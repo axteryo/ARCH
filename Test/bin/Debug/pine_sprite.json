@@ -1,0 +1,13 @@
+{
+	"pine_sprite":[
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape":[   16, 46  ,  28, 5  ,  30, 5  ,  44, 46  ]
+        },
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape":[   32, 46  ,  32, 55  ,  28, 55  ,  28, 46  ]
+        }]
+}

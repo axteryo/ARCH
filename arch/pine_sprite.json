@@ -1,0 +1,35 @@
+{ 
+    
+    "pine_sprite (2)": [
+        
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   16, 46  ,  28, 5  ,  30, 5  ,  44, 46  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   32, 46  ,  32, 55  ,  28, 55  ,  28, 46  ]
+        }
+    ]
+    , 
+    "wiz": [
+        
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   2, 50  ,  11, 18  ,  20, 18  ,  29, 50  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   13, 1  ,  21, 17  ,  11, 17  ,  1, 1  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   31, 1  ,  21, 16  ,  12, 1  ]
+        }
+    ]
+}

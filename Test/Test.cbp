@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Test" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Test" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/Debug" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-std=c++11" />
+					<Add option="-g" />
+					<Add option="-DSFML_STATIC" />
+					<Add directory="../../../../../SFML-2.3.2/include" />
+					<Add directory="../../../../../Box2D_v2.3.1" />
+				</Compiler>
+				<Linker>
+					<Add library="..\..\..\..\..\SFML-2.3.2\lib\libsfml-graphics-d.a" />
+					<Add library="..\..\..\..\..\SFML-2.3.2\lib\libsfml-window-d.a" />
+					<Add library="..\..\..\..\..\SFML-2.3.2\lib\libsfml-system-d.a" />
+					<Add library="..\..\..\..\..\SFML-2.3.2\lib\libfreetype.a" />
+					<Add library="..\..\..\..\..\SFML-2.3.2\lib\libjpeg.a" />
+					<Add library="..\..\..\..\..\Box2D_v2.3.1\Build\Box2D\libBox2D.a" />
+					<Add directory="../../../../../SFML-2.3.2/lib" />
+					<Add directory="../../../../../Box2D_v2.3.1/Box2D" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Test" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="Actor.cpp" />
+		<Unit filename="Actor.h" />
+		<Unit filename="BoxWiz.cpp" />
+		<Unit filename="BoxWiz.h" />
+		<Unit filename="Euler.cpp" />
+		<Unit filename="GameObj.cpp" />
+		<Unit filename="GameObj.h" />
+		<Unit filename="GameObject.cpp" />
+		<Unit filename="GameObject.h" />
+		<Unit filename="GuardianPrototype.cpp" />
+		<Unit filename="archie.cpp" />
+		<Unit filename="dist/json/json-forwards.h" />
+		<Unit filename="dist/json/json.h" />
+		<Unit filename="dist/jsoncpp.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
