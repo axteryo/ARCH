@@ -12,7 +12,7 @@ class wallBody : public PhysicsBody
 
         virtual ~wallBody();
         virtual void update(GameObject& gObj) = 0;
-        virtual void create(sf::Sprite sprite) = 0;
+        //virtual void create(sf::Sprite sprite) = 0;
 
     protected:
     private:

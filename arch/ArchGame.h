@@ -1,19 +1,11 @@
 #ifndef ARCHGAME_H
 #define ARCHGAME_H
 
-#include <SFML/Graphics.hpp>
-#include <Box2D/Box2D.h>
-#include <SFML/Window.hpp>
-#include <iostream>
-#include <thread>
-#include <chrono>
-#include <string>
-#include <math.h>
+#include "includes.h"
+
+
 #include "GameObject.h"
 
-extern b2Vec2 gravity;
-extern b2World* world;
-extern std::vector<GameObject> objectList;
 
 class ArchGame
 {

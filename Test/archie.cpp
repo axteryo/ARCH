@@ -785,7 +785,7 @@ int rowcount = 0;
     bool rRotate = false;
     bool lRotate = false;
     float maxlength = 1000;
-    float topSpeed = 14;
+    float topSpeed = 12;
     float turnRate = .075;
     b2Vec2 curPos;
     float pi = atan(1)*4;
@@ -961,7 +961,7 @@ mainCam->follow(playerBody);
             //std::cout <<window.mapPixelToCoords((Vector2i)(sf::Vector2f(mouse.getPosition(window)))).y <<std::endl;
 
 
-            std::cout<<playerSprite.getRotation()<<std::endl;
+            //std::cout<<playerSprite.getRotation()<<std::endl;
         }
 
     }
@@ -1180,7 +1180,7 @@ boostCounter-=1;
 if(!gridMode)
         {
             window.setFramerateLimit(60);
-            topSpeed = 14;
+            topSpeed = 12;
             if(!firing)
             {
 
@@ -1192,7 +1192,7 @@ if(!gridMode)
                 else
                 {
                     if(rightBoost)
-                    {topSpeed = 14;
+                    {topSpeed = 12;
                       turnRate = .05;
                     }
                     else{ turnRate = .1;}
@@ -1452,7 +1452,7 @@ if(segPoints.size()==4)
                 }
 
             }
-            b2PolygonShape* polygonShape;
+            /*b2PolygonShape* polygonShape;
                 sf::ConvexShape colShape;
                 colShape.setPointCount(4);
 
@@ -1473,7 +1473,7 @@ if(segPoints.size()==4)
                         colShape.setRotation((bodyIter->GetTransform().q.GetAngle()*(180-(180/3.14159))));
                         window.draw(colShape);
                     }
-                }
+                }*/
         }
     cam.x*=0;
     cam.y*=0;
@@ -1503,9 +1503,7 @@ void createObject(b2World& world, float X, float Y,std::string name,int id)
     b2BodyDef bodyDef;
     bodyDef.fixedRotation = true;
     bodyDef.type = b2_kinematicBody;
-    //bodyDef.position.Set(X/30,Y/30);
     b2Body* body = world.CreateBody(&bodyDef);
-    //body->
     b2FixtureDef fd;
     bl.attachFixture(body,name,fd);
     body->SetTransform(b2Vec2(X/30,Y/30),body->GetAngle());

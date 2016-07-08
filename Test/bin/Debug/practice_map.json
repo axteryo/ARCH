@@ -21,8 +21,31 @@
          "width":10,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "height":10,
+         "name":"player_spawn",
+         "objects":[
+                {
+                 "height":0,
+                 "id":15,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":208,
+                 "y":110
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":10,
+         "x":0,
+         "y":0
         }],
- "nextobjectid":11,
+ "nextobjectid":16,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":32,

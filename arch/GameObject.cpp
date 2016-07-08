@@ -1,9 +1,13 @@
 #include "GameObject.h"
 
-GameObject::GameObject()
+#include "GraphicsBody.h"
+#include "PhysicsBody.h"
+
+GameObject::GameObject(PhysicsBody& p)// GraphicsBody() g)
 {
-    //ctor
+
 }
+
 
 GameObject::~GameObject()
 {

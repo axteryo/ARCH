@@ -1,12 +1,15 @@
 #ifndef PHYSICSBODY_H
 #define PHYSICSBODY_H
 
-#include <SFML/Graphics.hpp>
+#include "includes.h"
+
 #include <Box2D/Box2D.h>
-#include <SFML/Window.hpp>
-#include <string>
-#include <math.h>
+
+
+
 #include "GameObject.h"
+
+
 
 
 class PhysicsBody
@@ -15,7 +18,8 @@ class PhysicsBody
         PhysicsBody();
         virtual ~PhysicsBody();
         virtual void update(GameObject& gObj) = 0;
-        virtual void create(sf::Sprite sprite) = 0;
+
+
 
 
         /**Physics properties**/
@@ -38,4 +42,4 @@ class PhysicsBody
 
 };
 
-#endif // PHYSICSBODY_H
+#endif  //PHYSICSBODY_H

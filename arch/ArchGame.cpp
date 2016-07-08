@@ -1,12 +1,6 @@
 #include "ArchGame.h"
-#include <SFML/Graphics.hpp>
-#include <Box2D/Box2D.h>
-#include <SFML/Window.hpp>
-#include <iostream>
-#include <thread>
-#include <chrono>
-#include <string>
-#include <math.h>
+
+
 
 
 b2Vec2 gravity = b2Vec2(0,0);

@@ -1,10 +1,11 @@
 #ifndef GRAPHICSBODY_H
 #define GRAPHICSBODY_H
 
-#include <SFML/Graphics.hpp>
-#include <Box2D/Box2D.h>
-#include <SFML/Window.hpp>
+#include "includes.h"
+
 #include "GameObject.h"
+
+
 
 
 class GraphicsBody
@@ -19,8 +20,8 @@ class GraphicsBody
     protected:
     private:
 
-    sf::Texture texture;
+    //sf::Texture texture;
     sf::Sprite sprite;
 };
 
-#endif // GRAPHICSBODY_H
+#endif  //GRAPHICSBODY_H

@@ -686,3 +686,150 @@
 
 1466273810 c:\users\mesh\desktop\c++_practice\test\gameobject.h
 
+1458068771 source:c:\users\mesh\documents\projectarch\test\actor.cpp
+
+1458314638 source:c:\users\mesh\documents\projectarch\test\boxwiz.cpp
+	"BoxWiz.h"
+
+1465674219 c:\users\mesh\documents\projectarch\test\boxwiz.h
+	<SFML/Graphics.hpp>
+	<Box2D/Box2D.h>
+	<SFML/Window.hpp>
+	<iostream>
+	<thread>
+	<chrono>
+	<string>
+	<math.h>
+	"BoxWiz.h"
+	"dist/json/json.h"
+	"dist/json/json-forwards.h"
+
+1465673537 c:\users\mesh\documents\projectarch\test\dist\json\json.h
+	<stddef.h>
+	<string>
+	<cpptl/config.h>
+	"version.h"
+	"allocator.h"
+	"config.h"
+	"forwards.h"
+	"forwards.h"
+	<string>
+	<vector>
+	<exception>
+	<map>
+	<cpptl/smallmap.h>
+	<cpptl/forwards.h>
+	"features.h"
+	"value.h"
+	<deque>
+	<iosfwd>
+	<stack>
+	<string>
+	<istream>
+	"value.h"
+	<vector>
+	<string>
+	<ostream>
+	<stdlib.h>
+	<sstream>
+	"config.h"
+
+1465673537 c:\users\mesh\documents\projectarch\test\dist\json\json-forwards.h
+	<stddef.h>
+	<string>
+	<cpptl/config.h>
+	"version.h"
+	"allocator.h"
+	"config.h"
+
+1465673537 source:c:\users\mesh\documents\projectarch\test\dist\jsoncpp.cpp
+	"json/json.h"
+	<json/assertions.h>
+	<json/reader.h>
+	<json/value.h>
+	"json_tool.h"
+	<utility>
+	<cstdio>
+	<cassert>
+	<cstring>
+	<istream>
+	<sstream>
+	<memory>
+	<set>
+	<limits>
+	<json/assertions.h>
+	<json/value.h>
+	<json/writer.h>
+	<math.h>
+	<sstream>
+	<utility>
+	<cstring>
+	<cassert>
+	<cpptl/conststring.h>
+	<cstddef>
+	<algorithm>
+	"json_valueiterator.inl"
+	<json/writer.h>
+	"json_tool.h"
+	<iomanip>
+	<memory>
+	<sstream>
+	<utility>
+	<set>
+	<cassert>
+	<cstring>
+	<cstdio>
+	<float.h>
+	<ieeefp.h>
+	<math.h>
+	<math.h>
+	<cmath>
+	<float.h>
+
+1452998403 source:c:\users\mesh\documents\projectarch\test\euler.cpp
+	<iostream>
+	<math.h>
+
+1458146279 source:c:\users\mesh\documents\projectarch\test\gameobj.cpp
+	"GameObj.h"
+	"BoxWiz.h"
+
+1458146267 c:\users\mesh\documents\projectarch\test\gameobj.h
+	<SFML/Graphics.hpp>
+	<Box2D/Box2D.h>
+	<SFML/Window.hpp>
+	<iostream>
+	<thread>
+	<chrono>
+	<string>
+	<math.h>
+
+1466273810 source:c:\users\mesh\documents\projectarch\test\gameobject.cpp
+	"GameObject.h"
+
+1466273810 c:\users\mesh\documents\projectarch\test\gameobject.h
+
+1463841664 source:c:\users\mesh\documents\projectarch\test\guardianprototype.cpp
+	<iostream>
+	<SFML/Graphics.hpp>
+	<SFML/Window.hpp>
+	<SFML/System.hpp>
+	<thread>
+	<cmath>
+	<chrono>
+	<math.h>
+
+1467665053 source:c:\users\mesh\documents\projectarch\test\archie.cpp
+	<SFML/Graphics.hpp>
+	<Box2D/Box2D.h>
+	<SFML/Window.hpp>
+	<iostream>
+	<fstream>
+	<thread>
+	<chrono>
+	<string>
+	<math.h>
+	"BoxWiz.h"
+	"dist/json/json.h"
+	"dist/json/json-forwards.h"
+

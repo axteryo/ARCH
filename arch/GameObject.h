@@ -1,12 +1,15 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 
-#include <SFML/Graphics.hpp>
-#include <Box2D/Box2D.h>
-#include <SFML/Window.hpp>
+#include "includes.h"
 
-class PhysicsBody;
+//#include "GraphicsBody.h"
+//#include "PhysicsBody.h"
+
 class GraphicsBody;
+class PhysicsBody;
+
+
 
 
 
@@ -15,24 +18,27 @@ class GraphicsBody;
 class GameObject
 {
     public:
-        GameObject();
+        GameObject(PhysicsBody& p);//,GraphicsBody()       g);
         virtual ~GameObject();
         virtual void update() = 0;
         virtual void setPosition() = 0;
 
-        b2Vec2 position;
-        b2Vec2 velocity;
-        b2Vec2 rotation;
+        b2Vec2 b2V_position;
+        b2Vec2 b2V_velocity;
+        b2Vec2 b2V_rotation;
 
+        std::string obJectId;
         int layerDepth;
+
+        //GraphicsBody _graphicsBody;
+        PhysicsBody *_physicsBody;
 
 
     protected:
     private:
 
-        GraphicsBody* _graphicsBody;
-        PhysicsBody* _physicsBody;
+
 
 };
 
-#endif // GAMEOBJECT_H
+#endif  //GAMEOBJECT_H
