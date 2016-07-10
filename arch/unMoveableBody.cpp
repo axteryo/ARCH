@@ -10,10 +10,10 @@ unMoveableBody::unMoveableBody()
     b2V2f_position = b2Vec2(0,0);
 
 }
-void unMoveableBody::update(GameObject& gObj)
+void unMoveableBody::update(GameObject* gObj)
 {
     //body->SetLinearVelocity(gObj.b2V_velocity);
-    gObj.b2V_position = body->GetPosition();
+    gObj->b2V_position = body->GetPosition();
 }
 
 unMoveableBody::~unMoveableBody()

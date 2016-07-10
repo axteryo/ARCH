@@ -3,14 +3,18 @@
 
 #include "GameObject.h"
 
+#include "unMoveableBody.h"
 
-class wallObject : GameObject
+
+
+class wallObject : public GameObject
 {
     public:
         wallObject();
         virtual ~wallObject();
-        virtual void update() = 0;
-        virtual void setPosition() = 0;
+        void update();
+        void setPosition();
+        unMoveableBody* _physicsBody;
     protected:
     private:
 };

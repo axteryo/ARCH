@@ -9,7 +9,7 @@ class MoveableBody : public PhysicsBody
     public:
         MoveableBody();
         virtual ~MoveableBody();
-        virtual void update(GameObject& gObj) = 0;
+        void update(GameObject& gObj);
     protected:
     private:
 };

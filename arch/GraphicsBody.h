@@ -13,7 +13,7 @@ class GraphicsBody
     public:
         GraphicsBody(sf::Texture t);
         virtual ~GraphicsBody();
-        virtual void update(GameObject& gObj) = 0;
+        virtual void update(GameObject* gObj) = 0;
         virtual sf::Sprite getSprite() = 0;
 
 

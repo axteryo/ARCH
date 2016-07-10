@@ -17,7 +17,7 @@ class PhysicsBody
     public:
         PhysicsBody();
         virtual ~PhysicsBody();
-        virtual void update(GameObject& gObj) = 0;
+        virtual void update(GameObject* gObj) = 0;
 
 
 
@@ -42,4 +42,4 @@ class PhysicsBody
 
 };
 
-#endif  //PHYSICSBODY_H
+#endif  PHYSICSBODY_H

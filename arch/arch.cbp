@@ -67,6 +67,8 @@
 			<Add directory="../../../../../SFML-2.3.2/lib" />
 			<Add directory="../../../../../Box2D_v2.3.1/Box2D" />
 		</Linker>
+		<Unit filename="AnimatableGraphic.cpp" />
+		<Unit filename="AnimatableGraphic.h" />
 		<Unit filename="ArchGame.cpp" />
 		<Unit filename="ArchGame.h" />
 		<Unit filename="GameObject.cpp" />
@@ -77,6 +79,7 @@
 		<Unit filename="MoveableBody.h" />
 		<Unit filename="PhysicsBody.cpp" />
 		<Unit filename="PhysicsBody.h" />
+		<Unit filename="includes.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="unMoveableBody.cpp" />
 		<Unit filename="unMoveableBody.h" />

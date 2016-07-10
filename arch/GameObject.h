@@ -4,21 +4,12 @@
 #include "includes.h"
 
 //#include "GraphicsBody.h"
-//#include "PhysicsBody.h"
-
-class GraphicsBody;
-class PhysicsBody;
-
-
-
-
-
-
+#include "PhysicsBody.h"
 
 class GameObject
 {
     public:
-        GameObject(PhysicsBody& p);//,GraphicsBody()       g);
+        GameObject();
         virtual ~GameObject();
         virtual void update() = 0;
         virtual void setPosition() = 0;
@@ -27,12 +18,8 @@ class GameObject
         b2Vec2 b2V_velocity;
         b2Vec2 b2V_rotation;
 
-        std::string obJectId;
+        std::string objectId;
         int layerDepth;
-
-        //GraphicsBody _graphicsBody;
-        PhysicsBody *_physicsBody;
-
 
     protected:
     private:
@@ -41,4 +28,4 @@ class GameObject
 
 };
 
-#endif  //GAMEOBJECT_H
+#endif  GAMEOBJECT_H

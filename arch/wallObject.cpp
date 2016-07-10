@@ -2,7 +2,7 @@
 
 
 
-wallObject::wallObject(MoveableBody p)//,GraphicsBody() g)
+wallObject::wallObject()//,GraphicsBody() g)
 {
 
     b2V_position = b2Vec2(0,0);
@@ -15,7 +15,9 @@ wallObject::wallObject(MoveableBody p)//,GraphicsBody() g)
     layerDepth = 5;
 
     //_graphicsBody = g;
-    _physicsBody = p;
+    _physicsBody  =  new unMoveableBody();
+
+
 
 }
 void wallObject::update()
@@ -24,6 +26,10 @@ void wallObject::update()
     _physicsBody->update(this);
    // _graphicsBody->update(this);
 
+}
+void wallObject::setPosition()
+{
+    ///
 }
 
 wallObject::~wallObject()
