@@ -79,6 +79,10 @@
 		<Unit filename="MoveableBody.h" />
 		<Unit filename="PhysicsBody.cpp" />
 		<Unit filename="PhysicsBody.h" />
+		<Unit filename="StaticGraphic.cpp" />
+		<Unit filename="StaticGraphic.h" />
+		<Unit filename="floorObject.cpp" />
+		<Unit filename="floorObject.h" />
 		<Unit filename="includes.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="unMoveableBody.cpp" />

@@ -76,6 +76,7 @@ void ArchGame::update(state currentState)
 
         break;
     }
+    world->Step(timeStep,velocityIterations,positionIterations);
 
 }
 

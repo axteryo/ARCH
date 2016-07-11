@@ -1,6 +1,7 @@
 #include "GraphicsBody.h"
 
-GraphicsBody::GraphicsBody(sf::Texture t)
+
+GraphicsBody::GraphicsBody()
 {
     //ctor
 }

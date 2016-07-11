@@ -603,14 +603,15 @@
 	"includes.h"
 	"GameObject.h"
 
-1468108872 c:\users\mesh\documents\projectarch\arch\gameobject.h
+1468224639 c:\users\mesh\documents\projectarch\arch\gameobject.h
 	"includes.h"
+	"GraphicsBody.h"
 	"PhysicsBody.h"
 
-1466411761 source:c:\users\mesh\documents\projectarch\arch\graphicsbody.cpp
+1468186312 source:c:\users\mesh\documents\projectarch\arch\graphicsbody.cpp
 	"GraphicsBody.h"
 
-1467927434 c:\users\mesh\documents\projectarch\arch\graphicsbody.h
+1468186341 c:\users\mesh\documents\projectarch\arch\graphicsbody.h
 	"includes.h"
 	"GameObject.h"
 
@@ -621,7 +622,7 @@
 1466372002 source:c:\users\mesh\documents\projectarch\arch\physicsbody.cpp
 	"PhysicsBody.h"
 
-1468108407 c:\users\mesh\documents\projectarch\arch\physicsbody.h
+1468185541 c:\users\mesh\documents\projectarch\arch\physicsbody.h
 	"includes.h"
 	<Box2D/Box2D.h>
 	"GameObject.h"
@@ -636,13 +637,13 @@
 1468106924 c:\users\mesh\documents\projectarch\arch\moveablebody.h
 	"PhysicsBody.h"
 
-1468108483 source:c:\users\mesh\documents\projectarch\arch\unmoveablebody.cpp
+1468200370 source:c:\users\mesh\documents\projectarch\arch\unmoveablebody.cpp
 	"unMoveableBody.h"
 
 1468108513 c:\users\mesh\documents\projectarch\arch\unmoveablebody.h
 	"PhysicsBody.h"
 
-1467929241 c:\users\mesh\documents\projectarch\arch\includes.h
+1468186357 c:\users\mesh\documents\projectarch\arch\includes.h
 	<SFML/Graphics.hpp>
 	<Box2D/Box2D.h>
 	<SFML/Window.hpp>
@@ -652,10 +653,30 @@
 	<thread>
 	<chrono>
 
-1468108361 source:c:\users\mesh\documents\projectarch\arch\wallobject.cpp
+1468224851 source:c:\users\mesh\documents\projectarch\arch\wallobject.cpp
 	"wallObject.h"
 
-1468108237 c:\users\mesh\documents\projectarch\arch\wallobject.h
+1468224693 c:\users\mesh\documents\projectarch\arch\wallobject.h
 	"GameObject.h"
 	"unMoveableBody.h"
+	"StaticGraphic.h"
+
+1468186047 source:c:\users\mesh\documents\projectarch\arch\animatablegraphic.cpp
+	"AnimatableGraphic.h"
+
+1468111194 c:\users\mesh\documents\projectarch\arch\animatablegraphic.h
+	"GraphicsBody.h"
+
+1468224998 source:c:\users\mesh\documents\projectarch\arch\staticgraphic.cpp
+	"StaticGraphic.h"
+
+1468224962 c:\users\mesh\documents\projectarch\arch\staticgraphic.h
+	"GraphicsBody.h"
+
+1468224871 source:c:\users\mesh\documents\projectarch\arch\floorobject.cpp
+	"floorObject.h"
+
+1468224676 c:\users\mesh\documents\projectarch\arch\floorobject.h
+	"GameObject.h"
+	"StaticGraphic.h"
 

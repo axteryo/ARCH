@@ -3,7 +3,7 @@
 
 #include "includes.h"
 
-//#include "GraphicsBody.h"
+#include "GraphicsBody.h"
 #include "PhysicsBody.h"
 
 class GameObject
@@ -12,11 +12,11 @@ class GameObject
         GameObject();
         virtual ~GameObject();
         virtual void update() = 0;
-        virtual void setPosition() = 0;
+        virtual void setPosition(float x, float y) = 0;
 
         b2Vec2 b2V_position;
         b2Vec2 b2V_velocity;
-        b2Vec2 b2V_rotation;
+        float fl_rotation;
 
         std::string objectId;
         int layerDepth;
