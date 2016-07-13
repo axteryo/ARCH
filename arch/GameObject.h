@@ -28,4 +28,4 @@ class GameObject
 
 };
 
-#endif  GAMEOBJECT_H
+#endif  //GAMEOBJECT_H

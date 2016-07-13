@@ -8,7 +8,7 @@
 #include <string>
 #include <math.h>
 #include "BoxWiz.h"
-#include "dist/json/json.h"
+
 #include "dist/json/json-forwards.h"
 #define _USE_MATH_DEFINES
 
@@ -591,7 +591,7 @@ public:
    /**A List for the maps layers **/
    std::vector<Json::Value> mapLayers;
 
-   /**Mao data list**/
+   /**Map data list**/
    std::vector<int> level;
    sf::Image spriteSheet;
    sf::Texture texture;
@@ -627,7 +627,6 @@ public:
         //mapLayers.push_back();
         std::cout<<mapLayers[0]["data"]<<std::endl;
 
-
     }
 private:
 
@@ -638,7 +637,7 @@ private:
 
 int main()
 { /** The window we'll be using to display  stuff as well as its dimensional variables **/
-    sf::Vector2f mapSize(5000,3000);
+    //sf::Vector2f mapSize(5000,3000);
 //    sf::Vector2f mapOrigin(-2500,)
     sf::Vector2f wSize(1000,800);
     sf::RenderWindow window(sf::VideoMode(wSize.x,wSize.y,32),"Hello Box2d");
@@ -1452,7 +1451,7 @@ if(segPoints.size()==4)
                 }
 
             }
-            /*b2PolygonShape* polygonShape;
+            b2PolygonShape* polygonShape;
                 sf::ConvexShape colShape;
                 colShape.setPointCount(4);
 
@@ -1473,7 +1472,7 @@ if(segPoints.size()==4)
                         colShape.setRotation((bodyIter->GetTransform().q.GetAngle()*(180-(180/3.14159))));
                         window.draw(colShape);
                     }
-                }*/
+                }
         }
     cam.x*=0;
     cam.y*=0;

@@ -75,12 +75,17 @@
 		<Unit filename="GameObject.h" />
 		<Unit filename="GraphicsBody.cpp" />
 		<Unit filename="GraphicsBody.h" />
+		<Unit filename="LevelManager.cpp" />
+		<Unit filename="LevelManager.h" />
 		<Unit filename="MoveableBody.cpp" />
 		<Unit filename="MoveableBody.h" />
 		<Unit filename="PhysicsBody.cpp" />
 		<Unit filename="PhysicsBody.h" />
 		<Unit filename="StaticGraphic.cpp" />
 		<Unit filename="StaticGraphic.h" />
+		<Unit filename="dist/json/json-forwards.h" />
+		<Unit filename="dist/json/json.h" />
+		<Unit filename="dist/jsoncpp.cpp" />
 		<Unit filename="floorObject.cpp" />
 		<Unit filename="floorObject.h" />
 		<Unit filename="includes.h" />

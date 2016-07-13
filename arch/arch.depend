@@ -596,14 +596,14 @@
 	<math.h>
 	"GameObject.h"
 
-1467926926 source:c:\users\mesh\documents\projectarch\arch\archgame.cpp
+1468225254 source:c:\users\mesh\documents\projectarch\arch\archgame.cpp
 	"ArchGame.h"
 
 1467926932 c:\users\mesh\documents\projectarch\arch\archgame.h
 	"includes.h"
 	"GameObject.h"
 
-1468224639 c:\users\mesh\documents\projectarch\arch\gameobject.h
+1468451360 c:\users\mesh\documents\projectarch\arch\gameobject.h
 	"includes.h"
 	"GraphicsBody.h"
 	"PhysicsBody.h"
@@ -622,7 +622,7 @@
 1466372002 source:c:\users\mesh\documents\projectarch\arch\physicsbody.cpp
 	"PhysicsBody.h"
 
-1468185541 c:\users\mesh\documents\projectarch\arch\physicsbody.h
+1468451360 c:\users\mesh\documents\projectarch\arch\physicsbody.h
 	"includes.h"
 	<Box2D/Box2D.h>
 	"GameObject.h"
@@ -643,15 +643,12 @@
 1468108513 c:\users\mesh\documents\projectarch\arch\unmoveablebody.h
 	"PhysicsBody.h"
 
-1468186357 c:\users\mesh\documents\projectarch\arch\includes.h
+1468451269 c:\users\mesh\documents\projectarch\arch\includes.h
 	<SFML/Graphics.hpp>
 	<Box2D/Box2D.h>
 	<SFML/Window.hpp>
 	<string>
 	<math.h>
-	<iostream>
-	<thread>
-	<chrono>
 
 1468224851 source:c:\users\mesh\documents\projectarch\arch\wallobject.cpp
 	"wallObject.h"
@@ -679,4 +676,87 @@
 1468224676 c:\users\mesh\documents\projectarch\arch\floorobject.h
 	"GameObject.h"
 	"StaticGraphic.h"
+
+1468449222 source:c:\users\mesh\documents\projectarch\arch\levelmanager.cpp
+	"LevelManager.h"
+
+1468451736 c:\users\mesh\documents\projectarch\arch\levelmanager.h
+	<iostream>
+	<fstream>
+	"dist/json/json.h"
+	"GameObject.h"
+
+1465673537 c:\users\mesh\documents\projectarch\arch\dist\json\json.h
+	<stddef.h>
+	<string>
+	<cpptl/config.h>
+	"version.h"
+	"allocator.h"
+	"config.h"
+	"forwards.h"
+	"forwards.h"
+	<string>
+	<vector>
+	<exception>
+	<map>
+	<cpptl/smallmap.h>
+	<cpptl/forwards.h>
+	"features.h"
+	"value.h"
+	<deque>
+	<iosfwd>
+	<stack>
+	<string>
+	<istream>
+	"value.h"
+	<vector>
+	<string>
+	<ostream>
+	<stdlib.h>
+	<sstream>
+	"config.h"
+
+1465673537 source:c:\users\mesh\documents\projectarch\arch\dist\jsoncpp.cpp
+	"json/json.h"
+	<json/assertions.h>
+	<json/reader.h>
+	<json/value.h>
+	"json_tool.h"
+	<utility>
+	<cstdio>
+	<cassert>
+	<cstring>
+	<istream>
+	<sstream>
+	<memory>
+	<set>
+	<limits>
+	<json/assertions.h>
+	<json/value.h>
+	<json/writer.h>
+	<math.h>
+	<sstream>
+	<utility>
+	<cstring>
+	<cassert>
+	<cpptl/conststring.h>
+	<cstddef>
+	<algorithm>
+	"json_valueiterator.inl"
+	<json/writer.h>
+	"json_tool.h"
+	<iomanip>
+	<memory>
+	<sstream>
+	<utility>
+	<set>
+	<cassert>
+	<cstring>
+	<cstdio>
+	<float.h>
+	<ieeefp.h>
+	<math.h>
+	<math.h>
+	<cmath>
+	<float.h>
 

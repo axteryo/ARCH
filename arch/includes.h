@@ -6,9 +6,9 @@
 #include <SFML/Window.hpp>
 #include <string>
 #include <math.h>
-#include <iostream>
-#include <thread>
-#include <chrono>
+//#include <iostream>
+//#include <thread>
+//#include <chrono>
 
 class GameObject;
 
