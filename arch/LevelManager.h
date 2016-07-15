@@ -5,7 +5,10 @@
 #include <fstream>
 #include "dist/json/json.h"
 
-#include "GameObject.h"
+#include "unMoveableBody.h"
+#include "MoveableBody.h"
+#include "StaticGraphic.h"
+#include "AnimatableGraphic.h"
 
 extern std::vector<GameObject*> gObjList;
 class LevelManager
@@ -24,7 +27,7 @@ class LevelManager
         std::vector<Json::Value> mapLayers;
 
         Json::Value baseMapRoot;
-        Json::Reader mapReader;
+        Json::Reader myReader;
         std::ifstream currentMapFile;
 
         std::ifstream shapeFile;

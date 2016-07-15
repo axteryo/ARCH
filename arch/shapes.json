@@ -1,0 +1,47 @@
+{ 
+    
+    "RightTriangle_Left": [
+        
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   32, 0  ,  32, 31  ,  31, 32  ,  0, 32  ]
+        }
+    ]
+    , 
+    "RightTriangle_LeftUp": [
+        
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   0, 0  ,  31, 0  ,  32, 1  ,  32, 32  ]
+        }
+    ]
+    , 
+    "RightTriangle_Right": [
+        
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   32, 32  ,  1, 32  ,  0, 31  ,  0, 0  ]
+        }
+    ]
+    , 
+    "RightTriangle_RightUp": [
+        
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   0, 32  ,  0, 1  ,  1, 0  ,  32, 0  ]
+        }
+    ]
+    , 
+    "Square": [
+        
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   32, 0  ,  32, 32  ,  0, 32  ,  0, 0  ]
+        }
+    ]
+}

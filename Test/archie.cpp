@@ -516,7 +516,7 @@ class BodyLoader
     void attachFixture(b2Body* bod, sf::String name, b2FixtureDef &fd)
     {
         std::ifstream shapeFile;
-        shapeFile.open(name+".json");
+
         Json::Reader  myReader;
         Json::Value shapeRoot;
 
