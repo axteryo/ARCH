@@ -2,7 +2,7 @@
 #define ARCHGAME_H
 
 #include "includes.h"
-
+#include "LevelManager.h"
 
 #include "GameObject.h"
 
@@ -49,6 +49,9 @@ class ArchGame
         void update(state currentState);
 
         void render(state currentState);
+
+        sf::Texture t;
+        wallObject* w;
 
 
     protected:

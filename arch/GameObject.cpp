@@ -13,3 +13,8 @@ GameObject::~GameObject()
 {
     //dtor
 }
+
+sf::Sprite GameObject::getSprite()
+{
+    return sf::Sprite();
+}

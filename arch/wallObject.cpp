@@ -39,4 +39,8 @@ wallObject::~wallObject()
 {
     //dtor
 }
+sf::Sprite wallObject::getSprite()
+{
+    return _graphicsBody->getSprite();
+}
 

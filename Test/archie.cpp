@@ -516,6 +516,7 @@ class BodyLoader
     void attachFixture(b2Body* bod, sf::String name, b2FixtureDef &fd)
     {
         std::ifstream shapeFile;
+        shapeFile.open(name+".json");
 
         Json::Reader  myReader;
         Json::Value shapeRoot;
@@ -527,14 +528,13 @@ class BodyLoader
             <<myReader.getFormattedErrorMessages()<<std::endl;
 
         }
+        else
+            std::cout<<"success"<<std::endl;
 
-        b2Vec2 vertices[4];
-        b2PolygonShape polyShape;
+
         //for objects in the "sprite name array"
         for(int i = 0; i < shapeRoot[name].size(); i++)
         {
-
-
             int x = 6;
             int y = x+1;
 	//FOr vertices in the "shapes array"
@@ -546,18 +546,10 @@ class BodyLoader
                                      (shapeRoot[name][i]["shape"][y].asInt()-bod->GetPosition().y*30)/30);
                     x-=2;
                     y = x+1;
-                    //std::cout<<vertices[ii].x<<","<<vertices[ii].y<<std::endl;
-
                 }
-
-
             }
-            //std::cout<<"next"<<std::endl;
-
             int counter = 4;
             polyShape.Set(vertices,counter);
-
-
             fd.shape = &polyShape;
             fd.friction = 0.0f;
             fd.density = 2.0f;
@@ -1451,7 +1443,7 @@ if(segPoints.size()==4)
                 }
 
             }
-            b2PolygonShape* polygonShape;
+           /* b2PolygonShape* polygonShape;
                 sf::ConvexShape colShape;
                 colShape.setPointCount(4);
 
@@ -1472,7 +1464,7 @@ if(segPoints.size()==4)
                         colShape.setRotation((bodyIter->GetTransform().q.GetAngle()*(180-(180/3.14159))));
                         window.draw(colShape);
                     }
-                }
+                }*/
         }
     cam.x*=0;
     cam.y*=0;

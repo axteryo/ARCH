@@ -13,6 +13,7 @@ class GameObject
         virtual ~GameObject();
         virtual void update() = 0;
         virtual void setPosition(float x, float y) = 0;
+        virtual sf::Sprite getSprite();
 
         b2Vec2 b2V_position;
         b2Vec2 b2V_velocity;

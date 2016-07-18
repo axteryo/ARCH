@@ -9,6 +9,7 @@
 #include "MoveableBody.h"
 #include "StaticGraphic.h"
 #include "AnimatableGraphic.h"
+#include "wallObject.h"
 
 extern std::vector<GameObject*> gObjList;
 class LevelManager
@@ -17,7 +18,7 @@ class LevelManager
         LevelManager();
         virtual ~LevelManager();
         void loadLevel(std::string mapFile);
-         GameObject *createObject();
+         GameObject *createObject(int data,sf::Vector2f pos);
 
         /**Map dimensions(Tile Count)**/
         sf::Vector2f v2f_mapDimension;
@@ -25,6 +26,8 @@ class LevelManager
         sf::Vector2f v2f_tileDimension;
         /**A List for the maps layers **/
         std::vector<Json::Value> mapLayers;
+        /**Sprite sheet coordinates**/
+        std::vector<sf::Vector2f> ssCoordinates;
 
         Json::Value baseMapRoot;
         Json::Reader myReader;

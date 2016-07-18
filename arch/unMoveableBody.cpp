@@ -13,7 +13,7 @@ unMoveableBody::unMoveableBody()
 void unMoveableBody::update(GameObject* gObj)
 {
     //body->SetLinearVelocity(gObj.b2V_velocity);
-    gObj->b2V_position = body->GetPosition();
+    body->SetTransform(gObj->b2V_position,body->GetAngle());
 }
 
 unMoveableBody::~unMoveableBody()

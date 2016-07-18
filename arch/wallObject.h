@@ -15,6 +15,7 @@ class wallObject : public GameObject
         virtual ~wallObject();
         void update();
         void setPosition(float x, float y);
+        sf::Sprite getSprite();
         unMoveableBody* _physicsBody;
         StaticGraphic* _graphicsBody;
 
