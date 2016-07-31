@@ -28,7 +28,7 @@ ArchGame::ArchGame()
 void ArchGame::start()
 {
     LevelManager lm;
-    lm.loadLevel("testmap.json");
+    lm.loadLevel("testmap3.json");
 
     while(window->isOpen())
     {
@@ -109,6 +109,8 @@ void ArchGame::render(state currentState)
             window->draw(gObjList[i]->getSprite());
 
         }
+
+        ///DEBUG COLLISION DRAWER
         for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
         {
 b2PolygonShape* polygonShape;

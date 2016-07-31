@@ -2,8 +2,6 @@
 
 StaticGraphic::StaticGraphic(sf::Texture t)
 {
-    //ctor
-
     texture = t;
     sprite.setTexture(texture);
 

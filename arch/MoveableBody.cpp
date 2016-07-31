@@ -6,9 +6,12 @@ MoveableBody::MoveableBody()
     bodyDef.fixedRotation = true;
     bodyDef.type = b2_dynamicBody;
     body = world->CreateBody(&bodyDef);
+
+    b2V2f_velocity = b2Vec2(0,0);
+    b2V2f_position = b2Vec2(0,0);
 }
 
-void MoveableBody::update(GameObject& gObj)
+void MoveableBody::update(GameObject* gObj)
 {
       /**
 
@@ -22,8 +25,10 @@ void MoveableBody::update(GameObject& gObj)
 
     graphics.position = container.position;
     **/
-
+   // body->SetTransform(gObj->b2V_position,body->GetAngle());
 }
+
+
 MoveableBody::~MoveableBody()
 {
     //dtor

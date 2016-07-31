@@ -1,0 +1,37 @@
+dynamiccam
+
+{
+
+public:
+
+
+dynamicCam::dynamicCam()
+{
+
+ vector position
+ sfmlView viewPort
+ vector focalPoint
+ 
+
+
+
+}
+
+follow(b2Body* player)
+if players position is a certain distance from the focalpoint then the camera will start transforming the players position ever so slightly towards the center
+translate(b2body* obj)
+scale()
+
+private:
+
+
+
+
+};
+
+
+When the player isn't moving and neither is the mouse, the camera should be homing in on the players position
+: The camera should be transforming everything in a way that the player is being pushed towards the focal point ever so slightly
+
+when the player is accelerating the camera should start following when the player reaches top speed, though the player shouldn't be able to outrun the camera. The player will always remain within a boundary of the cameras viewport. The camera will also have an organic motion as if its steadying its aim on the player though its rocking ever so slightly back and forth
+

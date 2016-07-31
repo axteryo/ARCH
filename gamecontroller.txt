@@ -1,0 +1,84 @@
+Game Controller
+
+The controller takes in the state of the game
+
+and translates input accordingly
+
+the controller reads a key file and binds certain keys.
+
+Never tell your password to anyone.
+Monday, July 25, 2016
+axteryo: Ok dan
+axteryo: my next issue to tackle
+axteryo: is input mapping
+axteryo: and keybindings
+axteryo: im thinking that i need to read keybindings from like a file
+axteryo: ill let you know how it goes and whether i feel like quitting again!!!
+Ninjaboi8175: What I'd do is make a list of actions to map to ( like jump, attack, run left, etc ) so you know what things to bind to. Then make a file like "bindings.cfg" or similiar that will store the action and key to bind it to. Make your own file format for the bindings so that when you parse through the file with your program, you'll be able to easily do so. One format that comes to mind is something like "Jump=Space;Left=LeftArrow;Right=RightArrow;Attack=A;" etc. You'd have your action, followed by the key to bind to it, followed by a symbol to end that binding line. When you parse that action and its binding, you'd read for the action first by starting from the top left of the file upon opening it and then read until you hit a '=' character. When you hit that, you know you've gotten all the characters for the action to first bind. With that text you'd then compare it to actions in your program and see if "Jump" matches up with anything. If it does ( in this case, "Jump" = "Jump" for the jump action's reserved text ) then you can proceed to finding what key is supposed to be binded to it. Starting after the '=' character you found in your read, you'd then read characters into a string until you hit a ';' symbol indicating the end of the key binding for that action. Taking the characters in the string up to that point ( in this case "Space" ), you'd do the same thing you did with the action and compare it to a list of reserved strings for each input you're willing to support for your game. If there's a match, you then bind that key to the action as you now have both identified to be together. To bind them you could, after finding both the action and key to bind it to, have a list of reserved strings like "JumpKey" and "LeftKey" that you can then make equal whatever key string your binding asks for. So for jump, you'd know that you parsed for it to be the space key and would set JumpKey to equal "Space".
+Ninjaboi8175: The reason you should have a list of reserved strings for each action+key is so your code outside of grabbing key bindings will be key agnostic, meaning it doesn't need to know what key is binded to the action as long as it knows the key that IS binded to it is being pressed.
+Ninjaboi8175: SFML has input handling like "if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) { // move left }", which if you only wanted input for that action to be the left arrow key then that'd be fine. If you want dynamic key bindings to your actions both on startup and in-game ( like how most games allow you to change bindings mid-game ), you want something like this in your non-keybinding code: "if ( isActionKeyPressed("Left") { // move left }" which the function would return true if the action "Left"'s key that it's binded to is pressed.
+Ninjaboi8175: That way, you can keep your button/key checking inside of isActionKeyPressed(), which would have a lot of if-else's checking to find the action the code wants you to check and see if it's associated binding is pressed. In the example above that would be the "Left" action for moving left. It would look like "if( actionToCheck == "Up" ) // it's not" then it'd go to "else if(actionToCheck == "Left") // it is". When it finds the action in the long list of if-else's, it can then proceed to checking a list of supported keys to find which one is LeftKey ( the key we binded to the action "Left" ).
+Ninjaboi8175: Sorry if that all sounds confusing.
+Ninjaboi8175: http://pastebin.com/WQs7jSzk
+Ninjaboi8175: That's some example code I wrote up for you to help you figure it out
+Ninjaboi8175: In short you're trying to keey your key binding code separate from all other code, so that when you're trying to say implement jumping code for different situations, you aren't also having a long list of if-else's in the jump code just to see if any possible keys are binded for the jump action.
+Ninjaboi8175: You'd add every action your game needs to isActionKeyPressed(), and any keys/buttons you're willing to support for dynamic key binding to isBindingKeyPressed().
+Ninjaboi8175: That's just to handle dynamic keys in your game code by the way, not how to bind keys to the actions. I can make example code for that too if you need it. I just didnt' think I explained how to use binded keys properly.
+axteryo: very interesting indeed
+axteryo: i will have to take a look at the code later
+axteryo: but i have a qestion
+axteryo: say the action keys were in a switch statement
+axteryo: what if i needed two keys to be pressed at the same time?
+Ninjaboi8175: Like how some games handle spells, like having one key down to open up your hotbar for spells and the next key being the spell in that list?
+axteryo: suuure
+axteryo: but mor on the lines
+axteryo: of
+axteryo: well for the sake of things
+axteryo: lets use that example
+Ninjaboi8175: You'd do something like http://pastebin.com/19Ws2CAH
+Ninjaboi8175: That's if you're doing one held down while tapping the other.
+Ninjaboi8175: If you're asking for both being tapped at the same time, you'd do something like: http://pastebin.com/x0FTvPnF
+axteryo: ah
+Ninjaboi8175: Those two examples are if you want to chain actions together, whether it's to conceal actions in a list ( like the first example ) or to create a third possible action ( like the second example )
+axteryo: wow thats pretty good
+axteryo: o - o
+Ninjaboi8175: Indeed. Plus with this system you can easily do things like create move lists for say a side-to-side fighter using basic action inputs chained
+Ninjaboi8175: Not to mention you can of course dynamically change the inputs for the actions and your game code won't care in the least.
+axteryo: hmm so i should use an if case within a switch?
+Ninjaboi8175: This opens up you being able to read bindings from files, changing inputs for actions mid-game, and changing possible input types based on the platform you supprt ( like if you wanted to port the game to the phone you'd just change the possible bindings in isBindingKeyPressed() )
+Ninjaboi8175: You can uee switches instead of if-else's over and over
+Ninjaboi8175: use*
+axteryo: i honestly prefer if elses but whats the advantage of a switch
+Ninjaboi8175: Shorter to type, takes up less space usually, so it keeps things more compact. That's the biggest example I can think of. Performance is also a thing as the compiler can generate jumps in code easier with very long switches vs very long if-elses ( thus saves process time ). Not to mention if you want to perform fall-through from one case into another you can do so with switches but not with if-else
+Ninjaboi8175: As with if-else you'd have to nest a copy-paste of whatever you wanted to fall-through
+Ninjaboi8175: if-else is just easier to read and implement for short to mid-sized cases given how you don't have to make everything you give it an int or an enum.
+Ninjaboi8175: Which is the only two types switches support.
+Ninjaboi8175: So if-elses are required for raw strings, characters, etc.
+Ninjaboi8175: Of course SFML made all its possible key/button bindings enums so you can use switches in this case.
+Ninjaboi8175: And in reality many would say to use switches if possible for the reasons I mentioned earlier.
+
+Never tell your password to anyone.
+Thursday, July 28, 2016
+axteryo: nvm still confused...
+Ninjaboi8175: Well I'd stay start with an object that's NOT dynamically created, or even an object to begin with. Start with basic variables that you can manipulate with input so you can see the proof of concept.
+Ninjaboi8175: Like try having a basic project for testing this out, and have there be two values: x position, and y position. There doesn't need to be any graphics or whatnot, just input and output with basic text displayed in either your window or your console if one is available.
+Ninjaboi8175: Make three different reserved actions: "Move Left", "Move Right", and "Jump". Again, no character needed, just text to see that your input is changing the values, and that the input logic is separated from the core game logic using the methods I described before.
+Ninjaboi8175: Have a function called MoveLeft() that moves your character on the x axis by -1, and have another function called MoveRight() do the opposite ( +1 on the x axis ).
+Ninjaboi8175: Finally, have a third function called Jump() that moves the character up on the y axis by whatever amount you wish, though 3 units should be enough.
+Ninjaboi8175: The point is to have your input method not matter to your game logic, as all it cares about ( whatever input method it may be ) is that the values from said input is valid for the action to take place. If your keyBindings file has Jump = Space, the game logic shouldn't know what button is needed to jump, only that it wants your character to Jump() and it checks the reserved action ( using isActionKeyPressed() from my example of how to implement this ) to see if the given input's status that's returned is what it wants in order to execute the action. In our case, Jump() would want the space bar to be pressed while the character is on something like ground or boxes.
+Ninjaboi8175: I'll try and make a fully runnable example for you to help solidify the concept of game logic and input separation. If I do end up doing that I'll likely upload the code for you as well as a short video of the output result.
+Ninjaboi8175: As for dynamically created objects and regards to their input and action relationship, check out my Planetary Gardening Squad game and look for input code in the source files. The player characters are dynamically created as they are not automatically there on startup. It'll also show you how a client handles input on a fully authorative server-client relationship in case you're interested in that. I didn't have the input dynamic in that game, but there's some separation of input logic to core game logic in there, especially in terms of how the client is separated from the server.
+Ninjaboi8175: http://dannydmcgill.com/projects/completed/    - There's the page with the source code link. Also here's the example code I gave you before in case you need it again: http://pastebin.com/WQs7jSzk
+Ninjaboi8175: In short you shouldn't have to use dictionaries, maps, function pointers, etc to accomplish all of this as far as I know. All you're doing differently than you have before with locked in input, is that you're adding an additional thin layer of logic that separates your actual input from the various supported devices you wish to target from the core game logic so that your game logic doesn't care what input you assign to any action as long as it's valid and supported by you.
+Ninjaboi8175 is now Online.
+axteryo: if im understanding this, are you proposing that there should be functions that control the character but are outside of the character?
+
+
+
+
+
+
+
+The game controller is an h file with a list of strings of preordained actions that player character is capable of using as well as
+functions include loadBindings saveBindings checkIsactionPressed IsBindedKeyPressed
+

@@ -114,12 +114,13 @@ void LevelManager::loadLevel(std::string mapFile)
             std::cout<<"Map file has been parsed"<<std::endl;
         }
         v2f_tileDimension = sf::Vector2f(baseMapRoot["tilewidth"].asFloat(),baseMapRoot["tileheight"].asFloat());
-        v2f_mapDimension = sf::Vector2f(baseMapRoot["width"].asFloat()*v2f_tileDimension.x,baseMapRoot["height"].asFloat()*v2f_tileDimension.y);
+        v2f_mapDimension = sf::Vector2f(baseMapRoot["width"].asFloat(),baseMapRoot["height"].asFloat());//*v2f_tileDimension.x,baseMapRoot["height"].asFloat()*v2f_tileDimension.y);
 
 ///Seperate the map layers
      for(int i = 0;i < baseMapRoot["layers"].size();++i)
         {
-            mapLayers.push_back(baseMapRoot["layers"][i]);
+            if((baseMapRoot["layers"][i]["type"] == "tileLayer"))
+                mapLayers.push_back(baseMapRoot["layers"][i]);
         }
 std::cout<<"Layers seperated"<<std::endl;
 ///Store the spritesheet
@@ -171,7 +172,7 @@ std::cout<<"Layers seperated"<<std::endl;
 
             xx+=32;
             ++rowCount;
-            if(rowCount==10)
+            if(rowCount==v2f_mapDimension.x)
             {
                 rowCount = 0;
                 xx = 0;

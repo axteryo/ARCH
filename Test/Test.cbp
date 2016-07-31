@@ -60,6 +60,9 @@
 		<Unit filename="dist/json/json-forwards.h" />
 		<Unit filename="dist/json/json.h" />
 		<Unit filename="dist/jsoncpp.cpp" />
+		<Unit filename="keytest.cpp">
+			<Option target="Debug" />
+		</Unit>
 		<Extensions>
 			<code_completion />
 			<envvars />

@@ -1,0 +1,41 @@
+Enemy States
+
+-Neutral
+-Aggro
+-Attack
+-CHASE
+-DEFENSE
+
+
+actions:
+
+-target
+-attack
+-goToward
+-encircle
+-evade
+-flee
+-issueattack(group)
+-issueDefend
+-issueCharge
+
+Attack phase
+
+is the player near me?
+No?Switch to idle
+Am i close enough to attack the player?
+yes?put ram or shoot on action stack
+No?Switch to chase
+
+chase Phase
+
+
+targetPlayer then goToward them.
+Am i close to Ram
+Yes. DO a boost Ram.
+Am i close enough to then halt and attack?
+Yes. Target(Player
+Did i hit player? Yes? IssueSubordinates to attack and switch to defend. or evade and issue subordinates to attack then prepare to attack again. or evade issueSubordinates to defend and 
+
+
+      Aggro->chase->attack

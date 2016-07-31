@@ -531,7 +531,8 @@ class BodyLoader
         else
             std::cout<<"success"<<std::endl;
 
-
+        b2Vec2 vertices[4];
+        b2PolygonShape polyShape;
         //for objects in the "sprite name array"
         for(int i = 0; i < shapeRoot[name].size(); i++)
         {
