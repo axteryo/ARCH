@@ -119,7 +119,7 @@ void LevelManager::loadLevel(std::string mapFile)
 ///Seperate the map layers
      for(int i = 0;i < baseMapRoot["layers"].size();++i)
         {
-            if((baseMapRoot["layers"][i]["type"] == "tileLayer"))
+            //if((baseMapRoot["layers"][i]["type"] == "tileLayer"))
                 mapLayers.push_back(baseMapRoot["layers"][i]);
         }
 std::cout<<"Layers seperated"<<std::endl;

@@ -19,7 +19,7 @@ ArchGame::ArchGame()
 
     t.loadFromFile("RightTriangle_Left.png");
 
-    w = new wallObject(new unMoveableBody, new StaticGraphic(t));
+    //w = new wallObject(new unMoveableBody, new StaticGraphic(t));
 
     gameRunning = true;
 }
@@ -28,7 +28,7 @@ ArchGame::ArchGame()
 void ArchGame::start()
 {
     LevelManager lm;
-    lm.loadLevel("testmap3.json");
+    lm.loadLevel("testmap.json");
 
     while(window->isOpen())
     {
@@ -105,7 +105,8 @@ void ArchGame::render(state currentState)
     case In_Game:
         window->clear(sf::Color::White);
         for(int i = 0; i<gObjList.size();++i)
-        {//std::cout<<"failed here"<<std::endl;
+        {std::cout<<"failed here"<<std::endl;
+
             window->draw(gObjList[i]->getSprite());
 
         }

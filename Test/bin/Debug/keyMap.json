@@ -1,6 +1,6 @@
 {
 	"turnRed" :"Down" ,
 	"turnBlue" :"Up" ,
-	"turnGreen" :"Left" ,
-	"turnYellow" :"Right"
+	"turnGreen" :"Right" ,
+	"turnYellow" :"Left"
 }

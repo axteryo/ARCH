@@ -628,7 +628,7 @@ private:
 
 
 
-int main()
+int main12()
 { /** The window we'll be using to display  stuff as well as its dimensional variables **/
     //sf::Vector2f mapSize(5000,3000);
 //    sf::Vector2f mapOrigin(-2500,)

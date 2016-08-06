@@ -76,41 +76,78 @@ class GameController
         turnYellowAction = root["turnYellow"].asString();
         turnGreenAction = root["turnGreen"].asString();
     }
-     bool isBindedKeyPressed(std::string bindingToCheck)
-    {
+
+        bool isBindedKeyPressed(std::string bindingToCheck)
+        {
         if (bindingToCheck == "Left")
 
-	{
+        {
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 			return true;
 		else
 			return false;
-	}
-	else if (bindingToCheck == "Right")
-	{
+        }
+        else if (bindingToCheck == "Right")
+        {
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 			return true;
 		else
 			return false;
-	}
-	else if (bindingToCheck == "Up")
-	{
+        }
+        else if (bindingToCheck == "Up")
+        {
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 			return true;
 		else
 			return false;
-	}
-	else if (bindingToCheck == "Down")
-    {
+        }
+        else if (bindingToCheck == "Down")
+        {
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
            return true;
         else
             return false;
+        }
     }
+
+    bool isBindedKeyReleased(std::string bindingToCheck, sf::Event e)
+        {
+
+        if (bindingToCheck == "Left")
+
+        {
+		if ( e.key.code == sf::Keyboard::Left)
+			return true;
+		else
+			return false;
+        }
+        else if (bindingToCheck == "Right")
+        {
+		if (e.key.code == sf::Keyboard::Right)
+			return true;
+		else
+			return false;
+        }
+        else if (bindingToCheck == "Up")
+        {
+		if ( e.key.code == sf::Keyboard::Up)
+			return true;
+		else
+			return false;
+        }
+        else if (bindingToCheck == "Down")
+        {
+        if(e.key.code == sf::Keyboard::Down)
+           return true;
+        else
+            return false;
+        }
     }
+
 
     bool isActionKeyPressed(std::string actionToCheck)
     {
+
         if(actionToCheck == "turnRed")
         {
             if(isBindedKeyPressed(turnRedAction))
@@ -151,6 +188,50 @@ class GameController
 
     }
 
+    bool isActionKeyReleased(std::string actionToCheck, sf::Event e)
+     {
+
+        if(actionToCheck == "turnRed")
+        {
+            if(isBindedKeyReleased(turnRedAction,e))
+            {
+
+                return true;
+            }
+
+            else
+            {
+                return false;
+
+            }
+
+        }
+
+        else if(actionToCheck == "turnBlue")
+        {
+            if(isBindedKeyReleased(turnBlueAction,e))
+                return true;
+            else
+                return false;
+
+        }
+        else if(actionToCheck == "turnYellow")
+        {
+            if(isBindedKeyReleased(turnYellowAction,e))
+                return true;
+            else
+                return false;
+        }
+        else if(actionToCheck == "turnGreen")
+        {
+            if(isBindedKeyReleased(turnGreenAction,e))
+                return true;
+            else
+                return false;
+        }
+
+    }
+
     void setBinding()
     {
 
@@ -158,7 +239,7 @@ class GameController
 };
 
 
-int main07()
+int main()
 {
     sf::Vector2f wSize(1000,800);
     sf::RenderWindow window(sf::VideoMode(wSize.x,wSize.y,32),"Hello KeyTest");
@@ -171,8 +252,9 @@ int main07()
     GameController* gC;
     gC = new GameController();
     gC->loadBinding();
+    float x = .1+.2+.3;
 
-
+    std::cout<< x<<std::endl;
 
 
 
@@ -184,6 +266,44 @@ int main07()
             {
                 window.close();
 
+            }
+            if (event.type == sf::Event::KeyPressed)
+            {
+                       if(gC->isActionKeyPressed("turnRed"))
+            {
+                tO.turnRed();
+            }
+            else if(gC->isActionKeyPressed("turnBlue"))
+            {
+                tO.turnBlue();
+            }
+             else if(gC->isActionKeyPressed("turnGreen"))
+            {
+                tO.turnGreen();
+            }
+            else if(gC->isActionKeyPressed("turnYellow"))
+            {
+                tO.turnYellow();
+            }
+            }
+            if(event.type == sf::Event::KeyReleased)
+            {
+            if(gC->isActionKeyReleased("turnRed",event))
+            {
+                std::cout<<"Red key released"<<std::endl;
+            }
+            else if(gC->isActionKeyReleased("turnBlue",event))
+            {
+                std::cout<<"Blue key released"<<std::endl;
+            }
+             else if(gC->isActionKeyReleased("turnGreen",event))
+            {
+                std::cout<<"Green key released"<<std::endl;
+            }
+            else if(gC->isActionKeyReleased("turnYellow",event))
+            {
+                std::cout<<"Yellow key released"<<std::endl;
+            }
             }
 
         }
@@ -212,3 +332,4 @@ int main07()
        return 0;
 
 }
+

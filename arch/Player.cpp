@@ -6,6 +6,10 @@ Player::Player(MoveableBody* p, AnimatableGraphic* g)
     layerDepth = 6;
     b2V_position = b2Vec2(0,0);
     b2V_velocity = b2Vec2(0,0);
+    thrustLevel = 0;
+    turnRate = 0;
+    topSpeed = 12;
+    //thrust = false;
 
     _graphicsBody = g;
     _physicsBody = p;
@@ -27,6 +31,15 @@ void Player::setPosition(float x, float y)
 sf::Sprite Player::getSprite()
 {
     return _graphicsBody->getSprite();
+}
+
+void Player::thrust()
+{
+    //thrust = true;
+}
+void Player::turnLeft()
+{
+    lRotate = true;
 }
 
 Player::~Player()

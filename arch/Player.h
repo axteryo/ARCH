@@ -18,6 +18,12 @@ class Player : public GameObject
         void turnLeft();
         //void handleInput(sf::Keyboard k);
         sf::Sprite getSprite();
+        float turnRate;
+        float thrustLevel;
+        float topSpeed;
+        //bool thrust;
+        bool rRotate;
+        bool lRotate;
 
         MoveableBody* _physicsBody;
         AnimatableGraphic* _graphicsBody;
