@@ -26,6 +26,8 @@ void MoveableBody::update(GameObject* gObj)
     graphics.position = container.position;
     **/
    // body->SetTransform(gObj->b2V_position,body->GetAngle());
+   b2V2f_velocity = gObj->b2V_velocity;
+
 }
 
 

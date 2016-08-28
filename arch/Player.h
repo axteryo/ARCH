@@ -13,7 +13,7 @@ class Player : public GameObject
         virtual ~Player();
         void update();
         void setPosition(float x, float y);
-        void thrust();
+        void activateThrusters();
         void turnRight();
         void turnLeft();
         //void handleInput(sf::Keyboard k);
@@ -21,7 +21,7 @@ class Player : public GameObject
         float turnRate;
         float thrustLevel;
         float topSpeed;
-        //bool thrust;
+        bool thrust;
         bool rRotate;
         bool lRotate;
 

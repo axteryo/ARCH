@@ -284,7 +284,7 @@ void update(Vector2f player)
         //a = atan2f(player.x-(body.getPosition().x),player.y-(body.getPosition().y));
         //a = 180- a*(180/3.141592);
 
-           /*if(std::abs(angle - commanderBody->GetAngle())<5)
+           if(std::abs(angle - commanderBody->GetAngle())<5)
             {
                if(sqrt((((player.x/30)-commanderBody->GetPosition().x) * ((player.x/30)-commanderBody->GetPosition().x))+
                         (((player.y/30)-commanderBody->GetPosition().y) * ((player.y/30)-commanderBody->GetPosition().y))) >1)
@@ -297,7 +297,7 @@ void update(Vector2f player)
                     encircle(spriteBody.getRotation());
                 }
 
-            }*/
+            }
 
 
 
@@ -306,7 +306,7 @@ void update(Vector2f player)
     case defensive:
         break;
     }
-    //angle = target(player);
+    angle = target(player);
     velocity+=acceleration;
     if(sqrt((velocity.x*velocity.x)+(velocity.y*velocity.y))>10)
     {
@@ -628,7 +628,7 @@ private:
 
 
 
-int main12()
+int main10()
 { /** The window we'll be using to display  stuff as well as its dimensional variables **/
     //sf::Vector2f mapSize(5000,3000);
 //    sf::Vector2f mapOrigin(-2500,)
@@ -750,7 +750,7 @@ int rowcount = 0;
     sf::Texture wizTexture;
     wizTexture.loadFromFile("wiz.png");
     //Commander queen1(sf::Vector2f(wSize.x/2,wSize.y/4),world);
-   /*Commander queen2(sf::Vector2f(wSize.x/2,wSize.y/4),world);
+    Commander queen2(sf::Vector2f(wSize.x/2,wSize.y/4),world);
     Commander queen3(sf::Vector2f(wSize.x/2,wSize.y/4),world);
     Commander queen4(sf::Vector2f(wSize.x/2,wSize.y/4),world);
     Commander queen5(sf::Vector2f(wSize.x/2,wSize.y/4),world);
@@ -1320,7 +1320,7 @@ if(segPoints.size()==4)
     playerSprite.setPosition(30.0*playerBody->GetPosition().x,30.0*playerBody->GetPosition().y);
     playerSprite.setRotation(90+playerBody->GetAngle()*((180/3.141592)));
     //queen1.update(playerSprite.getPosition());
-    /*queen2.update(playerSprite.getPosition());
+    queen2.update(playerSprite.getPosition());
     queen3.update(playerSprite.getPosition());
     queen4.update(playerSprite.getPosition());
     queen5.update(playerSprite.getPosition());
@@ -1359,7 +1359,7 @@ if(segPoints.size()==4)
 
     window.clear((sf::Color::White));
 
-
+    int drawcount = 0;
     for(b2Body* bodyIter = world.GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
         {
 
@@ -1417,7 +1417,7 @@ if(segPoints.size()==4)
                 sprite.setOrigin(16,16);
                 sprite.setPosition(30*bodyIter->GetPosition().x,30*bodyIter->GetPosition().y);
                 sprite.setRotation((bodyIter->GetAngle()*(180/3.14159)));
-                window.draw(sprite);
+                //window.draw(sprite);
                 //std::cout<<playerSprite.getPosition().x<<std::endl;
                 //std::cout<<playerSprite.getPosition().y<<std::endl;
             }
@@ -1444,7 +1444,7 @@ if(segPoints.size()==4)
                 }
 
             }
-           /* b2PolygonShape* polygonShape;
+            b2PolygonShape* polygonShape;
                 sf::ConvexShape colShape;
                 colShape.setPointCount(4);
 
@@ -1463,17 +1463,20 @@ if(segPoints.size()==4)
                         colShape.setOutlineThickness(1);
                         colShape.setPosition(bodyIter->GetPosition().x*30,bodyIter->GetPosition().y*30);
                         colShape.setRotation((bodyIter->GetTransform().q.GetAngle()*(180-(180/3.14159))));
-                        window.draw(colShape);
+
                     }
-                }*/
+                }
+                drawcount+=1;
+                window.draw(colShape);
         }
+        std::cout<<drawcount<<std::endl;
     cam.x*=0;
     cam.y*=0;
     window.draw(beam);
     window.draw(playerSprite);
     //window.draw(pineSprite);
     //window.draw(queen1.getBody());
-    /*window.draw(queen2.getBody());
+    window.draw(queen2.getBody());
     window.draw(queen3.getBody());
     window.draw(queen4.getBody());
     window.draw(queen5.getBody());

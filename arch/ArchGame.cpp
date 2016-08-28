@@ -28,13 +28,14 @@ ArchGame::ArchGame()
 void ArchGame::start()
 {
     LevelManager lm;
-    lm.loadLevel("testmap.json");
+    lm.loadLevel("testmap3.json");
 
     while(window->isOpen())
     {
         processInput(GameState);
         update(GameState);
         render(GameState);
+
         if (!gameRunning)
         {
             window->close();
@@ -79,6 +80,7 @@ void ArchGame::update(state currentState)
     {
     case Main_Menu:
 
+
         break;
     case In_Game:
         for(int i = 0; i<gObjList.size();++i)
@@ -99,20 +101,21 @@ void ArchGame::render(state currentState)
     switch(GameState)
     {
     case Main_Menu:
-        window->clear(sf::Color::White);
-        window->display();
+
         break;
     case In_Game:
         window->clear(sf::Color::White);
         for(int i = 0; i<gObjList.size();++i)
-        {std::cout<<"failed here"<<std::endl;
+        {
 
             window->draw(gObjList[i]->getSprite());
 
+
         }
+        std::cout<<"failed here"<<std::endl;
 
         ///DEBUG COLLISION DRAWER
-        for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
+       /* for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
         {
 b2PolygonShape* polygonShape;
                 sf::ConvexShape colShape;
@@ -136,9 +139,10 @@ b2PolygonShape* polygonShape;
                         window->draw(colShape);
                     }
                 }
-        }
+        }*/
         //window->draw(w->getSprite());
         window->display();
+
         break;
     }
 

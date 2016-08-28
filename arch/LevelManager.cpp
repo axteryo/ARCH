@@ -1,6 +1,9 @@
 #include "LevelManager.h"
 
 std::vector<GameObject*> gObjList;
+
+
+/** Upon creation of the level manager object, it first parses the file for collision shapes **/
 LevelManager::LevelManager()
 {
     v2f_mapDimension = sf::Vector2f(0,0);
@@ -139,7 +142,7 @@ std::cout<<"Layers seperated"<<std::endl;
         ssCoordinates.push_back(sf::Vector2f(x,y));
 
 
-        x+=v2f_tileDimension.x;
+        x+=32;
 
         if(x == ssDim.x)
         {
@@ -157,6 +160,7 @@ std::cout<<"Layers seperated"<<std::endl;
     xx = 0;
     yy = 0;
     int rowCount = 0;
+    int colCount = 0;
     for(int i = 0; i<mapLayers.size(); ++i)
     {
         for(int j = 0; j<mapLayers[i]["data"].size(); ++j)
@@ -164,9 +168,10 @@ std::cout<<"Layers seperated"<<std::endl;
 
             if(mapLayers[i]["data"][j].asInt()>0)
             {
-                gObjList.push_back(createObject(mapLayers[i]["data"][j].asInt(),sf::Vector2f(xx,yy)));
+                /*gObjList.push_back(createObject(mapLayers[i]["data"][j].asInt(),sf::Vector2f(xx,yy)));
                 std::cout<<yy<<std::endl;
-                //std::cout<<mapLayers[i]["data"][j]<<std::endl;
+         for(int j = 0; j<mapLayers[i]["data"].size(); ++j)
+        {       //std::cout<<mapLayers[i]["data"][j]<<std::endl;*/
             }
 
 
@@ -174,6 +179,7 @@ std::cout<<"Layers seperated"<<std::endl;
             ++rowCount;
             if(rowCount==v2f_mapDimension.x)
             {
+                ++colCount;
                 rowCount = 0;
                 xx = 0;
                 yy+=32;
@@ -181,7 +187,6 @@ std::cout<<"Layers seperated"<<std::endl;
 
         }
 
-
     }
-    std::cout<<"Objects created"<<std::endl;
+
 }

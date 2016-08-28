@@ -63,6 +63,7 @@
 		<Unit filename="keytest.cpp">
 			<Option target="Debug" />
 		</Unit>
+		<Unit filename="maptest.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

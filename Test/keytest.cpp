@@ -239,7 +239,7 @@ class GameController
 };
 
 
-int main()
+int main12()
 {
     sf::Vector2f wSize(1000,800);
     sf::RenderWindow window(sf::VideoMode(wSize.x,wSize.y,32),"Hello KeyTest");
