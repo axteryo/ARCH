@@ -29,11 +29,14 @@ int main()
    /**Sprite sheet coordinates**/
     std::vector<sf::Vector2f> ssCoordinates;
      sf::Image spriteSheet;
-
-   /**Map data list**/
+     /**Map data list**/
    std::vector<int> level;
+    /** Map Array **/
+     sf::VertexArray tileMap;
 
-   sf::Texture texture;
+
+
+
 
     Json::Value baseMapRoot;
     Json::Reader mapReader;
@@ -89,7 +92,9 @@ int main()
     }
     std::cout<<level.size()<<std::endl;
      std::cout<<"Sprite Sheet stored"<<std::endl;
-      sf::VertexArray tileMap(sf::Quads, v2f_mapDimension.x*v2f_mapDimension.y*4);
+
+    tileMap.setPrimitiveType(sf::Quads);
+      tileMap.resize(v2f_mapDimension.x*v2f_mapDimension.y*4);
 
 
     int xx,yy;

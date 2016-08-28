@@ -27,7 +27,12 @@ LevelManager::~LevelManager()
     //dtor
 }
 
-GameObject  *LevelManager::createObject(int data,sf::Vector2f pos)
+sf::VertexArray &LevelManager::getMap()
+{
+    return tileMap;
+}
+
+/*GameObject  *LevelManager::createObject(int data,sf::Vector2f pos)
 {
     sf::Sprite sprite;
     sprite.setTexture(texture);
@@ -98,12 +103,14 @@ GameObject  *LevelManager::createObject(int data,sf::Vector2f pos)
     w->setPosition(pos.x,pos.y);
 
 return w;
-}
+}*/
 
 void LevelManager::loadLevel(std::string mapFile)
 {
 
-///Open the mapfile and parse it
+///THE MAP FILE MUST FIRST BE OPENED AND PARSED FROM JSON TO VARIABLES*******/
+/**********************************************************************/
+/**********************************************************************/
     currentMapFile.open(mapFile);
     bool parsedSuccess = myReader.parse(currentMapFile,baseMapRoot,false);
     if(!parsedSuccess)
@@ -116,9 +123,17 @@ void LevelManager::loadLevel(std::string mapFile)
         {
             std::cout<<"Map file has been parsed"<<std::endl;
         }
+
+
+
+        ///store the tileWidth Dimensions
         v2f_tileDimension = sf::Vector2f(baseMapRoot["tilewidth"].asFloat(),baseMapRoot["tileheight"].asFloat());
+        ///store the tileCount Dimensions
         v2f_mapDimension = sf::Vector2f(baseMapRoot["width"].asFloat(),baseMapRoot["height"].asFloat());//*v2f_tileDimension.x,baseMapRoot["height"].asFloat()*v2f_tileDimension.y);
 
+
+/**********************************************************************/
+/**********************************************************************/
 ///Seperate the map layers
      for(int i = 0;i < baseMapRoot["layers"].size();++i)
         {
@@ -126,10 +141,33 @@ void LevelManager::loadLevel(std::string mapFile)
                 mapLayers.push_back(baseMapRoot["layers"][i]);
         }
 std::cout<<"Layers seperated"<<std::endl;
-///Store the spritesheet
+
+
+/**********************************************************************/
+/**********************************************************************/
+
+/**store spritesheet**/
+
+    ///load and store sprite sheet from file into image
     spriteSheet.loadFromFile(baseMapRoot["tilesets"][0]["image"].asString());
-    texture.loadFromImage(spriteSheet);
+    ///store sprite sheet from image into texture
+    spriteSheetTexture.loadFromImage(spriteSheet);
+    ///store sprite sheet dimensions in vector
     sf::Vector2f ssDim(baseMapRoot["tilesets"][0]["imagewidth"].asFloat(),baseMapRoot["tilesets"][0]["imageheight"].asFloat());
+
+
+    ///store level data in a vector List
+    for(int i = 0; i< mapLayers[0]["data"].size();++i)
+    {
+        level.push_back(mapLayers[0]["data"][i].asInt());
+         std::cout<<level[i]<<std::endl;
+    }
+
+/**********************************************************************/
+/**********************************************************************/
+
+
+    /** store tile coordinates from the spritesheet texture**/
 
     int x,y;
     x = 0;
@@ -137,16 +175,10 @@ std::cout<<"Layers seperated"<<std::endl;
     //std::cout<<baseMapRoot["tilsets"]<<std::endl;
     for (int i = 0; i<baseMapRoot["tilesets"][0]["tilecount"].asInt(); ++i)
     {
-
-        std::cout<<x<<","<<y<<std::endl;
         ssCoordinates.push_back(sf::Vector2f(x,y));
-
-
         x+=32;
-
         if(x == ssDim.x)
         {
-
             x = 0;
             y+=v2f_tileDimension.y;
         }
@@ -155,38 +187,63 @@ std::cout<<"Layers seperated"<<std::endl;
 
     std::cout<<"Sprite Sheet stored"<<std::endl;
 
-///create and store objects
+/**********************************************************************/
+/**********************************************************************/
+
+
+/**create and store objects**/
+
+    /** to create and store the map,
+     we will have to set numerous quads
+      in the vertex array to represent each tile**/
+    tileMap.setPrimitiveType(sf::Quads);
+    ///Set the amount of vertices per quad the map will store based on the number of tiles.
+    tileMap.resize(v2f_mapDimension.x*v2f_mapDimension.y*4);
+
+
     int xx,yy;
     xx = 0;
     yy = 0;
     int rowCount = 0;
     int colCount = 0;
-    for(int i = 0; i<mapLayers.size(); ++i)
-    {
-        for(int j = 0; j<mapLayers[i]["data"].size(); ++j)
+    int j = 0;
+
+    /** First, Loop through the level data to determine which tile is being placed.
+        Second, check to see if the tile is not an empty tile.
+        third, create a pointer to a quad in the vertex array and set the position of the tile based
+        on an incremental pattern and it's position in the map.
+        repeat for each column by row until map is stored with tiles.
+        **/
+    for(int i = 0; i<level.size(); ++i)
         {
-
-            if(mapLayers[i]["data"][j].asInt()>0)
+            if(level[i]>0)
             {
-                /*gObjList.push_back(createObject(mapLayers[i]["data"][j].asInt(),sf::Vector2f(xx,yy)));
-                std::cout<<yy<<std::endl;
-         for(int j = 0; j<mapLayers[i]["data"].size(); ++j)
-        {       //std::cout<<mapLayers[i]["data"][j]<<std::endl;*/
+
+            sf::Vertex* quad = &tileMap[j];
+
+            quad[j].position=sf::Vector2f(xx,yy);
+            quad[j+1].position=sf::Vector2f(xx+32,yy);
+            quad[j+2].position=sf::Vector2f(xx+32,yy+32);
+            quad[j+3].position=sf::Vector2f(xx,yy+32);
+
+            quad[j].texCoords= sf::Vector2f(ssCoordinates[level[i]-1].x,ssCoordinates[level[i]-1].y);
+            quad[j+1].texCoords= sf::Vector2f(ssCoordinates[level[i]-1].x+32,ssCoordinates[level[i]-1].y);
+            quad[j+2].texCoords= sf::Vector2f(ssCoordinates[level[i]-1].x+32,ssCoordinates[level[i]-1].y+32);
+            quad[j+3].texCoords= sf::Vector2f(ssCoordinates[level[i]-1].x,ssCoordinates[level[i]-1].y+32);
             }
-
-
+            j+=2;
             xx+=32;
             ++rowCount;
             if(rowCount==v2f_mapDimension.x)
             {
-                ++colCount;
                 rowCount = 0;
+
                 xx = 0;
                 yy+=32;
+
             }
 
-        }
 
-    }
+        }
 
 }

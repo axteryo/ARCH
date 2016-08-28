@@ -18,6 +18,7 @@ class LevelManager
         LevelManager();
         virtual ~LevelManager();
         void loadLevel(std::string mapFile);
+        sf::VertexArray &getMap();
          GameObject *createObject(int data,sf::Vector2f pos);
 
         /**Map dimensions(Tile Count)**/
@@ -28,6 +29,10 @@ class LevelManager
         std::vector<Json::Value> mapLayers;
         /**Sprite sheet coordinates**/
         std::vector<sf::Vector2f> ssCoordinates;
+        /** Map Array **/
+        sf::VertexArray tileMap;
+        /**Map data list**/
+        std::vector<int> level;
 
         Json::Value baseMapRoot;
         Json::Reader myReader;
@@ -37,9 +42,9 @@ class LevelManager
         Json::Value shapeRoot;
 
 
-        /**Map data list**/
+
         sf::Image spriteSheet;
-        sf::Texture texture;
+        sf::Texture spriteSheetTexture;
 
 
 
