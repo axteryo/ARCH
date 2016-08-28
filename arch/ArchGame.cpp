@@ -17,7 +17,9 @@ ArchGame::ArchGame()
     velocityIterations = 8;
     positionIterations = 3;
 
-    t.loadFromFile("RightTriangle_Left.png");
+
+
+    //t.loadFromFile("RightTriangle_Left.png");
 
     //w = new wallObject(new unMoveableBody, new StaticGraphic(t));
 
@@ -27,8 +29,8 @@ ArchGame::ArchGame()
 
 void ArchGame::start()
 {
-    LevelManager lm;
-    lm.loadLevel("testmap3.json");
+
+    level.loadLevel("testmap2.json");
 
     while(window->isOpen())
     {
@@ -105,17 +107,11 @@ void ArchGame::render(state currentState)
         break;
     case In_Game:
         window->clear(sf::Color::White);
-        for(int i = 0; i<gObjList.size();++i)
-        {
 
-            window->draw(gObjList[i]->getSprite());
-
-
-        }
-        std::cout<<"failed here"<<std::endl;
+    window->draw(level);
 
         ///DEBUG COLLISION DRAWER
-       /* for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
+        for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
         {
 b2PolygonShape* polygonShape;
                 sf::ConvexShape colShape;
@@ -133,14 +129,14 @@ b2PolygonShape* polygonShape;
                         colShape.setPoint(0,sf::Vector2f((polygonShape->GetVertex(3).x)*30,(polygonShape->GetVertex(3).y)*30));
                         colShape.setFillColor(sf::Color::Transparent);
                         colShape.setOutlineColor(sf::Color::Red);
-                        colShape.setOutlineThickness(.5);
+                        colShape.setOutlineThickness(1);
                         colShape.setPosition(bodyIter->GetPosition().x*30,bodyIter->GetPosition().y*30);
                         colShape.setRotation((bodyIter->GetTransform().q.GetAngle()*(180-(180/3.14159))));
                         window->draw(colShape);
                     }
                 }
-        }*/
-        //window->draw(w->getSprite());
+        }
+
         window->display();
 
         break;

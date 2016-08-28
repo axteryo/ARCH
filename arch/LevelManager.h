@@ -12,14 +12,24 @@
 #include "wallObject.h"
 
 extern std::vector<GameObject*> gObjList;
-class LevelManager
+class LevelManager : public sf::Drawable, public sf::Transformable
 {
+    private:
+
+        /** Map Array **/
+        sf::VertexArray tileMap;
+
+        sf::Image spriteSheet;
+        sf::Texture spriteSheetTexture;
+
+        void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+
     public:
         LevelManager();
         virtual ~LevelManager();
         void loadLevel(std::string mapFile);
-        sf::VertexArray &getMap();
-         GameObject *createObject(int data,sf::Vector2f pos);
+
+        GameObject *createObject(std::string shape,sf::Vector2f pos);
 
         /**Map dimensions(Tile Count)**/
         sf::Vector2f v2f_mapDimension;
@@ -29,8 +39,7 @@ class LevelManager
         std::vector<Json::Value> mapLayers;
         /**Sprite sheet coordinates**/
         std::vector<sf::Vector2f> ssCoordinates;
-        /** Map Array **/
-        sf::VertexArray tileMap;
+
         /**Map data list**/
         std::vector<int> level;
 
@@ -43,13 +52,12 @@ class LevelManager
 
 
 
-        sf::Image spriteSheet;
-        sf::Texture spriteSheetTexture;
+
 
 
 
     protected:
-    private:
+
 };
 
 #endif // LEVELMANAGER_H

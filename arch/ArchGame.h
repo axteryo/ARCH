@@ -34,7 +34,7 @@ class ArchGame
         int32 positionIterations;
 
 
-
+        LevelManager level;
 
     public:
 

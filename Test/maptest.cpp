@@ -29,8 +29,8 @@ int main()
    /**Sprite sheet coordinates**/
     std::vector<sf::Vector2f> ssCoordinates;
      sf::Image spriteSheet;
-     /**Map data list**/
-   std::vector<int> level;
+    /**Map data list**/
+    std::vector<int> level;
     /** Map Array **/
      sf::VertexArray tileMap;
 
@@ -54,6 +54,9 @@ int main()
 
 /**store spritesheet**/
     spriteSheet.loadFromFile(baseMapRoot["tilesets"][0]["image"].asString());
+    spriteSheetTexture.loadFromImage(spriteSheet);
+    sf::Vector2f ssDim(baseMapRoot["tilesets"][0]["imagewidth"].asFloat(),baseMapRoot["tilesets"][0]["imageheight"].asFloat());
+
     for(int i = 0;i < baseMapRoot["layers"].size();++i)
     {
         mapLayers.push_back(baseMapRoot["layers"][i]);
@@ -67,7 +70,6 @@ int main()
 
 
     /** store tile coordinates on texture**/
-    sf::Vector2f ssDim(baseMapRoot["tilesets"][0]["imagewidth"].asFloat(),baseMapRoot["tilesets"][0]["imageheight"].asFloat());
 
     int x,y;
     x = 0;
@@ -75,26 +77,20 @@ int main()
     //std::cout<<baseMapRoot["tilsets"]<<std::endl;
     for (int i = 0; i<baseMapRoot["tilesets"][0]["tilecount"].asInt(); ++i)
     {
-
-        //std::cout<<x<<","<<y<<std::endl;
         ssCoordinates.push_back(sf::Vector2f(x,y));
-
-
         x+=32;
-
         if(x == ssDim.x)
         {
-
             x = 0;
             y+=v2f_tileDimension.y;
         }
 
     }
-    std::cout<<level.size()<<std::endl;
+
      std::cout<<"Sprite Sheet stored"<<std::endl;
 
     tileMap.setPrimitiveType(sf::Quads);
-      tileMap.resize(v2f_mapDimension.x*v2f_mapDimension.y*4);
+    tileMap.resize(v2f_mapDimension.x*v2f_mapDimension.y*4);
 
 
     int xx,yy;
@@ -120,10 +116,6 @@ int main()
             quad[j+1].texCoords= sf::Vector2f(ssCoordinates[level[i]-1].x+32,ssCoordinates[level[i]-1].y);
             quad[j+2].texCoords= sf::Vector2f(ssCoordinates[level[i]-1].x+32,ssCoordinates[level[i]-1].y+32);
             quad[j+3].texCoords= sf::Vector2f(ssCoordinates[level[i]-1].x,ssCoordinates[level[i]-1].y+32);
-
-            //std::cout<<i<<std::endl;
-
-
             }
             j+=2;
             xx+=32;

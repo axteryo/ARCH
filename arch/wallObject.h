@@ -11,13 +11,13 @@
 class wallObject : public GameObject
 {
     public:
-        wallObject(unMoveableBody* p, StaticGraphic* g);
+        wallObject(unMoveableBody* p);//, StaticGraphic* g);
         virtual ~wallObject();
         void update();
         void setPosition(float x, float y);
-        sf::Sprite getSprite();
+        //sf::Sprite getSprite();
         unMoveableBody* _physicsBody;
-        StaticGraphic* _graphicsBody;
+        //StaticGraphic* _graphicsBody;
 
     protected:
     private:

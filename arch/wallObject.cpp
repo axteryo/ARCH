@@ -2,7 +2,7 @@
 
 
 
-wallObject::wallObject(unMoveableBody* p, StaticGraphic* g )
+wallObject::wallObject(unMoveableBody* p)//, StaticGraphic* g )
 {
 
     b2V_position = b2Vec2(0,0);
@@ -16,7 +16,7 @@ wallObject::wallObject(unMoveableBody* p, StaticGraphic* g )
 
     //_graphicsBody = g;
     _physicsBody  = p;
-    _graphicsBody = g;
+    //_graphicsBody = g;
 
     _physicsBody->body->SetUserData((void*)this);
 
@@ -27,7 +27,7 @@ void wallObject::update()
 {
     //b2V_velocity = _physicsBody->body->GetLinearVelocity;
     _physicsBody->update(this);
-    _graphicsBody->update(this);
+    //_graphicsBody->update(this);
 
 }
 void wallObject::setPosition(float x, float y)
@@ -39,8 +39,8 @@ wallObject::~wallObject()
 {
     //dtor
 }
-sf::Sprite wallObject::getSprite()
+/*sf::Sprite wallObject::getSprite()
 {
     return _graphicsBody->getSprite();
-}
+}*/
 

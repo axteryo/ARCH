@@ -27,67 +27,38 @@ LevelManager::~LevelManager()
     //dtor
 }
 
-sf::VertexArray &LevelManager::getMap()
+
+
+GameObject  *LevelManager::createObject(std::string shape,sf::Vector2f pos)
 {
-    return tileMap;
-}
 
-/*GameObject  *LevelManager::createObject(int data,sf::Vector2f pos)
-{
-    sf::Sprite sprite;
-    sprite.setTexture(texture);
 
-    texture.loadFromImage(spriteSheet,sf::IntRect(ssCoordinates[data-1].x,
-                                                  ssCoordinates[data-1].y
-                                                  ,32,32));
 
-   wallObject* w = new wallObject(new unMoveableBody(),new StaticGraphic(texture));
+
+   wallObject* w = new wallObject(new unMoveableBody());
 
 
     std::string name;
+
     b2Vec2 vertices[4];
     b2PolygonShape polyShape;
-    if(data == 1)
-    {
-        name = "RightTriangle_Left";
-    }
 
-    else if(data == 2)
-    {
-        name = "Square";
-    }
 
-    else if (data == 3)
-    {
-        name = "RightTriangle_Right";
-    }
 
-    else if (data == 4)
-    {
-        name = "RightTriangle_LeftUp";
-    }
 
-    else if (data == 5)
-    {
-        //name = "RightTriangl"
-    }
 
-    else if (data == 6)
-    {
-        name = "RightTriangle_RightUp";
-    }
 
-        for(int i = 0; i < shapeRoot[name].size(); i++)
+        for(int i = 0; i < shapeRoot[shape].size(); i++)
         {
             int x = 6;
             int y = x+1;
 	//FOr vertices in the "shapes array"
-            for (int ii = 0; ii < shapeRoot[name][i]["shape"].size(); ++ii)
+            for (int ii = 0; ii < shapeRoot[shape][i]["shape"].size(); ++ii)
             {
                 if(x>=0)
                 {
-                    vertices[ii].Set((shapeRoot[name][i]["shape"][x].asInt()-w->_physicsBody->body->GetPosition().x*30)/30,
-                                     (shapeRoot[name][i]["shape"][y].asInt()-w->_physicsBody->body->GetPosition().y*30)/30);
+                    vertices[ii].Set((shapeRoot[shape][i]["shape"][x].asInt()-w->_physicsBody->body->GetPosition().x*30)/30,
+                                     (shapeRoot[shape][i]["shape"][y].asInt()-w->_physicsBody->body->GetPosition().y*30)/30);
                     x-=2;
                     y = x+1;
                 }
@@ -103,7 +74,7 @@ sf::VertexArray &LevelManager::getMap()
     w->setPosition(pos.x,pos.y);
 
 return w;
-}*/
+}
 
 void LevelManager::loadLevel(std::string mapFile)
 {
@@ -137,9 +108,14 @@ void LevelManager::loadLevel(std::string mapFile)
 ///Seperate the map layers
      for(int i = 0;i < baseMapRoot["layers"].size();++i)
         {
-            //if((baseMapRoot["layers"][i]["type"] == "tileLayer"))
+           // if(baseMapRoot["layers"][i]["type"].asString().compare("tileLayer"))
+            //{
                 mapLayers.push_back(baseMapRoot["layers"][i]);
+            //}
+
+
         }
+
 std::cout<<"Layers seperated"<<std::endl;
 
 
@@ -245,5 +221,27 @@ std::cout<<"Layers seperated"<<std::endl;
 
 
         }
+/**Create Collision Objects **/
+        for(int n = 0;n < baseMapRoot["layers"].size();++n)
+        {
+            for(int m = 0; m <baseMapRoot["layers"][n]["objects"].size();++m)
+            {
+                gObjList.push_back(createObject(baseMapRoot["layers"][n]["objects"][m]["type"].asString(),
+                                   sf::Vector2f(baseMapRoot["layers"][n]["objects"][m]["x"].asFloat(),
+                                                baseMapRoot["layers"][n]["objects"][m]["y"].asFloat())));
+            }
 
+
+        }
+
+}
+
+ void LevelManager::draw(sf::RenderTarget& target,sf::RenderStates states) const
+{
+
+    states.transform *=getTransform();
+
+    states.texture= &spriteSheetTexture;
+
+    target.draw(tileMap,states);
 }
