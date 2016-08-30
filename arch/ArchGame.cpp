@@ -108,7 +108,6 @@ void ArchGame::render(state currentState)
     case In_Game:
         window->clear(sf::Color::White);
 
-    window->draw(level);
 
         ///DEBUG COLLISION DRAWER
         for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
@@ -136,6 +135,7 @@ b2PolygonShape* polygonShape;
                     }
                 }
         }
+        window->draw(level);
 
         window->display();
 
