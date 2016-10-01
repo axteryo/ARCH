@@ -14,6 +14,9 @@ class Player : public GameObject
         void update();
         void setPosition(float x, float y);
         void activateThrusters();
+        void cancelThrusters();
+        void cancelRightTurn();
+        void cancelLeftTurn();
         void turnRight();
         void turnLeft();
         //void handleInput(sf::Keyboard k);

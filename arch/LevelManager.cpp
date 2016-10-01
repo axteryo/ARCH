@@ -1,6 +1,7 @@
 #include "LevelManager.h"
 
 std::vector<GameObject*> gObjList;
+std::vector<Player*> chObjList;
 
 
 /** Upon creation of the level manager object, it first parses the file for collision shapes **/
@@ -8,6 +9,10 @@ LevelManager::LevelManager()
 {
     v2f_mapDimension = sf::Vector2f(0,0);
     v2f_tileDimension = sf::Vector2f(0,0);
+    playerSprite.loadFromFile("assets/archii_texture.png");
+    std::cout<<"loaded player_image"<<std::endl;
+
+    playerTexture.loadFromImage(playerSprite);
 
     ///Loads up the necessary shapes
      shapeFile.open("shapes.json");
@@ -27,13 +32,52 @@ LevelManager::~LevelManager()
     //dtor
 }
 
+Player *LevelManager::createCharacter(std::string shape,sf::Vector2f pos)
+{
+    Player* p = new Player(new MoveableBody(),new AnimatableGraphic(playerTexture));
+    std::string name;
 
+
+    b2PolygonShape polyShape;
+        for(int i = 0; i < shapeRoot[shape].size(); i++)
+        {
+            b2Vec2 vertices[shapeRoot[shape][i]["shape"].size()/2];
+            int x = shapeRoot[shape][i]["shape"].size()-2;
+            int y = x+1;
+            std::cout<<x<<std::endl;
+	//FOr vertices in the "shapes array"
+            for (int ii = 0; ii < shapeRoot[shape][i]["shape"].size(); ++ii)
+            {
+                if(x>=0)
+                {
+                    vertices[ii].Set((shapeRoot[shape][i]["shape"][x].asFloat()-p->_physicsBody->body->GetPosition().x*30.0)/30.0,
+                                     (shapeRoot[shape][i]["shape"][y].asFloat()-p->_physicsBody->body->GetPosition().y*30.0)/30.0);
+
+                    x-=2;
+                    y = x+1;
+
+
+                }
+
+            }
+
+        polyShape.Set(vertices,shapeRoot[shape][i]["shape"].size()/2);
+
+        p->_physicsBody->fixtureDef.shape = &polyShape;
+        p->_physicsBody->fixtureDef.friction = 0.0f;
+        p->_physicsBody->fixtureDef.density = 2.0f;
+
+        p->_physicsBody->body->CreateFixture(&p->_physicsBody->fixtureDef);
+    }
+    p->setPosition(pos.x,pos.y);
+
+
+    return p;
+
+}
 
 GameObject  *LevelManager::createObject(std::string shape,sf::Vector2f pos)
 {
-
-
-
 
    wallObject* w = new wallObject(new unMoveableBody());
 
@@ -136,7 +180,7 @@ std::cout<<"Layers seperated"<<std::endl;
     for(int i = 0; i< mapLayers[0]["data"].size();++i)
     {
         level.push_back(mapLayers[0]["data"][i].asInt());
-         std::cout<<level[i]<<std::endl;
+         //std::cout<<level[i]<<std::endl;
     }
 
 /**********************************************************************/
@@ -222,14 +266,76 @@ std::cout<<"Layers seperated"<<std::endl;
 
         }
 /**Create Collision Objects **/
-        for(int n = 0;n < baseMapRoot["layers"].size();++n)
+        for(int n = 0;n < baseMapRoot["layers"].size();n++)
         {
-            for(int m = 0; m <baseMapRoot["layers"][n]["objects"].size();++m)
-            {
-                gObjList.push_back(createObject(baseMapRoot["layers"][n]["objects"][m]["type"].asString(),
+
+
+
+
+
+
+                           // if(baseMapRoot["layers"][n]["name"].asString().compare("collision"))
+                            //{
+                                for(int m = 0; m <baseMapRoot["layers"][n]["objects"].size();++m)
+                                {   if(baseMapRoot["layers"][n]["name"].asString().compare("collision")==0)
+                                    {
+                                    /*
+                                        std::cout<<"We made it"<<std::endl;
+                                        gObjList.push_back(createObject(baseMapRoot["layers"][n]["objects"][m]["type"].asString(),
                                    sf::Vector2f(baseMapRoot["layers"][n]["objects"][m]["x"].asFloat(),
                                                 baseMapRoot["layers"][n]["objects"][m]["y"].asFloat())));
-            }
+                                        */
+                                    }
+                                    if(baseMapRoot["layers"][n]["name"].asString().compare("spawnPoints")==0)
+                                    {
+
+
+                                        chObjList.push_back(createCharacter(baseMapRoot["layers"][n]["objects"][m]["type"].asString(),
+                                    sf::Vector2f(baseMapRoot["layers"][n]["objects"][m]["x"].asFloat(),
+                                                 baseMapRoot["layers"][n]["objects"][m]["y"].asFloat())));
+
+
+                                    }
+                                }
+                   // else
+                    //{
+                     //   std::cout<<"nothing"<<std::endl;
+                    //}
+                       /* *//*
+                       for(int m = 0; m <baseMapRoot["layers"][n]["objects"].size();++m)
+                        {
+
+
+                        if(baseMapRoot["layers"][n]["objects"][m]["type"].asString().compare("archii_texture"))
+                        {
+
+                        }
+                        else{
+                                 std::cout<<"spawn"<<std::endl;
+
+                        }
+
+                        }
+
+
+
+                    /*}
+                    if(baseMapRoot["layers"][n]["name"].asString().compare("spawnPoints"))
+                    {
+                        for(int m = 0; m <baseMapRoot["layers"][n]["objects"].size();++m)
+                        {
+
+                        }
+                    }
+                    else
+                    {
+
+                    }
+
+
+*/
+
+
 
 
         }

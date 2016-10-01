@@ -10,8 +10,10 @@
 #include "StaticGraphic.h"
 #include "AnimatableGraphic.h"
 #include "wallObject.h"
+#include "Player.h"
 
 extern std::vector<GameObject*> gObjList;
+extern std::vector<Player*> chObjList;
 class LevelManager : public sf::Drawable, public sf::Transformable
 {
     private:
@@ -20,7 +22,9 @@ class LevelManager : public sf::Drawable, public sf::Transformable
         sf::VertexArray tileMap;
 
         sf::Image spriteSheet;
+        sf::Image playerSprite;
         sf::Texture spriteSheetTexture;
+        sf::Texture playerTexture;
 
         void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
@@ -30,6 +34,7 @@ class LevelManager : public sf::Drawable, public sf::Transformable
         void loadLevel(std::string mapFile);
 
         GameObject *createObject(std::string shape,sf::Vector2f pos);
+        Player *createCharacter(std::string shape,sf::Vector2f pos);
 
         /**Map dimensions(Tile Count)**/
         sf::Vector2f v2f_mapDimension;

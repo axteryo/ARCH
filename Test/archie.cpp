@@ -531,13 +531,15 @@ class BodyLoader
         else
             std::cout<<"success"<<std::endl;
 
-        b2Vec2 vertices[4];
+
         b2PolygonShape polyShape;
         //for objects in the "sprite name array"
         for(int i = 0; i < shapeRoot[name].size(); i++)
         {
-            int x = 6;
+            b2Vec2 vertices[shapeRoot[name][i]["shape"].size()/2];
+            int x = shapeRoot[name][i]["shape"].size()-2;
             int y = x+1;
+
 	//FOr vertices in the "shapes array"
             for (int ii = 0; ii < shapeRoot[name][i]["shape"].size(); ++ii)
             {
@@ -545,12 +547,13 @@ class BodyLoader
                 {
                     vertices[ii].Set((shapeRoot[name][i]["shape"][x].asInt()-bod->GetPosition().x*30)/30,
                                      (shapeRoot[name][i]["shape"][y].asInt()-bod->GetPosition().y*30)/30);
+
                     x-=2;
                     y = x+1;
                 }
             }
-            int counter = 4;
-            polyShape.Set(vertices,counter);
+            //int counter = 4;
+            polyShape.Set(vertices,shapeRoot[name][i]["shape"].size()/2);
             fd.shape = &polyShape;
             fd.friction = 0.0f;
             fd.density = 2.0f;
@@ -618,7 +621,7 @@ public:
         }
 
         //mapLayers.push_back();
-        std::cout<<mapLayers[0]["data"]<<std::endl;
+        //std::cout<<mapLayers[0]["data"]<<std::endl;
 
     }
 private:
@@ -628,7 +631,7 @@ private:
 
 
 
-int main10()
+int main()
 { /** The window we'll be using to display  stuff as well as its dimensional variables **/
     //sf::Vector2f mapSize(5000,3000);
 //    sf::Vector2f mapOrigin(-2500,)
@@ -737,7 +740,7 @@ int rowcount = 0;
     pineSprite.setOrigin(0,0);
     pineSprite.setPosition(0,0);
 
-    createObject(world,100,100,"pine_sprite",10);
+    //createObject(world,100,100,"pine_sprite",10);
     createObject(world,200,100,"wiz",9);
 
 
@@ -1374,7 +1377,7 @@ if(segPoints.size()==4)
                 sprite.setPosition(30*bodyIter->GetTransform().p.x,30*bodyIter->GetTransform().p.y);
                 //sprite.setOrigin(30*bodyIter->GetPosition().x,30*bodyIter->GetPosition().y);
                 sprite.setRotation((bodyIter->GetTransform().q.GetAngle()*(180-(180/3.14159))));
-                window.draw(sprite);
+                //window.draw(sprite);
             }
             if((int)bodyIter->GetUserData() == 10)
             {
@@ -1446,7 +1449,7 @@ if(segPoints.size()==4)
             }
             b2PolygonShape* polygonShape;
                 sf::ConvexShape colShape;
-                colShape.setPointCount(4);
+
 
                 for (b2Fixture* f = bodyIter->GetFixtureList(); f; f = f->GetNext())
                 {
@@ -1454,10 +1457,18 @@ if(segPoints.size()==4)
                     if(shapeType == b2Shape::e_polygon)
                     {
                         polygonShape = (b2PolygonShape*)f->GetShape();
-                        colShape.setPoint(3,sf::Vector2f((polygonShape->GetVertex(0).x)*30,(polygonShape->GetVertex(0).y)*30));
+                        colShape.setPointCount(polygonShape->GetVertexCount());
+                        int i = 0;
+                        for(int ii = polygonShape->GetVertexCount()-1; ii>=0 ; ii--)
+                        {
+                            colShape.setPoint(ii,sf::Vector2f((polygonShape->GetVertex(i).x)*30,(polygonShape->GetVertex(i).y)*30));
+                            i++;
+                        }
+
+                        /*colShape.setPoint(3,sf::Vector2f((polygonShape->GetVertex(0).x)*30,(polygonShape->GetVertex(0).y)*30));
                         colShape.setPoint(2,sf::Vector2f((polygonShape->GetVertex(1).x)*30,(polygonShape->GetVertex(1).y)*30));
                         colShape.setPoint(1,sf::Vector2f((polygonShape->GetVertex(2).x)*30,(polygonShape->GetVertex(2).y)*30));
-                        colShape.setPoint(0,sf::Vector2f((polygonShape->GetVertex(3).x)*30,(polygonShape->GetVertex(3).y)*30));
+                        colShape.setPoint(0,sf::Vector2f((polygonShape->GetVertex(3).x)*30,(polygonShape->GetVertex(3).y)*30));*/
                         colShape.setFillColor(sf::Color::Transparent);
                         colShape.setOutlineColor(sf::Color::Red);
                         colShape.setOutlineThickness(1);
@@ -1465,11 +1476,13 @@ if(segPoints.size()==4)
                         colShape.setRotation((bodyIter->GetTransform().q.GetAngle()*(180-(180/3.14159))));
 
                     }
+                    window.draw(colShape);
                 }
                 drawcount+=1;
-                window.draw(colShape);
+
+
         }
-        std::cout<<drawcount<<std::endl;
+        //std::cout<<drawcount<<std::endl;
     cam.x*=0;
     cam.y*=0;
     window.draw(beam);

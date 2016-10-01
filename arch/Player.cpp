@@ -8,9 +8,9 @@ Player::Player(MoveableBody* p, AnimatableGraphic* g)
     b2V_velocity = b2Vec2(0,0);
     fl_rotation = 0;
     thrustLevel = 0;
-    turnRate = 0;
+    turnRate = .05;
     topSpeed = 12;
-    //thrust = false;
+    thrust = false;
 
     _graphicsBody = g;
     _physicsBody = p;
@@ -21,6 +21,20 @@ Player::Player(MoveableBody* p, AnimatableGraphic* g)
 }
 void Player::update()
 {
+    fl_rotation = _physicsBody->body->GetAngle();
+
+    if(rRotate)
+    {
+        fl_rotation+=turnRate;
+
+
+
+    }
+
+    if(lRotate)
+    {
+        fl_rotation-=turnRate;
+    }
 
     if(thrust)
     {
@@ -42,20 +56,13 @@ void Player::update()
 
         turnRate =.1;
     }
-    if(rRotate)
-    {
-        fl_rotation+=turnRate;
-    }
-    if(lRotate)
-    {
-        fl_rotation-=turnRate;
-    }
+
      _physicsBody->update(this);
     _graphicsBody->update(this);
 }
 void Player::setPosition(float x, float y)
 {
-
+    b2V_position= b2Vec2(x/30,y/30);
 }
 
 sf::Sprite Player::getSprite()
@@ -67,13 +74,25 @@ void Player::activateThrusters()
 {
     thrust = true;
 }
+void Player::cancelThrusters()
+{
+    thrust = false;
+}
 void Player::turnLeft()
 {
     lRotate = true;
 }
+void Player::cancelLeftTurn()
+{
+    lRotate = false;
+}
 void Player::turnRight()
 {
     rRotate = true;
+}
+void Player::cancelRightTurn()
+{
+    rRotate = false;
 }
 Player::~Player()
 {

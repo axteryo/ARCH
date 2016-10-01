@@ -81,6 +81,8 @@
 		<Unit filename="MoveableBody.h" />
 		<Unit filename="PhysicsBody.cpp" />
 		<Unit filename="PhysicsBody.h" />
+		<Unit filename="Player.cpp" />
+		<Unit filename="Player.h" />
 		<Unit filename="StaticGraphic.cpp" />
 		<Unit filename="StaticGraphic.h" />
 		<Unit filename="dist/json/json-forwards.h" />

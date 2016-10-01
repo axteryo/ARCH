@@ -9,7 +9,7 @@
 
 #include "dist/json/json.h"
 
-int main()
+int main11()
 {
     sf::Vector2f wSize(1000,800);
     sf::RenderWindow window(sf::VideoMode(wSize.x,wSize.y,32),"Hello MapTest");
@@ -29,6 +29,8 @@ int main()
    /**Sprite sheet coordinates**/
     std::vector<sf::Vector2f> ssCoordinates;
      sf::Image spriteSheet;
+
+     sf::Texture spriteSheetTexture;
     /**Map data list**/
     std::vector<int> level;
     /** Map Array **/
@@ -135,7 +137,7 @@ std::cout<<colCount<<std::endl;
 
 
 
-    sf::Texture spriteSheetTexture;
+
 
 
     spriteSheetTexture.loadFromImage(spriteSheet);

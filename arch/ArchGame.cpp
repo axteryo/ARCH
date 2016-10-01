@@ -30,7 +30,8 @@ ArchGame::ArchGame()
 void ArchGame::start()
 {
 
-    level.loadLevel("testmap2.json");
+    level.loadLevel("testmap.json");
+    controller.loadBinding();
 
     while(window->isOpen())
     {
@@ -70,6 +71,60 @@ void ArchGame::processInput(state currentState)
             {
                 gameRunning = false;
             }
+            if (event.type == sf::Event::KeyPressed)
+            {
+                if(controller.isActionKeyPressed("activateThrusters"))
+                {
+                     for(int ii = 0; ii<chObjList.size();++ii)
+                    {
+                        chObjList[ii]->activateThrusters();
+                    }
+                }
+                if(controller.isActionKeyPressed("turnRight"))
+                {
+                     for(int ii = 0; ii<chObjList.size();++ii)
+                    {
+
+                        chObjList[ii]->turnRight();
+                        std::cout<<chObjList[ii]->turnRate<<std::endl;
+                    }
+
+                }
+                if(controller.isActionKeyPressed("turnLeft"))
+                {
+                     for(int ii = 0; ii<chObjList.size();++ii)
+                    {
+                        chObjList[ii]->turnLeft();
+                    }
+                }
+            }
+            if(event.type == sf::Event::KeyReleased)
+            {
+
+                    if(controller.isActionKeyReleased("activateThrusters",event))
+                {
+                     for(int ii = 0; ii<chObjList.size();++ii)
+                    {
+                        chObjList[ii]->cancelThrusters();
+                    }
+                }
+                else if(controller.isActionKeyReleased("turnRight",event))
+                {
+                     for(int ii = 0; ii<chObjList.size();++ii)
+                    {
+                        chObjList[ii]->cancelRightTurn();
+                    }
+
+                }
+                if(controller.isActionKeyReleased("turnLeft", event))
+                {
+                     for(int ii = 0; ii<chObjList.size();++ii)
+                    {
+                        chObjList[ii]->cancelLeftTurn();
+                    }
+                }
+
+            }
         }
         break;
     }
@@ -78,6 +133,8 @@ void ArchGame::processInput(state currentState)
 
 void ArchGame::update(state currentState)
 {
+    world->Step(timeStep,velocityIterations,positionIterations);
+
     switch(GameState)
     {
     case Main_Menu:
@@ -85,16 +142,21 @@ void ArchGame::update(state currentState)
 
         break;
     case In_Game:
-        for(int i = 0; i<gObjList.size();++i)
+      /*  for(int i = 0; i<gObjList.size();++i)
         {
             gObjList[i]->update();
+
+        }*/
+        for(int ii = 0; ii<chObjList.size();++ii)
+        {
+            chObjList[ii]->update();
+            std::cout<< chObjList[ii]->fl_rotation<<std::endl;
 
         }
 
 
         break;
     }
-    world->Step(timeStep,velocityIterations,positionIterations);
 
 }
 
@@ -108,13 +170,21 @@ void ArchGame::render(state currentState)
     case In_Game:
         window->clear(sf::Color::White);
 
+window->draw(level);
+        for(int ii = 0; ii<chObjList.size();++ii)
+        {
+            window->draw(chObjList[ii]->getSprite());
+        }
+
+
 
         ///DEBUG COLLISION DRAWER
+
         for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
         {
-b2PolygonShape* polygonShape;
+                b2PolygonShape* polygonShape;
                 sf::ConvexShape colShape;
-                colShape.setPointCount(4);
+
 
                 for (b2Fixture* f = bodyIter->GetFixtureList(); f; f = f->GetNext())
                 {
@@ -122,20 +192,25 @@ b2PolygonShape* polygonShape;
                     if(shapeType == b2Shape::e_polygon)
                     {
                         polygonShape = (b2PolygonShape*)f->GetShape();
-                        colShape.setPoint(3,sf::Vector2f((polygonShape->GetVertex(0).x)*30,(polygonShape->GetVertex(0).y)*30));
-                        colShape.setPoint(2,sf::Vector2f((polygonShape->GetVertex(1).x)*30,(polygonShape->GetVertex(1).y)*30));
-                        colShape.setPoint(1,sf::Vector2f((polygonShape->GetVertex(2).x)*30,(polygonShape->GetVertex(2).y)*30));
-                        colShape.setPoint(0,sf::Vector2f((polygonShape->GetVertex(3).x)*30,(polygonShape->GetVertex(3).y)*30));
+                         colShape.setPointCount(polygonShape->GetVertexCount());
+                        int i = 0;
+                        for(int ii = polygonShape->GetVertexCount()-1; ii>=0 ; ii--)
+                        {
+                            colShape.setPoint(ii,sf::Vector2f((polygonShape->GetVertex(i).x)*30,(polygonShape->GetVertex(i).y)*30));
+                            i++;
+                        }
                         colShape.setFillColor(sf::Color::Transparent);
-                        colShape.setOutlineColor(sf::Color::Red);
+                        colShape.setOutlineColor(sf::Color::Blue);
                         colShape.setOutlineThickness(1);
                         colShape.setPosition(bodyIter->GetPosition().x*30,bodyIter->GetPosition().y*30);
                         colShape.setRotation((bodyIter->GetTransform().q.GetAngle()*(180-(180/3.14159))));
-                        window->draw(colShape);
+
                     }
+                     window->draw(colShape);
                 }
         }
-        window->draw(level);
+
+
 
         window->display();
 

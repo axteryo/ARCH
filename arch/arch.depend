@@ -596,14 +596,15 @@
 	<math.h>
 	"GameObject.h"
 
-1472489907 source:c:\users\mesh\documents\projectarch\arch\archgame.cpp
+1475272797 source:c:\users\mesh\documents\projectarch\arch\archgame.cpp
 	"ArchGame.h"
 	"LevelManager.h"
 
-1472416987 c:\users\mesh\documents\projectarch\arch\archgame.h
+1473625000 c:\users\mesh\documents\projectarch\arch\archgame.h
 	"includes.h"
 	"LevelManager.h"
 	"GameObject.h"
+	"gameController.h"
 
 1468837589 c:\users\mesh\documents\projectarch\arch\gameobject.h
 	"includes.h"
@@ -633,7 +634,7 @@
 	"GameObject.h"
 	"PhysicsBody.h"
 
-1470472973 source:c:\users\mesh\documents\projectarch\arch\moveablebody.cpp
+1475285930 source:c:\users\mesh\documents\projectarch\arch\moveablebody.cpp
 	"MoveableBody.h"
 
 1469902276 c:\users\mesh\documents\projectarch\arch\moveablebody.h
@@ -645,7 +646,7 @@
 1468108513 c:\users\mesh\documents\projectarch\arch\unmoveablebody.h
 	"PhysicsBody.h"
 
-1468451269 c:\users\mesh\documents\projectarch\arch\includes.h
+1473534216 c:\users\mesh\documents\projectarch\arch\includes.h
 	<SFML/Graphics.hpp>
 	<Box2D/Box2D.h>
 	<SFML/Window.hpp>
@@ -660,7 +661,7 @@
 	"unMoveableBody.h"
 	"StaticGraphic.h"
 
-1468186047 source:c:\users\mesh\documents\projectarch\arch\animatablegraphic.cpp
+1475286096 source:c:\users\mesh\documents\projectarch\arch\animatablegraphic.cpp
 	"AnimatableGraphic.h"
 
 1468111194 c:\users\mesh\documents\projectarch\arch\animatablegraphic.h
@@ -679,10 +680,10 @@
 	"GameObject.h"
 	"StaticGraphic.h"
 
-1472422400 source:c:\users\mesh\documents\projectarch\arch\levelmanager.cpp
+1475286070 source:c:\users\mesh\documents\projectarch\arch\levelmanager.cpp
 	"LevelManager.h"
 
-1472419252 c:\users\mesh\documents\projectarch\arch\levelmanager.h
+1473625925 c:\users\mesh\documents\projectarch\arch\levelmanager.h
 	<iostream>
 	<fstream>
 	"dist/json/json.h"
@@ -691,6 +692,7 @@
 	"StaticGraphic.h"
 	"AnimatableGraphic.h"
 	"wallObject.h"
+	"Player.h"
 
 1465673537 c:\users\mesh\documents\projectarch\arch\dist\json\json.h
 	<stddef.h>
@@ -766,15 +768,20 @@
 	<cmath>
 	<float.h>
 
-1469430729 source:c:\users\mesh\documents\projectarch\arch\gamecontroller.cpp
+1474122748 source:c:\users\mesh\documents\projectarch\arch\gamecontroller.cpp
 	"gameController.h"
 
-1469430729 c:\users\mesh\documents\projectarch\arch\gamecontroller.h
+1473622863 c:\users\mesh\documents\projectarch\arch\gamecontroller.h
+	"dist/json/json.h"
+	<iostream>
+	<fstream>
+	<string>
+	<SFML/Window.hpp>
 
-1470440298 source:c:\users\mesh\documents\projectarch\arch\player.cpp
+1475286619 source:c:\users\mesh\documents\projectarch\arch\player.cpp
 	"Player.h"
 
-1470440271 c:\users\mesh\documents\projectarch\arch\player.h
+1473624421 c:\users\mesh\documents\projectarch\arch\player.h
 	"GameObject.h"
 	"AnimatableGraphic.h"
 	"MoveableBody.h"

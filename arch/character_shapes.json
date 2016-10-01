@@ -1,0 +1,21 @@
+{ 
+    
+    "archii_texture": [
+        
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   73, 19  ,  73, 46  ,  59, 57  ,  59, 7  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   59, 7  ,  59, 57  ,  23, 60  ,  23, 4  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   23, 60  ,  10, 42  ,  10, 22  ,  23, 4  ]
+        }
+    ]
+}

@@ -269,7 +269,7 @@ int main12()
             }
             if (event.type == sf::Event::KeyPressed)
             {
-                       if(gC->isActionKeyPressed("turnRed"))
+            if(gC->isActionKeyPressed("turnRed"))
             {
                 tO.turnRed();
             }

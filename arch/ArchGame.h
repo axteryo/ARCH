@@ -5,6 +5,7 @@
 #include "LevelManager.h"
 
 #include "GameObject.h"
+#include "gameController.h"
 
 
 class ArchGame
@@ -35,6 +36,7 @@ class ArchGame
 
 
         LevelManager level;
+        gameController controller;
 
     public:
 
