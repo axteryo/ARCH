@@ -11,6 +11,8 @@ Player::Player(MoveableBody* p, AnimatableGraphic* g)
     turnRate = .05;
     topSpeed = 12;
     thrust = false;
+    rRotate= false;
+    lRotate=false;
 
     _graphicsBody = g;
     _physicsBody = p;
@@ -22,6 +24,9 @@ Player::Player(MoveableBody* p, AnimatableGraphic* g)
 void Player::update()
 {
     fl_rotation = _physicsBody->body->GetAngle();
+    b2V_velocity = _physicsBody->body->GetLinearVelocity();
+
+    //fl_rotation = _graphicsBody->sprite.getRotation();
 
     if(rRotate)
     {
@@ -31,19 +36,26 @@ void Player::update()
 
     }
 
-    if(lRotate)
+    else if(lRotate)
     {
         fl_rotation-=turnRate;
     }
-
+    b2Vec2 aim(0,0);
     if(thrust)
     {
-        turnRate =.05;
+        //turnRate =.03;
         if(thrustLevel<2)
         {
             thrustLevel += .0075;
         }
         else{thrustLevel = 2;}
+        aim = b2Vec2(cos(fl_rotation),sin(fl_rotation));
+        float dMag = sqrt((aim.x*aim.x)+(aim.y*aim.y));
+        if(dMag!=0)
+        {
+            aim.x/dMag;
+            aim.y/dMag;
+        }
 
     }
     else
@@ -54,15 +66,40 @@ void Player::update()
         }
         else{thrustLevel = 0;}
 
-        turnRate =.1;
+        //turnRate =.05;
     }
+    aim.x*=thrustLevel;
+    aim.y*=thrustLevel;
+
+    b2V_velocity+=aim;
+    if(sqrt(
+            (b2V_velocity.x*b2V_velocity.x)
+            +(b2V_velocity.y*b2V_velocity.y))
+            >topSpeed
+       )
+    {
+        float mag = sqrt((b2V_velocity.x*b2V_velocity.x)
+                        +(b2V_velocity.y*b2V_velocity.y));
+        if(mag !=0)
+        {
+            b2V_velocity.x/=mag;
+            b2V_velocity.y/=mag;
+            b2V_velocity.x*=topSpeed;
+            b2V_velocity.y*=topSpeed;
+        }
+    }
+
+
 
      _physicsBody->update(this);
     _graphicsBody->update(this);
 }
 void Player::setPosition(float x, float y)
 {
-    b2V_position= b2Vec2(x/30,y/30);
+    _physicsBody->body->SetTransform(b2Vec2(x/30,y/30),_physicsBody->body->GetAngle());
+
+
+
 }
 
 sf::Sprite Player::getSprite()

@@ -44,14 +44,14 @@ Player *LevelManager::createCharacter(std::string shape,sf::Vector2f pos)
             b2Vec2 vertices[shapeRoot[shape][i]["shape"].size()/2];
             int x = shapeRoot[shape][i]["shape"].size()-2;
             int y = x+1;
-            std::cout<<x<<std::endl;
+
 	//FOr vertices in the "shapes array"
             for (int ii = 0; ii < shapeRoot[shape][i]["shape"].size(); ++ii)
             {
                 if(x>=0)
                 {
-                    vertices[ii].Set((shapeRoot[shape][i]["shape"][x].asFloat()-p->_physicsBody->body->GetPosition().x*30.0)/30.0,
-                                     (shapeRoot[shape][i]["shape"][y].asFloat()-p->_physicsBody->body->GetPosition().y*30.0)/30.0);
+                    vertices[ii].Set((shapeRoot[shape][i]["shape"][x].asFloat()-p->_physicsBody->body->GetPosition().x*30.0f)/30.0f,
+                                     (shapeRoot[shape][i]["shape"][y].asFloat()-p->_physicsBody->body->GetPosition().y*30.0f)/30.0f);
 
                     x-=2;
                     y = x+1;
@@ -279,13 +279,15 @@ std::cout<<"Layers seperated"<<std::endl;
                                 for(int m = 0; m <baseMapRoot["layers"][n]["objects"].size();++m)
                                 {   if(baseMapRoot["layers"][n]["name"].asString().compare("collision")==0)
                                     {
-                                    /*
+
                                         std::cout<<"We made it"<<std::endl;
                                         gObjList.push_back(createObject(baseMapRoot["layers"][n]["objects"][m]["type"].asString(),
                                    sf::Vector2f(baseMapRoot["layers"][n]["objects"][m]["x"].asFloat(),
                                                 baseMapRoot["layers"][n]["objects"][m]["y"].asFloat())));
-                                        */
+                                                std::cout<<baseMapRoot["layers"][n]["objects"][m]["x"].asFloat()<<","<<baseMapRoot["layers"][n]["objects"][m]["y"].asFloat()<<std::endl;
+
                                     }
+                                    //std::cout<<gObjList.size()<<std::endl;
                                     if(baseMapRoot["layers"][n]["name"].asString().compare("spawnPoints")==0)
                                     {
 

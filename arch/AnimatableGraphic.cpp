@@ -13,7 +13,7 @@ AnimatableGraphic::AnimatableGraphic(sf::Texture t)
 void AnimatableGraphic::update(GameObject* gObj)
 {
     sprite.setPosition(gObj->b2V_position.x*30.0, gObj->b2V_position.y*30.0);
-    sprite.setRotation(gObj->fl_rotation*((360/3.14)));
+    sprite.setRotation((gObj->fl_rotation*(180/3.141592)));
 
 
 }

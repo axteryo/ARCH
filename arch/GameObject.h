@@ -17,7 +17,7 @@ class GameObject
 
         b2Vec2 b2V_position;
         b2Vec2 b2V_velocity;
-        float fl_rotation;
+        double fl_rotation;
 
         std::string objectId;
         int layerDepth;

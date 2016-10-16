@@ -753,7 +753,7 @@ int rowcount = 0;
     sf::Texture wizTexture;
     wizTexture.loadFromFile("wiz.png");
     //Commander queen1(sf::Vector2f(wSize.x/2,wSize.y/4),world);
-    Commander queen2(sf::Vector2f(wSize.x/2,wSize.y/4),world);
+   /* Commander queen2(sf::Vector2f(wSize.x/2,wSize.y/4),world);
     Commander queen3(sf::Vector2f(wSize.x/2,wSize.y/4),world);
     Commander queen4(sf::Vector2f(wSize.x/2,wSize.y/4),world);
     Commander queen5(sf::Vector2f(wSize.x/2,wSize.y/4),world);
@@ -1323,7 +1323,7 @@ if(segPoints.size()==4)
     playerSprite.setPosition(30.0*playerBody->GetPosition().x,30.0*playerBody->GetPosition().y);
     playerSprite.setRotation(90+playerBody->GetAngle()*((180/3.141592)));
     //queen1.update(playerSprite.getPosition());
-    queen2.update(playerSprite.getPosition());
+    /*queen2.update(playerSprite.getPosition());
     queen3.update(playerSprite.getPosition());
     queen4.update(playerSprite.getPosition());
     queen5.update(playerSprite.getPosition());
@@ -1374,10 +1374,11 @@ if(segPoints.size()==4)
 
                 sf::Sprite sprite;
                 sprite.setTexture(wizTexture);
-                sprite.setPosition(30*bodyIter->GetTransform().p.x,30*bodyIter->GetTransform().p.y);
                 //sprite.setOrigin(30*bodyIter->GetPosition().x,30*bodyIter->GetPosition().y);
+                sprite.setPosition(30*bodyIter->GetTransform().p.x,30*bodyIter->GetTransform().p.y);
+
                 sprite.setRotation((bodyIter->GetTransform().q.GetAngle()*(180-(180/3.14159))));
-                //window.draw(sprite);
+                window.draw(sprite);
             }
             if((int)bodyIter->GetUserData() == 10)
             {
@@ -1407,7 +1408,7 @@ if(segPoints.size()==4)
                 window.draw(sprite);
 
             }
-            if((int)bodyIter->GetUserData() == 2)
+            /*if((int)bodyIter->GetUserData() == 2)
             {
                 b2Vec2 pos;
                 pos = bodyIter->GetPosition();
@@ -1423,7 +1424,7 @@ if(segPoints.size()==4)
                 //window.draw(sprite);
                 //std::cout<<playerSprite.getPosition().x<<std::endl;
                 //std::cout<<playerSprite.getPosition().y<<std::endl;
-            }
+            }*/
             if((int)bodyIter->GetUserData() == 3)
             {
                 if(gridMode)
@@ -1489,7 +1490,7 @@ if(segPoints.size()==4)
     window.draw(playerSprite);
     //window.draw(pineSprite);
     //window.draw(queen1.getBody());
-    window.draw(queen2.getBody());
+    /*window.draw(queen2.getBody());
     window.draw(queen3.getBody());
     window.draw(queen4.getBody());
     window.draw(queen5.getBody());
@@ -1509,8 +1510,9 @@ void createObject(b2World& world, float X, float Y,std::string name,int id)
     BodyLoader bl;
 
     b2BodyDef bodyDef;
-    bodyDef.fixedRotation = true;
-    bodyDef.type = b2_kinematicBody;
+    //bodyDef.fixedRotation = true;
+    bodyDef.type = b2_dynamicBody;
+    bodyDef.position.Set(1.25,1.25);
     b2Body* body = world.CreateBody(&bodyDef);
     b2FixtureDef fd;
     bl.attachFixture(body,name,fd);

@@ -86,7 +86,7 @@ void ArchGame::processInput(state currentState)
                     {
 
                         chObjList[ii]->turnRight();
-                        std::cout<<chObjList[ii]->turnRate<<std::endl;
+                        std::cout<<chObjList[ii]->_graphicsBody->sprite.getRotation()<<","<<chObjList[ii]->_physicsBody->body->GetAngle()*(180/3.14159) <<std::endl;
                     }
 
                 }
@@ -142,15 +142,15 @@ void ArchGame::update(state currentState)
 
         break;
     case In_Game:
-      /*  for(int i = 0; i<gObjList.size();++i)
+        for(int i = 0; i<gObjList.size();++i)
         {
             gObjList[i]->update();
 
-        }*/
+        }
         for(int ii = 0; ii<chObjList.size();++ii)
         {
             chObjList[ii]->update();
-            std::cout<< chObjList[ii]->fl_rotation<<std::endl;
+
 
         }
 
@@ -203,11 +203,12 @@ window->draw(level);
                         colShape.setOutlineColor(sf::Color::Blue);
                         colShape.setOutlineThickness(1);
                         colShape.setPosition(bodyIter->GetPosition().x*30,bodyIter->GetPosition().y*30);
-                        colShape.setRotation((bodyIter->GetTransform().q.GetAngle()*(180-(180/3.14159))));
+                        colShape.setRotation((bodyIter->GetTransform().q.GetAngle()*((180/3.14159))));
 
                     }
-                     window->draw(colShape);
+
                 }
+                //window->draw(colShape);
         }
 
 
