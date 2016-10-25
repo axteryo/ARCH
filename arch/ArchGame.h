@@ -6,6 +6,7 @@
 
 #include "GameObject.h"
 #include "gameController.h"
+#include "cam.h"
 
 
 class ArchGame
@@ -29,6 +30,8 @@ class ArchGame
         sf::Vector2f v2f_mousePos;
         sf::Event event;
         sf::Keyboard input;
+        cam* dynamicCam;
+        std::string subject;
 
         float32 timeStep;
         int32 velocityIterations;

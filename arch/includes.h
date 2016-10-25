@@ -6,7 +6,7 @@
 #include <SFML/Window.hpp>
 #include <string>
 #include <math.h>
-//#include <iostream>
+#include <iostream>
 //#include <thread>
 //#include <chrono>
 
@@ -16,6 +16,7 @@ class GameObject;
 extern b2Vec2 gravity;
 extern b2World* world;
 extern std::vector<GameObject> objectList;
+sf::Vector2f normalize(sf::Vector2f source);
 
 
 #endif  //INCLUDES_H_INCLUDED

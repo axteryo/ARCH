@@ -596,15 +596,16 @@
 	<math.h>
 	"GameObject.h"
 
-1476645496 source:c:\users\mesh\documents\projectarch\arch\archgame.cpp
+1477150021 source:c:\users\mesh\documents\projectarch\arch\archgame.cpp
 	"ArchGame.h"
 	"LevelManager.h"
 
-1473625000 c:\users\mesh\documents\projectarch\arch\archgame.h
+1477066904 c:\users\mesh\documents\projectarch\arch\archgame.h
 	"includes.h"
 	"LevelManager.h"
 	"GameObject.h"
 	"gameController.h"
+	"cam.h"
 
 1476637677 c:\users\mesh\documents\projectarch\arch\gameobject.h
 	"includes.h"
@@ -634,7 +635,7 @@
 	"GameObject.h"
 	"PhysicsBody.h"
 
-1476645358 source:c:\users\mesh\documents\projectarch\arch\moveablebody.cpp
+1477069084 source:c:\users\mesh\documents\projectarch\arch\moveablebody.cpp
 	"MoveableBody.h"
 
 1469902276 c:\users\mesh\documents\projectarch\arch\moveablebody.h
@@ -646,12 +647,13 @@
 1468108513 c:\users\mesh\documents\projectarch\arch\unmoveablebody.h
 	"PhysicsBody.h"
 
-1473534216 c:\users\mesh\documents\projectarch\arch\includes.h
+1477068753 c:\users\mesh\documents\projectarch\arch\includes.h
 	<SFML/Graphics.hpp>
 	<Box2D/Box2D.h>
 	<SFML/Window.hpp>
 	<string>
 	<math.h>
+	<iostream>
 
 1472419166 source:c:\users\mesh\documents\projectarch\arch\wallobject.cpp
 	"wallObject.h"
@@ -778,11 +780,20 @@
 	<string>
 	<SFML/Window.hpp>
 
-1476644222 source:c:\users\mesh\documents\projectarch\arch\player.cpp
+1476939104 source:c:\users\mesh\documents\projectarch\arch\player.cpp
 	"Player.h"
 
 1473624421 c:\users\mesh\documents\projectarch\arch\player.h
 	"GameObject.h"
 	"AnimatableGraphic.h"
 	"MoveableBody.h"
+
+1477083072 source:c:\users\mesh\documents\projectarch\arch\cam.cpp
+	"cam.h"
+
+1477065984 c:\users\mesh\documents\projectarch\arch\cam.h
+	"includes.h"
+
+1477066291 source:c:\users\mesh\documents\projectarch\arch\includes.cpp
+	"includes.h"
 

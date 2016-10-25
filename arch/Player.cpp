@@ -8,7 +8,7 @@ Player::Player(MoveableBody* p, AnimatableGraphic* g)
     b2V_velocity = b2Vec2(0,0);
     fl_rotation = 0;
     thrustLevel = 0;
-    turnRate = .05;
+    turnRate = .1;
     topSpeed = 12;
     thrust = false;
     rRotate= false;
@@ -43,7 +43,7 @@ void Player::update()
     b2Vec2 aim(0,0);
     if(thrust)
     {
-        //turnRate =.03;
+        turnRate =.05;
         if(thrustLevel<2)
         {
             thrustLevel += .0075;
@@ -66,7 +66,7 @@ void Player::update()
         }
         else{thrustLevel = 0;}
 
-        //turnRate =.05;
+        turnRate =.1;
     }
     aim.x*=thrustLevel;
     aim.y*=thrustLevel;

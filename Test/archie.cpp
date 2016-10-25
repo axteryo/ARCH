@@ -638,6 +638,7 @@ int main()
     sf::Vector2f wSize(1000,800);
     sf::RenderWindow window(sf::VideoMode(wSize.x,wSize.y,32),"Hello Box2d");
     window.setFramerateLimit(60);
+    window.setVerticalSyncEnabled(false);
     sf::Event event;
     sf::Mouse mouse;
     float angle;

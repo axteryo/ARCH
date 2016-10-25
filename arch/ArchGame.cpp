@@ -7,15 +7,19 @@
 b2Vec2 gravity = b2Vec2(0,0);
 b2World* world = new b2World(gravity);
 
+
 ArchGame::ArchGame()
 {
     v2f_windowSize = sf::Vector2f(800,600);
     window = new sf::RenderWindow(sf::VideoMode(v2f_windowSize.x,v2f_windowSize.y), "Project_Arch");
     window->setFramerateLimit(60);
+    window->setVerticalSyncEnabled(false);
     GameState = In_Game;
     timeStep = 1.0f/60.0f;
     velocityIterations = 8;
     positionIterations = 3;
+    dynamicCam = new cam(sf::Vector2f(0,0), v2f_windowSize);
+    subject = "object_player";
 
 
 
@@ -33,11 +37,14 @@ void ArchGame::start()
     level.loadLevel("testmap.json");
     controller.loadBinding();
 
+
     while(window->isOpen())
     {
         processInput(GameState);
         update(GameState);
         render(GameState);
+        window->setView(dynamicCam->getView());
+
 
         if (!gameRunning)
         {
@@ -133,7 +140,7 @@ void ArchGame::processInput(state currentState)
 
 void ArchGame::update(state currentState)
 {
-    world->Step(timeStep,velocityIterations,positionIterations);
+
 
     switch(GameState)
     {
@@ -144,19 +151,27 @@ void ArchGame::update(state currentState)
     case In_Game:
         for(int i = 0; i<gObjList.size();++i)
         {
+
             gObjList[i]->update();
+            /*if(subject.compare( gObjList[i]->objectId))
+            {
+                sf::Vector2f targ = sf::Vector2f(gObjList[i]->b2V_position.x*30,
+                                                 gObjList[i]->b2V_position.y*30);
+                dynamicCam->follow(targ);
+            }*/
 
         }
         for(int ii = 0; ii<chObjList.size();++ii)
         {
-            chObjList[ii]->update();
 
+            chObjList[ii]->update();
 
         }
 
 
         break;
     }
+        world->Step(timeStep,velocityIterations,positionIterations);
 
 }
 
@@ -175,12 +190,23 @@ window->draw(level);
         {
             window->draw(chObjList[ii]->getSprite());
         }
+for(int ii = 0; ii<chObjList.size();++ii)
+        {
+
+           if(subject==chObjList[ii]->objectId)
+            {
+                sf::Vector2f targ = sf::Vector2f(chObjList[ii]->b2V_position.x*30,
+                                                 chObjList[ii]->b2V_position.y*30);
+
+                dynamicCam->follow(targ);
+            }
+        }
 
 
 
         ///DEBUG COLLISION DRAWER
 
-        for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
+       /* for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
         {
                 b2PolygonShape* polygonShape;
                 sf::ConvexShape colShape;
@@ -208,8 +234,8 @@ window->draw(level);
                     }
 
                 }
-                //window->draw(colShape);
-        }
+               //window->draw(colShape);
+        }*/
 
 
 

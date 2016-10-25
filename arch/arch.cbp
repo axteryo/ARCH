@@ -18,6 +18,7 @@
 					<Add directory="../../../../../SFML-2.3.2/include" />
 					<Add directory="../../../../../Box2D_v2.3.1" />
 					<Add directory="include" />
+					<Add directory="../arch" />
 				</Compiler>
 				<Linker>
 					<Add library="..\..\..\..\..\SFML-2.3.2\lib\libsfml-graphics-d.a" />
@@ -38,6 +39,7 @@
 					<Add option="-DSFML_STATIC" />
 					<Add directory="../../../../../SFML-2.3.2/include" />
 					<Add directory="../../../../../Box2D_v2.3.1" />
+					<Add directory="../arch" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -85,6 +87,8 @@
 		<Unit filename="Player.h" />
 		<Unit filename="StaticGraphic.cpp" />
 		<Unit filename="StaticGraphic.h" />
+		<Unit filename="cam.cpp" />
+		<Unit filename="cam.h" />
 		<Unit filename="dist/json/json-forwards.h" />
 		<Unit filename="dist/json/json.h" />
 		<Unit filename="dist/jsoncpp.cpp" />
@@ -92,6 +96,7 @@
 		<Unit filename="floorObject.h" />
 		<Unit filename="gameController.cpp" />
 		<Unit filename="gameController.h" />
+		<Unit filename="includes.cpp" />
 		<Unit filename="includes.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="unMoveableBody.cpp" />

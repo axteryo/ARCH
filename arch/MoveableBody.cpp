@@ -32,8 +32,7 @@ void MoveableBody::update(GameObject* gObj)
 
     body->SetLinearVelocity(gObj->b2V_velocity);
     gObj->b2V_position = body->GetPosition();
-    //body->SetAngularVelocity(0);
-
+    body->SetAngularVelocity(0);
     body->SetTransform(gObj->b2V_position,gObj->fl_rotation);
 
 
