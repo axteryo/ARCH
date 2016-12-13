@@ -10,13 +10,18 @@ AnimatableGraphic::AnimatableGraphic(sf::Texture t)
 }
 
 
-void AnimatableGraphic::update(GameObject* gObj)
+void AnimatableGraphic::update(Actor* container)
 {
-    sprite.setPosition(gObj->b2V_position.x*30.0, gObj->b2V_position.y*30.0);
-    sprite.setRotation((gObj->fl_rotation*(180/3.141592)));
+    sprite.setPosition(container->b2V_position.x*30.0, container->b2V_position.y*30.0);
+    sprite.setRotation((container->fl_rotation*(180/3.141592)));
 
 
 }
+void AnimatableGraphic::update(GameObject* gObj)
+{
+    //nothing....
+}
+
 
 sf::Sprite AnimatableGraphic::getSprite()
 {

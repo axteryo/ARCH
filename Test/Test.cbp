@@ -46,7 +46,6 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="Actor.cpp" />
 		<Unit filename="Actor.h" />
 		<Unit filename="BoxWiz.cpp" />
 		<Unit filename="BoxWiz.h" />

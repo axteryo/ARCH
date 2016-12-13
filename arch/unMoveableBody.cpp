@@ -6,7 +6,7 @@ unMoveableBody::unMoveableBody()
     bodyDef.type = b2_kinematicBody;
     body = world->CreateBody(&bodyDef);
 
-    b2V2f_velocity = b2Vec2(0,0);
+    //b2V2f_velocity = b2Vec2(0,0);
     b2V2f_position = b2Vec2(0,0);
 
 }

@@ -2,9 +2,10 @@
 #define WALLOBJECT_H
 
 #include "GameObject.h"
-
 #include "unMoveableBody.h"
-#include "StaticGraphic.h"
+#include "includes.h"
+
+
 
 
 

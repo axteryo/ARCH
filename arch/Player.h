@@ -1,16 +1,18 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "GameObject.h"
-#include "AnimatableGraphic.h"
+#include "Actor.h"
 #include "MoveableBody.h"
+#include "AnimatableGraphic.h"
+#include "includes.h"
 
 
-class Player : public GameObject
+class Player: public Actor
 {
     public:
         Player(MoveableBody* p, AnimatableGraphic* g);
         virtual ~Player();
+
         void update();
         void setPosition(float x, float y);
         void activateThrusters();
@@ -23,13 +25,15 @@ class Player : public GameObject
         sf::Sprite getSprite();
         float turnRate;
         float thrustLevel;
-        float topSpeed;
+
         bool thrust;
         bool rRotate;
         bool lRotate;
 
         MoveableBody* _physicsBody;
         AnimatableGraphic* _graphicsBody;
+
+
     protected:
     private:
 };

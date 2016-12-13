@@ -1,12 +1,33 @@
 #ifndef ARCHGAME_H
 #define ARCHGAME_H
 
-#include "includes.h"
-#include "LevelManager.h"
 
+#include <SFML/Graphics.hpp>
+#include <Box2D/Box2D.h>
+#include <SFML/Window.hpp>
+#include <string>
+#include <math.h>
+#include <iostream>
+
+#include "unMoveableBody.h"
+#include "MoveableBody.h"
+
+#include "AnimatableGraphic.h"
+#include "wallObject.h"
+#include "Player.h"
+#include "Actor.h"
 #include "GameObject.h"
+#include "includes.h"
+
+
+
+
+#include <chrono>
+
+
 #include "gameController.h"
 #include "cam.h"
+#include "LevelManager.h"
 
 
 class ArchGame
@@ -30,6 +51,11 @@ class ArchGame
         sf::Vector2f v2f_mousePos;
         sf::Event event;
         sf::Keyboard input;
+        sf::Clock clock;
+        sf::Time accumulator;
+        sf::Time ups;
+        float td;
+
         cam* dynamicCam;
         std::string subject;
 

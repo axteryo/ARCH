@@ -6,10 +6,10 @@ Player::Player(MoveableBody* p, AnimatableGraphic* g)
     layerDepth = 6;
     b2V_position = b2Vec2(0,0);
     b2V_velocity = b2Vec2(0,0);
-    fl_rotation = 0;
+    fl_rotation = 180;
     thrustLevel = 0;
     turnRate = .1;
-    topSpeed = 12;
+    topSpeed = 16;
     thrust = false;
     rRotate= false;
     lRotate=false;
@@ -31,9 +31,6 @@ void Player::update()
     if(rRotate)
     {
         fl_rotation+=turnRate;
-
-
-
     }
 
     else if(lRotate)
@@ -46,15 +43,15 @@ void Player::update()
         turnRate =.05;
         if(thrustLevel<2)
         {
-            thrustLevel += .0075;
+            thrustLevel += .01;
         }
         else{thrustLevel = 2;}
         aim = b2Vec2(cos(fl_rotation),sin(fl_rotation));
         float dMag = sqrt((aim.x*aim.x)+(aim.y*aim.y));
         if(dMag!=0)
         {
-            aim.x/dMag;
-            aim.y/dMag;
+            aim.x/=dMag;
+            aim.y/=dMag;
         }
 
     }
@@ -92,7 +89,7 @@ void Player::update()
 
 
      _physicsBody->update(this);
-    _graphicsBody->update(this);
+
 }
 void Player::setPosition(float x, float y)
 {
@@ -104,6 +101,7 @@ void Player::setPosition(float x, float y)
 
 sf::Sprite Player::getSprite()
 {
+    _graphicsBody->update(this);
     return _graphicsBody->getSprite();
 }
 

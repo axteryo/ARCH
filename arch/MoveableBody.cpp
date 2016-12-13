@@ -12,7 +12,7 @@ MoveableBody::MoveableBody()
     b2V2f_position = b2Vec2(0,0);
 }
 
-void MoveableBody::update(GameObject* gObj)
+void MoveableBody::update(Actor* container)
 {
     /**
 
@@ -30,14 +30,19 @@ void MoveableBody::update(GameObject* gObj)
 
 
 
-    body->SetLinearVelocity(gObj->b2V_velocity);
-    gObj->b2V_position = body->GetPosition();
+    body->SetLinearVelocity(container->b2V_velocity);
+    container->b2V_position = body->GetPosition();
     body->SetAngularVelocity(0);
-    body->SetTransform(gObj->b2V_position,gObj->fl_rotation);
+    body->SetTransform(container->b2V_position,container->fl_rotation);
 
 
 
 }
+void MoveableBody::update(GameObject* gObj)
+{
+    ///nothing...
+}
+
 
 
 MoveableBody::~MoveableBody()

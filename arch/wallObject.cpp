@@ -6,7 +6,7 @@ wallObject::wallObject(unMoveableBody* p)//, StaticGraphic* g )
 {
 
     b2V_position = b2Vec2(0,0);
-    b2V_velocity = b2Vec2(0,0);
+    //b2V_velocity = b2Vec2(0,0);
     fl_rotation = 0;
    // _graphicsBody =  new GraphicsBody();
     //_physicsBody = new PhysicsBody();

@@ -3,14 +3,18 @@
 
 #include <SFML/Graphics.hpp>
 #include <Box2D/Box2D.h>
-#include <SFML/Window.hpp>
+
 #include <string>
 #include <math.h>
-#include <iostream>
+
+
+#include "GameObject.h"
+
 //#include <thread>
-//#include <chrono>
+
 
 class GameObject;
+class Actor;
 
 
 extern b2Vec2 gravity;

@@ -1,6 +1,9 @@
 #ifndef CAM_H
 #define CAM_H
 
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+
 #include "includes.h"
 
 
@@ -14,7 +17,7 @@ class cam
 
         sf::View camView;
         sf::Vector2f v2f_Position;
-        sf::Vector2f v2f_FocalPoint;
+        sf::Vector2i v2f_FocalPoint;
         sf::Vector2f v2f_CamDim;
         virtual ~cam();
     protected:

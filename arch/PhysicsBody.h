@@ -1,15 +1,10 @@
 #ifndef PHYSICSBODY_H
 #define PHYSICSBODY_H
 
-#include "includes.h"
 
 #include <Box2D/Box2D.h>
-
-
-
 #include "GameObject.h"
-
-
+#include "includes.h"
 
 
 class PhysicsBody
@@ -18,10 +13,6 @@ class PhysicsBody
         PhysicsBody();
         virtual ~PhysicsBody();
         virtual void update(GameObject* gObj) = 0;
-
-
-
-
         /**Physics properties**/
         b2Vec2 b2V2f_position;
         b2Vec2 b2V2f_velocity;

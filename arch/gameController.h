@@ -8,6 +8,8 @@
 #include <fstream>
 #include <string>
 #include <SFML/Window.hpp>
+#include "includes.h"
+
 
 
 class gameController

@@ -1,12 +1,10 @@
 #ifndef GRAPHICSBODY_H
 #define GRAPHICSBODY_H
 
-#include "includes.h"
 
-
+#include <SFML/Graphics.hpp>
 #include "GameObject.h"
-
-
+#include "includes.h"
 
 
 class GraphicsBody

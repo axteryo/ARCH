@@ -13,6 +13,7 @@ LevelManager::LevelManager()
     std::cout<<"loaded player_image"<<std::endl;
 
     playerTexture.loadFromImage(playerSprite);
+    playerTexture.setSmooth(true);
 
     ///Loads up the necessary shapes
      shapeFile.open("shapes.json");
@@ -86,11 +87,6 @@ GameObject  *LevelManager::createObject(std::string shape,sf::Vector2f pos)
 
     b2Vec2 vertices[4];
     b2PolygonShape polyShape;
-
-
-
-
-
 
         for(int i = 0; i < shapeRoot[shape].size(); i++)
         {
@@ -172,6 +168,7 @@ std::cout<<"Layers seperated"<<std::endl;
     spriteSheet.loadFromFile(baseMapRoot["tilesets"][0]["image"].asString());
     ///store sprite sheet from image into texture
     spriteSheetTexture.loadFromImage(spriteSheet);
+    spriteSheetTexture.setSmooth(false);
     ///store sprite sheet dimensions in vector
     sf::Vector2f ssDim(baseMapRoot["tilesets"][0]["imagewidth"].asFloat(),baseMapRoot["tilesets"][0]["imageheight"].asFloat());
 
@@ -196,7 +193,7 @@ std::cout<<"Layers seperated"<<std::endl;
     for (int i = 0; i<baseMapRoot["tilesets"][0]["tilecount"].asInt(); ++i)
     {
         ssCoordinates.push_back(sf::Vector2f(x,y));
-        x+=32;
+        x+=v2f_tileDimension.x;
         if(x == ssDim.x)
         {
             x = 0;
@@ -242,24 +239,24 @@ std::cout<<"Layers seperated"<<std::endl;
             sf::Vertex* quad = &tileMap[j];
 
             quad[j].position=sf::Vector2f(xx,yy);
-            quad[j+1].position=sf::Vector2f(xx+32,yy);
-            quad[j+2].position=sf::Vector2f(xx+32,yy+32);
-            quad[j+3].position=sf::Vector2f(xx,yy+32);
+            quad[j+1].position=sf::Vector2f(xx+v2f_tileDimension.x,yy);
+            quad[j+2].position=sf::Vector2f(xx+v2f_tileDimension.x,yy+v2f_tileDimension.y);
+            quad[j+3].position=sf::Vector2f(xx,yy+v2f_tileDimension.y);
 
             quad[j].texCoords= sf::Vector2f(ssCoordinates[level[i]-1].x,ssCoordinates[level[i]-1].y);
-            quad[j+1].texCoords= sf::Vector2f(ssCoordinates[level[i]-1].x+32,ssCoordinates[level[i]-1].y);
-            quad[j+2].texCoords= sf::Vector2f(ssCoordinates[level[i]-1].x+32,ssCoordinates[level[i]-1].y+32);
-            quad[j+3].texCoords= sf::Vector2f(ssCoordinates[level[i]-1].x,ssCoordinates[level[i]-1].y+32);
+            quad[j+1].texCoords= sf::Vector2f(ssCoordinates[level[i]-1].x+v2f_tileDimension.x,ssCoordinates[level[i]-1].y);
+            quad[j+2].texCoords= sf::Vector2f(ssCoordinates[level[i]-1].x+v2f_tileDimension.x,ssCoordinates[level[i]-1].y+v2f_tileDimension.y);
+            quad[j+3].texCoords= sf::Vector2f(ssCoordinates[level[i]-1].x,ssCoordinates[level[i]-1].y+v2f_tileDimension.y);
             }
             j+=2;
-            xx+=32;
+            xx+=v2f_tileDimension.x;
             ++rowCount;
             if(rowCount==v2f_mapDimension.x)
             {
                 rowCount = 0;
 
                 xx = 0;
-                yy+=32;
+                yy+=v2f_tileDimension.y;
 
             }
 
@@ -268,23 +265,61 @@ std::cout<<"Layers seperated"<<std::endl;
 /**Create Collision Objects **/
         for(int n = 0;n < baseMapRoot["layers"].size();n++)
         {
-
-
-
-
-
-
                            // if(baseMapRoot["layers"][n]["name"].asString().compare("collision"))
                             //{
                                 for(int m = 0; m <baseMapRoot["layers"][n]["objects"].size();++m)
                                 {   if(baseMapRoot["layers"][n]["name"].asString().compare("collision")==0)
                                     {
+                                        /****************************************************/
 
-                                        std::cout<<"We made it"<<std::endl;
+                                        wallObject* w = new wallObject(new unMoveableBody());
+
+                                        int verticesCount = baseMapRoot["layers"][n]["objects"][m]["polyline"].size();
+
+                                        b2Vec2 vertices[baseMapRoot["layers"][n]["objects"][m]["polyline"].size()];
+                                        b2PolygonShape polyShape;
+
+                                        /**For vertices in the polyline array**/
+                                        //
+                                        std::cout<<baseMapRoot["layers"][n]["objects"][m]["polyline"].size()<<std::endl;
+
+                                        for(int i = 0; i < baseMapRoot["layers"][n]["objects"][m]["polyline"].size(); i++)
+                                        {
+                                            vertices[i].Set((baseMapRoot["layers"][n]["objects"][m]["polyline"][i]["x"].asInt()-w->_physicsBody->body->GetPosition().x*30)/30,
+                                                            (baseMapRoot["layers"][n]["objects"][m]["polyline"][i]["y"].asInt()-w->_physicsBody->body->GetPosition().y*30)/30);
+
+                                             std::cout<<"Point"<<std::endl;
+
+                                        }
+                                        std::cout<<baseMapRoot["layers"][n]["objects"][m]["polyline"].size()<<std::endl;
+                                        polyShape.Set(vertices,baseMapRoot["layers"][n]["objects"][m]["polyline"].size());
+
+                                        w->_physicsBody->fixtureDef.shape = &polyShape;
+                                        w->_physicsBody->fixtureDef.friction = 0.0f;
+                                        w->_physicsBody->fixtureDef.density = 2.0f;
+
+                                        w->_physicsBody->body->CreateFixture(&w->_physicsBody->fixtureDef);
+
+
+                                    w->setPosition(baseMapRoot["layers"][n]["objects"][m]["x"].asFloat(),
+                                                baseMapRoot["layers"][n]["objects"][m]["y"].asFloat());
+
+
+                                    gObjList.push_back(w);
+                                        /***********************************************/
+
+                                    /*    std::cout<<"We made it"<<std::endl;
                                         gObjList.push_back(createObject(baseMapRoot["layers"][n]["objects"][m]["type"].asString(),
                                    sf::Vector2f(baseMapRoot["layers"][n]["objects"][m]["x"].asFloat(),
                                                 baseMapRoot["layers"][n]["objects"][m]["y"].asFloat())));
                                                 std::cout<<baseMapRoot["layers"][n]["objects"][m]["x"].asFloat()<<","<<baseMapRoot["layers"][n]["objects"][m]["y"].asFloat()<<std::endl;
+
+                                    */
+
+
+
+
+
 
                                     }
                                     //std::cout<<gObjList.size()<<std::endl;

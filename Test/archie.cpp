@@ -17,43 +17,19 @@ using namespace std;
 
 
 
-class MyContactListener : public b2ContactListener
-{
-    void BeginContact(b2Contact* contact)
-    {
-        ///Check if fixture A is the player
-        void* bodyUserData = contact->GetFixtureB()->GetBody()->GetUserData();
-        if((int)bodyUserData == 1)
-        {
-        bodyUserData = contact->GetFixtureA()->GetBody()->GetUserData();
-        if((int)bodyUserData == 2)
-        std::cout<<"close2"<<std::endl;
-        }
-
-       // grounded = true;
-
-
-    }
-    /*void EndContact(b2Contact* contact)
-    {
-         ///Check if fixture A is the player
-        void* bodyUserData = contact->GetFixtureB()->GetBody()->GetUserData();
-        if((int)bodyUserData == 1)
-        {
-
-        bodyUserData = contact->GetFixtureA()->GetBody()->GetUserData();
-        if((int)bodyUserData == 2)
-            //grounded = false;
-        }*/
-
-
-    //}
-
-};
 /** Creates walls for the map**/
 void CreatePlane(b2World& world,  float X, float Y);
 void createSegment(b2World& world,b2Body* bod);
 void createObject(b2World& world, float X, float Y,std::string name, int id);
+
+struct fixtureUserData
+{
+  std::string data;
+  fixtureUserData()
+  {
+      data = "";
+  }
+};
 int getSlope(float x1,float y1,float x2,float y2)
 {
     return (y2-y1)/(x2-x1);
@@ -207,15 +183,20 @@ private:
 class Commander
 {
 private:
+
+public:
     enum cState
     {
         neutral,
         chase,
         offense,
-        defensive
+        defensive,
+        cautious
     }commanderState;
-public:
+    fixtureUserData* fixtureData;
+    std::string objectID;
     sf::CircleShape spriteBody;
+    sf::CircleShape radius;
     sf::Vector2f velocity;
     sf::Vector2f acceleration;
     sf::Vector2f position;
@@ -224,23 +205,38 @@ public:
     b2CircleShape commanderShape;
     b2FixtureDef commanderFixtureDef;
 
+    b2BodyDef radiusBodyDef;
+    b2Body* radiusBody;
+    b2CircleShape radiusShape;
+    b2FixtureDef radiusFixtureDef;
+    float angle;
+
 
     int cCounter;
     Commander(sf::Vector2f pos,b2World& world)
     {
-
+        fixtureData =  new fixtureUserData;
+        fixtureData->data="radius";
+        objectID = "enemy";
         velocity = sf::Vector2f(0,0);
         acceleration = sf::Vector2f(0,0);
         position = pos;
         spriteBody.setRotation(180);
         cCounter = 60;
+        angle = 0;
 
-        spriteBody.setRadius(30);
+        spriteBody.setRadius(15);
         spriteBody.setPointCount(3);
+        radius.setRadius(300);
+        radius.setPointCount(50);
 
         spriteBody.setFillColor(sf::Color::Red);
-        spriteBody.setOrigin(30,30);
-        commanderState = chase;
+        spriteBody.setOrigin(15,15);
+        commanderState = cautious;
+        radius.setOrigin(300,300);
+        radius.setOutlineColor(sf::Color::Red);
+        radius.setFillColor(sf::Color::Transparent);
+        radius.setOutlineThickness(2);
 
         commanderBodyDef.type = b2_dynamicBody;
         commanderBodyDef.position.Set(position.x/30,position.y/30);
@@ -248,66 +244,96 @@ public:
         commanderBody = world.CreateBody(&commanderBodyDef);
         commanderBody->SetAngularVelocity(0);
 
+        radiusBodyDef.type = b2_dynamicBody;
+        radiusBodyDef.position.Set(position.x/30,position.y/30);
+        radiusBodyDef.fixedRotation = true;
+        radiusBody = world.CreateBody(&radiusBodyDef);
+        radiusBody->SetAngularVelocity(0);
+
 
         commanderShape.m_p.Set(0,0);
         commanderShape.m_radius = (spriteBody.getGlobalBounds().width/2)/30;
         commanderFixtureDef.shape = &commanderShape;
         commanderFixtureDef.density = 0.1;
         commanderBody->CreateFixture(&commanderFixtureDef);
-        //commanderBody->SetUserData((void*) 1);
+        commanderBody->SetUserData((void*)this);
+
+
+        radiusShape.m_p.Set(0,0);
+        radiusShape.m_radius = (radius.getGlobalBounds().width/2)/30;
+        radiusFixtureDef.shape = &radiusShape;
+        radiusFixtureDef.density = 0;
+        radiusFixtureDef.isSensor = true;
+        radiusFixtureDef.userData = ((void*)fixtureData);
+        radiusBody->CreateFixture(&radiusFixtureDef);
+        radiusBody->SetUserData((void*)this);
+
 
 
         spriteBody.setPosition(commanderBody->GetPosition().x*30,commanderBody->GetPosition().y*30);
+        radius.setPosition(radiusBody->GetPosition().x*30,radiusBody->GetPosition().y*30);
 
 
 
 
     }
+    ~Commander()
+    {
+        world.DestroyBody(commanderBody);
+        world.DestroyBody(radiusBody);
+        delete fixtureData;
+    }
 void update(Vector2f player)
 {
-    float angle;
+
 
     //goToward(Vector2f(cos(body.getRotation()),sin(body.getRotation())));
 
     //position = spriteBody.getPosition();
+    velocity = sf::Vector2f(commanderBody->GetLinearVelocity().x,commanderBody->GetLinearVelocity().y);
     switch(commanderState)
     {
     case neutral:
         break;
     case offense:
+        goToward(player);
+        angle = target(player);
         break;
     case chase:
-
-       angle = target(player);
-        //
-       // goToward(Vector2f(cos(body.getRotation()*(3.141592/180)),sin((body.getRotation()*(3.141592/180)))));
-        //a = atan2f(player.x-(body.getPosition().x),player.y-(body.getPosition().y));
-        //a = 180- a*(180/3.141592);
-
-           if(std::abs(angle - commanderBody->GetAngle())<5)
-            {
-               if(sqrt((((player.x/30)-commanderBody->GetPosition().x) * ((player.x/30)-commanderBody->GetPosition().x))+
-                        (((player.y/30)-commanderBody->GetPosition().y) * ((player.y/30)-commanderBody->GetPosition().y))) >1)
-                {
-
-                    goToward(player);
-                }
-                else
-                {
-                    encircle(spriteBody.getRotation());
-                }
-
-            }
-
-
-
 
         break;
     case defensive:
         break;
+    case cautious:
+angle = target(player);
+        break;
     }
-    angle = target(player);
+
+    /*sf::Vector2f direction =sf::Vector2f(cos(angle),sin(angle));
+    float dmag = sqrt((direction.x*direction.x)+(direction.y*direction.y));
+    if (dmag != 0)
+    {
+        direction.x/=dmag;
+        direction.y/=dmag;
+
+    }
+    direction.x*=4;
+    direction.y*=4;
+    */
+    //acceleration = direction;
+    //angle = target(player);
+    //float desiredAngle = atan2(commanderBody->GetPosition().x*30 - player.x, commanderBody->GetPosition().y*30-player.y);
+
+
+
+
+
+
+
     velocity+=acceleration;
+    //angle = atan2((velocity.y),(velocity.x))-3.141592/2;
+
+
     if(sqrt((velocity.x*velocity.x)+(velocity.y*velocity.y))>10)
     {
         float mag = sqrt((velocity.x*velocity.x)+(velocity.y*velocity.y));
@@ -322,15 +348,31 @@ void update(Vector2f player)
                 }
     }
 
-
     commanderBody->SetLinearVelocity(b2Vec2(velocity.x,velocity.y));
-    commanderBody->SetTransform(commanderBody->GetPosition(),commanderBody->GetAngle());
+    commanderBody->SetTransform(commanderBody->GetPosition(),angle);
+    radiusBody->SetTransform(commanderBody->GetPosition(),angle);
+    radius.setPosition(radiusBody->GetPosition().x*30,radiusBody->GetPosition().y*30);
     spriteBody.setPosition(commanderBody->GetPosition().x*30,commanderBody->GetPosition().y*30);
     spriteBody.setRotation(180+(commanderBody->GetAngle()*(180/3.141592)));
+
     acceleration = sf::Vector2f(0,0);
    // std::cout<<"commanderLocation:"<<commanderBody->GetPosition().x<<","<<commanderBody->GetPosition().y<<std::endl;
     //std::cout<<"SpriteLocation:"<<spriteBody.getPosition().x/30<<","<<spriteBody.getPosition().y/30<<std::endl;
 
+
+}
+
+void setCautious()
+{
+    commanderState = cautious;
+}
+void setNeutral()
+{
+    commanderState = neutral;
+}
+void setOffense()
+{
+     commanderState = offense;
 
 }
 
@@ -344,13 +386,23 @@ void goToward(sf::Vector2f direction)
     float mag = sqrt((direction.x*direction.x)+(direction.y*direction.y));
     if (mag != 0)
     {
-        direction.x/=mag*3;
-        direction.y/=mag*3;
+        direction.x/=mag;
+        direction.y/=mag;
 
     }
-        //direction.x*=250;
-       // direction.y*=250;
-    acceleration = direction;
+        direction.x*=15;
+        direction.y*=15;
+    sf::Vector2f steer = direction -velocity;
+    float smag = sqrt((steer.x*steer.x)+(steer.y*steer.y));
+    if(smag>1)
+       {
+           steer.x/smag;
+           steer.y/smag;
+       }
+    steer.x*=.05;
+    steer.y*=.05;
+    acceleration += steer;
+
 }
 void encircle(float angle)
 {
@@ -365,12 +417,15 @@ float target(Vector2f targ)
     b2Vec2 toTarg = target - commanderBody->GetPosition();
     float desiredAngle = atan2f(-toTarg.x,toTarg.y);
     float totalRotation = desiredAngle - rotation;
-    float change = 4 * (3.141592/180); //allow 1 degree rotation per time step
-    //float newAngle = rotation ;//+ std::min( change, std::max(-change, totalRotation));
-    //std::cout<<totalRotation<<std::endl;
+    float change = 3 * (3.141592/180); //allow 3 degree rotation per time step
     while ( totalRotation < -3.141592 ) totalRotation += 2*(3.141592);
     while ( totalRotation >  3.141592 ) totalRotation -= 2*(3.141592);
-     if(std::abs(totalRotation)<.05)
+    float newAngle = rotation + std::min( change, std::max(-change, totalRotation));
+    //std::cout<<totalRotation<<std::endl;
+   // std::cout<<"enemy angle"<<rotation*(180/3.141592)<<std::endl;
+    //std::cout<<"Necessary rotation angle"<<totalRotation*(180/3.141592)<<std::endl;
+
+   /*  if(std::abs(totalRotation)<.05)
     {
         rotation = desiredAngle;
     }
@@ -466,10 +521,7 @@ float target(Vector2f targ)
 
         // body.setRotation((angle*(-180/3.141592)+180)+(.0000000001*(rotation-(angle*(-180/3.141592)+180))));
 
-
-    commanderBody->SetTransform(commanderBody->GetPosition(),rotation);
-
-    return rotation;
+    return newAngle;
 }
 void attack()
 {
@@ -478,6 +530,10 @@ void attack()
 sf::CircleShape getBody()
 {
     return spriteBody;
+}
+sf::CircleShape getRadius()
+{
+    return radius;
 }
 void setPosition(sf::Vector2f p)
 {
@@ -629,6 +685,64 @@ private:
 };
 
 
+class MyContactListener : public b2ContactListener
+{
+    void BeginContact(b2Contact* contact)
+    {
+        ///Check if fixture B is the enemy
+        fixtureUserData* userData = static_cast<fixtureUserData*>(contact->GetFixtureB()->GetUserData());
+                    if(userData)
+                    {
+
+                        if( userData->data== "radius")
+                        {
+                            Commander* userData1 = static_cast<Commander*>(contact->GetFixtureB()->GetBody()->GetUserData());
+                             if(userData1->objectID == "enemy")
+                             {
+                                void* userData2 = contact->GetFixtureA()->GetBody()->GetUserData();
+                                if((int)userData2 == 1)
+                                {
+
+
+                                    std::cout<<"close2"<<std::endl;
+                                    userData1->setOffense();
+
+
+
+
+                                 }
+                                 //delete userData2;
+                            }
+                            //delete userData1;
+                        }
+
+                    }
+                    //delete userData;
+
+
+       // grounded = true;
+
+
+    }/*
+    void EndContact(b2Contact* contact)
+    {
+         void* bodyUserData = contact->GetFixtureB()->GetBody()->GetUserData();
+         if((std::string)static_cast<Commander*>(bodyUserData)->objectID == "enemy")
+        {
+
+            void* bodyUserData2 = contact->GetFixtureA()->GetBody()->GetUserData();
+            if((int)bodyUserData2 == 1)
+            {
+                std::cout<<"close2"<<std::endl;
+
+                static_cast<Commander*>(bodyUserData)->setNeutral();
+            }
+
+
+        }
+    }*/
+
+};
 
 
 int main()
@@ -719,13 +833,13 @@ int32 positionIterations = 3;
 int rowcount = 0;
 
 
-    for(int i = 0; i< 30;++i)
+    for(int i = 0; i< 100;++i)
     {
 
         CreatePlane(world,x,y);
         x+=192;
         ++rowcount;
-        if (rowcount == 6)
+        if (rowcount ==10)
         {
             x = 0;
             y +=192;
@@ -742,7 +856,7 @@ int rowcount = 0;
     pineSprite.setPosition(0,0);
 
     //createObject(world,100,100,"pine_sprite",10);
-    createObject(world,200,100,"wiz",9);
+    //createObject(world,200,100,"wiz",9);
 
 
     sf::Texture boxTexture;
@@ -753,8 +867,13 @@ int rowcount = 0;
 
     sf::Texture wizTexture;
     wizTexture.loadFromFile("wiz.png");
-    //Commander queen1(sf::Vector2f(wSize.x/2,wSize.y/4),world);
-   /* Commander queen2(sf::Vector2f(wSize.x/2,wSize.y/4),world);
+    std::vector<Commander*> cList;
+    for(int i = 0; i <10; i++)
+    {
+        cList.push_back(new Commander(sf::Vector2f(wSize.x,wSize.y),world));
+    }
+    /*Commander queen1(sf::Vector2f(wSize.x/2,wSize.y/4),world);
+    Commander queen2(sf::Vector2f(wSize.x/2,wSize.y/4),world);
     Commander queen3(sf::Vector2f(wSize.x/2,wSize.y/4),world);
     Commander queen4(sf::Vector2f(wSize.x/2,wSize.y/4),world);
     Commander queen5(sf::Vector2f(wSize.x/2,wSize.y/4),world);
@@ -841,10 +960,10 @@ mainCam->follow(playerBody);
         {
             if(!gridMode)
             {
-                if(!thrust&& !brake)
-                {
+                //if(!thrust&& !brake)
+                //{
                     firing = true;
-                }
+                //}
             }
         }
          if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
@@ -1052,7 +1171,7 @@ if (thrust)
 {
     if(thrustLevel < 2)
     {
-        thrustLevel += .0075;
+        thrustLevel += .005;
     }
     else{thrustLevel = 2;}
     //dest = sf::Vector2f(dir.x-(playerBody->GetPosition().x*30),dir.y-(playerBody->GetPosition().y*30));
@@ -1143,31 +1262,31 @@ boostCounter-=1;
 
 
         //std::cout<<thrustLevel<<std::endl;
-        if(thrustLevel>0)
-        {
+       // if(thrustLevel>0)
+        //{
 
            //thrustLevel-=.04;
-           thrustLevel = 0;
+          //thrustLevel -=.0275;
 
-        }
-        else
-        {
+        //}
+       // else
+        //{
             thrustLevel = 0;
-        }
-    }
-    if(brake)
-    {
-         if(sqrt((vel.x*vel.x)+(vel.y*vel.y)) > 1)
+       // }
+    //}
+   // if(brake)
+    //{
+         if(sqrt((vel.x*vel.x)+(vel.y*vel.y)) > .5)
         {
           //std::cout<<"STABLIZING"<<std::endl;
 
-             vel.x -=normalize(sf::Vector2f(vel.x,vel.y)).x/10;
-             vel.y -=normalize(sf::Vector2f(vel.x,vel.y)).y/10;
+             vel.x -=normalize(sf::Vector2f(vel.x,vel.y)).x/20;
+             vel.y -=normalize(sf::Vector2f(vel.x,vel.y)).y/20;
         }
         else
         {
-            vel.x=0;
-            vel.y=0;
+            //vel.x=0;
+            //vel.y=0;
         }
     }
 
@@ -1210,7 +1329,7 @@ if(!gridMode)
             window.setFramerateLimit(20);
             gridDuration-=1;
             //turnRate = 1.5;
-
+            topSpeed = 100;
             if(singleTap)
             {
                 //std::cout<<"herehereherehere"<<std::endl;
@@ -1219,7 +1338,7 @@ if(!gridMode)
                 dest.y=sin(playerBody->GetAngle())*20;
                 vel.x*=0;
                 vel.y*=0;
-                topSpeed = 20;
+
                 segPoints.push_back(new point(playerBody->GetPosition().x,playerBody->GetPosition().y));
 
             }
@@ -1323,8 +1442,8 @@ if(segPoints.size()==4)
     ///This ensures that the sprite is always glued to the physics body
     playerSprite.setPosition(30.0*playerBody->GetPosition().x,30.0*playerBody->GetPosition().y);
     playerSprite.setRotation(90+playerBody->GetAngle()*((180/3.141592)));
-    //queen1.update(playerSprite.getPosition());
-    /*queen2.update(playerSprite.getPosition());
+    /*queen1.update(playerSprite.getPosition());
+    queen2.update(playerSprite.getPosition());
     queen3.update(playerSprite.getPosition());
     queen4.update(playerSprite.getPosition());
     queen5.update(playerSprite.getPosition());
@@ -1332,6 +1451,10 @@ if(segPoints.size()==4)
     queen7.update(playerSprite.getPosition());
     /*queen2.update(playerSprite.getPosition());
     queen3.update(playerSprite.getPosition());*/
+    for(int i = 0; i<cList.size(); i++)
+    {
+        cList[i]->update(playerSprite.getPosition());
+    }
 
     /** SOME GRID LINE SSTUFFFF**/
 
@@ -1409,7 +1532,7 @@ if(segPoints.size()==4)
                 window.draw(sprite);
 
             }
-            /*if((int)bodyIter->GetUserData() == 2)
+            if((int)bodyIter->GetUserData() == 2)
             {
                 b2Vec2 pos;
                 pos = bodyIter->GetPosition();
@@ -1422,10 +1545,10 @@ if(segPoints.size()==4)
                 sprite.setOrigin(16,16);
                 sprite.setPosition(30*bodyIter->GetPosition().x,30*bodyIter->GetPosition().y);
                 sprite.setRotation((bodyIter->GetAngle()*(180/3.14159)));
-                //window.draw(sprite);
+                window.draw(sprite);
                 //std::cout<<playerSprite.getPosition().x<<std::endl;
                 //std::cout<<playerSprite.getPosition().y<<std::endl;
-            }*/
+            }
             if((int)bodyIter->GetUserData() == 3)
             {
                 if(gridMode)
@@ -1478,7 +1601,7 @@ if(segPoints.size()==4)
                         colShape.setRotation((bodyIter->GetTransform().q.GetAngle()*(180-(180/3.14159))));
 
                     }
-                    window.draw(colShape);
+                    //window.draw(colShape);
                 }
                 drawcount+=1;
 
@@ -1489,9 +1612,14 @@ if(segPoints.size()==4)
     cam.y*=0;
     window.draw(beam);
     window.draw(playerSprite);
+     for(int i = 0; i<cList.size(); i++)
+    {
+        window.draw(cList[i]->getBody());
+        //window.draw(cList[i]->getRadius());
+    }
     //window.draw(pineSprite);
-    //window.draw(queen1.getBody());
-    /*window.draw(queen2.getBody());
+    /*window.draw(queen1.getBody());
+    window.draw(queen2.getBody());
     window.draw(queen3.getBody());
     window.draw(queen4.getBody());
     window.draw(queen5.getBody());

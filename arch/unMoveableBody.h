@@ -3,6 +3,9 @@
 
 
 #include "PhysicsBody.h"
+#include "GameObject.h"
+#include "includes.h"
+
 
 class unMoveableBody : public PhysicsBody
 {

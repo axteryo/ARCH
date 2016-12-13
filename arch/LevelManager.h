@@ -5,14 +5,21 @@
 #include <fstream>
 #include "dist/json/json.h"
 
+#include <SFML/Graphics.hpp>
 #include "unMoveableBody.h"
 #include "MoveableBody.h"
 #include "StaticGraphic.h"
 #include "AnimatableGraphic.h"
+#include "Actor.h"
+#include "GameObject.h"
+
 #include "wallObject.h"
 #include "Player.h"
+#include "includes.h"
+
 
 extern std::vector<GameObject*> gObjList;
+/**NOTE TO SELF Change this to Actor* type list**/
 extern std::vector<Player*> chObjList;
 class LevelManager : public sf::Drawable, public sf::Transformable
 {

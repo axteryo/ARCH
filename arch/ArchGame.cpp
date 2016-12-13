@@ -10,14 +10,18 @@ b2World* world = new b2World(gravity);
 
 ArchGame::ArchGame()
 {
-    v2f_windowSize = sf::Vector2f(800,600);
+    v2f_windowSize = sf::Vector2f(1000,800);
     window = new sf::RenderWindow(sf::VideoMode(v2f_windowSize.x,v2f_windowSize.y), "Project_Arch");
-    window->setFramerateLimit(60);
-    window->setVerticalSyncEnabled(false);
+    //window->setFramerateLimit(60);
+    window->setVerticalSyncEnabled(true);
     GameState = In_Game;
     timeStep = 1.0f/60.0f;
     velocityIterations = 8;
     positionIterations = 3;
+
+    accumulator = sf::Time::Zero;
+    ups = sf::seconds(1.f / 60.0f);
+
     dynamicCam = new cam(sf::Vector2f(0,0), v2f_windowSize);
     subject = "object_player";
 
@@ -34,16 +38,24 @@ ArchGame::ArchGame()
 void ArchGame::start()
 {
 
-    level.loadLevel("testmap.json");
+    level.loadLevel("testmap4.json");
     controller.loadBinding();
-
+    dynamicCam->camView.setSize(1400, 1200);
 
     while(window->isOpen())
     {
-        processInput(GameState);
-        update(GameState);
-        render(GameState);
         window->setView(dynamicCam->getView());
+        render(GameState);
+        processInput(GameState);
+         while (accumulator > ups)
+        {
+            accumulator -= ups;
+            update(GameState);
+
+        }
+
+        accumulator += clock.restart();
+
 
 
         if (!gameRunning)
@@ -78,6 +90,21 @@ void ArchGame::processInput(state currentState)
             {
                 gameRunning = false;
             }
+            if(event.type == sf::Event::Resized)
+            {
+
+
+                dynamicCam->camView.setSize(event.size.width+400, event.size.height+362);
+                std::cout << "new width: " << event.size.width << std::endl;
+                std::cout << "new height: " << event.size.height << std::endl;
+
+                //std::cout << "View size x " << dynamicCam->camView.getSize().x <<std::endl;
+                 //std::cout << "View size y " << dynamicCam->camView.getSize().y <<std::endl;
+
+
+                // zoom the view relatively to its current size (apply a factor 0.5, so its final size is 600x400)
+                //dynamicCam->camView.zoom(2.5f);
+            }
             if (event.type == sf::Event::KeyPressed)
             {
                 if(controller.isActionKeyPressed("activateThrusters"))
@@ -93,7 +120,7 @@ void ArchGame::processInput(state currentState)
                     {
 
                         chObjList[ii]->turnRight();
-                        std::cout<<chObjList[ii]->_graphicsBody->sprite.getRotation()<<","<<chObjList[ii]->_physicsBody->body->GetAngle()*(180/3.14159) <<std::endl;
+                        //std::cout<<chObjList[ii]->_graphicsBody->sprite.getRotation()<<","<<chObjList[ii]->_physicsBody->body->GetAngle()*(180/3.14159) <<std::endl;
                     }
 
                 }
@@ -166,6 +193,16 @@ void ArchGame::update(state currentState)
 
             chObjList[ii]->update();
 
+                   if(subject==chObjList[ii]->objectId)
+            {
+                sf::Vector2f targ = sf::Vector2f(chObjList[ii]->b2V_position.x*30,
+                                                 chObjList[ii]->b2V_position.y*30);
+                                                 /*targ = targ+ sf::Vector2f(cos(chObjList[ii]->fl_rotation)*10,
+                                                                     sin(chObjList[ii]->fl_rotation)*10);*/
+
+                dynamicCam->follow(targ);
+            }
+
         }
 
 
@@ -183,30 +220,24 @@ void ArchGame::render(state currentState)
 
         break;
     case In_Game:
-        window->clear(sf::Color::White);
+        window->clear(sf::Color::Black);
 
-window->draw(level);
+        window->draw(level);
         for(int ii = 0; ii<chObjList.size();++ii)
         {
             window->draw(chObjList[ii]->getSprite());
         }
-for(int ii = 0; ii<chObjList.size();++ii)
-        {
+//for(int ii = 0; ii<chObjList.size();++ii)
+  //      {
 
-           if(subject==chObjList[ii]->objectId)
-            {
-                sf::Vector2f targ = sf::Vector2f(chObjList[ii]->b2V_position.x*30,
-                                                 chObjList[ii]->b2V_position.y*30);
 
-                dynamicCam->follow(targ);
-            }
-        }
+    //    }
 
 
 
         ///DEBUG COLLISION DRAWER
 
-       /* for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
+        /*for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
         {
                 b2PolygonShape* polygonShape;
                 sf::ConvexShape colShape;
@@ -234,7 +265,7 @@ for(int ii = 0; ii<chObjList.size();++ii)
                     }
 
                 }
-               //window->draw(colShape);
+               window->draw(colShape);
         }*/
 
 
