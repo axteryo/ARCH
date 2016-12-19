@@ -596,11 +596,11 @@
 	<math.h>
 	"GameObject.h"
 
-1481571396 source:c:\users\mesh\documents\projectarch\arch\archgame.cpp
+1482134671 source:c:\users\mesh\documents\projectarch\arch\archgame.cpp
 	"ArchGame.h"
 	"LevelManager.h"
 
-1481520455 c:\users\mesh\documents\projectarch\arch\archgame.h
+1482098119 c:\users\mesh\documents\projectarch\arch\archgame.h
 	<SFML/Graphics.hpp>
 	<Box2D/Box2D.h>
 	<SFML/Window.hpp>
@@ -648,7 +648,7 @@
 1481435206 source:c:\users\mesh\documents\projectarch\arch\gameobject.cpp
 	"GameObject.h"
 
-1481521689 source:c:\users\mesh\documents\projectarch\arch\moveablebody.cpp
+1482108381 source:c:\users\mesh\documents\projectarch\arch\moveablebody.cpp
 	"MoveableBody.h"
 
 1481520773 c:\users\mesh\documents\projectarch\arch\moveablebody.h
@@ -680,10 +680,10 @@
 	"unMoveableBody.h"
 	"includes.h"
 
-1481521603 source:c:\users\mesh\documents\projectarch\arch\animatablegraphic.cpp
+1482104940 source:c:\users\mesh\documents\projectarch\arch\animatablegraphic.cpp
 	"AnimatableGraphic.h"
 
-1481520653 c:\users\mesh\documents\projectarch\arch\animatablegraphic.h
+1482104365 c:\users\mesh\documents\projectarch\arch\animatablegraphic.h
 	"GraphicsBody.h"
 	"GameObject.h"
 	"Actor.h"
@@ -702,10 +702,10 @@
 	"GameObject.h"
 	"StaticGraphic.h"
 
-1481572227 source:c:\users\mesh\documents\projectarch\arch\levelmanager.cpp
+1482134366 source:c:\users\mesh\documents\projectarch\arch\levelmanager.cpp
 	"LevelManager.h"
 
-1481520441 c:\users\mesh\documents\projectarch\arch\levelmanager.h
+1482095833 c:\users\mesh\documents\projectarch\arch\levelmanager.h
 	<iostream>
 	<fstream>
 	"dist/json/json.h"
@@ -718,6 +718,7 @@
 	"GameObject.h"
 	"wallObject.h"
 	"Player.h"
+	"Enemy_D1.h"
 	"includes.h"
 
 1465669937 c:\users\mesh\documents\projectarch\arch\dist\json\json.h
@@ -805,24 +806,25 @@
 	<SFML/Window.hpp>
 	"includes.h"
 
-1481521405 source:c:\users\mesh\documents\projectarch\arch\player.cpp
+1482134867 source:c:\users\mesh\documents\projectarch\arch\player.cpp
 	"Player.h"
 
-1481520985 c:\users\mesh\documents\projectarch\arch\player.h
+1482090927 c:\users\mesh\documents\projectarch\arch\player.h
 	"Actor.h"
 	"MoveableBody.h"
 	"AnimatableGraphic.h"
+	<iostream>
 	"includes.h"
 
-1481431468 source:c:\users\mesh\documents\projectarch\arch\cam.cpp
+1482133911 source:c:\users\mesh\documents\projectarch\arch\cam.cpp
 	"cam.h"
 
-1481520425 c:\users\mesh\documents\projectarch\arch\cam.h
+1482133568 c:\users\mesh\documents\projectarch\arch\cam.h
 	<SFML/Graphics.hpp>
 	<SFML/Window.hpp>
 	"includes.h"
 
-1477062691 source:c:\users\mesh\documents\projectarch\arch\includes.cpp
+1481762167 source:c:\users\mesh\documents\projectarch\arch\includes.cpp
 	"includes.h"
 
 1481082326 source:c:\users\mesh\documents\projectarch\arch\src\enemy.cpp
@@ -836,16 +838,16 @@
 	"MoveableBody.h"
 	"GameObject.h"
 
-1481521528 c:\users\mesh\documents\projectarch\arch\actor.h
+1482090301 c:\users\mesh\documents\projectarch\arch\actor.h
 	<SFML/Graphics.hpp>
 	<Box2D/Box2D.h>
 	"GameObject.h"
 	"includes.h"
 
-1481521836 source:c:\users\mesh\documents\projectarch\arch\enemy.cpp
+1481784034 source:c:\users\mesh\documents\projectarch\arch\enemy.cpp
 	"Enemy.h"
 
-1481520999 c:\users\mesh\documents\projectarch\arch\enemy.h
+1482088036 c:\users\mesh\documents\projectarch\arch\enemy.h
 	"Actor.h"
 	"MoveableBody.h"
 	"AnimatableGraphic.h"
@@ -853,4 +855,11 @@
 
 1481390496 source:c:\users\mesh\documents\projectarch\arch\actor.cpp
 	"Actor.h"
+
+1482131062 source:c:\users\mesh\documents\projectarch\arch\enemy_d1.cpp
+	"Enemy_D1.h"
+
+1482097496 c:\users\mesh\documents\projectarch\arch\enemy_d1.h
+	"Enemy.h"
+	<iostream>
 

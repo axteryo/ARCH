@@ -210,6 +210,7 @@ public:
     b2CircleShape radiusShape;
     b2FixtureDef radiusFixtureDef;
     float angle;
+    int counter;
 
 
     int cCounter;
@@ -267,6 +268,7 @@ public:
         radiusFixtureDef.userData = ((void*)fixtureData);
         radiusBody->CreateFixture(&radiusFixtureDef);
         radiusBody->SetUserData((void*)this);
+        radiusBody->SetActive(true);
 
 
 
@@ -334,7 +336,7 @@ angle = target(player);
     //angle = atan2((velocity.y),(velocity.x))-3.141592/2;
 
 
-    if(sqrt((velocity.x*velocity.x)+(velocity.y*velocity.y))>10)
+    if(sqrt((velocity.x*velocity.x)+(velocity.y*velocity.y))>14)
     {
         float mag = sqrt((velocity.x*velocity.x)+(velocity.y*velocity.y));
             if (mag != 0)
@@ -375,7 +377,10 @@ void setOffense()
      commanderState = offense;
 
 }
-
+void startCount()
+{
+    counter+=1;
+}
 void wander()
 {
 
@@ -390,8 +395,8 @@ void goToward(sf::Vector2f direction)
         direction.y/=mag;
 
     }
-        direction.x*=15;
-        direction.y*=15;
+        direction.x*=30;
+        direction.y*=30;
     sf::Vector2f steer = direction -velocity;
     float smag = sqrt((steer.x*steer.x)+(steer.y*steer.y));
     if(smag>1)
@@ -399,8 +404,8 @@ void goToward(sf::Vector2f direction)
            steer.x/smag;
            steer.y/smag;
        }
-    steer.x*=.05;
-    steer.y*=.05;
+    steer.x*=.025;
+    steer.y*=.025;
     acceleration += steer;
 
 }
@@ -704,7 +709,8 @@ class MyContactListener : public b2ContactListener
                                 {
 
 
-                                    std::cout<<"close2"<<std::endl;
+                                    //std::cout<<"close2"<<std::endl;
+                                    //userData1->startCount();
                                     userData1->setOffense();
 
 
@@ -868,7 +874,7 @@ int rowcount = 0;
     sf::Texture wizTexture;
     wizTexture.loadFromFile("wiz.png");
     std::vector<Commander*> cList;
-    for(int i = 0; i <10; i++)
+    for(int i = 0; i <1; i++)
     {
         cList.push_back(new Commander(sf::Vector2f(wSize.x,wSize.y),world));
     }
@@ -926,7 +932,10 @@ mainCam->follow(playerBody);
             window.close();
 
         }
-
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        {
+            topSpeed+=1;
+        }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
         {
             if(!gridMode)
@@ -1295,7 +1304,7 @@ boostCounter-=1;
 if(!gridMode)
         {
             window.setFramerateLimit(60);
-            topSpeed = 12;
+            topSpeed = 13;
             if(!firing)
             {
 
@@ -1307,7 +1316,7 @@ if(!gridMode)
                 else
                 {
                     if(rightBoost)
-                    {topSpeed = 12;
+                    {topSpeed = 16;
                       turnRate = .05;
                     }
                     else{ turnRate = .1;}
@@ -1615,7 +1624,7 @@ if(segPoints.size()==4)
      for(int i = 0; i<cList.size(); i++)
     {
         window.draw(cList[i]->getBody());
-        //window.draw(cList[i]->getRadius());
+        window.draw(cList[i]->getRadius());
     }
     //window.draw(pineSprite);
     /*window.draw(queen1.getBody());

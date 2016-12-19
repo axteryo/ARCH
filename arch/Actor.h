@@ -20,11 +20,13 @@ class Actor:public GameObject
 
         virtual void update() = 0;
         virtual void setPosition(float x, float y) = 0;
+        virtual void setRotation(float angle) = 0;
         virtual sf::Sprite getSprite() = 0;
 
 
         float topSpeed;
         b2Vec2 b2V_velocity;
+        b2Vec2 b2V_acceleration;
 
         MoveableBody* _physicsBody;
         AnimatableGraphic* _graphicsBody;

@@ -12,3 +12,6 @@ sf::Vector2f normalize(sf::Vector2f source)
 
         return source;
 }
+//b2Vec2 b2Norma
+
+

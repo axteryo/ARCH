@@ -1,8 +1,8 @@
 #include "Enemy.h"
 
-Enemy::Enemy(MoveableBody* p, AnimatableGraphic* g)
+Enemy::Enemy()
 {
-    objectId = "object_enemy";
+    /*objectId = "object_enemy";
     layerDepth = 6;
     b2V_position = b2Vec2(0,0);
     b2V_velocity = b2Vec2(0,0);
@@ -11,8 +11,8 @@ Enemy::Enemy(MoveableBody* p, AnimatableGraphic* g)
     _graphicsBody = g;
     _physicsBody = p;
 
-    _physicsBody->body->SetUserData((void*)this);
-}
+    _physicsBody->body->SetUserData((void*)this);*/
+}/*
 void Enemy::update()
 {
      switch(bState)
@@ -39,7 +39,7 @@ sf::Sprite Enemy::getSprite()
     _graphicsBody->update(this);
     return _graphicsBody->getSprite();
 }
-
+*/
 Enemy::~Enemy()
 {
     //dtor

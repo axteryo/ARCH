@@ -1,7 +1,7 @@
 #include "LevelManager.h"
 
 std::vector<GameObject*> gObjList;
-std::vector<Player*> chObjList;
+std::vector<Actor*> chObjList;
 
 
 /** Upon creation of the level manager object, it first parses the file for collision shapes **/
@@ -14,6 +14,10 @@ LevelManager::LevelManager()
 
     playerTexture.loadFromImage(playerSprite);
     playerTexture.setSmooth(true);
+
+    d1Image.loadFromFile("assets/d1_texture.png");
+    d1Texture.loadFromImage(d1Image);
+    d1Texture.setSmooth(true);
 
     ///Loads up the necessary shapes
      shapeFile.open("shapes.json");
@@ -33,10 +37,15 @@ LevelManager::~LevelManager()
     //dtor
 }
 
-Player *LevelManager::createCharacter(std::string shape,sf::Vector2f pos)
+Actor *LevelManager::createCharacter(std::string shape,sf::Vector2f pos)
 {
-    Player* p = new Player(new MoveableBody(),new AnimatableGraphic(playerTexture));
-    std::string name;
+
+
+if(shape.compare("archii_texture")==0)
+{
+
+    Player* a = new Player(new MoveableBody(),new AnimatableGraphic(playerTexture));
+
 
 
     b2PolygonShape polyShape;
@@ -47,33 +56,80 @@ Player *LevelManager::createCharacter(std::string shape,sf::Vector2f pos)
             int y = x+1;
 
 	//FOr vertices in the "shapes array"
+
             for (int ii = 0; ii < shapeRoot[shape][i]["shape"].size(); ++ii)
             {
                 if(x>=0)
                 {
-                    vertices[ii].Set((shapeRoot[shape][i]["shape"][x].asFloat()-p->_physicsBody->body->GetPosition().x*30.0f)/30.0f,
-                                     (shapeRoot[shape][i]["shape"][y].asFloat()-p->_physicsBody->body->GetPosition().y*30.0f)/30.0f);
+                    vertices[ii].Set(((shapeRoot[shape][i]["shape"][x].asFloat()-a->_graphicsBody->width/2)/30.0f),//_physicsBody->body->GetPosition().x)/30.0f),
+                                     ((shapeRoot[shape][i]["shape"][y].asFloat()-a->_graphicsBody->height/2)/30.0f));//_physicsBody->body->GetPosition().y)/30.0f));
+                                     std::cout<<"Fudged up here"<<std::endl;
 
                     x-=2;
                     y = x+1;
-
-
                 }
-
             }
 
         polyShape.Set(vertices,shapeRoot[shape][i]["shape"].size()/2);
 
-        p->_physicsBody->fixtureDef.shape = &polyShape;
-        p->_physicsBody->fixtureDef.friction = 0.0f;
-        p->_physicsBody->fixtureDef.density = 2.0f;
+        a->_physicsBody->fixtureDef.shape = &polyShape;
+        a->_physicsBody->fixtureDef.friction = 0.0f;
+        a->_physicsBody->fixtureDef.density = 2.0f;
 
-        p->_physicsBody->body->CreateFixture(&p->_physicsBody->fixtureDef);
+        a->_physicsBody->body->CreateFixture(&a->_physicsBody->fixtureDef);
     }
-    p->setPosition(pos.x,pos.y);
+
+    a->setPosition(pos.x,pos.y);
+    a->setRotation(3.141592);
 
 
-    return p;
+
+
+    return a;
+
+}
+else
+{
+    Enemy_D1* d = new Enemy_D1(new MoveableBody(),new AnimatableGraphic(d1Texture));
+        b2PolygonShape polyShape;
+        for(int i = 0; i < shapeRoot[shape].size(); i++)
+        {
+            b2Vec2 vertices[shapeRoot[shape][i]["shape"].size()/2];
+            int x = shapeRoot[shape][i]["shape"].size()-2;
+            int y = x+1;
+
+	//FOr vertices in the "shapes array"
+
+            for (int ii = 0; ii < shapeRoot[shape][i]["shape"].size(); ++ii)
+            {
+                if(x>=0)
+                {
+                    vertices[ii].Set((shapeRoot[shape][i]["shape"][x].asFloat()-d->_graphicsBody->width/2)/30.0f,//_physicsBody->body->GetPosition().x)/30.0f),
+                                     ((shapeRoot[shape][i]["shape"][y].asFloat()-d->_graphicsBody->height/2)/30.0f));
+                                     std::cout<<"Fudged up here"<<std::endl;
+
+                    x-=2;
+                    y = x+1;
+                }
+            }
+
+        polyShape.Set(vertices,shapeRoot[shape][i]["shape"].size()/2);
+
+        d->_physicsBody->fixtureDef.shape = &polyShape;
+        d->_physicsBody->fixtureDef.friction = 0.0f;
+        d->_physicsBody->fixtureDef.density = 2.0f;
+
+        d->_physicsBody->body->CreateFixture(&d->_physicsBody->fixtureDef);
+    }
+
+    d->setPosition(pos.x,pos.y);
+    d->setRotation(3.141592);
+
+
+
+
+    return d;
+}
 
 }
 
@@ -330,6 +386,8 @@ std::cout<<"Layers seperated"<<std::endl;
                                         chObjList.push_back(createCharacter(baseMapRoot["layers"][n]["objects"][m]["type"].asString(),
                                     sf::Vector2f(baseMapRoot["layers"][n]["objects"][m]["x"].asFloat(),
                                                  baseMapRoot["layers"][n]["objects"][m]["y"].asFloat())));
+
+
 
 
                                     }

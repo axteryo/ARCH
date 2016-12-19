@@ -16,21 +16,24 @@ void cam::follow(sf::Vector2f point)
     sf::Vector2f direction = sf::Vector2f(point.x - v2f_FocalPoint.x,
                                               point.y - v2f_FocalPoint.y);
 
-    int fl_CamVel;
+    float fl_CamVel;
     ///Checks to see whether the player character is a certain distance from the center
-    if(sqrt(((point.x - v2f_FocalPoint.x)*
+    if(ceil(sqrt(((point.x - v2f_FocalPoint.x)*
             (point.x-v2f_FocalPoint.x)) +
             ((point.y - v2f_FocalPoint.y)*
-            (point.y - v2f_FocalPoint.y)))>= 2.0)
+            (point.y - v2f_FocalPoint.y))))> 1.0)
     {
         ///Will close on player if so
         fl_CamVel = sqrt(((point.x - v2f_FocalPoint.x)*
             (point.x-v2f_FocalPoint.x)) +
             ((point.y - v2f_FocalPoint.y)*
-            (point.y-v2f_FocalPoint.y)))/30.0;
+            (point.y-v2f_FocalPoint.y)))/20.0;
 
-            v2f_FocalPoint.x+=(normalize(direction).x*fl_CamVel);
-            v2f_FocalPoint.y+=(normalize(direction).y*fl_CamVel);
+            //ceil(fl_CamVel);
+
+            direction = normalize(direction);
+            v2f_FocalPoint.x+=direction.x*fl_CamVel;
+            v2f_FocalPoint.y+=direction.y*fl_CamVel;
 
 
 

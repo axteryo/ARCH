@@ -21,6 +21,7 @@ ArchGame::ArchGame()
 
     accumulator = sf::Time::Zero;
     ups = sf::seconds(1.f / 60.0f);
+    playerAlive = false;
 
     dynamicCam = new cam(sf::Vector2f(0,0), v2f_windowSize);
     subject = "object_player";
@@ -38,22 +39,33 @@ ArchGame::ArchGame()
 void ArchGame::start()
 {
 
-    level.loadLevel("testmap4.json");
+    level.loadLevel("track.json");
     controller.loadBinding();
     dynamicCam->camView.setSize(1400, 1200);
+    for(int ii = 0; ii<chObjList.size();++ii)
+    {
+        if(chObjList[ii]->objectId == "object_player")
+           {
+
+                p =(Player*)chObjList[ii];
+                playerAlive= true;
+
+           }
+
+    }
 
     while(window->isOpen())
     {
-        window->setView(dynamicCam->getView());
+
         render(GameState);
         processInput(GameState);
          while (accumulator > ups)
         {
             accumulator -= ups;
             update(GameState);
-
+            dynamicCam->follow(targ);
         }
-
+        window->setView(dynamicCam->getView());
         accumulator += clock.restart();
 
 
@@ -107,58 +119,66 @@ void ArchGame::processInput(state currentState)
             }
             if (event.type == sf::Event::KeyPressed)
             {
-                if(controller.isActionKeyPressed("activateThrusters"))
+                if(playerAlive)
                 {
-                     for(int ii = 0; ii<chObjList.size();++ii)
+                    if(controller.isActionKeyPressed("activateThrusters"))
                     {
-                        chObjList[ii]->activateThrusters();
+                        // for(int ii = 0; ii<chObjList.size();++ii)
+                        //{
+                            p->activateThrusters();
+                        //}
                     }
-                }
-                if(controller.isActionKeyPressed("turnRight"))
-                {
-                     for(int ii = 0; ii<chObjList.size();++ii)
+                    if(controller.isActionKeyPressed("turnRight"))
                     {
+                        // for(int ii = 0; ii<chObjList.size();++ii)
+                        //{
 
-                        chObjList[ii]->turnRight();
-                        //std::cout<<chObjList[ii]->_graphicsBody->sprite.getRotation()<<","<<chObjList[ii]->_physicsBody->body->GetAngle()*(180/3.14159) <<std::endl;
+                            p->turnRight();
+                            //std::cout<<chObjList[ii]->_graphicsBody->sprite.getRotation()<<","<<chObjList[ii]->_physicsBody->body->GetAngle()*(180/3.14159) <<std::endl;
+                        //}
+
+                    }
+                    if(controller.isActionKeyPressed("turnLeft"))
+                    {
+                         //for(int ii = 0; ii<chObjList.size();++ii)
+                        //{
+                            p->turnLeft();
+                        //}
                     }
 
-                }
-                if(controller.isActionKeyPressed("turnLeft"))
-                {
-                     for(int ii = 0; ii<chObjList.size();++ii)
-                    {
-                        chObjList[ii]->turnLeft();
-                    }
+
                 }
             }
             if(event.type == sf::Event::KeyReleased)
             {
-
+                if(playerAlive)
+                {
                     if(controller.isActionKeyReleased("activateThrusters",event))
-                {
-                     for(int ii = 0; ii<chObjList.size();++ii)
                     {
-                        chObjList[ii]->cancelThrusters();
+                         //for(int ii = 0; ii<chObjList.size();++ii)
+                        //{
+                            p->cancelThrusters();
+                        //}
                     }
-                }
-                else if(controller.isActionKeyReleased("turnRight",event))
-                {
-                     for(int ii = 0; ii<chObjList.size();++ii)
+                    else if(controller.isActionKeyReleased("turnRight",event))
                     {
-                        chObjList[ii]->cancelRightTurn();
-                    }
+                         //for(int ii = 0; ii<chObjList.size();++ii)
+                        //{
+                            p->cancelRightTurn();
+                        //}
 
-                }
-                if(controller.isActionKeyReleased("turnLeft", event))
-                {
-                     for(int ii = 0; ii<chObjList.size();++ii)
+                    }
+                    if(controller.isActionKeyReleased("turnLeft", event))
                     {
-                        chObjList[ii]->cancelLeftTurn();
+                         //for(int ii = 0; ii<chObjList.size();++ii)
+                        //{
+                            p->cancelLeftTurn();
+                        //}
                     }
                 }
 
             }
+
         }
         break;
     }
@@ -180,36 +200,23 @@ void ArchGame::update(state currentState)
         {
 
             gObjList[i]->update();
-            /*if(subject.compare( gObjList[i]->objectId))
-            {
-                sf::Vector2f targ = sf::Vector2f(gObjList[i]->b2V_position.x*30,
-                                                 gObjList[i]->b2V_position.y*30);
-                dynamicCam->follow(targ);
-            }*/
-
         }
         for(int ii = 0; ii<chObjList.size();++ii)
         {
-
             chObjList[ii]->update();
-
-                   if(subject==chObjList[ii]->objectId)
+            if(subject==chObjList[ii]->objectId)
             {
-                sf::Vector2f targ = sf::Vector2f(chObjList[ii]->b2V_position.x*30,
-                                                 chObjList[ii]->b2V_position.y*30);
+                 targ = sf::Vector2f((chObjList[ii]->b2V_position.x*30)+cos(chObjList[ii]->fl_rotation)*0,
+                                                 (chObjList[ii]->b2V_position.y*30)+sin(chObjList[ii]->fl_rotation)*0);
                                                  /*targ = targ+ sf::Vector2f(cos(chObjList[ii]->fl_rotation)*10,
                                                                      sin(chObjList[ii]->fl_rotation)*10);*/
 
-                dynamicCam->follow(targ);
+
             }
-
         }
-
-
         break;
     }
         world->Step(timeStep,velocityIterations,positionIterations);
-
 }
 
 void ArchGame::render(state currentState)

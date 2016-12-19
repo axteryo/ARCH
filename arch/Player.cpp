@@ -6,11 +6,12 @@ Player::Player(MoveableBody* p, AnimatableGraphic* g)
     layerDepth = 6;
     b2V_position = b2Vec2(0,0);
     b2V_velocity = b2Vec2(0,0);
+    b2V_acceleration = b2Vec2(0,0);
     fl_rotation = 180;
     thrustLevel = 0;
     turnRate = .1;
-    topSpeed = 16;
-    thrust = false;
+    topSpeed = 18;
+    thrusting = false;
     rRotate= false;
     lRotate=false;
 
@@ -21,13 +22,8 @@ Player::Player(MoveableBody* p, AnimatableGraphic* g)
 
     //ctor
 }
-void Player::update()
+void Player::turn()
 {
-    fl_rotation = _physicsBody->body->GetAngle();
-    b2V_velocity = _physicsBody->body->GetLinearVelocity();
-
-    //fl_rotation = _graphicsBody->sprite.getRotation();
-
     if(rRotate)
     {
         fl_rotation+=turnRate;
@@ -37,58 +33,76 @@ void Player::update()
     {
         fl_rotation-=turnRate;
     }
+
+}
+void Player::thrust()
+{
     b2Vec2 aim(0,0);
-    if(thrust)
+    if(thrusting)
     {
-        turnRate =.05;
-        if(thrustLevel<2)
+        turnRate =.03;
+        if(thrustLevel<1)
         {
-            thrustLevel += .01;
+            thrustLevel += .025;
         }
-        else{thrustLevel = 2;}
+        else{thrustLevel = 1;}
         aim = b2Vec2(cos(fl_rotation),sin(fl_rotation));
-        float dMag = sqrt((aim.x*aim.x)+(aim.y*aim.y));
+        aim.Normalize();
+        /*float dMag = sqrt((aim.x*aim.x)+(aim.y*aim.y));
         if(dMag!=0)
         {
             aim.x/=dMag;
             aim.y/=dMag;
-        }
-
+        }*/
     }
     else
     {
+
         if(thrustLevel> 0)
-        {
+        {  //std::cout<<"Thrust Level:"<<thrustLevel<<std::endl;
             thrustLevel = 0;
         }
         else{thrustLevel = 0;}
 
         turnRate =.1;
+        if(sqrt(
+            (b2V_velocity.x*b2V_velocity.x)
+            +(b2V_velocity.y*b2V_velocity.y))>1)
+           {
+                b2Vec2 vel = b2V_velocity;
+                vel.Normalize();
+                b2V_velocity.x-=vel.x/topSpeed;
+                b2V_velocity.y-=vel.y/topSpeed;
+
+           }
     }
     aim.x*=thrustLevel;
     aim.y*=thrustLevel;
+    b2V_acceleration+=aim;
 
-    b2V_velocity+=aim;
-    if(sqrt(
-            (b2V_velocity.x*b2V_velocity.x)
-            +(b2V_velocity.y*b2V_velocity.y))
-            >topSpeed
-       )
-    {
-        float mag = sqrt((b2V_velocity.x*b2V_velocity.x)
-                        +(b2V_velocity.y*b2V_velocity.y));
-        if(mag !=0)
-        {
-            b2V_velocity.x/=mag;
-            b2V_velocity.y/=mag;
-            b2V_velocity.x*=topSpeed;
-            b2V_velocity.y*=topSpeed;
-        }
-    }
+
+}
+void Player::update()
+{
+    fl_rotation = _physicsBody->body->GetAngle();
+    b2V_velocity = _physicsBody->body->GetLinearVelocity();
+
+    //fl_rotation = _graphicsBody->sprite.getRotation();
+
+    ///Player turning
+    turn();
+    ///Player Thrusters
+    thrust();
+
+
+
 
 
 
      _physicsBody->update(this);
+     _graphicsBody->update(this);
+
+     b2V_acceleration = b2Vec2(0,0);
 
 }
 void Player::setPosition(float x, float y)
@@ -98,20 +112,25 @@ void Player::setPosition(float x, float y)
 
 
 }
+void Player::setRotation(float angle)
+{
+
+    _physicsBody->body->SetTransform(_physicsBody->body->GetPosition(),angle);
+}
 
 sf::Sprite Player::getSprite()
 {
-    _graphicsBody->update(this);
+
     return _graphicsBody->getSprite();
 }
 
 void Player::activateThrusters()
 {
-    thrust = true;
+    thrusting = true;
 }
 void Player::cancelThrusters()
 {
-    thrust = false;
+    thrusting = false;
 }
 void Player::turnLeft()
 {

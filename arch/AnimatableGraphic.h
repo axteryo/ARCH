@@ -15,6 +15,8 @@ class AnimatableGraphic: public GraphicsBody
         void update(Actor* container);
         void update(GameObject* gObj);
         sf::Sprite getSprite();
+        int height;
+        int width;
     protected:
     private:
 };

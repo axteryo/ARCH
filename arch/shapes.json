@@ -50,7 +50,16 @@
         {
             "density": 2, "friction": 0, "bounce": 0, 
             "filter": { "categoryBits": 1, "maskBits": 65535 },
-            "shape": [   69, 46  ,  49, 58  ,  24, 58  ,  13, 44  ,  13, 24  ,  24, 10  ,  49, 10  ,  69, 21  ]
+            "shape": [   11, 25  ,  25, 9  ,  60, 9  ,  76, 26  ,  76, 41  ,  60, 59  ,  25, 59  ,  11, 45  ]
+        }
+    ]
+    , 
+    "d1_texture": [
+        
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   18, 38  ,  13, 38  ,  4, 27  ,  13, 5  ,  17, 5  ,  27, 27  ]
         }
     ]
 }

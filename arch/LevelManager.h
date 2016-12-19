@@ -15,12 +15,13 @@
 
 #include "wallObject.h"
 #include "Player.h"
+#include "Enemy_D1.h"
 #include "includes.h"
 
 
 extern std::vector<GameObject*> gObjList;
 /**NOTE TO SELF Change this to Actor* type list**/
-extern std::vector<Player*> chObjList;
+extern std::vector<Actor*> chObjList;
 class LevelManager : public sf::Drawable, public sf::Transformable
 {
     private:
@@ -30,8 +31,10 @@ class LevelManager : public sf::Drawable, public sf::Transformable
 
         sf::Image spriteSheet;
         sf::Image playerSprite;
+        sf::Image d1Image;
         sf::Texture spriteSheetTexture;
         sf::Texture playerTexture;
+        sf::Texture d1Texture;
 
         void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
@@ -41,7 +44,7 @@ class LevelManager : public sf::Drawable, public sf::Transformable
         void loadLevel(std::string mapFile);
 
         GameObject *createObject(std::string shape,sf::Vector2f pos);
-        Player *createCharacter(std::string shape,sf::Vector2f pos);
+        Actor *createCharacter(std::string shape,sf::Vector2f pos);
 
         /**Map dimensions(Tile Count)**/
         sf::Vector2f v2f_mapDimension;

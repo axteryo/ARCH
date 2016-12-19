@@ -55,6 +55,7 @@ class ArchGame
         sf::Time accumulator;
         sf::Time ups;
         float td;
+        sf::Vector2f targ;
 
         cam* dynamicCam;
         std::string subject;
@@ -66,6 +67,8 @@ class ArchGame
 
         LevelManager level;
         gameController controller;
+        Player* p;
+        bool playerAlive;
 
     public:
 

@@ -11,27 +11,39 @@
 class Enemy : public Actor
 {
     public:
-        Enemy(MoveableBody* p, AnimatableGraphic* g);
+        Enemy();
         virtual ~Enemy();
-
-        void setPosition(float x, float y);
-        void update();
-        void goToward(float x, float y);
-        void lookAt(float x, float y);
-        sf::Sprite getSprite();
+        /// Base Actor functions
+        virtual void update() = 0;
+        virtual void setPosition(float x, float y)= 0;
+        virtual void setRotation(float angle)= 0;
+        virtual sf::Sprite getSprite()= 0;
+        ///Base enemy functions
+        virtual void goToward(float x, float y)= 0;
+        virtual void target(float x, float y)=0;
+        virtual void setInactive() = 0;
 
         MoveableBody* _physicsBody;
         AnimatableGraphic* _graphicsBody;
 
-
-        enum baseState
+        ///Base Enemy States
+        enum basicState
         {
             neutral,
-            chase,
             offense,
-            defensive,
-            alerted
-        }bState;
+            defensive
+
+        }baseState;
+        enum secondaryState
+        {
+            ///Offense_substate
+            chase,
+            attacking,
+            ///Neutral_substate
+            alerted,
+            unalerted,
+            inactive
+        }secondState;
     protected:
     private:
 };

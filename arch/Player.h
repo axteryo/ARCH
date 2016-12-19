@@ -4,6 +4,7 @@
 #include "Actor.h"
 #include "MoveableBody.h"
 #include "AnimatableGraphic.h"
+#include <iostream>
 #include "includes.h"
 
 
@@ -15,18 +16,24 @@ class Player: public Actor
 
         void update();
         void setPosition(float x, float y);
+        void setRotation(float angle);
+        sf::Sprite getSprite();
+
         void activateThrusters();
         void cancelThrusters();
         void cancelRightTurn();
         void cancelLeftTurn();
         void turnRight();
         void turnLeft();
+
+        void turn();
+        void thrust();
         //void handleInput(sf::Keyboard k);
-        sf::Sprite getSprite();
+
         float turnRate;
         float thrustLevel;
 
-        bool thrust;
+        bool thrusting;
         bool rRotate;
         bool lRotate;
 

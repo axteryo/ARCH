@@ -78,6 +78,8 @@
 		<Unit filename="ArchGame.h" />
 		<Unit filename="Enemy.cpp" />
 		<Unit filename="Enemy.h" />
+		<Unit filename="Enemy_D1.cpp" />
+		<Unit filename="Enemy_D1.h" />
 		<Unit filename="GameObject.cpp" />
 		<Unit filename="GameObject.h" />
 		<Unit filename="GraphicsBody.cpp" />
