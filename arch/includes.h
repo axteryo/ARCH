@@ -6,9 +6,11 @@
 
 #include <string>
 #include <math.h>
+#include <iostream>
 
 
 #include "GameObject.h"
+#include <stack>
 
 //#include <thread>
 
@@ -19,6 +21,14 @@ class Actor;
 
 extern b2Vec2 gravity;
 extern b2World* world;
+struct fixtureUserData
+{
+  std::string data;
+  fixtureUserData()
+  {
+      data = "";
+  }
+};
 extern std::vector<GameObject> objectList;
 sf::Vector2f normalize(sf::Vector2f source);
 

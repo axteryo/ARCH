@@ -5,7 +5,7 @@ MoveableBody::MoveableBody()
 {
     //bodyDef.fixedRotation = true;
     bodyDef.type = b2_dynamicBody;
-    //bodyDef.position.Set(0,0);
+   // bodyDef.position.Set(100000,-100000);
     body = world->CreateBody(&bodyDef);
 
     b2V2f_velocity = b2Vec2(0,0);
@@ -43,19 +43,16 @@ void MoveableBody::update(Actor* container)
             container->b2V_velocity.y*=container->topSpeed;
        // }
     }
-
-
     body->SetLinearVelocity(container->b2V_velocity);
     container->b2V_position = body->GetPosition();
     body->SetAngularVelocity(0);
     body->SetTransform(container->b2V_position,container->fl_rotation);
 
-
-
 }
 void MoveableBody::update(GameObject* gObj)
 {
     ///nothing...
+
 
 }
 
@@ -63,5 +60,6 @@ void MoveableBody::update(GameObject* gObj)
 
 MoveableBody::~MoveableBody()
 {
+     world->DestroyBody(body);
     //dtor
 }

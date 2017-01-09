@@ -1,4 +1,11 @@
 #include "Player.h"
+Player::~Player()
+{
+
+    delete _alertRadius;
+    delete _physicsBody;
+    delete _graphicsBody;
+}
 
 Player::Player(MoveableBody* p, AnimatableGraphic* g)
 {
@@ -7,7 +14,7 @@ Player::Player(MoveableBody* p, AnimatableGraphic* g)
     b2V_position = b2Vec2(0,0);
     b2V_velocity = b2Vec2(0,0);
     b2V_acceleration = b2Vec2(0,0);
-    fl_rotation = 180;
+    //fl_rotation = 180;
     thrustLevel = 0;
     turnRate = .1;
     topSpeed = 18;
@@ -17,8 +24,11 @@ Player::Player(MoveableBody* p, AnimatableGraphic* g)
 
     _graphicsBody = g;
     _physicsBody = p;
+    _alertRadius = new RadiusBody(300);
+    _alertRadius->create(_physicsBody,"alert_radius");
 
     _physicsBody->body->SetUserData((void*)this);
+
 
     //ctor
 }
@@ -40,7 +50,7 @@ void Player::thrust()
     b2Vec2 aim(0,0);
     if(thrusting)
     {
-        turnRate =.03;
+        turnRate =.04;
         if(thrustLevel<1)
         {
             thrustLevel += .025;
@@ -67,12 +77,12 @@ void Player::thrust()
         turnRate =.1;
         if(sqrt(
             (b2V_velocity.x*b2V_velocity.x)
-            +(b2V_velocity.y*b2V_velocity.y))>1)
+            +(b2V_velocity.y*b2V_velocity.y))>10)
            {
                 b2Vec2 vel = b2V_velocity;
                 vel.Normalize();
-                b2V_velocity.x-=vel.x/topSpeed;
-                b2V_velocity.y-=vel.y/topSpeed;
+                b2V_velocity.x-=vel.x/20;
+                b2V_velocity.y-=vel.y/20;
 
            }
     }
@@ -112,6 +122,10 @@ void Player::setPosition(float x, float y)
 
 
 }
+b2Vec2 Player::getPosition()
+{
+    return b2V_position;
+}
 void Player::setRotation(float angle)
 {
 
@@ -148,7 +162,8 @@ void Player::cancelRightTurn()
 {
     rRotate = false;
 }
-Player::~Player()
+
+void Player::handleCollision(GameObject* obj,std::string fixtureType,std::string self_fixtureType)
 {
-    //dtor
+
 }

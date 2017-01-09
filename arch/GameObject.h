@@ -14,6 +14,8 @@ class GameObject
         virtual ~GameObject();
         virtual void update() = 0;
         virtual void setPosition(float x, float y) = 0;
+        virtual b2Vec2 getPosition() = 0;
+        virtual void handleCollision(GameObject* obj,std::string fixtureType,std::string self_fixtureType) = 0;
         //virtual sf::Sprite getSprite();
 
         b2Vec2 b2V_position;

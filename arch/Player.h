@@ -5,6 +5,7 @@
 #include "MoveableBody.h"
 #include "AnimatableGraphic.h"
 #include <iostream>
+#include "RadiusBody.h"
 #include "includes.h"
 
 
@@ -16,8 +17,10 @@ class Player: public Actor
 
         void update();
         void setPosition(float x, float y);
+        b2Vec2 getPosition();
         void setRotation(float angle);
         sf::Sprite getSprite();
+        void handleCollision(GameObject* obj,std::string fixtureType,std::string self_fixtureType);
 
         void activateThrusters();
         void cancelThrusters();
@@ -37,8 +40,6 @@ class Player: public Actor
         bool rRotate;
         bool lRotate;
 
-        MoveableBody* _physicsBody;
-        AnimatableGraphic* _graphicsBody;
 
 
     protected:

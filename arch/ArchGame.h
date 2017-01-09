@@ -18,6 +18,7 @@
 #include "Actor.h"
 #include "GameObject.h"
 #include "includes.h"
+#include "collisionFactory.h"
 
 
 
@@ -52,12 +53,14 @@ class ArchGame
         sf::Event event;
         sf::Keyboard input;
         sf::Clock clock;
+        sf::Clock cl;
         sf::Time accumulator;
         sf::Time ups;
         float td;
-        sf::Vector2f targ;
+        sf::Vector2i targ;
 
         cam* dynamicCam;
+        collisionFactory* colFactory;
         std::string subject;
 
         float32 timeStep;

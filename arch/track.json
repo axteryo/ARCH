@@ -20,23 +20,23 @@
                  "height":32,
                  "id":1,
                  "name":"player_spawn",
-                 "rotation":0,
+                 "rotation":3.14,
                  "type":"archii_texture",
                  "visible":true,
                  "width":32,
-                 "x":2112,
-                 "y":160
+                 "x":2496,
+                 "y":128
                 }, 
                 {
-                 "height":32,
-                 "id":380,
+                 "height":0,
+                 "id":489,
                  "name":"Enemy_spawn",
                  "rotation":0,
                  "type":"d1_texture",
                  "visible":true,
-                 "width":32,
-                 "x":1824,
-                 "y":192
+                 "width":0,
+                 "x":1280,
+                 "y":224
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -233,11 +233,11 @@
                         }, 
                         {
                          "x":32,
-                         "y":-320
+                         "y":-352
                         }, 
                         {
                          "x":0,
-                         "y":-320
+                         "y":-352
                         }],
                  "rotation":0,
                  "type":"",
@@ -253,7 +253,7 @@
                  "polyline":[
                         {
                          "x":-32,
-                         "y":32
+                         "y":0
                         }, 
                         {
                          "x":-32,
@@ -1885,7 +1885,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":381,
+ "nextobjectid":490,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":32,

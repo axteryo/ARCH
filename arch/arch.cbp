@@ -92,8 +92,12 @@
 		<Unit filename="PhysicsBody.h" />
 		<Unit filename="Player.cpp" />
 		<Unit filename="Player.h" />
+		<Unit filename="RadiusBody.cpp" />
+		<Unit filename="RadiusBody.h" />
 		<Unit filename="cam.cpp" />
 		<Unit filename="cam.h" />
+		<Unit filename="collisionFactory.cpp" />
+		<Unit filename="collisionFactory.h" />
 		<Unit filename="dist/json/json-forwards.h" />
 		<Unit filename="dist/json/json.h" />
 		<Unit filename="dist/jsoncpp.cpp" />

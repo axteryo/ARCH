@@ -35,12 +35,21 @@ void wallObject::setPosition(float x, float y)
     b2V_position = b2Vec2(x/30,y/30);
 }
 
-wallObject::~wallObject()
+
+b2Vec2 wallObject::getPosition()
 {
-    //dtor
+    return b2V_position;
 }
 /*sf::Sprite wallObject::getSprite()
 {
     return _graphicsBody->getSprite();
 }*/
 
+void wallObject::handleCollision(GameObject* obj,std::string fixtureType,std::string self_fixtureType)
+{
+
+}
+wallObject::~wallObject()
+{
+    delete _physicsBody;
+}

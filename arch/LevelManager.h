@@ -28,6 +28,8 @@ class LevelManager : public sf::Drawable, public sf::Transformable
 
         /** Map Array **/
         sf::VertexArray tileMap;
+        std::vector<sf::VertexArray>* tileMapeLayers;
+
 
         sf::Image spriteSheet;
         sf::Image playerSprite;
@@ -42,6 +44,7 @@ class LevelManager : public sf::Drawable, public sf::Transformable
         LevelManager();
         virtual ~LevelManager();
         void loadLevel(std::string mapFile);
+        void closeLevel();
 
         GameObject *createObject(std::string shape,sf::Vector2f pos);
         Actor *createCharacter(std::string shape,sf::Vector2f pos);
@@ -57,6 +60,7 @@ class LevelManager : public sf::Drawable, public sf::Transformable
 
         /**Map data list**/
         std::vector<int> level;
+        std::vector<std::vector<int>> levelLayers;
 
         Json::Value baseMapRoot;
         Json::Reader myReader;

@@ -16,15 +16,18 @@ class Enemy : public Actor
         /// Base Actor functions
         virtual void update() = 0;
         virtual void setPosition(float x, float y)= 0;
+        virtual b2Vec2 getPosition()= 0;
         virtual void setRotation(float angle)= 0;
         virtual sf::Sprite getSprite()= 0;
+        //virtual void handleCollision(std::string objId,std::string fixtureType,std::string self_fixtureType) = 0;
         ///Base enemy functions
         virtual void goToward(float x, float y)= 0;
         virtual void target(float x, float y)=0;
         virtual void setInactive() = 0;
+        virtual void setTarget(GameObject* gObj) = 0;
 
-        MoveableBody* _physicsBody;
-        AnimatableGraphic* _graphicsBody;
+
+        std::stack<GameObject*> targetStack;
 
         ///Base Enemy States
         enum basicState
