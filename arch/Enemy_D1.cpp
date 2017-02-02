@@ -8,15 +8,21 @@ Enemy_D1::Enemy_D1(MoveableBody* p, AnimatableGraphic* g)
     b2V_velocity = b2Vec2(0,0);
     b2V_acceleration = b2Vec2(0,0);
     fl_rotation = 0;
-    baseState = offense;
+    baseState = neutral;
+    secondState = unalerted;
+    impactTypeState = NO_IMPACT;
+    impactDirection = b2Vec2(0,0);
     topSpeed= 20;
+
+    impactDuration = 30;
 
     _graphicsBody = g;
     _physicsBody = p;
-    _alertRadius = new RadiusBody(600);
+    _alertRadius = new RadiusBody(300);
     _alertRadius->create(_physicsBody,"alert_radius");
 
     _physicsBody->body->SetUserData((void*)this);
+
 }
 
 Enemy_D1::~Enemy_D1()
@@ -24,42 +30,16 @@ Enemy_D1::~Enemy_D1()
     delete _alertRadius;
     delete _physicsBody;
     delete _graphicsBody;
+
     //dtor
 }
 
-void Enemy_D1::update()
+sf::Sprite Enemy_D1::getSprite()
 {
-    fl_rotation = _physicsBody->body->GetAngle();
-    b2V_velocity = _physicsBody->body->GetLinearVelocity();
-    b2Vec2 t;
-     switch(baseState)
-    {
-    case neutral:
-        break;
-    case offense:
-        if(!targetStack.empty())
-        {
-            t = targetStack.top()->getPosition();
 
-            target(t.x,t.y);
-            goToward(t.x,t.y);
-        }
-
-
-
-        break;
-    case defensive:
-        break;
-    }
-
-
-    _physicsBody->update(this);
-
-
-    b2V_acceleration = b2Vec2(0,0);
+    return _graphicsBody->getSprite();
 
 }
-
 void Enemy_D1::setPosition(float x,float y)
 {
     _physicsBody->body->SetTransform(b2Vec2(x/30,y/30),_physicsBody->body->GetAngle());
@@ -73,6 +53,121 @@ void Enemy_D1::setRotation(float angle)
 {
     //fl_rotation = angle;
 }
+
+
+void Enemy_D1::update()
+{
+    fl_rotation = _physicsBody->body->GetAngle();
+    b2V_velocity = _physicsBody->body->GetLinearVelocity();
+    b2Vec2 t;
+    if(!targetStack.empty())
+    {
+        t = targetStack.top()->getPosition();
+    ///Base State of ai behavior (neautral, offense, defense,
+        switch(baseState)
+        {
+            case neutral:
+                ///Secondary state of the ai.
+                ///this is where the actions are initiated
+                ///each base state has its own parameter of secondary states
+                switch(secondState)
+                {
+                    case unalerted:
+
+                    break;
+                    case alerted:
+                    target(t.x,t.y);
+
+                    break;
+
+                }
+
+
+            break;
+            case offense:
+                switch(secondState)
+                {
+                    case chase:
+                    target(t.x,t.y);
+                    //goToward(t.x,t.y);
+
+                    break;
+                    case attacking:
+
+                    break;
+
+
+
+
+
+                }
+
+            break;
+            /// The basic D1 enemy doesn't have a defensive state.
+            ///it's designed and geared toward relentless attacks.
+            case defensive:
+            switch(secondState)
+            {
+
+            }
+            break;
+        }
+    }
+    _physicsBody->applyImpact(impactTypeState,impactDirection);
+    if(impactDuration<=0)
+    {
+        impactTypeState = NO_IMPACT;
+        impactDuration = 30;
+    }
+    else
+    {
+        impactDuration-=1;
+    }
+
+
+
+    _physicsBody->update(this);
+    _graphicsBody->update(this);
+
+
+    b2V_acceleration = b2Vec2(0,0);
+
+}
+void Enemy_D1::setInactive()
+{
+
+}
+
+void Enemy_D1::setNeutral()
+{
+    baseState = neutral;
+}
+void Enemy_D1::setOffense()
+{
+     baseState = offense;
+}
+void Enemy_D1::setDefensive()
+{
+     baseState = defensive;
+}
+void Enemy_D1::setUnalerted()
+{
+    secondState = unalerted;
+}
+void Enemy_D1::setAlerted()
+{
+    secondState = alerted;
+}
+void Enemy_D1::setChase()
+{
+    secondState = chase;
+}
+void Enemy_D1::setAttacking()
+{
+    secondState = attacking;
+}
+
+
 
 void Enemy_D1::target(float x, float y)
 {
@@ -106,30 +201,50 @@ void Enemy_D1::goToward(float x, float y)
 
 void Enemy_D1::setTarget(GameObject* gObj)
 {
+
+    if(!targetStack.empty())
+    {
+        targetStack.pop();
+    }
     targetStack.push(gObj);
 }
 
-
-void Enemy_D1::setInactive()
+void Enemy_D1::gaugeAttack(std::string attack, b2Vec2 direction)
 {
-
-}
-
-sf::Sprite Enemy_D1::getSprite()
-{
-    _graphicsBody->update(this);
-    return _graphicsBody->getSprite();
-
+    direction.Normalize();
+    impactDirection = direction;
+    if(attack.compare("laser")==0)
+    {
+        impactTypeState = PUSHEDBACK;
+    }
 }
 
 void Enemy_D1::handleCollision(GameObject* obj,std::string fixtureType,std::string self_fixtureType)
 {
     if(obj->objectId.compare("object_player")==0)
     {
-        if(fixtureType.compare("body")==0)
+        setTarget(obj);
+        if(self_fixtureType.compare("alert_radius")==0)
         {
-            setTarget(obj);
-            std::cout<<targetStack.size()<<std::endl;
+
+            if(fixtureType.compare("body")==0)
+            {
+                setOffense();
+                setChase();
+                //std::cout<<targetStack.size()<<std::endl;
+            }
+            else if(fixtureType.compare("alert_radius")==0)
+            {
+                setAlerted();
+            }
+
+        }
+        else if(self_fixtureType.compare("body")==0)
+        {
+            if(fixtureType.compare("laser")==0)
+            {
+               gaugeAttack(fixtureType,b2Vec2(cos(obj->fl_rotation),sin(obj->fl_rotation)));
+            }
         }
 
     }

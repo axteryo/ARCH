@@ -42,12 +42,25 @@ void MoveableBody::update(Actor* container)
             container->b2V_velocity.x*=container->topSpeed;
             container->b2V_velocity.y*=container->topSpeed;
        // }
-    }
+        }
     body->SetLinearVelocity(container->b2V_velocity);
     container->b2V_position = body->GetPosition();
     body->SetAngularVelocity(0);
     body->SetTransform(container->b2V_position,container->fl_rotation);
 
+}
+void MoveableBody::applyImpact(Actor::ImpactState impactType,b2Vec2 direction)
+{
+    switch(impactType)
+    {
+    case Actor::PUSHEDBACK:
+        body->ApplyForce(b2Vec2(direction.x*1000,direction.y*1000),body->GetWorldCenter(),true);
+        std::cout<<"Got hit got hit"<<std::endl;
+        break;
+        case Actor::NO_IMPACT:
+        break;
+
+    }
 }
 void MoveableBody::update(GameObject* gObj)
 {

@@ -22,15 +22,25 @@ class Player: public Actor
         sf::Sprite getSprite();
         void handleCollision(GameObject* obj,std::string fixtureType,std::string self_fixtureType);
 
+
+        ///State setting functions
         void activateThrusters();
         void cancelThrusters();
         void cancelRightTurn();
         void cancelLeftTurn();
+
+
+        void useAttack(int a);
+        void setTurnRight();
+        void setTurnLeft();
+        void setNoAttack();
+
+        ///Action Functions
         void turnRight();
         void turnLeft();
-
-        void turn();
         void thrust();
+        void arrive();
+        void laser();
         //void handleInput(sf::Keyboard k);
 
         float turnRate;
@@ -39,6 +49,40 @@ class Player: public Actor
         bool thrusting;
         bool rRotate;
         bool lRotate;
+        bool firing;
+
+        int laserDuration;
+        int laserCoolDown;
+
+
+
+        enum ThrustingState
+        {
+            THRUST_T,
+            THRUST_F
+        }thrustState;
+
+        enum TurningRightState
+        {
+
+            TURN_RIGHT,
+            TURN_RIGHT_F
+        }turnRightState;
+          enum TurningLeftState
+        {
+            TURN_LEFT,
+            TURN_LEFT_F
+        }turnLeftState;
+
+       // std::stack<TurningState> turnStack;
+
+        enum AttackState
+        {
+            LASER,
+            NO_ATTACK
+        }attackTypeState;
+
+    b2Fixture* laserFixture;
 
 
 

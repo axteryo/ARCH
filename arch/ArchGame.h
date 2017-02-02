@@ -54,8 +54,8 @@ class ArchGame
         sf::Keyboard input;
         sf::Clock clock;
         sf::Clock cl;
-        sf::Time accumulator;
-        sf::Time ups;
+        //sf::Time accumulator;
+        //sf::Time dt;
         float td;
         sf::Vector2i targ;
 
@@ -71,6 +71,7 @@ class ArchGame
         LevelManager level;
         gameController controller;
         Player* p;
+        bool setPlayer;
         bool playerAlive;
 
     public:

@@ -921,6 +921,8 @@ window.setView(mainCam->GetView());
 mainCam->follow(playerBody);
 ///The players current velocity
     b2Vec2 vel = playerBody->GetLinearVelocity();
+     //std::cout<<"proxycount:"<<world.GetProxyCount()<<std::endl;
+
 
     angle = playerBody->GetAngle();
     /**INPUT IS PROCESSED**/
@@ -1113,7 +1115,7 @@ mainCam->follow(playerBody);
         angle-=turnRate;
         //std::cout<<"ITS A HIT"<<std::endl;
     }
-    if(rRotate)
+    else if(rRotate)
     {
         angle+=turnRate;
     }
@@ -1577,7 +1579,7 @@ if(segPoints.size()==4)
                 }
                 else
                 {
-                    world.DestroyBody(bodyIter);
+                    world.DestroyBody(bodyIter); //https://peaceful-refuge-13515.herokuapp.com/
                 }
 
             }
@@ -1610,7 +1612,7 @@ if(segPoints.size()==4)
                         colShape.setRotation((bodyIter->GetTransform().q.GetAngle()*(180-(180/3.14159))));
 
                     }
-                    //window.draw(colShape);
+                    window.draw(colShape);
                 }
                 drawcount+=1;
 

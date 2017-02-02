@@ -19,6 +19,7 @@ class GameObject
         //virtual sf::Sprite getSprite();
 
         b2Vec2 b2V_position;
+//b2Vec2 b2V_positionPre;
         /**NOTE TO SELF
         Derive an ACTOR CLASS FROM GAMEOBJECT IN FUTURE
         A wall does not need a topSpeed or velocity**/

@@ -45,21 +45,21 @@
         }
     ]
     , 
-    "archii_texture": [
-        
-        {
-            "density": 2, "friction": 0, "bounce": 0, 
-            "filter": { "categoryBits": 1, "maskBits": 65535 },
-            "shape": [   73, 47  ,  50, 59  ,  25, 59  ,  14, 45  ,  14, 25  ,  25, 11  ,  50, 11  ,  73, 23  ]
-        }
-    ]
-    , 
     "d1_texture": [
         
         {
             "density": 2, "friction": 0, "bounce": 0, 
             "filter": { "categoryBits": 1, "maskBits": 65535 },
-            "shape": [   21, 2  ,  27, 11  ,  18, 24  ,  15, 24  ,  6, 11  ,  11, 2  ]
+            "shape": [   3, 38  ,  3, 9  ,  15.284974098205566, 1.3678741455078125  ,  29, 9  ,  29, 39  ,  16, 47  ]
+        }
+    ]
+    , 
+    "archii_texture": [
+        
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   63, 39  ,  40, 51  ,  15, 51  ,  4, 37  ,  4, 17  ,  15, 3  ,  40, 3  ,  63, 15  ]
         }
     ]
 }

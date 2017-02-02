@@ -27,6 +27,7 @@ class gameController
         std::string activateThrustersAction;
         std::string turnLeftAction;
         std::string turnRightAction;
+        std::string useAttack1Action;
 
     protected:
     private:

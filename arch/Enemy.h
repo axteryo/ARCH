@@ -25,6 +25,13 @@ class Enemy : public Actor
         virtual void target(float x, float y)=0;
         virtual void setInactive() = 0;
         virtual void setTarget(GameObject* gObj) = 0;
+        virtual void setNeutral()= 0;
+        virtual void setOffense() = 0;
+        virtual void setDefensive() = 0;
+        virtual void setUnalerted() = 0;
+        virtual void setAlerted()= 0;
+        virtual void setChase() = 0;
+        virtual void setAttacking() = 0;
 
 
         std::stack<GameObject*> targetStack;

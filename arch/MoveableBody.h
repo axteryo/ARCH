@@ -19,7 +19,9 @@ class MoveableBody : public PhysicsBody
         MoveableBody();
         virtual ~MoveableBody();
         void update(Actor* container);
+        void applyImpact(Actor::ImpactState impactType, b2Vec2 direction);
         void update(GameObject* gObj);
+
     protected:
     private:
 };

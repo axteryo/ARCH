@@ -5,6 +5,7 @@ gameController::gameController()
     activateThrustersAction ="none";
     turnLeftAction = "none";
     turnRightAction = "none";
+    useAttack1Action = "none";
 }
 
 gameController::~gameController()
@@ -30,6 +31,7 @@ void gameController::loadBinding()
     activateThrustersAction = root["activateThrusters"].asString();
     turnLeftAction = root["turnLeft"].asString();
     turnRightAction = root["turnRight"].asString();
+    useAttack1Action = root["useAttack1"].asString();
 
 }
 
@@ -57,6 +59,13 @@ bool gameController::isBindedKeyPressed(std::string bindingToCheck)
 		else
 			return false;
         }
+        else if (bindingToCheck == "Space")
+        {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+			return true;
+		else
+			return false;
+        }
 
 }
 
@@ -79,6 +88,13 @@ bool gameController::isBindedKeyReleased(std::string bindingToCheck, sf::Event e
         else if (bindingToCheck == "Up")
         {
 		if ( e.key.code == sf::Keyboard::Up)
+			return true;
+		else
+			return false;
+        }
+         else if (bindingToCheck == "Space")
+        {
+		if ( e.key.code == sf::Keyboard::Space)
 			return true;
 		else
 			return false;
@@ -121,6 +137,17 @@ bool gameController::isActionKeyPressed(std::string actionToCheck)
             return false;
         }
     }
+     else if(actionToCheck == "useAttack1")
+    {
+        if(isBindedKeyPressed(useAttack1Action))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
 
 bool gameController::isActionKeyReleased(std::string actionToCheck, sf::Event e)
@@ -150,6 +177,17 @@ bool gameController::isActionKeyReleased(std::string actionToCheck, sf::Event e)
     else if(actionToCheck == "turnLeft")
     {
         if(isBindedKeyReleased(turnLeftAction,e))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+     else if(actionToCheck == "useAttack1")
+    {
+        if(isBindedKeyReleased(useAttack1Action,e))
         {
             return true;
         }

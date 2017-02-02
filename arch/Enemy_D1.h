@@ -21,6 +21,16 @@ class Enemy_D1: public Enemy
         void target(float x, float y);
         void setInactive();
         void setTarget(GameObject* gObj);
+        void setNeutral();
+        void setOffense();
+        void setDefensive();
+        void setUnalerted();
+        void setAlerted();
+        void setChase();
+        void setAttacking();
+        void gaugeAttack(std::string attack,b2Vec2 direction);
+
+        int impactDuration;
     protected:
     private:
 };

@@ -28,7 +28,7 @@ void cam::follow(sf::Vector2i point)
         camVel =( sqrt(((point.x - v2i_FocalPoint.x)*
             (point.x-v2i_FocalPoint.x)) +
             ((point.y - v2i_FocalPoint.y)*
-            (point.y-v2i_FocalPoint.y)))/25.0);
+            (point.y-v2i_FocalPoint.y)))/25);
 
             //ceil(fl_CamVel);
 

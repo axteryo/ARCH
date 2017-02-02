@@ -500,6 +500,13 @@ for(int ii = 0; ii<levelLayers.size();++ii)
 
 
         }
+        for(int i = 0; i<gObjList.size();++i)
+        {
+
+            gObjList[i]->update();
+
+
+        }
 
 }
 

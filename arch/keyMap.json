@@ -2,6 +2,8 @@
 	
 	"turnRight" :"Right",
 	"turnLeft" :"Left",
-	"activateThrusters" :"Up"
+	"activateThrusters" :"Up",
+	"useAttack1":"Space",
+	"useAttack2":"W"
 	
 }

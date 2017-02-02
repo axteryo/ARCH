@@ -25,17 +25,26 @@ class Actor:public GameObject
         virtual void setRotation(float angle) = 0;
         virtual sf::Sprite getSprite() = 0;
 
+
         //virtual void handleCollision(std::string objId,std::string fixtureType,std::string self_fixtureType) = 0;
 
 
         float topSpeed;
         b2Vec2 b2V_velocity;
         b2Vec2 b2V_acceleration;
+        b2Vec2 impactDirection;
 
         MoveableBody* _physicsBody;
         AnimatableGraphic* _graphicsBody;
         RadiusBody* _alertRadius;
         RadiusBody* _attackRadius;
+
+        enum ImpactState
+        {
+            STUNNED,
+            PUSHEDBACK,
+            NO_IMPACT
+        }impactTypeState;
 
     protected:
     private:
