@@ -49,6 +49,15 @@ void wallObject::handleCollision(GameObject* obj,std::string fixtureType,std::st
 {
 
 }
+
+void wallObject::initiateCollision(GameObject* obj,std::string fixtureType,std::string self_fixtureType)
+{
+
+}
+void wallObject::resolveCollision(GameObject* obj,std::string fixtureType,std::string self_fixtureType)
+{
+
+}
 wallObject::~wallObject()
 {
     delete _physicsBody;

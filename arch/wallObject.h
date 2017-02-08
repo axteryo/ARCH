@@ -18,6 +18,8 @@ class wallObject : public GameObject
         void setPosition(float x, float y);
         b2Vec2 getPosition();
         void handleCollision(GameObject* obj,std::string fixtureType,std::string self_fixtureType);
+        void initiateCollision(GameObject* obj,std::string fixtureType,std::string self_fixtureType);
+        void resolveCollision(GameObject* obj,std::string fixtureType,std::string self_fixtureType);
         //sf::Sprite getSprite();
         unMoveableBody* _physicsBody;
         //StaticGraphic* _graphicsBody;

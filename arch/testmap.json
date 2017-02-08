@@ -4730,6 +4730,17 @@
                  "width":32,
                  "x":96,
                  "y":96
+                }, 
+                {
+                 "height":0,
+                 "id":252,
+                 "name":"Enemy_spawn",
+                 "rotation":0,
+                 "type":"d1_texture",
+                 "visible":true,
+                 "width":0,
+                 "x":352,
+                 "y":384
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -4738,7 +4749,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":252,
+ "nextobjectid":253,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":32,

@@ -8,13 +8,22 @@ Enemy_D1::Enemy_D1(MoveableBody* p, AnimatableGraphic* g)
     b2V_velocity = b2Vec2(0,0);
     b2V_acceleration = b2Vec2(0,0);
     fl_rotation = 0;
+    aliveState = ALIVE;
     baseState = neutral;
     secondState = unalerted;
     impactTypeState = NO_IMPACT;
+    attackTypeState = NO_ATTACK;
     impactDirection = b2Vec2(0,0);
     topSpeed= 20;
 
+    maxHealthLevel = 100;
+    minHealthLevel = 0;
+    currentHealthLevel = 100;
+    damageAmount = 0;
+
     impactDuration = 30;
+    attackDuration = 0;
+    attackCoolDown = 0;
 
     _graphicsBody = g;
     _physicsBody = p;
@@ -89,7 +98,7 @@ void Enemy_D1::update()
                 {
                     case chase:
                     target(t.x,t.y);
-                    //goToward(t.x,t.y);
+                    goToward(t.x,t.y);
 
                     break;
                     case attacking:
@@ -209,6 +218,60 @@ void Enemy_D1::setTarget(GameObject* gObj)
     targetStack.push(gObj);
 }
 
+
+void Enemy_D1::initiateCollision(GameObject* obj,std::string fixtureType,std::string self_fixtureType)
+{
+       ///Checks for RADIUS interactions
+        if(self_fixtureType.compare("alert_radius")==0)
+        {
+            if(obj->objectId.compare("object_player")==0)
+            {
+                setTarget(obj);
+                if(fixtureType.compare("body")==0)
+                {
+                    setOffense();
+                    setChase();
+                    //std::cout<<targetStack.size()<<std::endl;
+                }
+                else if(fixtureType.compare("alert_radius")==0)
+                {
+                    setAlerted();
+                }
+            }
+
+        }///Checks for BODY interactions
+        else if(self_fixtureType.compare("body")==0)
+        {
+
+            if(fixtureType.compare("laser")==0)
+            {
+               gaugeAttack(fixtureType,b2Vec2(cos(obj->fl_rotation),sin(obj->fl_rotation)));
+            }
+        }
+
+}
+void Enemy_D1::resolveCollision(GameObject* obj,std::string fixtureType,std::string self_fixtureType)
+{
+
+}
+
+bool Enemy_D1::isAlive()
+{
+     switch(aliveState)
+    {
+    case ALIVE:
+        return true;
+        break;
+    case DEAD:
+        return false;
+        break;
+    }
+}
+bool Enemy_D1::isImpacted()
+{
+    return false;
+}
+
 void Enemy_D1::gaugeAttack(std::string attack, b2Vec2 direction)
 {
     direction.Normalize();
@@ -218,36 +281,78 @@ void Enemy_D1::gaugeAttack(std::string attack, b2Vec2 direction)
         impactTypeState = PUSHEDBACK;
     }
 }
-
-void Enemy_D1::handleCollision(GameObject* obj,std::string fixtureType,std::string self_fixtureType)
+void Enemy_D1::useAttack(int a)
 {
-    if(obj->objectId.compare("object_player")==0)
+    if(a==1)
+	{
+		attackTypeState = DRAIN;
+	}
+}
+void Enemy_D1::setDamageAmount(int a)
+{
+    damageAmount = a;
+}
+void Enemy_D1::takeDamage()
+{
+    currentHealthLevel -= damageAmount;
+}
+
+void Enemy_D1::drain()
+{
+     if(attackCoolDown<=0)
+        {
+        if(attackFixture)
+        {
+            //std::cout<<firing<<std::endl;
+            if(attackDuration<=0)
+            {
+
+                _physicsBody->body->DestroyFixture(attackFixture);
+                //firing = false;
+                //attackDuration = 20;
+                //attackCoolDown = 60;
+                //setNoAttack();
+                attackFixture = nullptr;
+
+            }
+            else
+            {
+                attackDuration-=1;
+            }
+
+        }
+        else
+        {
+            //attackDuration = 20;
+            //attackCoolDown = 60;
+            //firing = true;
+            b2PolygonShape drainShape;
+            fixtureUserData* f = new fixtureUserData;
+            f->data ="drain";
+            /*b2FixtureDef laserFixtureDef;
+            laserFixtureDef.isSensor= true;
+            laserShape.SetAsBox((500.0f)/30,(20.0f)/30,b2Vec2(18,0),0);
+            laserFixtureDef.shape = &laserShape;
+            laserFixtureDef.userData= ((void*)f);
+            attackFixture = _physicsBody->body->CreateFixture(&laserFixtureDef);
+        */
+        }
+    }
+    else
     {
-        setTarget(obj);
-        if(self_fixtureType.compare("alert_radius")==0)
-        {
-
-            if(fixtureType.compare("body")==0)
-            {
-                setOffense();
-                setChase();
-                //std::cout<<targetStack.size()<<std::endl;
-            }
-            else if(fixtureType.compare("alert_radius")==0)
-            {
-                setAlerted();
-            }
-
-        }
-        else if(self_fixtureType.compare("body")==0)
-        {
-            if(fixtureType.compare("laser")==0)
-            {
-               gaugeAttack(fixtureType,b2Vec2(cos(obj->fl_rotation),sin(obj->fl_rotation)));
-            }
-        }
-
+        //std::cout<<" is in cooldown"<<std::endl;
+        attackDuration = 20;
+        //setNoAttack();
     }
 
 }
+
+
+void Enemy_D1::handleCollision(GameObject* obj,std::string fixtureType,std::string self_fixtureType)
+{
+
+
+}
+
+
 

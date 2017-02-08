@@ -9,6 +9,7 @@ Player::~Player()
 
 Player::Player(MoveableBody* p, AnimatableGraphic* g)
 {
+    aliveState = ALIVE;
     objectId = "object_player";
     layerDepth = 6;
     b2V_position = b2Vec2(0,0);
@@ -22,8 +23,14 @@ Player::Player(MoveableBody* p, AnimatableGraphic* g)
     rRotate= false;
     lRotate=false;
     firing = false;
-    laserDuration = 20;
-    laserCoolDown = 60;
+    attackDuration = 20;
+    attackCoolDown = 60;
+
+    maxHealthLevel = 100;
+    minHealthLevel = 0;
+    currentHealthLevel = 100;
+    damageAmount = 0;
+
 
     thrustState = THRUST_F;
     turnRightState = TURN_RIGHT_F;
@@ -34,17 +41,17 @@ Player::Player(MoveableBody* p, AnimatableGraphic* g)
     _graphicsBody = g;
     _physicsBody = p;
     _alertRadius = new RadiusBody(300);
-    //_alertRadius->create(_physicsBody,"alert_radius");
+    _alertRadius->create(_physicsBody,"alert_radius");
 
     _physicsBody->body->SetUserData((void*)this);
-    laserFixture = nullptr;
+    attackFixture = nullptr;
 
 
     //ctor
 }
 void Player::turnLeft()
 {
-    if(thrusting || firing)
+    if(thrusting)
     {
         turnRate = .04;
     }
@@ -57,7 +64,7 @@ void Player::turnLeft()
 }
 void Player::turnRight()
 {
-    if(thrusting || firing)
+    if(thrusting)
     {
         turnRate = .04;
     }
@@ -104,8 +111,8 @@ void::Player::arrive()
        {
             b2Vec2 vel = b2V_velocity;
             vel.Normalize();
-            b2V_velocity.x-=vel.x/20;
-            b2V_velocity.y-=vel.y/20;
+            b2V_velocity.x-=vel.x/30;
+            b2V_velocity.y-=vel.y/30;
 
        }
 
@@ -153,28 +160,14 @@ void Player::update()
     switch(attackTypeState)
     {
         case NO_ATTACK:
-            if(!firing)
-            {
 
-                laserCoolDown-=1;
+                attackCoolDown-=1;
 
-            }
+
 
         break;
         case LASER:
-            if(laserCoolDown<=0)
-                {
                 laser();
-                }
-            if(firing)
-            {
-                  laserDuration-=1;
-
-            }
-            else
-            {
-                laserCoolDown-=1;
-            }
         break;
 
     }
@@ -234,11 +227,23 @@ void Player::cancelRightTurn()
 {
     turnRightState = TURN_RIGHT_F;
 }
+
+void Player::setDamageAmount(int a)
+{
+    damageAmount = a;
+}
+void Player::takeDamage()
+{
+    currentHealthLevel -= damageAmount;
+}
+
+///PLAYER ATTACK FUNCTION
 void Player::useAttack(int a)
 {
     if(a==1)
 	{
 		attackTypeState = LASER;
+
 	}
 
 }
@@ -251,37 +256,90 @@ void Player::handleCollision(GameObject* obj,std::string fixtureType,std::string
 {
 
 }
-
-void Player::laser()
+void Player::initiateCollision(GameObject* obj,std::string fixtureType,std::string self_fixtureType)
 {
-    if(laserFixture)
-    {
-        //std::cout<<firing<<std::endl;
-        if(laserDuration<=0)
-        {
 
-            _physicsBody->body->DestroyFixture(laserFixture);
-            firing = false;
-            laserDuration = 20;
-            laserCoolDown = 60;
-            setNoAttack();
-            laserFixture = nullptr;
+}
+void Player::resolveCollision(GameObject* obj,std::string fixtureType,std::string self_fixtureType)
+{
+
+}
+
+bool Player::isAlive()
+{
+    switch(aliveState)
+    {
+    case ALIVE:
+        return true;
+        break;
+    case DEAD:
+        return false;
+        break;
+    }
+}
+bool Player::isImpacted()
+{
+    return false;
+}
+
+void Player::gaugeAttack(std::string attack,b2Vec2 direction)
+{
+     direction.Normalize();
+    impactDirection = direction;
+    if(attack.compare("drain")==0)
+    {
+        impactTypeState = PULLED;
+    }
+}
+
+
+
+///LASER ATTACK
+void Player::laser()
+    {
+    if(attackCoolDown<=0)
+        {
+        if(attackFixture)
+        {
+            //std::cout<<firing<<std::endl;
+            if(attackDuration<=0)
+            {
+
+                _physicsBody->body->DestroyFixture(attackFixture);
+                firing = false;
+                attackDuration = 20;
+                attackCoolDown = 60;
+                setNoAttack();
+                attackFixture = nullptr;
+
+            }
+            else
+            {
+                attackDuration-=1;
+            }
 
         }
-
+        else
+        {
+            //attackDuration = 20;
+            //attackCoolDown = 60;
+            firing = true;
+            b2PolygonShape laserShape;
+            fixtureUserData* f = new fixtureUserData;
+            f->data ="laser";
+            b2FixtureDef laserFixtureDef;
+            laserFixtureDef.isSensor= true;
+            laserShape.SetAsBox((500.0f)/30,(20.0f)/30,b2Vec2(18,0),0);
+            laserFixtureDef.shape = &laserShape;
+            laserFixtureDef.userData= ((void*)f);
+            attackFixture = _physicsBody->body->CreateFixture(&laserFixtureDef);
+        }
     }
     else
     {
-        firing = true;
-        b2PolygonShape laserShape;
-        fixtureUserData* f = new fixtureUserData;
-        f->data ="laser";
-        b2FixtureDef laserFixtureDef;
-        laserFixtureDef.isSensor= true;
-        laserShape.SetAsBox((500.0f)/30,(8.0f)/30,b2Vec2(18,0),0);
-        laserFixtureDef.shape = &laserShape;
-        laserFixtureDef.userData= ((void*)f);
-        laserFixture = _physicsBody->body->CreateFixture(&laserFixtureDef);
+        std::cout<<"Laser is in cooldown"<<std::endl;
+        attackDuration = 20;
+        setNoAttack();
     }
 
 

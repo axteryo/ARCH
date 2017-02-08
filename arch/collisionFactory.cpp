@@ -33,12 +33,13 @@ void collisionFactory::BeginContact(b2Contact* contact)
             if(f_data)
             {
 
+
                 data_B = f_data->data;
                 //std::cout<<A->objectId<<std::endl;
                 //std::cout<<B->objectId<<std::endl;
                 ///This Object hit you! this is the part that hit you! this is the part of you that was hit!
-                A->handleCollision(B,data_B,data_A);
-                B->handleCollision(A,data_A,data_B);
+                A->initiateCollision(B,data_B,data_A);
+                B->initiateCollision(A,data_A,data_B);
             }
         }
 
@@ -153,6 +154,12 @@ else if(id_A.compare("object_enemy")==0)
 
     //switch
 */
+}
+
+void collisionFactory::checkObstaclesBetween(GameObject* A, GameObject* B)
+{
+    //b2RayCastCallback c;
+    //world->RayCast(&c,A->b2V_position,B->b2V_position);
 }
 
 collisionFactory::~collisionFactory()

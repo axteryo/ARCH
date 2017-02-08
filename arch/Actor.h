@@ -26,13 +26,25 @@ class Actor:public GameObject
         virtual sf::Sprite getSprite() = 0;
 
 
-        //virtual void handleCollision(std::string objId,std::string fixtureType,std::string self_fixtureType) = 0;
+        virtual bool isAlive() = 0;
+        virtual bool isImpacted() = 0;
+        virtual void gaugeAttack(std::string attack,b2Vec2 direction) = 0;
+        virtual void useAttack(int a) = 0;
+        virtual void setDamageAmount(int a)= 0;
+        virtual void takeDamage() = 0;
 
+
+        //virtual void handleCollision(std::string objId,std::string fixtureType,std::string self_fixtureType) = 0;
+        int maxHealthLevel;
+        int minHealthLevel;
+        int currentHealthLevel;
+        int damageAmount;
 
         float topSpeed;
         b2Vec2 b2V_velocity;
         b2Vec2 b2V_acceleration;
         b2Vec2 impactDirection;
+        int impactDuration;
 
         MoveableBody* _physicsBody;
         AnimatableGraphic* _graphicsBody;
@@ -43,8 +55,22 @@ class Actor:public GameObject
         {
             STUNNED,
             PUSHEDBACK,
+            PULLED,
             NO_IMPACT
         }impactTypeState;
+
+        enum AliveState
+        {
+            ALIVE,
+            DEAD
+        }aliveState;
+
+        enum AttackState
+        {
+            NO_ATTACK
+        }attackTypeState;
+
+
 
     protected:
     private:

@@ -20,8 +20,11 @@ class Player: public Actor
         b2Vec2 getPosition();
         void setRotation(float angle);
         sf::Sprite getSprite();
-        void handleCollision(GameObject* obj,std::string fixtureType,std::string self_fixtureType);
 
+        //
+        void handleCollision(GameObject* obj,std::string fixtureType,std::string self_fixtureType);
+        void initiateCollision(GameObject* obj,std::string fixtureType,std::string self_fixtureType);
+        void resolveCollision(GameObject* obj,std::string fixtureType,std::string self_fixtureType);
 
         ///State setting functions
         void activateThrusters();
@@ -30,10 +33,19 @@ class Player: public Actor
         void cancelLeftTurn();
 
 
-        void useAttack(int a);
+
         void setTurnRight();
         void setTurnLeft();
         void setNoAttack();
+
+
+
+        bool isAlive();
+        bool isImpacted();
+        void gaugeAttack(std::string attack,b2Vec2 direction);
+        void useAttack(int a);
+        void setDamageAmount(int a);
+        void takeDamage();
 
         ///Action Functions
         void turnRight();
@@ -51,8 +63,8 @@ class Player: public Actor
         bool lRotate;
         bool firing;
 
-        int laserDuration;
-        int laserCoolDown;
+        int attackDuration;
+        int attackCoolDown;
 
 
 
@@ -82,7 +94,7 @@ class Player: public Actor
             NO_ATTACK
         }attackTypeState;
 
-    b2Fixture* laserFixture;
+    b2Fixture* attackFixture;
 
 
 

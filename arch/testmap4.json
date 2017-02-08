@@ -596,19 +596,8 @@
                  "type":"archii_texture",
                  "visible":true,
                  "width":32,
-                 "x":1600,
-                 "y":1280
-                }, 
-                {
-                 "height":0,
-                 "id":49,
-                 "name":"Enemy_spawn",
-                 "rotation":0,
-                 "type":"d1_texture",
-                 "visible":true,
-                 "width":0,
-                 "x":1408,
-                 "y":1216
+                 "x":2176,
+                 "y":1728
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -617,7 +606,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":112,
+ "nextobjectid":119,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":64,
