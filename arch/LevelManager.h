@@ -17,6 +17,7 @@
 #include "Player.h"
 #include "Enemy_D1.h"
 #include "includes.h"
+#include "cam.h"
 
 
 extern std::vector<GameObject*> gObjList;
@@ -38,6 +39,13 @@ class LevelManager : public sf::Drawable, public sf::Transformable
         sf::Texture playerTexture;
         sf::Texture d1Texture;
 
+        cam* _camera;
+        Player* p;
+
+        int camCount;
+
+
+
         void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
     public:
@@ -45,9 +53,15 @@ class LevelManager : public sf::Drawable, public sf::Transformable
         virtual ~LevelManager();
         void loadLevel(std::string mapFile);
         void closeLevel();
+        void update();
+        void render(sf::RenderWindow* window);
+
+        void createCamera(sf::Vector2f pos, sf::Vector2f cameraDimension);
+        cam* getCamera();
 
         GameObject *createObject(std::string shape,sf::Vector2f pos);
         Actor *createCharacter(std::string shape,sf::Vector2f pos);
+        Player* getPlayer();
 
         /**Map dimensions(Tile Count)**/
         sf::Vector2f v2f_mapDimension;

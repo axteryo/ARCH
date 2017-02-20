@@ -57,6 +57,9 @@ void MoveableBody::applyImpact(Actor::ImpactState impactType,b2Vec2 direction)
         body->ApplyForce(b2Vec2(direction.x*1000,direction.y*1000),body->GetWorldCenter(),true);
         std::cout<<"Got hit got hit"<<std::endl;
         break;
+        case Actor::PULLED:
+            body->ApplyForce(b2Vec2(direction.x*60,direction.y*60),body->GetWorldCenter(),true);
+        break;
         case Actor::NO_IMPACT:
         break;
 

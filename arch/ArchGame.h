@@ -59,7 +59,6 @@ class ArchGame
         float td;
         sf::Vector2i targ;
 
-        cam* dynamicCam;
         collisionFactory* colFactory;
         std::string subject;
 

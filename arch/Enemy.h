@@ -33,6 +33,8 @@ class Enemy : public Actor
         virtual void setChase() = 0;
         virtual void setAttacking() = 0;
 
+        virtual float getDistanceFromTarget(b2Vec2 t) = 0;
+
 
         std::stack<GameObject*> targetStack;
 

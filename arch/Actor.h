@@ -19,10 +19,10 @@ class Actor:public GameObject
         Actor();
         virtual ~Actor();
 
-        virtual void update() = 0;
-        virtual void setPosition(float x, float y) = 0;
-        virtual b2Vec2 getPosition() = 0;
-        virtual void setRotation(float angle) = 0;
+        //virtual void update() = 0;
+        //void setPosition(float x, float y);
+        //virtual b2Vec2 getPosition() = 0;
+        //virtual void setRotation(float angle) = 0;
         virtual sf::Sprite getSprite() = 0;
 
 
@@ -30,8 +30,10 @@ class Actor:public GameObject
         virtual bool isImpacted() = 0;
         virtual void gaugeAttack(std::string attack,b2Vec2 direction) = 0;
         virtual void useAttack(int a) = 0;
+        virtual void setNoAttack() = 0;
         virtual void setDamageAmount(int a)= 0;
         virtual void takeDamage() = 0;
+        virtual void arrive() = 0;
 
 
         //virtual void handleCollision(std::string objId,std::string fixtureType,std::string self_fixtureType) = 0;
@@ -49,7 +51,7 @@ class Actor:public GameObject
         MoveableBody* _physicsBody;
         AnimatableGraphic* _graphicsBody;
         RadiusBody* _alertRadius;
-        RadiusBody* _attackRadius;
+        //RadiusBody* _attackRadius;
 
         enum ImpactState
         {

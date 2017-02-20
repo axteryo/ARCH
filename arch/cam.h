@@ -13,6 +13,7 @@ class cam
         cam(sf::Vector2f pos, sf::Vector2f cameraDimension);
         void follow(sf::Vector2i point);
         void frame();
+        void update();
         sf::View getView();
 
         sf::View camView;

@@ -72,6 +72,8 @@
 		</Linker>
 		<Unit filename="Actor.cpp" />
 		<Unit filename="Actor.h" />
+		<Unit filename="Ai_Controller.cpp" />
+		<Unit filename="Ai_Controller.h" />
 		<Unit filename="AnimatableGraphic.cpp" />
 		<Unit filename="AnimatableGraphic.h" />
 		<Unit filename="ArchGame.cpp" />
@@ -88,12 +90,16 @@
 		<Unit filename="LevelManager.h" />
 		<Unit filename="MoveableBody.cpp" />
 		<Unit filename="MoveableBody.h" />
+		<Unit filename="Observer.cpp" />
+		<Unit filename="Observer.h" />
 		<Unit filename="PhysicsBody.cpp" />
 		<Unit filename="PhysicsBody.h" />
 		<Unit filename="Player.cpp" />
 		<Unit filename="Player.h" />
 		<Unit filename="RadiusBody.cpp" />
 		<Unit filename="RadiusBody.h" />
+		<Unit filename="Subject.cpp" />
+		<Unit filename="Subject.h" />
 		<Unit filename="cam.cpp" />
 		<Unit filename="cam.h" />
 		<Unit filename="collisionFactory.cpp" />

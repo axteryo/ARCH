@@ -15,6 +15,7 @@ Player::Player(MoveableBody* p, AnimatableGraphic* g)
     b2V_position = b2Vec2(0,0);
     b2V_velocity = b2Vec2(0,0);
     b2V_acceleration = b2Vec2(0,0);
+    impactDirection =b2Vec2(0,0);
     //fl_rotation = 180;
     thrustLevel = 0;
     turnRate = .1;
@@ -25,6 +26,7 @@ Player::Player(MoveableBody* p, AnimatableGraphic* g)
     firing = false;
     attackDuration = 20;
     attackCoolDown = 60;
+    impactDuration = 0;
 
     maxHealthLevel = 100;
     minHealthLevel = 0;
@@ -160,19 +162,25 @@ void Player::update()
     switch(attackTypeState)
     {
         case NO_ATTACK:
-
-                attackCoolDown-=1;
-
-
-
+            attackCoolDown-=1;
         break;
         case LASER:
                 laser();
         break;
 
     }
+     _physicsBody->applyImpact(impactTypeState,impactDirection);
+      if(impactDuration<=0)
+    {
+        impactTypeState = NO_IMPACT;
+        impactDuration = 30;
+    }
+    else
+    {
+        impactDuration-=1;
+    }
      _physicsBody->update(this);
-     _graphicsBody->update(this);
+
 
      b2V_acceleration = b2Vec2(0,0);
 
@@ -180,8 +188,6 @@ void Player::update()
 void Player::setPosition(float x, float y)
 {
     _physicsBody->body->SetTransform(b2Vec2(x/30,y/30),_physicsBody->body->GetAngle());
-
-
 
 }
 b2Vec2 Player::getPosition()
@@ -196,7 +202,7 @@ void Player::setRotation(float angle)
 
 sf::Sprite Player::getSprite()
 {
-
+     _graphicsBody->update(this);
     return _graphicsBody->getSprite();
 }
 
@@ -258,6 +264,14 @@ void Player::handleCollision(GameObject* obj,std::string fixtureType,std::string
 }
 void Player::initiateCollision(GameObject* obj,std::string fixtureType,std::string self_fixtureType)
 {
+    if(self_fixtureType.compare("body")==0)
+        {
+
+            if(fixtureType.compare("drain")==0)
+            {
+               gaugeAttack(fixtureType,obj->getPosition());
+            }
+        }
 
 }
 void Player::resolveCollision(GameObject* obj,std::string fixtureType,std::string self_fixtureType)
@@ -284,8 +298,11 @@ bool Player::isImpacted()
 
 void Player::gaugeAttack(std::string attack,b2Vec2 direction)
 {
-     direction.Normalize();
-    impactDirection = direction;
+    b2Vec2 p =getPosition();
+
+    b2Vec2 d = b2Vec2(direction.x-p.x,direction.y-p.y);
+     d.Normalize();
+    impactDirection = d;
     if(attack.compare("drain")==0)
     {
         impactTypeState = PULLED;

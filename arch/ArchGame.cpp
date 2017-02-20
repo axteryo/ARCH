@@ -16,17 +16,13 @@ ArchGame::ArchGame()
     v2f_windowSize = sf::Vector2f(1000,800);
     window = new sf::RenderWindow(sf::VideoMode(v2f_windowSize.x,v2f_windowSize.y), "Project_Arch");
     //window->setFramerateLimit(60);
-    window->setVerticalSyncEnabled(true);
+    //window->setVerticalSyncEnabled(true);
     GameState = In_Game;
     timeStep = 1.0/60.0;
-    velocityIterations = 8;
-    positionIterations = 3;
+    velocityIterations = 6;
+    positionIterations = 2;
 
-    //accumulator = sf::Time::Zero;
-    //dt = sf::seconds(1.f / 60.0f);
     playerAlive = false;
-
-    dynamicCam = new cam(sf::Vector2f(0,0), v2f_windowSize);
     colFactory = new collisionFactory();
     subject = "object_player";
     world->SetContactListener(colFactory);
@@ -34,7 +30,6 @@ ArchGame::ArchGame()
     p = nullptr;
 
 
-    //t.loadFromFile("RightTriangle_Left.png");
 
 
 
@@ -45,9 +40,10 @@ ArchGame::ArchGame()
 void ArchGame::start()
 {
 
-    level.loadLevel("testmap4.json");
+    level.loadLevel("testmap.json");
+    level.createCamera(sf::Vector2f(0,0), v2f_windowSize);
     controller.loadBinding();
-    dynamicCam->camView.setSize(1400, 1200);
+    //dynamicCam->camView.setSize(1400, 1200);
     /*for(int ii = 0; ii<chObjList.size();++ii)
     {
         if(chObjList[ii]->objectId == "object_enemy")
@@ -75,14 +71,7 @@ void ArchGame::start()
         double newTime = 0.0;
         newTime = clock.getElapsedTime().asSeconds();
         double elapsed = newTime-currentTime;
-
-         if ( elapsed > 0.1 )
-         {
-             elapsed = 0.25;
-         }
-         currentTime = newTime;
-
-
+        currentTime = newTime;
         accumulator+=elapsed;
 
 
@@ -90,47 +79,41 @@ void ArchGame::start()
 
         processInput(GameState);
 
-        if(setPlayer)
-        {
-            for(int ii = 0; ii<chObjList.size();++ii)
-            {
-                if(chObjList[ii]->objectId == "object_player")
-                   {
-                        p =(Player*)chObjList[ii];
-                        setPlayer = false;
-                   }
-            }
-        }
          while (accumulator >= dt)
         {
-            world->Step(dt,velocityIterations,positionIterations);
-            update(GameState);
-            dynamicCam->follow(targ);
 
+
+                    update(GameState);
+                    world->Step(timeStep,velocityIterations,positionIterations);
+            //level.getCamera()->update();
             accumulator -= dt;
 
 
+
+
         }
+        render(GameState);
+
+
+
+        //std::cout<<accumulator.asSeconds()<<std::endl;
+        //accumulator += clock.restart();
+        float fpsLast = fps;
+
+        fps = 1/cl.getElapsedTime().asSeconds();
         //std::cout<<fps<<std::endl;
 
 
-        render(GameState);
 
-        //std::cout<<accumulator.asSeconds()<<std::endl;
 
-        //accumulator += clock.restart();
-        fps = 1/cl.getElapsedTime().asSeconds();
+        //if(fps-fpsLast>2)
+        //{
+
+        //}
 
         //std::cout<<"Body count:"<<world->GetBodyCount()<<std::endl;
         //std::cout<<"proxycount:"<<world->GetProxyCount()<<std::endl;
-
-
-
         cl.restart();
-
-
-
-
         if (!gameRunning)
         {
             window->close();
@@ -167,7 +150,7 @@ void ArchGame::processInput(state currentState)
             {
 
 
-                dynamicCam->camView.setSize(event.size.width+512, event.size.height+256);
+               level.getCamera()->camView.setSize(event.size.width+512, event.size.height+256);
                 std::cout << "new width: " << event.size.width << std::endl;
                 std::cout << "new height: " << event.size.height << std::endl;
 
@@ -204,13 +187,13 @@ void ArchGame::processInput(state currentState)
                     setPlayer = true;
                 }
 
-                if(p)
+                if(level.getPlayer())
                 {
                     if(controller.isActionKeyPressed("activateThrusters"))
                     {
                         // for(int ii = 0; ii<chObjList.size();++ii)
                         //{
-                            p->activateThrusters();
+                            level.getPlayer()->activateThrusters();
                         //}
                     }
                     if(controller.isActionKeyPressed("turnRight"))
@@ -218,7 +201,7 @@ void ArchGame::processInput(state currentState)
                         // for(int ii = 0; ii<chObjList.size();++ii)
                         //{
 
-                            p->setTurnRight();
+                            level.getPlayer()->setTurnRight();
                             //std::cout<<chObjList[ii]->_graphicsBody->sprite.getRotation()<<","<<chObjList[ii]->_physicsBody->body->GetAngle()*(180/3.14159) <<std::endl;
                         //}
 
@@ -227,7 +210,7 @@ void ArchGame::processInput(state currentState)
                     {
                          //for(int ii = 0; ii<chObjList.size();++ii)
                         //{
-                            p->setTurnLeft();
+                            level.getPlayer()->setTurnLeft();
                         //}
                     }
 
@@ -235,7 +218,7 @@ void ArchGame::processInput(state currentState)
                     {
                          //for(int ii = 0; ii<chObjList.size();++ii)
                         //{
-                            p->useAttack(1);
+                            level.getPlayer()->useAttack(1);
                             std::cout<<"used Attack 1"<<std::endl;
                         //}
                     }
@@ -244,20 +227,20 @@ void ArchGame::processInput(state currentState)
             }
             if(event.type == sf::Event::KeyReleased)
             {
-                if(p)
+                if(level.getPlayer())
                 {
                     if(controller.isActionKeyReleased("activateThrusters",event))
                     {
                          //for(int ii = 0; ii<chObjList.size();++ii)
                         //{
-                            p->cancelThrusters();
+                            level.getPlayer()->cancelThrusters();
                         //}
                     }
                     if(controller.isActionKeyReleased("turnRight",event))
                     {
                          //for(int ii = 0; ii<chObjList.size();++ii)
                         //{
-                            p->cancelRightTurn();
+                            level.getPlayer()->cancelRightTurn();
                         //}
 
                     }
@@ -265,13 +248,8 @@ void ArchGame::processInput(state currentState)
                     {
                          //for(int ii = 0; ii<chObjList.size();++ii)
                         //{
-                            p->cancelLeftTurn();
+                            level.getPlayer()->cancelLeftTurn();
                         //}
-                    }
-                   if(controller.isActionKeyReleased("useAttack1",event))
-                    {
-                        //p->setNoAttack();
-
                     }
                 }
 
@@ -294,25 +272,7 @@ void ArchGame::update(state currentState)
 
         break;
     case In_Game:
-        for(int ii = 0; ii<chObjList.size();++ii)
-        {
-            chObjList[ii]->update();
-
-
-            if(subject==chObjList[ii]->objectId)
-            {
-                 targ = sf::Vector2i((chObjList[ii]->b2V_position.x*30)+(cos(chObjList[ii]->fl_rotation)*175)+(20*(chObjList[ii]->b2V_velocity.x)),
-                                                 (chObjList[ii]->b2V_position.y*30)+(sin(chObjList[ii]->fl_rotation)*175)+(20*(chObjList[ii]->b2V_velocity.y)));
-            }
-        }
-       /* for(int i = 0; i<gObjList.size();++i)
-        {
-
-            gObjList[i]->update();
-
-
-        }*/
-         //std::cout<< gObjList[1]->getPosition().x<<std::endl;
+        level.update();
         break;
     }
 
@@ -329,37 +289,15 @@ void ArchGame::render(state currentState)
         break;
     case In_Game:
 
-
+        //level.getCamera()->update();
+        window->setView(level.getCamera()->getView());
         window->clear(sf::Color::Black);
-        window->setView(dynamicCam->getView());
-        //window->setView(dynamicCam->getView());
         window->draw(level);
-        for(int ii = 0; ii<chObjList.size();++ii)
-        {
-
-            window->draw(chObjList[ii]->getSprite());
-        }
-        /*if(p)
-        {
-            window->draw(p->getSprite());
-        }*/
-
-
-
-
-
-
-//for(int ii = 0; ii<chObjList.size();++ii)
-  //      {
-
-
-    //    }
-
-
+        level.render(window);
 
         ///DEBUG COLLISION DRAWER
 
-       for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
+       /*for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
         {
                 b2PolygonShape* polygonShape;
                 //sf::ConvexShape colShape;
@@ -409,7 +347,7 @@ void ArchGame::render(state currentState)
         }
 
 
-
+*/
         window->display();
 
         break;

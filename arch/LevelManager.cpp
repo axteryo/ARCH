@@ -10,6 +10,7 @@ LevelManager::LevelManager()
 
     v2f_mapDimension = sf::Vector2f(0,0);
     v2f_tileDimension = sf::Vector2f(0,0);
+    camCount = 300;
     playerSprite.loadFromFile("assets/archii_texture.png");
     std::cout<<"loaded player_image"<<std::endl;
 
@@ -31,6 +32,7 @@ LevelManager::LevelManager()
         }
         else
             std::cout<<"The shapeFile has been parsed"<<std::endl;
+
 }
 
 LevelManager::~LevelManager()
@@ -507,7 +509,60 @@ for(int ii = 0; ii<levelLayers.size();++ii)
 
 
         }
+         for(int ii = 0; ii<chObjList.size();++ii)
+        {
+            if(chObjList[ii]->objectId.compare("object_player")==0)
+            {
+                p =(Player*)chObjList[ii];
+                 /*targ = sf::Vector2i((chObjList[ii]->b2V_position.x*30)+(cos(chObjList[ii]->fl_rotation)*175)+(20*(chObjList[ii]->b2V_velocity.x)),
+                                                 (chObjList[ii]->b2V_position.y*30)+(sin(chObjList[ii]->fl_rotation)*175)+(20*(chObjList[ii]->b2V_velocity.y)));
 
+            */}
+
+
+        }
+
+}
+void LevelManager::update()
+{
+
+    for(int ii = 0; ii<chObjList.size();++ii)
+        {
+            chObjList[ii]->update();
+
+        }
+        if(getPlayer())
+        {
+            _camera->follow(sf::Vector2i((p->getPosition().x*30)+(cos(p->fl_rotation)*175)+(20*(p->b2V_velocity.x)),
+                                                 (p->getPosition().y*30)+(sin(p->fl_rotation)*175)+(20*(p->b2V_velocity.y))));
+        }
+       getCamera()->update();
+
+
+}
+void LevelManager::render(sf::RenderWindow* window)
+{
+    //window->draw(this);
+    for(int ii = 0; ii<chObjList.size();++ii)
+        {
+
+            window->draw(chObjList[ii]->getSprite());
+        }
+
+}
+void LevelManager::createCamera(sf::Vector2f pos, sf::Vector2f cameraDimension)
+{
+    _camera = new cam( pos,cameraDimension);
+    _camera->camView.setSize(1400, 1200);
+}
+cam* LevelManager::getCamera()
+{
+    return _camera;
+}
+
+Player* LevelManager::getPlayer()
+{
+    return p;
 }
 
  void LevelManager::draw(sf::RenderTarget& target,sf::RenderStates states) const

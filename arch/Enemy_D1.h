@@ -2,9 +2,10 @@
 #define ENEMY_D1_H
 
 #include "Enemy.h"
+#include "Subject.h"
 #include <iostream>
 
-class Enemy_D1: public Enemy
+class Enemy_D1 : public Enemy//, public Subject
 {
     public:
         Enemy_D1(MoveableBody* p, AnimatableGraphic* g);
@@ -22,6 +23,7 @@ class Enemy_D1: public Enemy
 
         ///Base enemy functions
         void goToward(float x, float y);
+        void arrive();
         void target(float x, float y);
         void setInactive();
         void setTarget(GameObject* gObj);
@@ -41,8 +43,11 @@ class Enemy_D1: public Enemy
         bool isImpacted();
         void gaugeAttack(std::string attack,b2Vec2 direction);
         void useAttack(int a);
+        void setNoAttack();
         void setDamageAmount(int a);
         void takeDamage();
+
+        float getDistanceFromTarget(b2Vec2 t);
 
         int attackDuration;
         int attackCoolDown;
@@ -50,7 +55,7 @@ class Enemy_D1: public Enemy
 
 
         ///D1s BehaviorStack
-        std::stack<secondaryState> turnStack;
+        std::stack<secondaryState> actionStack;
          enum AttackState
         {
             DRAIN,

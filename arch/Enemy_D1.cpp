@@ -29,6 +29,8 @@ Enemy_D1::Enemy_D1(MoveableBody* p, AnimatableGraphic* g)
     _physicsBody = p;
     _alertRadius = new RadiusBody(300);
     _alertRadius->create(_physicsBody,"alert_radius");
+    attackFixture = nullptr;
+
 
     _physicsBody->body->SetUserData((void*)this);
 
@@ -45,7 +47,7 @@ Enemy_D1::~Enemy_D1()
 
 sf::Sprite Enemy_D1::getSprite()
 {
-
+     _graphicsBody->update(this);
     return _graphicsBody->getSprite();
 
 }
@@ -68,10 +70,14 @@ void Enemy_D1::update()
 {
     fl_rotation = _physicsBody->body->GetAngle();
     b2V_velocity = _physicsBody->body->GetLinearVelocity();
-    b2Vec2 t;
+   /* b2Vec2 t;
+    float fl_targetDistance;
+    //secondState = actionStack.top();
     if(!targetStack.empty())
     {
         t = targetStack.top()->getPosition();
+        fl_targetDistance = getDistanceFromTarget(t);
+
     ///Base State of ai behavior (neautral, offense, defense,
         switch(baseState)
         {
@@ -79,64 +85,69 @@ void Enemy_D1::update()
                 ///Secondary state of the ai.
                 ///this is where the actions are initiated
                 ///each base state has its own parameter of secondary states
-                switch(secondState)
-                {
-                    case unalerted:
-
-                    break;
-                    case alerted:
-                    target(t.x,t.y);
-
-                    break;
-
-                }
-
 
             break;
             case offense:
-                switch(secondState)
-                {
-                    case chase:
-                    target(t.x,t.y);
-                    goToward(t.x,t.y);
-
-                    break;
-                    case attacking:
-
-                    break;
-
-
-
-
-
-                }
 
             break;
             /// The basic D1 enemy doesn't have a defensive state.
             ///it's designed and geared toward relentless attacks.
             case defensive:
-            switch(secondState)
-            {
 
-            }
             break;
         }
-    }
-    _physicsBody->applyImpact(impactTypeState,impactDirection);
-    if(impactDuration<=0)
+        switch(secondState)
+                {
+                    case unalerted:
+                    break;
+                    case alerted:
+                    target(t.x,t.y);
+                    break;
+                    case chase:
+                    target(t.x,t.y);
+                    goToward(t.x,t.y);
+                    break;
+                    case attacking:
+                    break;
+
+            }
+            if(fl_targetDistance<10)
+            {
+                drain();
+
+            }
+            else
+            {
+                if(attackFixture)
+                {
+                _physicsBody->body->DestroyFixture(attackFixture);
+                //setNoAttack();
+                attackFixture = nullptr;
+
+                }
+            }
+
+    }*/
+    if(isImpacted())
     {
-        impactTypeState = NO_IMPACT;
-        impactDuration = 30;
+        _physicsBody->applyImpact(impactTypeState,impactDirection);
+        if(impactDuration<=0)
+        {
+            impactTypeState = NO_IMPACT;
+            impactDuration = 30;
+        }
+        else
+        {
+            impactDuration-=1;
+        }
     }
-    else
-    {
-        impactDuration-=1;
-    }
+
+
 
 
 
     _physicsBody->update(this);
-    _graphicsBody->update(this);
+
 
 
     b2V_acceleration = b2Vec2(0,0);
@@ -207,6 +218,19 @@ void Enemy_D1::goToward(float x, float y)
     b2V_acceleration+=steer;
 
 }
+void Enemy_D1::arrive()
+{
+    if(sqrt(
+        (b2V_velocity.x*b2V_velocity.x)
+        +(b2V_velocity.y*b2V_velocity.y))>2)
+       {
+            b2Vec2 vel = b2V_velocity;
+            vel.Normalize();
+            b2V_velocity.x-=vel.x/10;
+            b2V_velocity.y-=vel.y/10;
+
+       }
+}
 
 void Enemy_D1::setTarget(GameObject* gObj)
 {
@@ -216,6 +240,13 @@ void Enemy_D1::setTarget(GameObject* gObj)
         targetStack.pop();
     }
     targetStack.push(gObj);
+}
+
+float Enemy_D1::getDistanceFromTarget(b2Vec2 t)
+{
+   b2Vec2 p = getPosition();
+
+    return sqrt(((t.x-p.x)*(t.x-p.x))+((t.y-p.y)*(t.y-p.y)));
 }
 
 
@@ -247,6 +278,7 @@ void Enemy_D1::initiateCollision(GameObject* obj,std::string fixtureType,std::st
             {
                gaugeAttack(fixtureType,b2Vec2(cos(obj->fl_rotation),sin(obj->fl_rotation)));
             }
+
         }
 
 }
@@ -269,6 +301,13 @@ bool Enemy_D1::isAlive()
 }
 bool Enemy_D1::isImpacted()
 {
+    switch(impactTypeState)
+    {
+         case PUSHEDBACK:
+             return true;
+        break;
+    }
+
     return false;
 }
 
@@ -280,6 +319,10 @@ void Enemy_D1::gaugeAttack(std::string attack, b2Vec2 direction)
     {
         impactTypeState = PUSHEDBACK;
     }
+}
+void Enemy_D1::setNoAttack()
+{
+    attackTypeState = NO_ATTACK;
 }
 void Enemy_D1::useAttack(int a)
 {
@@ -303,15 +346,16 @@ void Enemy_D1::drain()
         {
         if(attackFixture)
         {
-            //std::cout<<firing<<std::endl;
+            //
             if(attackDuration<=0)
             {
 
                 _physicsBody->body->DestroyFixture(attackFixture);
+                std::cout<<"getting here"<<std::endl;
                 //firing = false;
                 //attackDuration = 20;
                 //attackCoolDown = 60;
-                //setNoAttack();
+                setNoAttack();
                 attackFixture = nullptr;
 
             }
@@ -326,23 +370,24 @@ void Enemy_D1::drain()
             //attackDuration = 20;
             //attackCoolDown = 60;
             //firing = true;
-            b2PolygonShape drainShape;
+            b2CircleShape drainShape;
             fixtureUserData* f = new fixtureUserData;
             f->data ="drain";
-            /*b2FixtureDef laserFixtureDef;
-            laserFixtureDef.isSensor= true;
-            laserShape.SetAsBox((500.0f)/30,(20.0f)/30,b2Vec2(18,0),0);
-            laserFixtureDef.shape = &laserShape;
-            laserFixtureDef.userData= ((void*)f);
-            attackFixture = _physicsBody->body->CreateFixture(&laserFixtureDef);
-        */
+            b2FixtureDef drainFixtureDef;
+            drainFixtureDef.isSensor= true;
+            drainShape.m_p.Set(0,0);
+            drainShape.m_radius= 5;
+            drainFixtureDef.shape = &drainShape;
+            drainFixtureDef.userData= ((void*)f);
+            attackFixture = _physicsBody->body->CreateFixture(&drainFixtureDef);
+
         }
     }
     else
     {
         //std::cout<<" is in cooldown"<<std::endl;
-        attackDuration = 20;
-        //setNoAttack();
+        //attackDuration = 20;
+        setNoAttack();
     }
 
 }
