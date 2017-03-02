@@ -1,0 +1,106 @@
+So states might not be the most optimal
+
+
+Problems:
+
+The enemy needs a "TARGET" in order to do anything; move, look,etc
+
+The target is usally the player in the offense state which seems to be the only base state that is operational
+which begs the question. Why a heirarchy of states that are so "general"?(neutral, offense, defense.)
+
+Well, got any other options?
+perhaps more SPECIFIC states.
+what if we get too specific?
+Lets just try first. So will we still be doing a hierarchy? NO!!!
+
+
+Concurrency seems to be working for the player? somewhat.
+
+
+
+MovementState
+	neutral
+	offense
+		chasing
+	AttackingState
+		Attacking
+			target
+		Not_Attacking
+			following
+			target
+	defense
+	
+	floating
+
+AttackTypeState
+	Drain
+	No_Attack
+AlertedState
+	Alerted
+	UnAlerted
+
+
+
+FUCK ALL THAT SHIT
+
+The Shell Observer Thinker Initiator pattern
+
+(RANDOM IDEA) What if each room is an Observer and the enemies spawned in the room are the subjects and they each have a reference to that observer meaning when they die, the room unlocks
+
+
+The Shell(Enemy)
+Will feed the happenings to the observer 
+The observer will feed all this to the thinker
+the thinker will think up a plan and present it to the initiator in steps
+the initiator does the stuff through the shell.
+
+
+EXAMPLE
+
+
+The player gets close to the enemy
+
+The Enemy EVENT is EVENT_Player_Within_range
+
+This is sent to the Ai_Observer who thinks up a solution
+
+The solution is initiated by the Controller in the order of the steps
+
+---Simplify---
+
+I want to seperate the actor from the director
+
+Actor(Enemy Shell)
+Directior(ai)
+
+The Actor will have actions and Event States.
+The Director will Check those Event States and will give the order for actions to be initiated in.
+
+
+The Event States will be driven by the world and the player.
+
+new orders will be given to the Actor after a certain number of cycles(possibly).
+
+There will be a default order of do nothing.
+
+
+Event_States include:
+ 
+Event_Player_Within_Attack_range,
+Event_Player_out_of_range
+
+Director should get the reference to the player
+
+Director functions:
+
+OnNotify()
+initiate()
+
+
+D1.notify(Event,this)
+aiController.onNotify()
+
+
+
+
+

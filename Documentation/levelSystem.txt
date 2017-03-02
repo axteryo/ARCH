@@ -1,0 +1,19 @@
+
+create maps
+create characters
+load level data
+track level/room events
+
+
+
+
+The level class will load and save level data
+
+Level Data encompases: Maps, charater positions, completion information, etc.
+
+
+Levels will consist of:
+	A map object which will store map layer objects along with the current map texture.
+	A CharacterSpawner Object which will create characters
+	
+

@@ -1,0 +1,15 @@
+each ai state is an action.like attack, defend, flee but more complex....or maybe a state of being with instructions???
+
+or better yet each AI has a state which includes different patterns of behavior that change depending on the number of enemies?(maybe although probably a bit more difficult to design and implement.)
+
+
+in each state the ai has certain <----patterns of behaving----->. predefined patterns that make it easy to understand and therefore defeat, because the ultimate goal of the ai, is to be defeated......
+
+lets go back to the basic states of behavior (Behavior states)(perhaps offsense, defense,neutral?). Each behavior state has it's own set of behavior patterns for example a behavior state might be attack, which has perhaps 4 different patterns and each pattern is a sequence of instructions/actions.
+
+the most basic of the patterns could be <----fire laser at player----> the ai will hold it's current position(reduce its velocity to 0) ->>> aim at player(Adjust it's angle to face the player.) ->>>> Fire at player(use it's firelaserattack method which creates a ray based off of its current angle.)
+
+
+GOAL CENTERED DESIGN AND DECISION MAKING
+
+Ai make decisions based on a central goal, in this case, defeat the player. The goal is achieved by enacting diffrent patterns of behavior given certain circumstances using metrics such as proximity, orientation, conditon(for lack of better word denoting physical/mental well-being of the autonomous agent), and ability. 

@@ -1,0 +1,26 @@
+What is in a demo of a game?
+
+
+What does this game need to be completed?
+
+music
+art
+ai
+saving/loading
+levels
+sequences
+player skills
+enemies
+
+
+what does this game need to be a demo?
+
+player skills(controls,grid line beam, laser, strafing)
+enemies(2 enemy types)
+enemy skills( impulse, laser)
+ai(Basic mob mentality, and flocking)
+Music/sound(a theme for overall game, battles, background ambience, player thrusters)
+levels(part of 1 level)
+sequences(intro,rising action, climax, end)
+
+

@@ -1,0 +1,5 @@
+Double boost
+
+player taps space bar twice and is promptly boosted at a higher speed in the direction they are facing
+
+When they tap the space bar, a boolean variable call "FirstTap" will become true, prompting  the start of a counter. The counter starts at 30 and  if the counter hits 0, firstTap will equal false.HOWEVER, if they hit space again before the counter hit's zero, DoubleTap will be true and the counter will be reset as well the firstTap which will also reset doubletap to false and will push the character forward 

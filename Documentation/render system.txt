@@ -1,0 +1,41 @@
+Each character will be drawn from the same texture.
+The sprite for the character will atlased on 1 giant sprite sheet
+The graphicsComponent will be given the transform of that sprite in the texture atlas
+That transform will be represented on a Quad(along with the sprite from the texture)
+The quads will be inserted into the vertex array Batch
+The batch will be drawn.
+
+Define Batching: the act of Collecting or grouping. 
+
+
+PROBLEM
+How are we going to update positions to corresponding characters in a batch without recreating the entire structure of the vertex array?
+
+possible solutions:
+batch and draw depending on what quadrant the sprite is in.But we would still have to recreate the vertex array or atleast access every index.
+What if we indexed identifications as well?
+Explain.
+
+
+Graphics Component Class:
+IntRect for texture Coordinates(possibly of current frame of animation if animateable)
+Position State for world coordinates
+
+intRect getTextureCoordinates()
+getPosition()
+getAngle()
+
+
+
+
+SpriteBatcher Class:
+Std::Vector<Quads> batch list
+Batch_vertArray
+batch_texture
+
+void addToBatch()
+	the graphicsComponent of the object will be represented as a Quad
+Batch()
+	Each Quad will be inserted into the batch_vertArray at their given position
+drawable::draw()
+	target.(batch_vertArray,batch_texture)

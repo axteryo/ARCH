@@ -1,0 +1,11 @@
+The player presses the thruster button and enters the thruster state.
+(would a key release switch from the thruster state? perhaps into the floating state) Enum thrusterState{ floating, forwardThrust, LeftBoost,RightBoots})
+
+
+case(floating)
+
+
+
+	
+
+case(forwardThrust)
