@@ -2,9 +2,6 @@
 
 
 
-
-b2World* world = new b2World(b2Vec2(0,0));
-
 Game::Game()
 {
     v2f_windowSize = sf::Vector2f(1024,768);

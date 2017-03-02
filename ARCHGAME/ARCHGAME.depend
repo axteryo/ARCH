@@ -6,15 +6,18 @@
 1487467347 source:c:\users\mesh\documents\projectarch\archgame\src\level.cpp
 	"level.h"
 
-1487485359 c:\users\mesh\documents\projectarch\archgame\include\level.h
+1488480111 c:\users\mesh\documents\projectarch\archgame\include\level.h
 	<SFML/Graphics.hpp>
 	<SFML/Window.hpp>
 	<Box2D/Box2D.h>
+	"player.h"
+	"GraphicsComponent.h"
+	"PhysicsComponent.h"
 
 1487480049 source:c:\users\mesh\documents\projectarch\archgame\src\entity.cpp
 	"entity.h"
 
-1487485368 c:\users\mesh\documents\projectarch\archgame\include\entity.h
+1488479754 c:\users\mesh\documents\projectarch\archgame\include\entity.h
 	<SFML/Graphics.hpp>
 	<Box2D/Box2D.h>
 
@@ -396,16 +399,17 @@
 	<string>
 	<vector>
 
-1487485409 source:c:\users\mesh\documents\projectarch\archgame\src\game.cpp
+1488480606 source:c:\users\mesh\documents\projectarch\archgame\src\game.cpp
 	"Game.h"
 
-1487485402 c:\users\mesh\documents\projectarch\archgame\include\game.h
+1488480574 c:\users\mesh\documents\projectarch\archgame\include\game.h
 	<SFML/Graphics.hpp>
 	<Box2D/Box2D.h>
 	<SFML/Window.hpp>
 	<string>
 	<math.h>
 	<iostream>
+	"level.h"
 
 1456769403 c:\box2d_v2.3.1\box2d\box2d.h
 	<Box2D/Common/b2Settings.h>
@@ -646,13 +650,31 @@
 1487474677 source:c:\users\mesh\documents\projectarch\archgame\src\physicscomponent.cpp
 	"PhysicsComponent.h"
 
-1487485346 c:\users\mesh\documents\projectarch\archgame\include\physicscomponent.h
+1488480594 c:\users\mesh\documents\projectarch\archgame\include\physicscomponent.h
 	<Box2D/Box2D.h>
+	"entity.h"
 
-1487481507 source:c:\users\mesh\documents\projectarch\archgame\src\graphicscomponent.cpp
+1488470995 source:c:\users\mesh\documents\projectarch\archgame\src\graphicscomponent.cpp
 	"GraphicsComponent.h"
 
-1487484217 c:\users\mesh\documents\projectarch\archgame\include\graphicscomponent.h
+1488480284 c:\users\mesh\documents\projectarch\archgame\include\graphicscomponent.h
 	<SFML/Graphics.hpp>
 	<SFML/Window.hpp>
+	"entity.h"
+	"PhysicsComponent.h"
+
+1488474682 source:c:\users\mesh\documents\projectarch\archgame\src\spritebatcher.cpp
+	"SpriteBatcher.h"
+
+1488474716 c:\users\mesh\documents\projectarch\archgame\include\spritebatcher.h
+	"GraphicsComponent.h"
+	<SFML/Graphics.hpp>
+
+1488475948 source:c:\users\mesh\documents\projectarch\archgame\src\player.cpp
+	"player.h"
+
+1488475918 c:\users\mesh\documents\projectarch\archgame\include\player.h
+	"entity.h"
+	"GraphicsComponent.h"
+	"PhysicsComponent.h"
 

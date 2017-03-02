@@ -3,16 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <Box2D/Box2D.h>
-namespace States
-{
-   struct positionState
-   {
-       b2Vec2 postion;
-       b2Vec2 velocity;
-       b2Vec2 acceleration;
-       float rotation;
-   };
-}
+
 
 class entity
 {
@@ -26,12 +17,13 @@ class entity
 
         virtual void update(float dt) = 0;
         virtual void physicsUpdate(float dt)= 0;
+        virtual std::string getID() = 0;
         /**
         virtual void initiateCollision() = 0;
         virtual void resolveCollision() = 0;
         **/
     protected:
-        std::string entity_Name;
+        std::string entity_ID;
     private:
 
 };

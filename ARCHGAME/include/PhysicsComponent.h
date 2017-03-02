@@ -2,6 +2,9 @@
 #define PHYSICSCOMPONENT_H
 
 #include <Box2D/Box2D.h>
+#include "entity.h"
+
+extern b2World* world;
 
 namespace States
 {
@@ -15,20 +18,25 @@ namespace States
 }
 
 
+
+
 class PhysicsComponent
 {
     public:
         PhysicsComponent();
         virtual ~PhysicsComponent();
-        virtual void setPosition(b2Vec2 p)=0;
-        virtual void setRotation(float a)=0;
+        void setPosition(b2Vec2 p);
+        void setRotation(float a);
         //virtual float getAcceleration
-        virtual float getRotation() = 0;
-        virtual b2Vec2 getPosition() = 0;
-        virtual void accelerate(b2Vec2 force)= 0;
-        virtual void createFixtureRectangle(b2Fixture* f,b2Vec2 dimensions,b2Vec2 position,std::string fixturedata) = 0;
+        float getRotation();
+        b2Vec2 getPosition();
+        void accelerate(b2Vec2 force);
+        void createFixtureRectangle(b2Fixture* f,b2Vec2 dimensions,b2Vec2 position,std::string fixturedata);
+        States::positionState getCurrentState();
+        States::positionState getPreviousState();
+        void setTopSpeed(float s);
 
-        virtual void update(float dt);
+        void update(entity* e,float dt);
         /***
         virtual void createFixtureCircle() = 0;
         virtual void createFixtureFromPoints()= 0;
@@ -44,6 +52,7 @@ class PhysicsComponent
         b2PolygonShape polygonShape;
         b2FixtureDef fixtureDef;
 
+        float topSpeed;
         States::positionState currentState;
         States::positionState previousState;
 

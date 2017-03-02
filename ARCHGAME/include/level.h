@@ -5,19 +5,13 @@
 #include <SFML/Window.hpp>
 #include <Box2D/Box2D.h>
 
+#include "player.h"
+//#include "entity.h"
+#include "GraphicsComponent.h"
+#include "PhysicsComponent.h"
 
-namespace States
-{
-   struct positionState
-   {
-       b2Vec2 postion;
-       b2Vec2 velocity;
-       b2Vec2 acceleration;
-       float rotation;
-   };
-}
 
-class level
+class level// : public sf::Drawable, public sf::Transformable
 {
     public:
         level();
@@ -32,6 +26,7 @@ class level
         void spawn();
         void render(sf::RenderWindow* window);
         void update(float dt);
+        std::vector<entity*> spawnList;
 
 
     protected:

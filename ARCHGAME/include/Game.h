@@ -8,17 +8,13 @@
 #include <math.h>
 #include <iostream>
 
-extern b2World* world;
-namespace States
-{
-   struct positionState
-   {
-       b2Vec2 postion;
-       b2Vec2 velocity;
-       b2Vec2 acceleration;
-       float rotation;
-   };
-}
+
+#include "level.h"
+
+
+
+
+
 
 
 class Game
