@@ -15,16 +15,16 @@ possible solutions:
 batch and draw depending on what quadrant the sprite is in.But we would still have to recreate the vertex array or atleast access every index.
 What if we indexed identifications as well?
 Explain.
+Well say we inserted each quad into a batch list before we batched them and in the list we give them a certain identification?
 
 
 Graphics Component Class:
 IntRect for texture Coordinates(possibly of current frame of animation if animateable)
-Position State for world coordinates
+Render State for world coordinates
 
 intRect getTextureCoordinates()
-getPosition()
-getAngle()
-
+void setTextureCoordinates()
+getRenderState()
 
 
 
@@ -33,7 +33,9 @@ Std::Vector<Quads> batch list
 Batch_vertArray
 batch_texture
 
-void addToBatch()
+void setBatchtexture(sf::Image);
+
+void addToBatch(entity)
 	the graphicsComponent of the object will be represented as a Quad
 Batch()
 	Each Quad will be inserted into the batch_vertArray at their given position

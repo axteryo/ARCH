@@ -16,7 +16,7 @@ ArchGame::ArchGame()
     v2f_windowSize = sf::Vector2f(1000,800);
     window = new sf::RenderWindow(sf::VideoMode(v2f_windowSize.x,v2f_windowSize.y), "Project_Arch");
     //window->setFramerateLimit(60);
-    //window->setVerticalSyncEnabled(true);
+    window->setVerticalSyncEnabled(true);
     GameState = In_Game;
     timeStep = 1.0/60.0;
     velocityIterations = 6;

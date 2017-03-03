@@ -1,11 +1,12 @@
 
 create maps
+Create rooms
 create characters
 load level data
 track level/room events
 
 
-
+An idea is that the maps will store room data(enemies,objectives/items) the map will export the data into a room object which will spawn based on a sensor.
 
 The level class will load and save level data
 
@@ -16,4 +17,16 @@ Levels will consist of:
 	A map object which will store map layer objects along with the current map texture.
 	A CharacterSpawner Object which will create characters
 	
+
+level class:
+load()
+
+
+
+Helper classes:
+
+//map
+//RoomSpawner
+CharacterSpawner
+
 
