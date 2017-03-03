@@ -10,11 +10,23 @@ namespace States
 {
    struct positionState
    {
-       b2Vec2 postion;
+       b2Vec2 position;
        b2Vec2 velocity;
        b2Vec2 acceleration;
        float rotation;
    };
+   struct renderState
+   {
+       sf::Vector2f position;
+       float rotation;
+   };
+   float to_degrees(float f);
+   float to_radians(float f);
+   b2Vec2 to_b2v(sf::Vector2f v);
+   sf::Vector2f to_v2f(b2Vec2 b);
+   renderState to_renderState(positionState p);
+   positionState to_positionState(renderState r);
+
 }
 
 
@@ -36,7 +48,7 @@ class PhysicsComponent
         States::positionState getPreviousState();
         void setTopSpeed(float s);
 
-        void update(entity* e,float dt);
+        void update(float dt);
         /***
         virtual void createFixtureCircle() = 0;
         virtual void createFixtureFromPoints()= 0;

@@ -17,14 +17,16 @@ class GraphicsComponent
 
         void update(entity* e);
         //sf::Vector2f getPosition();
-        States::positionState getCurrentState();
-        States::positionState getPreviousState();
+        States::renderState getCurrentState();
+        States::renderState getPreviousState();
 
+
+        sf::IntRect getTextureCoord();
+        void setTextureCoord(sf::IntRect c);
     protected:
-        sf::IntRect textureCoord;
 
-        States::positionState currentRenderState;
-        States::positionState previousRenderState;
+
+
 
         /**Render Notes
             Sprite Batch:Place all character textures on one image.
@@ -34,6 +36,9 @@ class GraphicsComponent
         //sf::Texture texture;
 
     private:
+        sf::IntRect textureCoord;
+        States::renderState currentRenderState;
+        States::renderState previousRenderState;
 };
 
 #endif // GRAPHICSCOMPONENT_H

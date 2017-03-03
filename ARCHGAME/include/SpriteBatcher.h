@@ -2,7 +2,10 @@
 #define SPRITEBATCHER_H
 
 #include "GraphicsComponent.h"
+#include "entity.h"
+#include "player.h"
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 
 class SpriteBatcher// : public sf::Drawable, public sf::Transformable
@@ -10,7 +13,8 @@ class SpriteBatcher// : public sf::Drawable, public sf::Transformable
     public:
         SpriteBatcher();
         virtual ~SpriteBatcher();
-        void addToBatch(GraphicsComponent* gComponent);
+        void setBatchTexture(sf::Image i);
+        void addToBatch(entity* e);
         void batch();
     protected:
 

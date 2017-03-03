@@ -16,7 +16,9 @@ class player : public entity
         float getRotation();
 
         void update(float dt);
-        void physicsUpdate(float dt);
+
+        GraphicsComponent* getGraphic();
+        PhysicsComponent* getPhysics();
         /**
         virtual void initiateCollision() = 0;
         virtual void resolveCollision() = 0;

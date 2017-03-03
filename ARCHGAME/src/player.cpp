@@ -33,11 +33,11 @@ void player::update(float dt)
 {
 
 }
-
-void player::physicsUpdate(float dt)
+GraphicsComponent* player::getGraphic()
 {
-
+    return gComponent;
 }
+
 
 std::string player::getID()
 {

@@ -647,33 +647,36 @@
 	<sstream>
 	"config.h"
 
-1487474677 source:c:\users\mesh\documents\projectarch\archgame\src\physicscomponent.cpp
+1488570073 source:c:\users\mesh\documents\projectarch\archgame\src\physicscomponent.cpp
 	"PhysicsComponent.h"
 
-1488480594 c:\users\mesh\documents\projectarch\archgame\include\physicscomponent.h
+1488570010 c:\users\mesh\documents\projectarch\archgame\include\physicscomponent.h
 	<Box2D/Box2D.h>
 	"entity.h"
 
-1488470995 source:c:\users\mesh\documents\projectarch\archgame\src\graphicscomponent.cpp
+1488570162 source:c:\users\mesh\documents\projectarch\archgame\src\graphicscomponent.cpp
 	"GraphicsComponent.h"
 
-1488480284 c:\users\mesh\documents\projectarch\archgame\include\graphicscomponent.h
+1488568003 c:\users\mesh\documents\projectarch\archgame\include\graphicscomponent.h
 	<SFML/Graphics.hpp>
 	<SFML/Window.hpp>
 	"entity.h"
 	"PhysicsComponent.h"
 
-1488474682 source:c:\users\mesh\documents\projectarch\archgame\src\spritebatcher.cpp
+1488567766 source:c:\users\mesh\documents\projectarch\archgame\src\spritebatcher.cpp
 	"SpriteBatcher.h"
 
-1488474716 c:\users\mesh\documents\projectarch\archgame\include\spritebatcher.h
+1488566748 c:\users\mesh\documents\projectarch\archgame\include\spritebatcher.h
 	"GraphicsComponent.h"
+	"entity.h"
+	"player.h"
 	<SFML/Graphics.hpp>
+	<iostream>
 
-1488475948 source:c:\users\mesh\documents\projectarch\archgame\src\player.cpp
+1488567635 source:c:\users\mesh\documents\projectarch\archgame\src\player.cpp
 	"player.h"
 
-1488475918 c:\users\mesh\documents\projectarch\archgame\include\player.h
+1488564336 c:\users\mesh\documents\projectarch\archgame\include\player.h
 	"entity.h"
 	"GraphicsComponent.h"
 	"PhysicsComponent.h"
