@@ -26,6 +26,8 @@ void Game::start()
     lastTime=clock.getElapsedTime().asSeconds();
     float elapsed = 0.0;
     float accumulator = 0.0;
+    ///load function is called here to load the entities and assets of the game level
+    gameLevel.load();
 
     while(window->isOpen())
     {
@@ -58,7 +60,6 @@ void Game::start()
         }
         ///render freely
         render();
-
         if (!gameRunning)
         {
             window->close();
@@ -68,13 +69,14 @@ void Game::start()
 }
 void Game::render()
 {
-    window->clear(sf::Color::Black);
+    window->clear(sf::Color::White);
+    gameLevel.render(window);
     window->display();
 }
 /** The game is updated **/
 void Game::update(float dt)
 {
-
+    gameLevel.update(dt);
 }
 
 /** Input is Processed through the windows pollEvent() function **/
@@ -93,6 +95,10 @@ void Game::processInput()
             {
                 gameRunning = false;
             }
+        }
+        if(event.type == sf::Event::MouseMoved)
+        {
+
         }
     }
 

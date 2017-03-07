@@ -40,7 +40,7 @@ ArchGame::ArchGame()
 void ArchGame::start()
 {
 
-    level.loadLevel("testmap.json");
+    level.loadLevel("track.json");
     level.createCamera(sf::Vector2f(0,0), v2f_windowSize);
     controller.loadBinding();
     //dynamicCam->camView.setSize(1400, 1200);
@@ -297,7 +297,7 @@ void ArchGame::render(state currentState)
 
         ///DEBUG COLLISION DRAWER
 
-       /*for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
+       for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
         {
                 b2PolygonShape* polygonShape;
                 //sf::ConvexShape colShape;
@@ -347,7 +347,7 @@ void ArchGame::render(state currentState)
         }
 
 
-*/
+
         window->display();
 
         break;

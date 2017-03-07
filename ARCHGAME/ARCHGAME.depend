@@ -1,15 +1,18 @@
 # depslib dependency file v1.0
-1487483948 source:c:\users\mesh\documents\projectarch\archgame\main.cpp
+1488861371 source:c:\users\mesh\documents\projectarch\archgame\main.cpp
 	<iostream>
 	"Game.h"
 
-1487467347 source:c:\users\mesh\documents\projectarch\archgame\src\level.cpp
+1488862892 source:c:\users\mesh\documents\projectarch\archgame\src\level.cpp
 	"level.h"
+	"EntitySpawner.h"
+	"SpriteBatcher.h"
 
-1488480111 c:\users\mesh\documents\projectarch\archgame\include\level.h
+1488858423 c:\users\mesh\documents\projectarch\archgame\include\level.h
 	<SFML/Graphics.hpp>
 	<SFML/Window.hpp>
 	<Box2D/Box2D.h>
+	<iostream>
 	"player.h"
 	"GraphicsComponent.h"
 	"PhysicsComponent.h"
@@ -17,7 +20,7 @@
 1487480049 source:c:\users\mesh\documents\projectarch\archgame\src\entity.cpp
 	"entity.h"
 
-1488479754 c:\users\mesh\documents\projectarch\archgame\include\entity.h
+1488862159 c:\users\mesh\documents\projectarch\archgame\include\entity.h
 	<SFML/Graphics.hpp>
 	<Box2D/Box2D.h>
 
@@ -399,10 +402,10 @@
 	<string>
 	<vector>
 
-1488480606 source:c:\users\mesh\documents\projectarch\archgame\src\game.cpp
+1488861311 source:c:\users\mesh\documents\projectarch\archgame\src\game.cpp
 	"Game.h"
 
-1488480574 c:\users\mesh\documents\projectarch\archgame\include\game.h
+1488779960 c:\users\mesh\documents\projectarch\archgame\include\game.h
 	<SFML/Graphics.hpp>
 	<Box2D/Box2D.h>
 	<SFML/Window.hpp>
@@ -647,37 +650,81 @@
 	<sstream>
 	"config.h"
 
-1488570073 source:c:\users\mesh\documents\projectarch\archgame\src\physicscomponent.cpp
+1488862400 source:c:\users\mesh\documents\projectarch\archgame\src\physicscomponent.cpp
 	"PhysicsComponent.h"
 
 1488570010 c:\users\mesh\documents\projectarch\archgame\include\physicscomponent.h
 	<Box2D/Box2D.h>
 	"entity.h"
 
-1488570162 source:c:\users\mesh\documents\projectarch\archgame\src\graphicscomponent.cpp
+1488590626 source:c:\users\mesh\documents\projectarch\archgame\src\graphicscomponent.cpp
 	"GraphicsComponent.h"
 
-1488568003 c:\users\mesh\documents\projectarch\archgame\include\graphicscomponent.h
+1488590659 c:\users\mesh\documents\projectarch\archgame\include\graphicscomponent.h
 	<SFML/Graphics.hpp>
 	<SFML/Window.hpp>
 	"entity.h"
 	"PhysicsComponent.h"
 
-1488567766 source:c:\users\mesh\documents\projectarch\archgame\src\spritebatcher.cpp
+1488858629 source:c:\users\mesh\documents\projectarch\archgame\src\spritebatcher.cpp
 	"SpriteBatcher.h"
 
-1488566748 c:\users\mesh\documents\projectarch\archgame\include\spritebatcher.h
+1488857876 c:\users\mesh\documents\projectarch\archgame\include\spritebatcher.h
 	"GraphicsComponent.h"
-	"entity.h"
 	"player.h"
-	<SFML/Graphics.hpp>
 	<iostream>
+	<fstream>
+	"json/json.h"
+	"batch.h"
 
-1488567635 source:c:\users\mesh\documents\projectarch\archgame\src\player.cpp
+1488781900 source:c:\users\mesh\documents\projectarch\archgame\src\player.cpp
 	"player.h"
 
-1488564336 c:\users\mesh\documents\projectarch\archgame\include\player.h
+1488768733 c:\users\mesh\documents\projectarch\archgame\include\player.h
 	"entity.h"
 	"GraphicsComponent.h"
 	"PhysicsComponent.h"
+
+1488778051 c:\users\mesh\documents\projectarch\archgame\include\entityspawner.h
+	"entity.h"
+	"level.h"
+
+1488858523 source:c:\users\mesh\documents\projectarch\archgame\src\entityspawner.cpp
+	"EntitySpawner.h"
+
+1465669937 c:\users\mesh\documents\projectarch\archgame\include\json\json.h
+	<stddef.h>
+	<string>
+	<cpptl/config.h>
+	"version.h"
+	"allocator.h"
+	"config.h"
+	"forwards.h"
+	"forwards.h"
+	<string>
+	<vector>
+	<exception>
+	<map>
+	<cpptl/smallmap.h>
+	<cpptl/forwards.h>
+	"features.h"
+	"value.h"
+	<deque>
+	<iosfwd>
+	<stack>
+	<string>
+	<istream>
+	"value.h"
+	<vector>
+	<string>
+	<ostream>
+	<stdlib.h>
+	<sstream>
+	"config.h"
+
+1488862995 c:\users\mesh\documents\projectarch\archgame\include\batch.h
+	"GraphicsComponent.h"
+
+1488858555 source:c:\users\mesh\documents\projectarch\archgame\src\batch.cpp
+	"batch.h"
 

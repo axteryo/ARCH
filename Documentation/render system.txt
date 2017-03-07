@@ -41,3 +41,10 @@ Batch()
 	Each Quad will be inserted into the batch_vertArray at their given position
 drawable::draw()
 	target.(batch_vertArray,batch_texture)
+
+
+
+ROTATING A QUAD:
+
+First get the center
+then rotate about the center....

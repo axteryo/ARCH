@@ -22,7 +22,7 @@ class GraphicsComponent
 
 
         sf::IntRect getTextureCoord();
-        void setTextureCoord(sf::IntRect c);
+        void setFrame(sf::IntRect c);
     protected:
 
 

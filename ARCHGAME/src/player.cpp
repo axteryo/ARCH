@@ -10,6 +10,8 @@ player::player(GraphicsComponent* g,PhysicsComponent* p)
 
 player::~player()
 {
+    delete gComponent;
+    delete pComponent;
     //dtor
 }
 void player::setPosition(b2Vec2 p)
@@ -31,7 +33,7 @@ float player::getRotation()
 
 void player::update(float dt)
 {
-
+    pComponent->update(dt);
 }
 GraphicsComponent* player::getGraphic()
 {

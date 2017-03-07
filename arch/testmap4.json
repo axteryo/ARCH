@@ -598,6 +598,83 @@
                  "width":32,
                  "x":2176,
                  "y":1728
+                }, 
+                {
+                 "height":0,
+                 "id":126,
+                 "name":"Enemy_spawn",
+                 "rotation":0,
+                 "type":"d1_texture",
+                 "visible":true,
+                 "width":0,
+                 "x":1536,
+                 "y":1408
+                }, 
+                {
+                 "height":0,
+                 "id":127,
+                 "name":"Enemy_spawn",
+                 "rotation":0,
+                 "type":"d1_texture",
+                 "visible":true,
+                 "width":0,
+                 "x":1344,
+                 "y":1408
+                }, 
+                {
+                 "height":0,
+                 "id":128,
+                 "name":"Enemy_spawn",
+                 "rotation":0,
+                 "type":"d1_texture",
+                 "visible":true,
+                 "width":0,
+                 "x":1472,
+                 "y":1728
+                }, 
+                {
+                 "height":0,
+                 "id":129,
+                 "name":"Enemy_spawn",
+                 "rotation":0,
+                 "type":"d1_texture",
+                 "visible":true,
+                 "width":0,
+                 "x":1408,
+                 "y":1152
+                }, 
+                {
+                 "height":0,
+                 "id":130,
+                 "name":"Enemy_spawn",
+                 "rotation":0,
+                 "type":"d1_texture",
+                 "visible":true,
+                 "width":0,
+                 "x":1152,
+                 "y":1600
+                }, 
+                {
+                 "height":0,
+                 "id":131,
+                 "name":"Enemy_spawn",
+                 "rotation":0,
+                 "type":"d1_texture",
+                 "visible":true,
+                 "width":0,
+                 "x":1280,
+                 "y":1920
+                }, 
+                {
+                 "height":0,
+                 "id":132,
+                 "name":"Enemy_spawn",
+                 "rotation":0,
+                 "type":"d1_texture",
+                 "visible":true,
+                 "width":0,
+                 "x":1344,
+                 "y":1536
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -606,7 +683,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":126,
+ "nextobjectid":133,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":64,

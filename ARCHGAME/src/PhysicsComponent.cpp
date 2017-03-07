@@ -48,6 +48,7 @@ PhysicsComponent::PhysicsComponent()
 
 PhysicsComponent::~PhysicsComponent()
 {
+    world->DestroyBody(body);
     //dtor
 }
 
@@ -66,7 +67,8 @@ void PhysicsComponent::createFixtureRectangle(b2Fixture* f,b2Vec2 dimensions,b2V
 
 void PhysicsComponent::update(float dt)
 {
-    previousState = currentState;
+
+
     currentState.velocity.x+=(currentState.acceleration.x *dt);
     currentState.velocity.y+=(currentState.acceleration.y *dt);
 
@@ -82,7 +84,7 @@ void PhysicsComponent::update(float dt)
     currentState.position = body->GetPosition();
     body->SetAngularVelocity(0);
     body->SetTransform(currentState.position,currentState.rotation);
-
+    previousState = currentState;
 }
 void PhysicsComponent::setRotation(float a)
 {
@@ -94,7 +96,7 @@ float PhysicsComponent::getRotation()
 }
 void PhysicsComponent::setPosition(b2Vec2 p)
 {
-    currentState.position = p;
+    body->SetTransform(p,body->GetAngle());
 }
 b2Vec2 PhysicsComponent::getPosition()
 {

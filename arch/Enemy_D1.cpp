@@ -70,7 +70,7 @@ void Enemy_D1::update()
 {
     fl_rotation = _physicsBody->body->GetAngle();
     b2V_velocity = _physicsBody->body->GetLinearVelocity();
-   /* b2Vec2 t;
+    b2Vec2 t;
     float fl_targetDistance;
     //secondState = actionStack.top();
     if(!targetStack.empty())
@@ -127,7 +127,7 @@ void Enemy_D1::update()
                 }
             }
 
-    }*/
+    }
     if(isImpacted())
     {
         _physicsBody->applyImpact(impactTypeState,impactDirection);

@@ -53,21 +53,25 @@
 			<Add library="..\..\..\..\..\SFML-2.3.2\lib\libsfml-graphics.a" />
 			<Add library="..\..\..\..\..\SFML-2.3.2\lib\libsfml-window.a" />
 		</Linker>
+		<Unit filename="include/EntitySpawner.h" />
 		<Unit filename="include/Game.h" />
 		<Unit filename="include/GraphicsComponent.h" />
 		<Unit filename="include/PhysicsComponent.h" />
 		<Unit filename="include/SpriteBatcher.h" />
+		<Unit filename="include/batch.h" />
 		<Unit filename="include/entity.h" />
+		<Unit filename="include/json/json-forwards.h" />
+		<Unit filename="include/json/json.h" />
 		<Unit filename="include/level.h" />
 		<Unit filename="include/player.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/EntitySpawner.cpp" />
 		<Unit filename="src/Game.cpp" />
 		<Unit filename="src/GraphicsComponent.cpp" />
 		<Unit filename="src/PhysicsComponent.cpp" />
 		<Unit filename="src/SpriteBatcher.cpp" />
+		<Unit filename="src/batch.cpp" />
 		<Unit filename="src/entity.cpp" />
-		<Unit filename="src/json/json-forwards.h" />
-		<Unit filename="src/json/json.h" />
 		<Unit filename="src/jsoncpp.cpp" />
 		<Unit filename="src/level.cpp" />
 		<Unit filename="src/player.cpp" />

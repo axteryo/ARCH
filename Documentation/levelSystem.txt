@@ -16,17 +16,70 @@ Level Data encompases: Maps, charater positions, completion information, etc.
 Levels will consist of:
 	A map object which will store map layer objects along with the current map texture.
 	A CharacterSpawner Object which will create characters
+
+level will load spritesheets, shapes, spawn Player, update, render, close.
 	
 
 level class:
+
+
+entityList<Entity*>
+roomList<room*>
+	spawnPoint Struct{}
+	SpawnList<spawnPoint>
+
 load()
+{
+*********
+	/** The tile map file is FIRST loaded and the functions below retrieve the necessary information from the JSON object **/
+	
+	
+	
+	//-getRooms()
+/**for now spawn points will be their own layer instead of being encapsulated in rooms
+
+	//-getSpawnPoints()
+
+	//-createMap()
+	
+
+**********
 
 
 
-Helper classes:
 
-//map
+	
+	-SpriteBatcher.loadEntityTextures()
+	//-EntitySpawner.loadEntityShapes()
+
+/**Possible implimentation in the future:Have entity spawner take a room object and the rooms will have a list of spawn points for their local space. the level class itself will have a spawnlist for the current and last location of the player
+
+	-EntitySpawner.Spawn(SpawnPoint)
+	
+
+	 
+
+	//SpriteBatcher.setTextureFrame();
+	gc.setFrame()
+	
+
+	
+	
+}
+
+createRoom()
+{
+	-
+	
+}
+
+
+
+
+map
 //RoomSpawner
 CharacterSpawner
+SpriteBatcher
+
 
 

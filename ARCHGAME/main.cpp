@@ -9,6 +9,7 @@ int main()
     Game* arch = new Game;
 
     arch->start();
+    delete arch;
 
     return 0;
 }

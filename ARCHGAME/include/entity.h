@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <Box2D/Box2D.h>
 
-
+/**Entity interface class. Foundation for building entity objects with underlying functionality**/
 class entity
 {
     public:
@@ -16,7 +16,6 @@ class entity
         virtual float getRotation()=0;
 
         virtual void update(float dt) = 0;
-        virtual void physicsUpdate(float dt)= 0;
         virtual std::string getID() = 0;
         /**
         virtual void initiateCollision() = 0;

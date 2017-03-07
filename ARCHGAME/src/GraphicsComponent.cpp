@@ -22,7 +22,7 @@ sf::IntRect GraphicsComponent::getTextureCoord()
 {
     return textureCoord;
 }
-void GraphicsComponent::setTextureCoord(sf::IntRect c)
+void GraphicsComponent::setFrame(sf::IntRect c)
 {
     textureCoord = c;
 }

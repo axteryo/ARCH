@@ -56,6 +56,9 @@ class Game
         void render();
 
 
+        level gameLevel;;
+
+
 };
 
 #endif // GAME_H
