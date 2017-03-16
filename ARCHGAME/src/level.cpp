@@ -36,11 +36,23 @@ void level::load()
 {
     spawnPoint pSpawn;
     pSpawn.spawnID = "entity_player";
-    pSpawn.location =b2Vec2(300/30,300/30);
-    pSpawn.rotation = 1.5;
+    pSpawn.location =b2Vec2(3,20);
+    pSpawn.rotation =0;
     batcher->loadEntityTextures();
-    entityList.push_back(spawner->spawnEntity(pSpawn));
-    batcher->setFrameTexture(((player*)entityList[0])->getGraphic(),"archii_texture.png");
+    ///TEST CODE PLEASE REMOVE LATER
+    for(int i = 0; i<1;++i)
+    {
+        entityList.push_back(spawner->spawnEntity(pSpawn));
+        batcher->setFrameTexture(((player*)entityList[i])->getGraphic(),"archii_texture.png");
+        pSpawn.location.y+=5;
+    }
+    //entityList.push_back(spawner->spawnEntity(pSpawn));
+
+    /**
+    THIS IS A PROBLEM IN THE MAKING
+    having to cast the entity in order to set it's frame texture
+    **/
+    //batcher->setFrameTexture(((player*)entityList[0])->getGraphic(),"archii_texture.png");
 }
 
 

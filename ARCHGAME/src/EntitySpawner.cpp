@@ -25,11 +25,12 @@ entity* EntitySpawner::spawnEntity(level::spawnPoint s)
             player* p;
             PhysicsComponent* pC = new PhysicsComponent;
             b2Fixture* f;
-            pC->createFixtureRectangle(f,b2Vec2(50*30,50*30),b2Vec2(0,0),"Nothing");
+            pC->createFixtureRectangle(f,b2Vec2(1,1),b2Vec2(0,0),"Nothing");
             p = new player(new GraphicsComponent,pC);
 
             p->setPosition(s.location);
             p->setRotation(s.rotation);
+
 
             return p;
         }

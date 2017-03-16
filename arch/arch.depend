@@ -6,7 +6,7 @@
 	<SFML/Window.hpp>
 	"ArchGame.h"
 
-1450289759 c:\sfml-2.3.2\include\sfml\graphics.hpp
+1450293359 c:\sfml-2.3.2\include\sfml\graphics.hpp
 	<SFML/Window.hpp>
 	<SFML/Graphics/BlendMode.hpp>
 	<SFML/Graphics/CircleShape.hpp>
@@ -34,7 +34,7 @@
 	<SFML/Graphics/VertexArray.hpp>
 	<SFML/Graphics/View.hpp>
 
-1450289759 c:\sfml-2.3.2\include\sfml\window.hpp
+1450293359 c:\sfml-2.3.2\include\sfml\window.hpp
 	<SFML/System.hpp>
 	<SFML/Window/Context.hpp>
 	<SFML/Window/ContextSettings.hpp>
@@ -49,7 +49,7 @@
 	<SFML/Window/WindowHandle.hpp>
 	<SFML/Window/WindowStyle.hpp>
 
-1450289759 c:\sfml-2.3.2\include\sfml\system.hpp
+1450293359 c:\sfml-2.3.2\include\sfml\system.hpp
 	<SFML/Config.hpp>
 	<SFML/System/Clock.hpp>
 	<SFML/System/Err.hpp>
@@ -69,24 +69,24 @@
 	<SFML/System/Vector2.hpp>
 	<SFML/System/Vector3.hpp>
 
-1450289759 c:\sfml-2.3.2\include\sfml\config.hpp
+1450293359 c:\sfml-2.3.2\include\sfml\config.hpp
 	"TargetConditionals.h"
 
-1450289760 c:\sfml-2.3.2\include\sfml\system\clock.hpp
+1450293360 c:\sfml-2.3.2\include\sfml\system\clock.hpp
 	<SFML/System/Export.hpp>
 	<SFML/System/Time.hpp>
 
-1450289760 c:\sfml-2.3.2\include\sfml\system\export.hpp
+1450293360 c:\sfml-2.3.2\include\sfml\system\export.hpp
 	<SFML/Config.hpp>
 
-1450289761 c:\sfml-2.3.2\include\sfml\system\time.hpp
+1450293361 c:\sfml-2.3.2\include\sfml\system\time.hpp
 	<SFML/System/Export.hpp>
 
-1450289760 c:\sfml-2.3.2\include\sfml\system\err.hpp
+1450293360 c:\sfml-2.3.2\include\sfml\system\err.hpp
 	<SFML/System/Export.hpp>
 	<ostream>
 
-1450289760 c:\sfml-2.3.2\include\sfml\system\fileinputstream.hpp
+1450293360 c:\sfml-2.3.2\include\sfml\system\fileinputstream.hpp
 	<SFML/Config.hpp>
 	<SFML/System/Export.hpp>
 	<SFML/System/InputStream.hpp>
@@ -94,39 +94,39 @@
 	<cstdio>
 	<string>
 
-1450289760 c:\sfml-2.3.2\include\sfml\system\inputstream.hpp
+1450293360 c:\sfml-2.3.2\include\sfml\system\inputstream.hpp
 	<SFML/Config.hpp>
 	<SFML/System/Export.hpp>
 
-1450289760 c:\sfml-2.3.2\include\sfml\system\noncopyable.hpp
+1450293360 c:\sfml-2.3.2\include\sfml\system\noncopyable.hpp
 	<SFML/System/Export.hpp>
 
-1450289760 c:\sfml-2.3.2\include\sfml\system\lock.hpp
+1450293360 c:\sfml-2.3.2\include\sfml\system\lock.hpp
 	<SFML/System/Export.hpp>
 	<SFML/System/NonCopyable.hpp>
 
-1450289760 c:\sfml-2.3.2\include\sfml\system\memoryinputstream.hpp
+1450293360 c:\sfml-2.3.2\include\sfml\system\memoryinputstream.hpp
 	<SFML/Config.hpp>
 	<SFML/System/InputStream.hpp>
 	<SFML/System/Export.hpp>
 	<cstdlib>
 
-1450289760 c:\sfml-2.3.2\include\sfml\system\mutex.hpp
+1450293360 c:\sfml-2.3.2\include\sfml\system\mutex.hpp
 	<SFML/System/Export.hpp>
 	<SFML/System/NonCopyable.hpp>
 
-1450289760 c:\sfml-2.3.2\include\sfml\system\sleep.hpp
+1450293360 c:\sfml-2.3.2\include\sfml\system\sleep.hpp
 	<SFML/System/Export.hpp>
 	<SFML/System/Time.hpp>
 
-1450289760 c:\sfml-2.3.2\include\sfml\system\string.hpp
+1450293360 c:\sfml-2.3.2\include\sfml\system\string.hpp
 	<SFML/System/Export.hpp>
 	<SFML/System/Utf.hpp>
 	<locale>
 	<string>
 	<SFML/System/String.inl>
 
-1450289761 c:\sfml-2.3.2\include\sfml\system\utf.hpp
+1450293361 c:\sfml-2.3.2\include\sfml\system\utf.hpp
 	<SFML/Config.hpp>
 	<algorithm>
 	<locale>
@@ -134,85 +134,85 @@
 	<cstdlib>
 	<SFML/System/Utf.inl>
 
-1450289761 c:\sfml-2.3.2\include\sfml\system\utf.inl
+1450293361 c:\sfml-2.3.2\include\sfml\system\utf.inl
 
-1450289760 c:\sfml-2.3.2\include\sfml\system\string.inl
+1450293360 c:\sfml-2.3.2\include\sfml\system\string.inl
 
-1450289760 c:\sfml-2.3.2\include\sfml\system\thread.hpp
+1450293360 c:\sfml-2.3.2\include\sfml\system\thread.hpp
 	<SFML/System/Export.hpp>
 	<SFML/System/NonCopyable.hpp>
 	<cstdlib>
 	<SFML/System/Thread.inl>
 
-1450289760 c:\sfml-2.3.2\include\sfml\system\thread.inl
+1450293360 c:\sfml-2.3.2\include\sfml\system\thread.inl
 
-1450289761 c:\sfml-2.3.2\include\sfml\system\threadlocal.hpp
+1450293361 c:\sfml-2.3.2\include\sfml\system\threadlocal.hpp
 	<SFML/System/Export.hpp>
 	<SFML/System/NonCopyable.hpp>
 	<cstdlib>
 
-1450289761 c:\sfml-2.3.2\include\sfml\system\threadlocalptr.hpp
+1450293361 c:\sfml-2.3.2\include\sfml\system\threadlocalptr.hpp
 	<SFML/System/ThreadLocal.hpp>
 	<SFML/System/ThreadLocalPtr.inl>
 
-1450289761 c:\sfml-2.3.2\include\sfml\system\threadlocalptr.inl
+1450293361 c:\sfml-2.3.2\include\sfml\system\threadlocalptr.inl
 
-1450289761 c:\sfml-2.3.2\include\sfml\system\vector2.hpp
+1450293361 c:\sfml-2.3.2\include\sfml\system\vector2.hpp
 	<SFML/System/Vector2.inl>
 
-1450289761 c:\sfml-2.3.2\include\sfml\system\vector2.inl
+1450293361 c:\sfml-2.3.2\include\sfml\system\vector2.inl
 
-1450289761 c:\sfml-2.3.2\include\sfml\system\vector3.hpp
+1450293361 c:\sfml-2.3.2\include\sfml\system\vector3.hpp
 	<SFML/System/Vector3.inl>
 
-1450289761 c:\sfml-2.3.2\include\sfml\system\vector3.inl
+1450293361 c:\sfml-2.3.2\include\sfml\system\vector3.inl
 
-1450289761 c:\sfml-2.3.2\include\sfml\window\context.hpp
+1450293361 c:\sfml-2.3.2\include\sfml\window\context.hpp
 	<SFML/Window/Export.hpp>
 	<SFML/Window/GlResource.hpp>
 	<SFML/Window/ContextSettings.hpp>
 	<SFML/System/NonCopyable.hpp>
 
-1450289761 c:\sfml-2.3.2\include\sfml\window\export.hpp
+1450293361 c:\sfml-2.3.2\include\sfml\window\export.hpp
 	<SFML/Config.hpp>
 
-1450289761 c:\sfml-2.3.2\include\sfml\window\glresource.hpp
+1450293361 c:\sfml-2.3.2\include\sfml\window\glresource.hpp
 	<SFML/Window/Export.hpp>
 
-1450289761 c:\sfml-2.3.2\include\sfml\window\contextsettings.hpp
+1450293361 c:\sfml-2.3.2\include\sfml\window\contextsettings.hpp
 
-1450289761 c:\sfml-2.3.2\include\sfml\window\event.hpp
+1450293361 c:\sfml-2.3.2\include\sfml\window\event.hpp
 	<SFML/Config.hpp>
 	<SFML/Window/Joystick.hpp>
 	<SFML/Window/Keyboard.hpp>
 	<SFML/Window/Mouse.hpp>
 	<SFML/Window/Sensor.hpp>
 
-1450289761 c:\sfml-2.3.2\include\sfml\window\joystick.hpp
+1450293361 c:\sfml-2.3.2\include\sfml\window\joystick.hpp
 	<SFML/Window/Export.hpp>
 	<SFML/System/String.hpp>
 
-1450289761 c:\sfml-2.3.2\include\sfml\window\keyboard.hpp
+1450293361 c:\sfml-2.3.2\include\sfml\window\keyboard.hpp
 	<SFML/Window/Export.hpp>
 
-1450289761 c:\sfml-2.3.2\include\sfml\window\mouse.hpp
+1450293361 c:\sfml-2.3.2\include\sfml\window\mouse.hpp
 	<SFML/Window/Export.hpp>
 	<SFML/System/Vector2.hpp>
 
-1450289761 c:\sfml-2.3.2\include\sfml\window\sensor.hpp
+1450293361 c:\sfml-2.3.2\include\sfml\window\sensor.hpp
 	<SFML/Window/Export.hpp>
 	<SFML/System/Vector3.hpp>
 	<SFML/System/Time.hpp>
 
-1450289761 c:\sfml-2.3.2\include\sfml\window\touch.hpp
+1450293361 c:\sfml-2.3.2\include\sfml\window\touch.hpp
 	<SFML/Window/Export.hpp>
 	<SFML/System/Vector2.hpp>
 
-1450289761 c:\sfml-2.3.2\include\sfml\window\videomode.hpp
+1450293361 c:\sfml-2.3.2\include\sfml\window\videomode.hpp
 	<SFML/Window/Export.hpp>
 	<vector>
 
-1450289761 c:\sfml-2.3.2\include\sfml\window\window.hpp
+1450293361 c:\sfml-2.3.2\include\sfml\window\window.hpp
 	<SFML/Window/Export.hpp>
 	<SFML/Window/ContextSettings.hpp>
 	<SFML/Window/VideoMode.hpp>
@@ -224,54 +224,54 @@
 	<SFML/System/NonCopyable.hpp>
 	<SFML/System/String.hpp>
 
-1450289761 c:\sfml-2.3.2\include\sfml\window\windowhandle.hpp
+1450293361 c:\sfml-2.3.2\include\sfml\window\windowhandle.hpp
 	<SFML/Config.hpp>
 
-1450289761 c:\sfml-2.3.2\include\sfml\window\windowstyle.hpp
+1450293361 c:\sfml-2.3.2\include\sfml\window\windowstyle.hpp
 
-1450289759 c:\sfml-2.3.2\include\sfml\graphics\blendmode.hpp
+1450293359 c:\sfml-2.3.2\include\sfml\graphics\blendmode.hpp
 	<SFML/Graphics/Export.hpp>
 
-1450289759 c:\sfml-2.3.2\include\sfml\graphics\export.hpp
+1450293359 c:\sfml-2.3.2\include\sfml\graphics\export.hpp
 	<SFML/Config.hpp>
 
-1450289759 c:\sfml-2.3.2\include\sfml\graphics\circleshape.hpp
+1450293359 c:\sfml-2.3.2\include\sfml\graphics\circleshape.hpp
 	<SFML/Graphics/Export.hpp>
 	<SFML/Graphics/Shape.hpp>
 
-1450289760 c:\sfml-2.3.2\include\sfml\graphics\shape.hpp
+1450293360 c:\sfml-2.3.2\include\sfml\graphics\shape.hpp
 	<SFML/Graphics/Export.hpp>
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Graphics/Transformable.hpp>
 	<SFML/Graphics/VertexArray.hpp>
 	<SFML/System/Vector2.hpp>
 
-1450289759 c:\sfml-2.3.2\include\sfml\graphics\drawable.hpp
+1450293359 c:\sfml-2.3.2\include\sfml\graphics\drawable.hpp
 	<SFML/Graphics/Export.hpp>
 	<SFML/Graphics/RenderStates.hpp>
 
-1450289759 c:\sfml-2.3.2\include\sfml\graphics\renderstates.hpp
+1450293359 c:\sfml-2.3.2\include\sfml\graphics\renderstates.hpp
 	<SFML/Graphics/Export.hpp>
 	<SFML/Graphics/BlendMode.hpp>
 	<SFML/Graphics/Transform.hpp>
 
-1450289760 c:\sfml-2.3.2\include\sfml\graphics\transform.hpp
+1450293360 c:\sfml-2.3.2\include\sfml\graphics\transform.hpp
 	<SFML/Graphics/Export.hpp>
 	<SFML/Graphics/Rect.hpp>
 	<SFML/System/Vector2.hpp>
 
-1450289759 c:\sfml-2.3.2\include\sfml\graphics\rect.hpp
+1450293359 c:\sfml-2.3.2\include\sfml\graphics\rect.hpp
 	<SFML/System/Vector2.hpp>
 	<algorithm>
 	<SFML/Graphics/Rect.inl>
 
-1450289759 c:\sfml-2.3.2\include\sfml\graphics\rect.inl
+1450293359 c:\sfml-2.3.2\include\sfml\graphics\rect.inl
 
-1450289760 c:\sfml-2.3.2\include\sfml\graphics\transformable.hpp
+1450293360 c:\sfml-2.3.2\include\sfml\graphics\transformable.hpp
 	<SFML/Graphics/Export.hpp>
 	<SFML/Graphics/Transform.hpp>
 
-1450289760 c:\sfml-2.3.2\include\sfml\graphics\vertexarray.hpp
+1450293360 c:\sfml-2.3.2\include\sfml\graphics\vertexarray.hpp
 	<SFML/Graphics/Export.hpp>
 	<SFML/Graphics/Vertex.hpp>
 	<SFML/Graphics/PrimitiveType.hpp>
@@ -279,22 +279,22 @@
 	<SFML/Graphics/Drawable.hpp>
 	<vector>
 
-1450289760 c:\sfml-2.3.2\include\sfml\graphics\vertex.hpp
+1450293360 c:\sfml-2.3.2\include\sfml\graphics\vertex.hpp
 	<SFML/Graphics/Export.hpp>
 	<SFML/Graphics/Color.hpp>
 	<SFML/System/Vector2.hpp>
 
-1450289759 c:\sfml-2.3.2\include\sfml\graphics\color.hpp
+1450293359 c:\sfml-2.3.2\include\sfml\graphics\color.hpp
 	<SFML/Graphics/Export.hpp>
 
-1450289759 c:\sfml-2.3.2\include\sfml\graphics\primitivetype.hpp
+1450293359 c:\sfml-2.3.2\include\sfml\graphics\primitivetype.hpp
 
-1450289759 c:\sfml-2.3.2\include\sfml\graphics\convexshape.hpp
+1450293359 c:\sfml-2.3.2\include\sfml\graphics\convexshape.hpp
 	<SFML/Graphics/Export.hpp>
 	<SFML/Graphics/Shape.hpp>
 	<vector>
 
-1450289759 c:\sfml-2.3.2\include\sfml\graphics\font.hpp
+1450293359 c:\sfml-2.3.2\include\sfml\graphics\font.hpp
 	<SFML/Graphics/Export.hpp>
 	<SFML/Graphics/Glyph.hpp>
 	<SFML/Graphics/Texture.hpp>
@@ -305,27 +305,27 @@
 	<string>
 	<vector>
 
-1450289759 c:\sfml-2.3.2\include\sfml\graphics\glyph.hpp
+1450293359 c:\sfml-2.3.2\include\sfml\graphics\glyph.hpp
 	<SFML/Graphics/Export.hpp>
 	<SFML/Graphics/Rect.hpp>
 
-1450289760 c:\sfml-2.3.2\include\sfml\graphics\texture.hpp
+1450293360 c:\sfml-2.3.2\include\sfml\graphics\texture.hpp
 	<SFML/Graphics/Export.hpp>
 	<SFML/Graphics/Image.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1450289759 c:\sfml-2.3.2\include\sfml\graphics\image.hpp
+1450293359 c:\sfml-2.3.2\include\sfml\graphics\image.hpp
 	<SFML/Graphics/Export.hpp>
 	<SFML/Graphics/Color.hpp>
 	<SFML/Graphics/Rect.hpp>
 	<string>
 	<vector>
 
-1450289759 c:\sfml-2.3.2\include\sfml\graphics\rectangleshape.hpp
+1450293359 c:\sfml-2.3.2\include\sfml\graphics\rectangleshape.hpp
 	<SFML/Graphics/Export.hpp>
 	<SFML/Graphics/Shape.hpp>
 
-1450289759 c:\sfml-2.3.2\include\sfml\graphics\rendertarget.hpp
+1450293359 c:\sfml-2.3.2\include\sfml\graphics\rendertarget.hpp
 	<SFML/Graphics/Export.hpp>
 	<SFML/Graphics/Color.hpp>
 	<SFML/Graphics/Rect.hpp>
@@ -337,25 +337,25 @@
 	<SFML/Graphics/Vertex.hpp>
 	<SFML/System/NonCopyable.hpp>
 
-1450289760 c:\sfml-2.3.2\include\sfml\graphics\view.hpp
+1450293360 c:\sfml-2.3.2\include\sfml\graphics\view.hpp
 	<SFML/Graphics/Export.hpp>
 	<SFML/Graphics/Rect.hpp>
 	<SFML/Graphics/Transform.hpp>
 	<SFML/System/Vector2.hpp>
 
-1450289759 c:\sfml-2.3.2\include\sfml\graphics\rendertexture.hpp
+1450293359 c:\sfml-2.3.2\include\sfml\graphics\rendertexture.hpp
 	<SFML/Graphics/Export.hpp>
 	<SFML/Graphics/Texture.hpp>
 	<SFML/Graphics/RenderTarget.hpp>
 
-1450289760 c:\sfml-2.3.2\include\sfml\graphics\renderwindow.hpp
+1450293360 c:\sfml-2.3.2\include\sfml\graphics\renderwindow.hpp
 	<SFML/Graphics/Export.hpp>
 	<SFML/Graphics/RenderTarget.hpp>
 	<SFML/Graphics/Image.hpp>
 	<SFML/Window/Window.hpp>
 	<string>
 
-1450289760 c:\sfml-2.3.2\include\sfml\graphics\shader.hpp
+1450293360 c:\sfml-2.3.2\include\sfml\graphics\shader.hpp
 	<SFML/Graphics/Export.hpp>
 	<SFML/Graphics/Transform.hpp>
 	<SFML/Graphics/Color.hpp>
@@ -366,14 +366,14 @@
 	<map>
 	<string>
 
-1450289760 c:\sfml-2.3.2\include\sfml\graphics\sprite.hpp
+1450293360 c:\sfml-2.3.2\include\sfml\graphics\sprite.hpp
 	<SFML/Graphics/Export.hpp>
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Graphics/Transformable.hpp>
 	<SFML/Graphics/Vertex.hpp>
 	<SFML/Graphics/Rect.hpp>
 
-1450289760 c:\sfml-2.3.2\include\sfml\graphics\text.hpp
+1450293360 c:\sfml-2.3.2\include\sfml\graphics\text.hpp
 	<SFML/Graphics/Export.hpp>
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Graphics/Transformable.hpp>
@@ -384,7 +384,7 @@
 	<string>
 	<vector>
 
-1456769403 c:\box2d_v2.3.1\box2d\box2d.h
+1456773003 c:\box2d_v2.3.1\box2d\box2d.h
 	<Box2D/Common/b2Settings.h>
 	<Box2D/Common/b2Draw.h>
 	<Box2D/Common/b2Timer.h>
@@ -414,83 +414,83 @@
 	<Box2D/Dynamics/Joints/b2WeldJoint.h>
 	<Box2D/Dynamics/Joints/b2WheelJoint.h>
 
-1482202072 c:\box2d_v2.3.1\box2d\common\b2settings.h
+1482205672 c:\box2d_v2.3.1\box2d\common\b2settings.h
 	<stddef.h>
 	<assert.h>
 	<float.h>
 
-1456769404 c:\box2d_v2.3.1\box2d\common\b2draw.h
+1456773004 c:\box2d_v2.3.1\box2d\common\b2draw.h
 	<Box2D/Common/b2Math.h>
 
-1456769404 c:\box2d_v2.3.1\box2d\common\b2math.h
+1456773004 c:\box2d_v2.3.1\box2d\common\b2math.h
 	<Box2D/Common/b2Settings.h>
 	<math.h>
 
-1456769404 c:\box2d_v2.3.1\box2d\common\b2timer.h
+1456773004 c:\box2d_v2.3.1\box2d\common\b2timer.h
 	<Box2D/Common/b2Settings.h>
 
-1456769404 c:\box2d_v2.3.1\box2d\collision\shapes\b2circleshape.h
+1456773004 c:\box2d_v2.3.1\box2d\collision\shapes\b2circleshape.h
 	<Box2D/Collision/Shapes/b2Shape.h>
 
-1456769404 c:\box2d_v2.3.1\box2d\collision\shapes\b2shape.h
+1456773004 c:\box2d_v2.3.1\box2d\collision\shapes\b2shape.h
 	<Box2D/Common/b2BlockAllocator.h>
 	<Box2D/Common/b2Math.h>
 	<Box2D/Collision/b2Collision.h>
 
-1456769404 c:\box2d_v2.3.1\box2d\common\b2blockallocator.h
+1456773004 c:\box2d_v2.3.1\box2d\common\b2blockallocator.h
 	<Box2D/Common/b2Settings.h>
 
-1456769403 c:\box2d_v2.3.1\box2d\collision\b2collision.h
+1456773003 c:\box2d_v2.3.1\box2d\collision\b2collision.h
 	<Box2D/Common/b2Math.h>
 	<limits.h>
 
-1456769404 c:\box2d_v2.3.1\box2d\collision\shapes\b2edgeshape.h
+1456773004 c:\box2d_v2.3.1\box2d\collision\shapes\b2edgeshape.h
 	<Box2D/Collision/Shapes/b2Shape.h>
 
-1456769404 c:\box2d_v2.3.1\box2d\collision\shapes\b2chainshape.h
+1456773004 c:\box2d_v2.3.1\box2d\collision\shapes\b2chainshape.h
 	<Box2D/Collision/Shapes/b2Shape.h>
 
-1456769404 c:\box2d_v2.3.1\box2d\collision\shapes\b2polygonshape.h
+1456773004 c:\box2d_v2.3.1\box2d\collision\shapes\b2polygonshape.h
 	<Box2D/Collision/Shapes/b2Shape.h>
 
-1456769403 c:\box2d_v2.3.1\box2d\collision\b2broadphase.h
+1456773003 c:\box2d_v2.3.1\box2d\collision\b2broadphase.h
 	<Box2D/Common/b2Settings.h>
 	<Box2D/Collision/b2Collision.h>
 	<Box2D/Collision/b2DynamicTree.h>
 	<algorithm>
 
-1456769403 c:\box2d_v2.3.1\box2d\collision\b2dynamictree.h
+1456773003 c:\box2d_v2.3.1\box2d\collision\b2dynamictree.h
 	<Box2D/Collision/b2Collision.h>
 	<Box2D/Common/b2GrowableStack.h>
 
-1456769404 c:\box2d_v2.3.1\box2d\common\b2growablestack.h
+1456773004 c:\box2d_v2.3.1\box2d\common\b2growablestack.h
 	<Box2D/Common/b2Settings.h>
 	<string.h>
 
-1456769403 c:\box2d_v2.3.1\box2d\collision\b2distance.h
+1456773003 c:\box2d_v2.3.1\box2d\collision\b2distance.h
 	<Box2D/Common/b2Math.h>
 
-1456769404 c:\box2d_v2.3.1\box2d\collision\b2timeofimpact.h
+1456773004 c:\box2d_v2.3.1\box2d\collision\b2timeofimpact.h
 	<Box2D/Common/b2Math.h>
 	<Box2D/Collision/b2Distance.h>
 
-1456769404 c:\box2d_v2.3.1\box2d\dynamics\b2body.h
+1456773004 c:\box2d_v2.3.1\box2d\dynamics\b2body.h
 	<Box2D/Common/b2Math.h>
 	<Box2D/Collision/Shapes/b2Shape.h>
 	<memory>
 
-1456769404 c:\box2d_v2.3.1\box2d\dynamics\b2fixture.h
+1456773004 c:\box2d_v2.3.1\box2d\dynamics\b2fixture.h
 	<Box2D/Dynamics/b2Body.h>
 	<Box2D/Collision/b2Collision.h>
 	<Box2D/Collision/Shapes/b2Shape.h>
 
-1456769404 c:\box2d_v2.3.1\box2d\dynamics\b2worldcallbacks.h
+1456773004 c:\box2d_v2.3.1\box2d\dynamics\b2worldcallbacks.h
 	<Box2D/Common/b2Settings.h>
 
-1456769404 c:\box2d_v2.3.1\box2d\dynamics\b2timestep.h
+1456773004 c:\box2d_v2.3.1\box2d\dynamics\b2timestep.h
 	<Box2D/Common/b2Math.h>
 
-1456769404 c:\box2d_v2.3.1\box2d\dynamics\b2world.h
+1456773004 c:\box2d_v2.3.1\box2d\dynamics\b2world.h
 	<Box2D/Common/b2Math.h>
 	<Box2D/Common/b2BlockAllocator.h>
 	<Box2D/Common/b2StackAllocator.h>
@@ -498,52 +498,52 @@
 	<Box2D/Dynamics/b2WorldCallbacks.h>
 	<Box2D/Dynamics/b2TimeStep.h>
 
-1456769404 c:\box2d_v2.3.1\box2d\common\b2stackallocator.h
+1456773004 c:\box2d_v2.3.1\box2d\common\b2stackallocator.h
 	<Box2D/Common/b2Settings.h>
 
-1456769404 c:\box2d_v2.3.1\box2d\dynamics\b2contactmanager.h
+1456773004 c:\box2d_v2.3.1\box2d\dynamics\b2contactmanager.h
 	<Box2D/Collision/b2BroadPhase.h>
 
-1456769405 c:\box2d_v2.3.1\box2d\dynamics\contacts\b2contact.h
+1456773005 c:\box2d_v2.3.1\box2d\dynamics\contacts\b2contact.h
 	<Box2D/Common/b2Math.h>
 	<Box2D/Collision/b2Collision.h>
 	<Box2D/Collision/Shapes/b2Shape.h>
 	<Box2D/Dynamics/b2Fixture.h>
 
-1456769405 c:\box2d_v2.3.1\box2d\dynamics\joints\b2distancejoint.h
+1456773005 c:\box2d_v2.3.1\box2d\dynamics\joints\b2distancejoint.h
 	<Box2D/Dynamics/Joints/b2Joint.h>
 
-1456769405 c:\box2d_v2.3.1\box2d\dynamics\joints\b2joint.h
+1456773005 c:\box2d_v2.3.1\box2d\dynamics\joints\b2joint.h
 	<Box2D/Common/b2Math.h>
 
-1456769405 c:\box2d_v2.3.1\box2d\dynamics\joints\b2frictionjoint.h
+1456773005 c:\box2d_v2.3.1\box2d\dynamics\joints\b2frictionjoint.h
 	<Box2D/Dynamics/Joints/b2Joint.h>
 
-1456769405 c:\box2d_v2.3.1\box2d\dynamics\joints\b2gearjoint.h
+1456773005 c:\box2d_v2.3.1\box2d\dynamics\joints\b2gearjoint.h
 	<Box2D/Dynamics/Joints/b2Joint.h>
 
-1456769405 c:\box2d_v2.3.1\box2d\dynamics\joints\b2motorjoint.h
+1456773005 c:\box2d_v2.3.1\box2d\dynamics\joints\b2motorjoint.h
 	<Box2D/Dynamics/Joints/b2Joint.h>
 
-1456769405 c:\box2d_v2.3.1\box2d\dynamics\joints\b2mousejoint.h
+1456773005 c:\box2d_v2.3.1\box2d\dynamics\joints\b2mousejoint.h
 	<Box2D/Dynamics/Joints/b2Joint.h>
 
-1456769405 c:\box2d_v2.3.1\box2d\dynamics\joints\b2prismaticjoint.h
+1456773005 c:\box2d_v2.3.1\box2d\dynamics\joints\b2prismaticjoint.h
 	<Box2D/Dynamics/Joints/b2Joint.h>
 
-1456769405 c:\box2d_v2.3.1\box2d\dynamics\joints\b2pulleyjoint.h
+1456773005 c:\box2d_v2.3.1\box2d\dynamics\joints\b2pulleyjoint.h
 	<Box2D/Dynamics/Joints/b2Joint.h>
 
-1456769405 c:\box2d_v2.3.1\box2d\dynamics\joints\b2revolutejoint.h
+1456773005 c:\box2d_v2.3.1\box2d\dynamics\joints\b2revolutejoint.h
 	<Box2D/Dynamics/Joints/b2Joint.h>
 
-1456769405 c:\box2d_v2.3.1\box2d\dynamics\joints\b2ropejoint.h
+1456773005 c:\box2d_v2.3.1\box2d\dynamics\joints\b2ropejoint.h
 	<Box2D/Dynamics/Joints/b2Joint.h>
 
-1456769405 c:\box2d_v2.3.1\box2d\dynamics\joints\b2weldjoint.h
+1456773005 c:\box2d_v2.3.1\box2d\dynamics\joints\b2weldjoint.h
 	<Box2D/Dynamics/Joints/b2Joint.h>
 
-1456769405 c:\box2d_v2.3.1\box2d\dynamics\joints\b2wheeljoint.h
+1456773005 c:\box2d_v2.3.1\box2d\dynamics\joints\b2wheeljoint.h
 	<Box2D/Dynamics/Joints/b2Joint.h>
 
 1466376924 c:\users\mesh\desktop\c++_practice\arch\archgame.h
@@ -596,11 +596,11 @@
 	<math.h>
 	"GameObject.h"
 
-1488753370 source:c:\users\mesh\documents\projectarch\arch\archgame.cpp
+1489533504 source:c:\users\mesh\documents\projectarch\arch\archgame.cpp
 	"ArchGame.h"
 	"LevelManager.h"
 
-1486971349 c:\users\mesh\documents\projectarch\arch\archgame.h
+1486974949 c:\users\mesh\documents\projectarch\arch\archgame.h
 	<SFML/Graphics.hpp>
 	<Box2D/Box2D.h>
 	<SFML/Window.hpp>
@@ -621,52 +621,52 @@
 	"cam.h"
 	"LevelManager.h"
 
-1486586429 c:\users\mesh\documents\projectarch\arch\gameobject.h
+1486590029 c:\users\mesh\documents\projectarch\arch\gameobject.h
 	<string>
 	<Box2D/Box2D.h>
 	"includes.h"
 
-1468182712 source:c:\users\mesh\documents\projectarch\arch\graphicsbody.cpp
+1468186312 source:c:\users\mesh\documents\projectarch\arch\graphicsbody.cpp
 	"GraphicsBody.h"
 
-1481520484 c:\users\mesh\documents\projectarch\arch\graphicsbody.h
+1481524084 c:\users\mesh\documents\projectarch\arch\graphicsbody.h
 	<SFML/Graphics.hpp>
 	"GameObject.h"
 	"includes.h"
 
-1481519603 source:c:\users\mesh\documents\projectarch\arch\main.cpp
+1481523203 source:c:\users\mesh\documents\projectarch\arch\main.cpp
 	<iostream>
 	"ArchGame.h"
 
-1466368402 source:c:\users\mesh\documents\projectarch\arch\physicsbody.cpp
+1466372002 source:c:\users\mesh\documents\projectarch\arch\physicsbody.cpp
 	"PhysicsBody.h"
 
-1481520487 c:\users\mesh\documents\projectarch\arch\physicsbody.h
+1481524087 c:\users\mesh\documents\projectarch\arch\physicsbody.h
 	<Box2D/Box2D.h>
 	"GameObject.h"
 	"includes.h"
 
-1481435206 source:c:\users\mesh\documents\projectarch\arch\gameobject.cpp
+1481438806 source:c:\users\mesh\documents\projectarch\arch\gameobject.cpp
 	"GameObject.h"
 
-1486686907 source:c:\users\mesh\documents\projectarch\arch\moveablebody.cpp
+1486690507 source:c:\users\mesh\documents\projectarch\arch\moveablebody.cpp
 	"MoveableBody.h"
 
-1486001354 c:\users\mesh\documents\projectarch\arch\moveablebody.h
+1486004954 c:\users\mesh\documents\projectarch\arch\moveablebody.h
 	"PhysicsBody.h"
 	"GameObject.h"
 	"includes.h"
 	"Actor.h"
 
-1483484692 source:c:\users\mesh\documents\projectarch\arch\unmoveablebody.cpp
+1483488292 source:c:\users\mesh\documents\projectarch\arch\unmoveablebody.cpp
 	"unMoveableBody.h"
 
-1481520445 c:\users\mesh\documents\projectarch\arch\unmoveablebody.h
+1481524045 c:\users\mesh\documents\projectarch\arch\unmoveablebody.h
 	"PhysicsBody.h"
 	"GameObject.h"
 	"includes.h"
 
-1482977132 c:\users\mesh\documents\projectarch\arch\includes.h
+1482980732 c:\users\mesh\documents\projectarch\arch\includes.h
 	<SFML/Graphics.hpp>
 	<Box2D/Box2D.h>
 	<string>
@@ -675,18 +675,18 @@
 	"GameObject.h"
 	<stack>
 
-1486587155 source:c:\users\mesh\documents\projectarch\arch\wallobject.cpp
+1486590755 source:c:\users\mesh\documents\projectarch\arch\wallobject.cpp
 	"wallObject.h"
 
-1486587053 c:\users\mesh\documents\projectarch\arch\wallobject.h
+1486590653 c:\users\mesh\documents\projectarch\arch\wallobject.h
 	"GameObject.h"
 	"unMoveableBody.h"
 	"includes.h"
 
-1482104940 source:c:\users\mesh\documents\projectarch\arch\animatablegraphic.cpp
+1482108540 source:c:\users\mesh\documents\projectarch\arch\animatablegraphic.cpp
 	"AnimatableGraphic.h"
 
-1482104365 c:\users\mesh\documents\projectarch\arch\animatablegraphic.h
+1482107965 c:\users\mesh\documents\projectarch\arch\animatablegraphic.h
 	"GraphicsBody.h"
 	"GameObject.h"
 	"Actor.h"
@@ -695,7 +695,7 @@
 1470446465 source:c:\users\mesh\documents\projectarch\arch\staticgraphic.cpp
 	"StaticGraphic.h"
 
-1468221362 c:\users\mesh\documents\projectarch\arch\staticgraphic.h
+1468224962 c:\users\mesh\documents\projectarch\arch\staticgraphic.h
 	"GraphicsBody.h"
 
 1468221271 source:c:\users\mesh\documents\projectarch\arch\floorobject.cpp
@@ -705,10 +705,10 @@
 	"GameObject.h"
 	"StaticGraphic.h"
 
-1487273664 source:c:\users\mesh\documents\projectarch\arch\levelmanager.cpp
+1489301631 source:c:\users\mesh\documents\projectarch\arch\levelmanager.cpp
 	"LevelManager.h"
 
-1486971600 c:\users\mesh\documents\projectarch\arch\levelmanager.h
+1486975200 c:\users\mesh\documents\projectarch\arch\levelmanager.h
 	<iostream>
 	<fstream>
 	"dist/json/json.h"
@@ -725,7 +725,7 @@
 	"includes.h"
 	"cam.h"
 
-1465669937 c:\users\mesh\documents\projectarch\arch\dist\json\json.h
+1465673537 c:\users\mesh\documents\projectarch\arch\dist\json\json.h
 	<stddef.h>
 	<string>
 	<cpptl/config.h>
@@ -755,7 +755,7 @@
 	<sstream>
 	"config.h"
 
-1465669937 source:c:\users\mesh\documents\projectarch\arch\dist\jsoncpp.cpp
+1465673537 source:c:\users\mesh\documents\projectarch\arch\dist\jsoncpp.cpp
 	"json/json.h"
 	<json/assertions.h>
 	<json/reader.h>
@@ -799,10 +799,10 @@
 	<cmath>
 	<float.h>
 
-1485638256 source:c:\users\mesh\documents\projectarch\arch\gamecontroller.cpp
+1485641856 source:c:\users\mesh\documents\projectarch\arch\gamecontroller.cpp
 	"gameController.h"
 
-1485637996 c:\users\mesh\documents\projectarch\arch\gamecontroller.h
+1489122247 c:\users\mesh\documents\projectarch\arch\gamecontroller.h
 	"dist/json/json.h"
 	<iostream>
 	<fstream>
@@ -810,10 +810,10 @@
 	<SFML/Window.hpp>
 	"includes.h"
 
-1487186187 source:c:\users\mesh\documents\projectarch\arch\player.cpp
+1489196734 source:c:\users\mesh\documents\projectarch\arch\player.cpp
 	"Player.h"
 
-1486665794 c:\users\mesh\documents\projectarch\arch\player.h
+1486669394 c:\users\mesh\documents\projectarch\arch\player.h
 	"Actor.h"
 	"MoveableBody.h"
 	"AnimatableGraphic.h"
@@ -821,15 +821,15 @@
 	"RadiusBody.h"
 	"includes.h"
 
-1487273354 source:c:\users\mesh\documents\projectarch\arch\cam.cpp
+1487276954 source:c:\users\mesh\documents\projectarch\arch\cam.cpp
 	"cam.h"
 
-1486612829 c:\users\mesh\documents\projectarch\arch\cam.h
+1486616429 c:\users\mesh\documents\projectarch\arch\cam.h
 	<SFML/Graphics.hpp>
 	<SFML/Window.hpp>
 	"includes.h"
 
-1482977107 source:c:\users\mesh\documents\projectarch\arch\includes.cpp
+1482980707 source:c:\users\mesh\documents\projectarch\arch\includes.cpp
 	"includes.h"
 
 1481082326 source:c:\users\mesh\documents\projectarch\arch\src\enemy.cpp
@@ -843,70 +843,70 @@
 	"MoveableBody.h"
 	"GameObject.h"
 
-1486686243 c:\users\mesh\documents\projectarch\arch\actor.h
+1486689843 c:\users\mesh\documents\projectarch\arch\actor.h
 	<SFML/Graphics.hpp>
 	<Box2D/Box2D.h>
 	"GameObject.h"
 	"includes.h"
 	"RadiusBody.h"
 
-1481784034 source:c:\users\mesh\documents\projectarch\arch\enemy.cpp
+1481787634 source:c:\users\mesh\documents\projectarch\arch\enemy.cpp
 	"Enemy.h"
 
-1486660044 c:\users\mesh\documents\projectarch\arch\enemy.h
+1486663644 c:\users\mesh\documents\projectarch\arch\enemy.h
 	"Actor.h"
 	"MoveableBody.h"
 	"AnimatableGraphic.h"
 	"includes.h"
 
-1486612217 source:c:\users\mesh\documents\projectarch\arch\actor.cpp
+1486615817 source:c:\users\mesh\documents\projectarch\arch\actor.cpp
 	"Actor.h"
 
-1488753343 source:c:\users\mesh\documents\projectarch\arch\enemy_d1.cpp
+1488756943 source:c:\users\mesh\documents\projectarch\arch\enemy_d1.cpp
 	"Enemy_D1.h"
 
-1487026338 c:\users\mesh\documents\projectarch\arch\enemy_d1.h
+1487029938 c:\users\mesh\documents\projectarch\arch\enemy_d1.h
 	"Enemy.h"
 	"Subject.h"
 	<iostream>
 
-1483993333 source:c:\users\mesh\documents\projectarch\arch\radiusbody.cpp
+1483996933 source:c:\users\mesh\documents\projectarch\arch\radiusbody.cpp
 	"RadiusBody.h"
 
-1482977496 c:\users\mesh\documents\projectarch\arch\radiusbody.h
+1482981096 c:\users\mesh\documents\projectarch\arch\radiusbody.h
 	"PhysicsBody.h"
 	<Box2D/Box2D.h>
 	"includes.h"
 
-1486166197 c:\users\mesh\documents\projectarch\arch\collisionfactory.h
+1486169797 c:\users\mesh\documents\projectarch\arch\collisionfactory.h
 	<Box2D/Box2D.h>
 	"GameObject.h"
 	"Actor.h"
 	"Enemy.h"
 	"includes.h"
 
-1486586381 source:c:\users\mesh\documents\projectarch\arch\collisionfactory.cpp
+1486589981 source:c:\users\mesh\documents\projectarch\arch\collisionfactory.cpp
 	"collisionFactory.h"
 
-1487019281 source:c:\users\mesh\documents\projectarch\arch\observer.cpp
+1487022881 source:c:\users\mesh\documents\projectarch\arch\observer.cpp
 	"Observer.h"
 
-1487025965 c:\users\mesh\documents\projectarch\arch\observer.h
+1487029565 c:\users\mesh\documents\projectarch\arch\observer.h
 	"Player.h"
 	"Enemy_D1.h"
 	"GameObject.h"
 	"includes.h"
 
-1487026196 c:\users\mesh\documents\projectarch\arch\subject.h
+1487029796 c:\users\mesh\documents\projectarch\arch\subject.h
 	"Observer.h"
 
-1487026180 source:c:\users\mesh\documents\projectarch\arch\subject.cpp
+1487029780 source:c:\users\mesh\documents\projectarch\arch\subject.cpp
 	"Subject.h"
 
-1487024808 source:c:\users\mesh\documents\projectarch\arch\ai_controller.cpp
+1487028408 source:c:\users\mesh\documents\projectarch\arch\ai_controller.cpp
 	"Ai_Controller.h"
 
-1487026030 c:\users\mesh\documents\projectarch\arch\ai_controller.h
+1487029630 c:\users\mesh\documents\projectarch\arch\ai_controller.h
 	"Enemy_D1.h"
 	"Observer.h"
 	"Subject.h"

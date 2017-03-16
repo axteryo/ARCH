@@ -42,7 +42,9 @@ PhysicsComponent::PhysicsComponent()
     previousState = currentState;
     bodyDef.type = b2_dynamicBody;
     body = world->CreateBody(&bodyDef);
-    float topSpeed = 0;
+    topSpeed = 0;
+    rotationAmount = 0;
+
     //ctor
 }
 
@@ -55,40 +57,49 @@ PhysicsComponent::~PhysicsComponent()
 void PhysicsComponent::createFixtureRectangle(b2Fixture* f,b2Vec2 dimensions,b2Vec2 position,std::string fixturedata)
 {
     b2PolygonShape boxShape;
-    boxShape.SetAsBox(dimensions.x,dimensions.y);
+    boxShape.SetAsBox(dimensions.x,dimensions.y,position,0);
     fixtureDef.shape = &boxShape;
     fixtureDef.friction = 0.0f;
     fixtureDef.density = 2.0f;
     ///insert fixturedata here
     ///insert userdata here
-    body->CreateFixture(&fixtureDef);
+
+    f =body->CreateFixture(&fixtureDef);
+
 
 }
 
 void PhysicsComponent::update(float dt)
 {
 
-
+    previousState = currentState;
+    //std::cout<<dt<<std::endl;
+    currentState.rotation+=(rotationAmount*dt);
     currentState.velocity.x+=(currentState.acceleration.x *dt);
     currentState.velocity.y+=(currentState.acceleration.y *dt);
 
-    if(sqrt((currentState.velocity.x*currentState.velocity.x)
-            +(currentState.velocity.y*currentState.velocity.y))
-            > topSpeed)
-    {
-        currentState.velocity.Normalize();
-        currentState.velocity.x*=topSpeed;
-        currentState.velocity.y*=topSpeed;
-    }
-    body->SetLinearVelocity(currentState.velocity);
+
+    limitVelocity();
+    //body->SetLinearVelocity(b2Vec2(currentState.velocity.x,currentState.velocity.y));
     currentState.position = body->GetPosition();
-    body->SetAngularVelocity(0);
+
+
+    currentState.position.x +=(currentState.velocity.x*dt);
+    currentState.position.y +=(currentState.velocity.y*dt);
     body->SetTransform(currentState.position,currentState.rotation);
-    previousState = currentState;
+
+    body->SetAngularVelocity(0);
+    rotationAmount = 0;
+    currentState.acceleration = b2Vec2(0,0);
+
 }
 void PhysicsComponent::setRotation(float a)
 {
     currentState.rotation = a;
+}
+void PhysicsComponent::_rotate(float a)
+{
+    rotationAmount = a;
 }
 float PhysicsComponent::getRotation()
 {
@@ -96,6 +107,7 @@ float PhysicsComponent::getRotation()
 }
 void PhysicsComponent::setPosition(b2Vec2 p)
 {
+    //currentState.position = p;
     body->SetTransform(p,body->GetAngle());
 }
 b2Vec2 PhysicsComponent::getPosition()
@@ -120,4 +132,16 @@ States::positionState PhysicsComponent::getPreviousState()
 void PhysicsComponent::setTopSpeed(float s)
 {
     topSpeed = s;
+}
+
+void PhysicsComponent::limitVelocity()
+{
+    if(sqrt((currentState.velocity.x*currentState.velocity.x)
+            +(currentState.velocity.y*currentState.velocity.y))
+            > topSpeed)
+    {
+        currentState.velocity.Normalize();
+        currentState.velocity.x*=topSpeed;
+        currentState.velocity.y*=topSpeed;
+    }
 }

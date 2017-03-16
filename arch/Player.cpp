@@ -86,6 +86,7 @@ void Player::thrust()
         thrustLevel += .025;
     }
     else{thrustLevel = 1;}
+    //thrustLevel = 1;
     aim = b2Vec2(cos(fl_rotation),sin(fl_rotation));
     aim.Normalize();
 

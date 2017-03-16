@@ -55,6 +55,7 @@
 		</Linker>
 		<Unit filename="include/EntitySpawner.h" />
 		<Unit filename="include/Game.h" />
+		<Unit filename="include/GameController.h" />
 		<Unit filename="include/GraphicsComponent.h" />
 		<Unit filename="include/PhysicsComponent.h" />
 		<Unit filename="include/SpriteBatcher.h" />
@@ -64,9 +65,11 @@
 		<Unit filename="include/json/json.h" />
 		<Unit filename="include/level.h" />
 		<Unit filename="include/player.h" />
+		<Unit filename="include/playerInputComponent.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/EntitySpawner.cpp" />
 		<Unit filename="src/Game.cpp" />
+		<Unit filename="src/GameController.cpp" />
 		<Unit filename="src/GraphicsComponent.cpp" />
 		<Unit filename="src/PhysicsComponent.cpp" />
 		<Unit filename="src/SpriteBatcher.cpp" />
@@ -75,6 +78,7 @@
 		<Unit filename="src/jsoncpp.cpp" />
 		<Unit filename="src/level.cpp" />
 		<Unit filename="src/player.cpp" />
+		<Unit filename="src/playerInputComponent.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

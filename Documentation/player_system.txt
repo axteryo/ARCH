@@ -1,0 +1,33 @@
+The player is a sub-class of the enity class
+
+Entities have base functions and attributes that each class derived from it need. BUT the entity class is not only an interface class, but entities themselves are an interface to component classes that they utilize
+
+entity class
+{
+
+entity_ID
+getPosition()
+setPosition()
+getRotation()
+setRotation()
+update()
+getID()
+initiateCollision()
+resolveCollision()
+
+}
+
+
+you will notice that entites do not have a base state or state variables.
+those will be in the entity sub-classes and each will be distinct to each entity based on their purpose and function.
+
+The player entity sub-class have a graphics, physics and input component.
+Players can rotate and move in the direction they are facing as well stop and use attacks
+
+player : entity class
+
+{
+	turnRight()
+	turnLeft()
+	thrust()
+}

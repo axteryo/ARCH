@@ -297,7 +297,7 @@ void ArchGame::render(state currentState)
 
         ///DEBUG COLLISION DRAWER
 
-       for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
+      /* for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
         {
                 b2PolygonShape* polygonShape;
                 //sf::ConvexShape colShape;
@@ -345,7 +345,7 @@ void ArchGame::render(state currentState)
                 }
 
         }
-
+*/
 
 
         window->display();

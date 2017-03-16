@@ -1,0 +1,126 @@
+controllers and coupling
+
+In the avg game loop, it's
+
+
+ProcessInput()
+Update()
+Render()
+-Repeat-
+
+Input is gathered through keyboard events
+and a cardinal sin of getting input is to weave the character in there(hue)
+something like so:
+
+
+if(W.ispressed())
+{
+	player.jump() ----causewedon'tknowwhatwe'redoing----
+}
+
+how to remedy this?
+Controller class?
+maybe
+ok picture this
+
+
+
+if(key.isPressed())
+{
+	Controller.processKeyPress(key)
+
+}
+
+thats pretty cool. so could we also do something like this?
+
+if(key.isReleased())
+{
+
+	controller.processKeyRelease(key)
+
+
+}
+
+SURE
+wow so we'd only need like two functions to be run on the surface?
+Ideally
+Then how would it affect the player without coupling the player tooooooomuch?
+Thats the tricky part!!!!!!!!
+well got any ideas then?
+yeah hold on.
+ok
+
+lets say the controller had a list of every possible action in the game, and it could on a whim rebind all of those action.
+
+alright, we are saying this.
+
+in the controller we would check which keys are pressed or released and we would check the corresponding actions that are binded to those keys
+
+cool cool, but what about the pl-
+
+i'm getting there
+
+sorry
+
+it's all good. Anyways when it comes to the player as well as entities or systems that are associated with input, we need something in place to ensure that they see that input had been directed to them without directly touching them.Make sense?
+
+Not really.
+
+So here is whati am a suggesting.
+Take for example the player. Say the player wants to turn or move. the controller gets keyboard input and registers that one of those actions corresponding to a key has been pressed. In order to get this to the player, what needs to happen is that the player must be told that this action has occured in as simple a way as possible.
+
+Which is....?
+
+I'm not sure. A handle Input function?
+
+nah. too coupling.
+
+how about more than one handle input function. one function for each possible player function?
+
+sounds stupid.
+
+it does, but i dn't see you suggesting anything...?
+
+what about controller.getActiveActions()?
+
+what the bloody heck would that do?
+
+return a list of actions being initiated in the order they were initiated?
+
+hmmmmmmmmmmm. What if we also had controller states, like for menus and in game stuff?
+
+Sure what if we also had an input component?
+
+nah that is the coupling king. Unless of course you're saying it's a component that takes in our list of actions and changes the players internal states from within itself based on the actions?
+
+uh yes?
+
+ok so our main game controller would be this:
+
+GameController class:
+
+controllerTypeState[Keyboard_Mouse,controller]
+
+processInput()
+
+
+isActionKeyPressed()
+isBindedKeyPressed()
+
+getActiveActions()
+
+
+wait. I just thought of something.
+
+Dammit here we go. Is it coupling inducing?
+
+perhaps. But just here me out. What if we passed not an entire list of mostly useless functions, but the controller itself to the players input component?
+
+So like a filthy whore,the controller object is being passed around to the player to the menu objects and all the classes that need to see if input has been dished their way?
+
+well yes, but think of it this way. Game systems can't be perfect, they can only be good enough. And besides i think this will reduce unecessary processes that could build up.
+
+Fine
+
+InputComponent
+

@@ -2,16 +2,16 @@
 
 {
 	"filename": "archii_texture.png",
-	"frame": {"x":1,"y":1,"w":69,"h":57},
+	"frame": {"x":1,"y":1,"w":64,"h":54},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":69,"h":57},
-	"sourceSize": {"w":69,"h":57},
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":54},
+	"sourceSize": {"w":64,"h":54},
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
 	"filename": "d1_texture.png",
-	"frame": {"x":72,"y":1,"w":32,"h":48},
+	"frame": {"x":67,"y":1,"w":32,"h":48},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":48},
@@ -23,8 +23,8 @@
 	"version": "1.0",
 	"image": "characterTextures.png",
 	"format": "RGBA8888",
-	"size": {"w":105,"h":59},
+	"size": {"w":100,"h":56},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:1e97526a0d41a179201f45e80c1088cb:bda23b5dd8467c06b9f50595140efbb8:df285b20ee2436030770164ab2a563bc$"
+	"smartupdate": "$TexturePacker:SmartUpdate:8b24e1e53525a3a8c34024c1f7c9da6d:23dfdfda65e2c73f38b980d28cdee62a:df285b20ee2436030770164ab2a563bc$"
 }
 }

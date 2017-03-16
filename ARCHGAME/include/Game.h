@@ -10,6 +10,7 @@
 
 
 #include "level.h"
+#include "GameController.h"
 
 
 
@@ -56,7 +57,9 @@ class Game
         void render();
 
 
-        level gameLevel;;
+        level gameLevel;
+        //GameController controller;
+
 
 
 };

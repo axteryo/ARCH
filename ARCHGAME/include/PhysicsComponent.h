@@ -3,6 +3,7 @@
 
 #include <Box2D/Box2D.h>
 #include "entity.h"
+#include <iostream>
 
 extern b2World* world;
 
@@ -38,7 +39,10 @@ class PhysicsComponent
         PhysicsComponent();
         virtual ~PhysicsComponent();
         void setPosition(b2Vec2 p);
+        ///sets rotation to a specific angle
         void setRotation(float a);
+        /// changes angle of rotation by a specific amount
+        void _rotate(float a);
         //virtual float getAcceleration
         float getRotation();
         b2Vec2 getPosition();
@@ -47,6 +51,7 @@ class PhysicsComponent
         States::positionState getCurrentState();
         States::positionState getPreviousState();
         void setTopSpeed(float s);
+        void limitVelocity();
 
         void update(float dt);
         /***
@@ -65,6 +70,7 @@ class PhysicsComponent
         b2FixtureDef fixtureDef;
 
         float topSpeed;
+        float rotationAmount;
         States::positionState currentState;
         States::positionState previousState;
 
