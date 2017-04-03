@@ -23,9 +23,10 @@ class SpriteBatcher
         void loadEntityTextures();
         void setBatchTexture(sf::Image i);
         void setFrameTexture(GraphicsComponent* g,std::string textureName);
-        void addToBatch(entity* e);
+        void addToBatch(entity* e,double alpha);
         void batchSprites();
         batch getBatch();
+        batch b;
 
 
 
@@ -55,7 +56,7 @@ class SpriteBatcher
         sf::VertexArray batch_vertArray;
         sf::Texture  batch_texture;
         std::vector<batchQuad> batch_list;
-        batch b;
+
         Json::Value textureRoot;
         Json::Reader myReader;
         std::ifstream textureFile;

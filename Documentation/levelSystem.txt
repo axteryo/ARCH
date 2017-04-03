@@ -6,6 +6,11 @@ load level data
 track level/room events
 
 
+
+/*** INSTEAD OF ROOMS THINK SEQUENCES*****/
+
+
+
 An idea is that the maps will store room data(enemies,objectives/items) the map will export the data into a room object which will spawn based on a sensor.
 
 The level class will load and save level data
@@ -23,8 +28,8 @@ level will load spritesheets, shapes, spawn Player, update, render, close.
 level class:
 
 
-entityList<Entity*>
-roomList<room*>
+	entityList<Entity*>
+	roomList<room*>
 	spawnPoint Struct{}
 	SpawnList<spawnPoint>
 
@@ -59,7 +64,7 @@ load()
 
 	 
 
-	//SpriteBatcher.setTextureFrame();
+	SpriteBatcher.setTextureFrame();
 	gc.setFrame()
 	
 
@@ -74,12 +79,23 @@ createRoom()
 }
 
 
-
-
-map
 //RoomSpawner
 CharacterSpawner
 SpriteBatcher
+
+
+MAP CLASS
+
+The level class will unpackage a map file or save file and pass the data to the necessary classes.
+(a save file will generally have the name of the current map file.)
+
+Map data will be passed to the map class, such as tile information which will be used to create the tiled map and collision data which will be used to create wall objects.
+The map object will divide the tile map into quadrants depending on the size.
+A map object will store map layer objects along with the current map texture.
+There will be three layers.(2 initially)
+
+Each layer will be split into the same number of quadrants.
+
 
 
 

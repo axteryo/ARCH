@@ -9,7 +9,7 @@ player::player(GraphicsComponent* g,PhysicsComponent* p)
     inputComponent = new playerInputComponent;
     thrustRate = 0;
     turnRate = 0;
-    pComponent->setTopSpeed(30);
+    pComponent->setTopSpeed(80);
     //ctor
 }
 
@@ -60,11 +60,11 @@ void player::update(float dt)
     switch(thrustState)
     {
     case THRUST:
-        turnRate = 3;
+        turnRate = 2;
         thrust();
         break;
     case THRUST_F:
-        turnRate = 10;
+        turnRate = 6;
         thrustRate = 0;
         break;
     }
@@ -74,17 +74,23 @@ void player::update(float dt)
         brake();
         break;
     case BRAKE_F:
-        pComponent->setTopSpeed(30);
+        pComponent->setTopSpeed(80);
         break;
     }
+
+
     pComponent->update(dt);
+    gComponent->update(this);
 }
 GraphicsComponent* player::getGraphic()
 {
     return gComponent;
 }
 
-
+PhysicsComponent* player::getPhysics()
+{
+    return pComponent;
+}
 std::string player::getID()
 {
     return entity_ID;
@@ -144,16 +150,16 @@ void player::thrust()
 {
     float r = getRotation();
     b2Vec2 aim(0,0);
-    //turnRate =.04;
-    if(thrustRate<150)
+
+    if(thrustRate>=240)
     {
-        thrustRate += 5;
+        thrustRate = 240;
     }
     else
     {
-        thrustRate = 150;
+        thrustRate+=6;
     }
-    //thrustRate=;
+
     aim = b2Vec2(cos(r),sin(r));
     aim.Normalize();
 
@@ -163,6 +169,5 @@ void player::thrust()
 }
 void player::brake()
 {
-    pComponent->setTopSpeed(10);
-    //pComponent->limitVelocity();
+    pComponent->setTopSpeed(20);
 }

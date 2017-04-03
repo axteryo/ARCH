@@ -52,7 +52,7 @@ void cam::follow(sf::Vector2i point)
 
 
 
-        //camView.setCenter(v2i_FocalPoint.x,v2i_FocalPoint.y);
+        //
 
             }
 */

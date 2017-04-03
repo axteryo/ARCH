@@ -1,0 +1,41 @@
+What is the problem?
+
+The sprite is showing signs of visible artifices. 
+
+Then lerp.
+
+Lerp doesn't work.
+
+Why not?
+
+Maybe it's not lerping correctly.
+
+But we wrote it correctly.
+
+Maybe we're not inputing correct values.
+
+Maybe our sprite update system is all kinds of fucked
+
+Too blanketed
+
+Ok maybe we have been going about setting render states all wrong.
+
+ok
+
+Then what should we do
+
+reassess the methods reassess the logic of it all
+
+ok
+
+
+GraphicsComponent()
+{
+	currentState;
+	previousState;
+	setCurrentState;
+	setPreviousState;
+
+}
+
+Should there be an update? nah not really.

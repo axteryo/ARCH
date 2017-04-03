@@ -702,7 +702,7 @@
         {
          "columns":6,
          "firstgid":1,
-         "image":"..\/ARCHGAME\/assets\/spritesheet2.png",
+         "image":"spritesheet2.png",
          "imageheight":320,
          "imagewidth":384,
          "margin":0,

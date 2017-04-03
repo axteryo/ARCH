@@ -22,7 +22,7 @@ class GameController
     protected:
     private:
         sf::Keyboard keyBoard;
-        sf::Joystick joyStick;
+        //sf::Joystick joyStick;
         std::string playerThrustAction;
         std::string playerTurnLeftAction;
         std::string playerTurnRightAction;

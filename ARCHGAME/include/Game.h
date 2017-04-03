@@ -4,6 +4,8 @@
 #include <SFML/Graphics.hpp>
 #include <Box2D/Box2D.h>
 #include <SFML/Window.hpp>
+#include <SFML/OpenGL.hpp>
+
 #include <string>
 #include <math.h>
 #include <iostream>
@@ -11,6 +13,7 @@
 
 #include "level.h"
 #include "GameController.h"
+#include "camera.h"
 
 
 
@@ -39,6 +42,8 @@ class Game
         sf::Event event;
         sf::Clock clock;
 
+        sf::View tempView;
+
         sf::Time currentTime;
         float flPreviousTime;
         float dt;
@@ -48,13 +53,15 @@ class Game
         float32 timeStep;
         int32 velocityIterations;
         int32 positionIterations;
+        bool isVsynced;
 
 
 
 
         void processInput();
         void update(float dt);
-        void render();
+        void render(double alpha);
+
 
 
         level gameLevel;

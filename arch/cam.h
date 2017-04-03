@@ -15,7 +15,6 @@ class cam
         void frame();
         void update();
         sf::View getView();
-
         sf::View camView;
         sf::Vector2f v2f_Position;
         sf::Vector2i v2i_FocalPoint;

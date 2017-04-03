@@ -24,8 +24,8 @@
                  "type":"archii_texture",
                  "visible":true,
                  "width":32,
-                 "x":2112,
-                 "y":128
+                 "x":128,
+                 "y":384
                 }, 
                 {
                  "height":0,

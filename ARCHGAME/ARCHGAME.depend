@@ -3,19 +3,21 @@
 	<iostream>
 	"Game.h"
 
-1489679624 source:c:\users\mesh\documents\projectarch\archgame\src\level.cpp
+1491072235 source:c:\users\mesh\documents\projectarch\archgame\src\level.cpp
 	"level.h"
 	"EntitySpawner.h"
 	"SpriteBatcher.h"
+	"GameMap.h"
 
-1488862023 c:\users\mesh\documents\projectarch\archgame\include\level.h
+1491071207 c:\users\mesh\documents\projectarch\archgame\include\level.h
 	<SFML/Graphics.hpp>
 	<SFML/Window.hpp>
 	<Box2D/Box2D.h>
 	<iostream>
-	"player.h"
 	"GraphicsComponent.h"
 	"PhysicsComponent.h"
+	"player.h"
+	"camera.h"
 
 1487483649 source:c:\users\mesh\documents\projectarch\archgame\src\entity.cpp
 	"entity.h"
@@ -402,18 +404,20 @@
 	<string>
 	<vector>
 
-1489636554 source:c:\users\mesh\documents\projectarch\archgame\src\game.cpp
+1491178631 source:c:\users\mesh\documents\projectarch\archgame\src\game.cpp
 	"Game.h"
 
-1489121619 c:\users\mesh\documents\projectarch\archgame\include\game.h
+1491177737 c:\users\mesh\documents\projectarch\archgame\include\game.h
 	<SFML/Graphics.hpp>
 	<Box2D/Box2D.h>
 	<SFML/Window.hpp>
+	<SFML/OpenGL.hpp>
 	<string>
 	<math.h>
 	<iostream>
 	"level.h"
 	"GameController.h"
+	"camera.h"
 
 1456773003 c:\box2d_v2.3.1\box2d\box2d.h
 	<Box2D/Common/b2Settings.h>
@@ -651,27 +655,27 @@
 	<sstream>
 	"config.h"
 
-1489526988 source:c:\users\mesh\documents\projectarch\archgame\src\physicscomponent.cpp
+1491179019 source:c:\users\mesh\documents\projectarch\archgame\src\physicscomponent.cpp
 	"PhysicsComponent.h"
 
-1489526786 c:\users\mesh\documents\projectarch\archgame\include\physicscomponent.h
+1491174178 c:\users\mesh\documents\projectarch\archgame\include\physicscomponent.h
 	<Box2D/Box2D.h>
 	"entity.h"
 	<iostream>
 
-1488958595 source:c:\users\mesh\documents\projectarch\archgame\src\graphicscomponent.cpp
+1490807622 source:c:\users\mesh\documents\projectarch\archgame\src\graphicscomponent.cpp
 	"GraphicsComponent.h"
 
-1488594259 c:\users\mesh\documents\projectarch\archgame\include\graphicscomponent.h
+1489731854 c:\users\mesh\documents\projectarch\archgame\include\graphicscomponent.h
 	<SFML/Graphics.hpp>
 	<SFML/Window.hpp>
 	"entity.h"
 	"PhysicsComponent.h"
 
-1489426012 source:c:\users\mesh\documents\projectarch\archgame\src\spritebatcher.cpp
+1490896956 source:c:\users\mesh\documents\projectarch\archgame\src\spritebatcher.cpp
 	"SpriteBatcher.h"
 
-1488861476 c:\users\mesh\documents\projectarch\archgame\include\spritebatcher.h
+1490583988 c:\users\mesh\documents\projectarch\archgame\include\spritebatcher.h
 	"GraphicsComponent.h"
 	"player.h"
 	<iostream>
@@ -679,7 +683,7 @@
 	"json/json.h"
 	"batch.h"
 
-1489679597 source:c:\users\mesh\documents\projectarch\archgame\src\player.cpp
+1491178931 source:c:\users\mesh\documents\projectarch\archgame\src\player.cpp
 	"player.h"
 	"playerInputComponent.h"
 
@@ -735,7 +739,7 @@
 1489527503 source:c:\users\mesh\documents\projectarch\archgame\src\gamecontroller.cpp
 	"GameController.h"
 
-1489525938 c:\users\mesh\documents\projectarch\archgame\include\gamecontroller.h
+1490479933 c:\users\mesh\documents\projectarch\archgame\include\gamecontroller.h
 	"json/json.h"
 	<iostream>
 	<fstream>
@@ -747,4 +751,37 @@
 
 1489123042 c:\users\mesh\documents\projectarch\archgame\include\playerinputcomponent.h
 	"player.h"
+
+1490887388 source:c:\users\mesh\documents\projectarch\archgame\src\gamemap.cpp
+	"GameMap.h"
+
+1490583856 c:\users\mesh\documents\projectarch\archgame\include\gamemap.h
+	<Box2D/Box2D.h>
+	<SFML/Graphics.hpp>
+	<iostream>
+	<fstream>
+	"json/json.h"
+	"batch.h"
+
+1491177540 source:c:\users\mesh\documents\projectarch\archgame\src\camera.cpp
+	"camera.h"
+
+1491072168 c:\users\mesh\documents\projectarch\archgame\include\camera.h
+	<SFML/Graphics.hpp>
+	<SFML/Window.hpp>
+	"entity.h"
+	"player.h"
+
+1450293359 c:\sfml-2.3.2\include\sfml\opengl.hpp
+	<SFML/Config.hpp>
+	<windows.h>
+	<GL/gl.h>
+	<GLES/gl.h>
+	<GLES/glext.h>
+	<GL/gl.h>
+	<OpenGL/gl.h>
+	<OpenGLES/ES1/gl.h>
+	<OpenGLES/ES1/glext.h>
+	<GLES/gl.h>
+	<GLES/glext.h>
 

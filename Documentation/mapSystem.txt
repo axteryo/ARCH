@@ -1,0 +1,50 @@
+Necessary componenets of mapSystem
+
+MapFile
+MapObject
+LayerObject
+QuadrantSize
+MapSize
+
+The mapobject will load the map file
+
+The map file will be split into layer objects
+
+Each layer will be a vertex array(we have a batch object class so we can just wrap that into layers.)
+---so that means that each layer will be a batch---
+
+Each layer will be drawn in the order they are given to the level class
+
+The map file will be composed of an array of tile data which corresponds to the tiles location on the map
+
+
+Class MapObject
+{
+	jsValue baseMapRoot
+	jsReader mapReader
+	vector<int> levelData;
+	vector<vector<int>> layerData; 
+	batch layer1
+	batch layer2
+	v2f_mapDimensions
+	v2f_tileDimensions
+	v2f_textureSheetDimensions
+	mapTexture
+	
+	
+	loadFile()
+	create()
+	close()
+
+}
+
+
+
+
+
+
+The map file will be seperated into Quadrants based off of the size of it
+
+
+
+

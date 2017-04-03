@@ -17,6 +17,7 @@ void SpriteBatcher::setBatchTexture(sf::Image i)
     else
     {
         std::cout<<"Entity_texture has successfully been stored"<<std::endl;
+         batch_texture.setSmooth(true);
 
     }
 
@@ -68,7 +69,7 @@ void SpriteBatcher::setFrameTexture(GraphicsComponent* g,std::string textureName
 }
 
 ///Add a quad representation of an entity objects graphics component to a list of quads to be drawn to screen
-void SpriteBatcher::addToBatch(entity* e)
+void SpriteBatcher::addToBatch(entity* e, double alpha)
 {
     GraphicsComponent* g;
     States::renderState state;
@@ -78,13 +79,14 @@ void SpriteBatcher::addToBatch(entity* e)
         player* p;
         p = static_cast<player*>(e);
         g = p->getGraphic();
-        g->update(e);
-        state = g->getCurrentState();
         i = g->getTextureCoord();
+        //g->update(e);
+        state = States::lerpRenderState(g->getPreviousState(),g->getCurrentState(),alpha);
 
-        //std::cout<<i.left<<","<<i.top<<","<<i.width<<","<<i.height<<std::endl;
+
+
     }
-    //sf::Vertex* quad;
+
 
     ///Create a quad struct object and set the 4 corners of it's physical location
     /// and the 4 corners of it's texture position on spritesheet
@@ -110,15 +112,13 @@ void SpriteBatcher::addToBatch(entity* e)
     quad.point3 =rotation.transformPoint(quad.point3);
     quad.point4 =rotation.transformPoint(quad.point4);
 
-    //quad.rotation =270;
-
 
     batch_list.push_back(quad);
 }
 
 void SpriteBatcher::batchSprites()
 {
-    //sf::Transform rotation;
+
     b.v.clear();
 
     if(!batch_list.empty())
@@ -127,7 +127,7 @@ void SpriteBatcher::batchSprites()
         int j = 0;
         for(int i = 0; i <batch_list.size();++i)
         {
-            //rotation.rotate(batch_list[i].rotation,batch_list[i].center);
+
             sf::Vertex* quad = &b.v[j];
             quad[j].position =batch_list[i].point1;
             quad[j+1].position =batch_list[i].point2;
@@ -144,12 +144,12 @@ void SpriteBatcher::batchSprites()
 
 
             j+=2;
-            //batch_vertArray[i]=batch_list[i];
+
         }
     }
 
     b.t = batch_texture;
-    b.t.setSmooth(true);
+
     batch_list.clear();
 
 

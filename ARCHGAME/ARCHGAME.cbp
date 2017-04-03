@@ -56,10 +56,12 @@
 		<Unit filename="include/EntitySpawner.h" />
 		<Unit filename="include/Game.h" />
 		<Unit filename="include/GameController.h" />
+		<Unit filename="include/GameMap.h" />
 		<Unit filename="include/GraphicsComponent.h" />
 		<Unit filename="include/PhysicsComponent.h" />
 		<Unit filename="include/SpriteBatcher.h" />
 		<Unit filename="include/batch.h" />
+		<Unit filename="include/camera.h" />
 		<Unit filename="include/entity.h" />
 		<Unit filename="include/json/json-forwards.h" />
 		<Unit filename="include/json/json.h" />
@@ -70,10 +72,12 @@
 		<Unit filename="src/EntitySpawner.cpp" />
 		<Unit filename="src/Game.cpp" />
 		<Unit filename="src/GameController.cpp" />
+		<Unit filename="src/GameMap.cpp" />
 		<Unit filename="src/GraphicsComponent.cpp" />
 		<Unit filename="src/PhysicsComponent.cpp" />
 		<Unit filename="src/SpriteBatcher.cpp" />
 		<Unit filename="src/batch.cpp" />
+		<Unit filename="src/camera.cpp" />
 		<Unit filename="src/entity.cpp" />
 		<Unit filename="src/jsoncpp.cpp" />
 		<Unit filename="src/level.cpp" />

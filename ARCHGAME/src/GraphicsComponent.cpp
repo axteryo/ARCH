@@ -34,6 +34,8 @@ void GraphicsComponent::update(entity* e)
     currentRenderState.rotation=States::to_degrees(e->getRotation());
 }
 
+
+
 GraphicsComponent::~GraphicsComponent()
 {
     //dtor

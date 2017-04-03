@@ -6,13 +6,22 @@
 #include <Box2D/Box2D.h>
 #include <iostream>
 
-#include "player.h"
+
 //#include "entity.h"
 #include "GraphicsComponent.h"
 #include "PhysicsComponent.h"
+#include "player.h"
+#include "camera.h"
 
 class EntitySpawner;
 class SpriteBatcher;
+class GameMap;
+
+
+
+
+extern camera gameCamera;
+
 
 
 
@@ -36,10 +45,12 @@ class level// : public sf::Drawable, public sf::Transformable
         int getQuadrant();
         void draw();
         **/
-        void load();
+        void load(std::string mapFile);
         void getSpawnPoints();
         void update(float dt);
-        void render(sf::RenderWindow* window);
+        void physicsUpdate(float dt, float a);
+        //void physicsSmooth(float a);
+        void render(sf::RenderWindow* window,double alpha);
 
         std::vector<spawnPoint> spawnList;
         std::vector<entity*> entityList;
@@ -47,6 +58,7 @@ class level// : public sf::Drawable, public sf::Transformable
 
         EntitySpawner* spawner;
         SpriteBatcher* batcher;
+        GameMap* _map;
 
 
 

@@ -1,0 +1,42 @@
+The 2d camera will be an object that will behave differently depending on the situation.
+There are several problems we must address with the camera. When the player is moving independtly of any camera movement, there is a very noticeable stuttering that is a result of the physics calculations.
+However, when the player has camera position locked on it, the surrounding world has a noticeable stutter, likely due to the camera trying to constantly hone in on the player.
+
+a possible work around for this is to define clear camera states that will work iterchangeably to mask these issues.
+
+
+Camera
+{
+
+ target_id;
+
+ vector position
+ vector cam_range	
+ 
+ sfmlView viewPort
+ vector focalPoint
+ 
+ update(entity);
+	
+ camera_states[anchoredX,anchoredY]
+
+ Frame();
+ Follow();
+ 
+
+}
+
+
+The camera will update based on an entity
+In the case of the player, the Camera will update based on the players current state and the input of the controller
+If the controller registers that the player is "Thrusting" in a certain direction, the camera will aim ahead of the player in the direction they are facing while taking their velocity into account, and the camera will zoom in or out slightly.
+
+if the controller registers that the player is not "Thrusting", but merely floating or rotating, the camera will hone slightly on and off the player.  
+
+
+
+
+NEW CAM IDEAS 10/21/2016
+
+
+IN the camera update function have a switch for camera modes like follow, frame etc and various functions like zoom and set subject()

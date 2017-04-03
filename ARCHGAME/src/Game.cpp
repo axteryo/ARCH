@@ -2,20 +2,26 @@
 
 GameController controller;
 
+
 Game::Game()
 {
     v2f_windowSize = sf::Vector2f(1024,768);
     window = new sf::RenderWindow(sf::VideoMode(v2f_windowSize.x,v2f_windowSize.y),"Initiative_ARCH");
-    window->setVerticalSyncEnabled(true);
+    tempView = sf::View(sf::Vector2f(90,600),v2f_windowSize);
+    tempView.zoom(1.25);
+    gameCamera.setCoords(sf::Vector2i(90,600),sf::Vector2f(1024,768));
+    //tempView.setSize(v2f_windowSize.x+256,v2f_windowSize.y+256);
     //world->SetAutoClearForces(false);
-
+    //window->setFramerateLimit(300);
     gameRunning = true;
 
-    dt = .01f;
+    dt = 1.f/60.0f;
 
-    timeStep = 1.0/60.0;
+    timeStep = 1.0/60.0f;
     velocityIterations = 6;
     positionIterations = 2;
+    isVsynced = false;
+    window->setVerticalSyncEnabled(isVsynced);
 
 
 
@@ -23,19 +29,29 @@ Game::Game()
 
 void Game::start()
 {
+
     float lastTime = 0.0;
     float newTime = 0.0;
     lastTime=clock.getElapsedTime().asSeconds();
     float elapsed = 0.0;
     float accumulator = 0.0;
+    int t = 0.0;
+
+
+
 
     ///Game Controller Bindings are loaded
     controller.loadBindings();
     ///load function is called here to load the entities and assets of the game level
-    gameLevel.load();
+    gameLevel.load("assets/testmap4.json");
 
     while(window->isOpen())
     {
+         ///Process user input
+        processInput();
+
+
+
         /// The clock goes forward so we store the current time in newTime
         ///Then we get how much has elapsed bu subtracting the lastTime
         newTime = clock.getElapsedTime().asSeconds();
@@ -47,28 +63,51 @@ void Game::start()
         }
 
         lastTime = newTime;
-        accumulator +=elapsed;
 
-        ///Process user input
-        processInput();
+        if(elapsed>.017)
+        {
+            //std::cout<<"Stutter frame detected"<<std::endl;
+        }
+        accumulator +=elapsed;
+        //std::cout<<1/elapsed<<std::endl;
+
+
 
         ///update logic at a fixed rate of 30
-        while(accumulator>=timeStep)
+        float o = 0.0;
+        int counter = 0;
+        //t+=elapsed;
+
+
+        while(accumulator>=dt)
         {
-            ///increment accumulator
-            accumulator-=timeStep;
-            ///update logic
-                update(dt);
-            ///update Physics
+            counter+=1;
+            update(dt);
+            accumulator-=dt;
             world->Step(timeStep,velocityIterations,positionIterations);
-            //world->Step(timeStep,velocityIterations,positionIterations);
-            //world->ClearForces();
-
-
-
         }
+
+        //std::cout<<counter<<std::endl;
+        //gameLevel.physicsUpdate(elapsed,accumulator);
+
+
+
+
+        //world->ClearForces();
+        //std::cout<<elapsed<<std::endl;
+
+
+
+
+
+
+        double alpha = (accumulator/dt);
+
+
         ///render freely
-        render();
+        render(alpha);
+        //window->setView(tempView);
+
         if (!gameRunning)
         {
             window->close();
@@ -76,10 +115,11 @@ void Game::start()
     }
 
 }
-void Game::render()
+void Game::render(double alpha)
 {
+    window->setView(gameCamera.camView);
     window->clear(sf::Color::Black);
-    gameLevel.render(window);
+    gameLevel.render(window,alpha);
     /*for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
         {
                 b2PolygonShape* polygonShape;
@@ -129,6 +169,8 @@ void Game::render()
 
         }*/
     window->display();
+
+
 }
 /** The game is updated **/
 void Game::update(float dt)
@@ -152,10 +194,32 @@ void Game::processInput()
             {
                 gameRunning = false;
             }
+            if(keyBoard.isKeyPressed(keyBoard.Num1))
+            {
+                if(isVsynced)
+                {
+                    isVsynced = false;
+                }
+                else
+                {
+                    isVsynced = true;
+                }
+                window->setVerticalSyncEnabled(isVsynced);
+            }
         }
         if(event.type == sf::Event::MouseMoved)
         {
 
+        }
+        if(event.type == sf::Event::Resized)
+        {
+
+
+           gameCamera.camView.setSize(v2f_windowSize.x+256,v2f_windowSize.y);
+           gameCamera.camView.zoom(1.25);
+           //window->setView();//event.size.width+512, event.size.height+1024);
+            std::cout << "new width: " << event.size.width << std::endl;
+            std::cout << "new height: " << event.size.height << std::endl;
         }
     }
 

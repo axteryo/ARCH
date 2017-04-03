@@ -21,8 +21,10 @@ class GraphicsComponent
         States::renderState getPreviousState();
 
 
+
         sf::IntRect getTextureCoord();
         void setFrame(sf::IntRect c);
+        //void setState(States::renderState r);
     protected:
 
 
