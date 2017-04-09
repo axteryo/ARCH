@@ -28,6 +28,7 @@ class GameMap// : public sf::Drawable, public sf::Transformable
 
     protected:
     private:
+
         Json::Value baseMapRoot;
         Json::Reader mapReader;
         std::ifstream currentMapFile;

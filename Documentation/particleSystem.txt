@@ -1,0 +1,23 @@
+particle system
+
+How would particles work?
+
+What exactly would particles be?
+
+particles would be an entity....
+
+say we have a particle spawner class?
+
+go on
+
+the sprite batcher would parse that entity into particle spawner class(sub type say explosion or something)
+it would interpret each entity differently and respond accordingly....
+
+now how would i create a particle spawner put it in the update loop.
+
+have some sort of observer watch and do?
+for example
+particleMaster.watches(player)
+and pushesback(explosionParticleSpawner)into spritebatcher
+
+Just a possible thought....

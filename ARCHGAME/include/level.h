@@ -49,7 +49,7 @@ class level// : public sf::Drawable, public sf::Transformable
         void getSpawnPoints();
         void update(float dt);
         void physicsUpdate(float dt, float a);
-        //void physicsSmooth(float a);
+        void physicsSmooth(float alpha);
         void render(sf::RenderWindow* window,double alpha);
 
         std::vector<spawnPoint> spawnList;

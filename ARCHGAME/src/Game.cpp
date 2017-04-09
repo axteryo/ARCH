@@ -12,7 +12,8 @@ Game::Game()
     gameCamera.setCoords(sf::Vector2i(90,600),sf::Vector2f(1024,768));
     //tempView.setSize(v2f_windowSize.x+256,v2f_windowSize.y+256);
     //world->SetAutoClearForces(false);
-    //window->setFramerateLimit(300);
+    //window->setFramerateLimit(600);
+
     gameRunning = true;
 
     dt = 1.f/60.0f;
@@ -20,10 +21,8 @@ Game::Game()
     timeStep = 1.0/60.0f;
     velocityIterations = 6;
     positionIterations = 2;
-    isVsynced = false;
+    isVsynced = true;
     window->setVerticalSyncEnabled(isVsynced);
-
-
 
 }
 
@@ -34,8 +33,9 @@ void Game::start()
     float newTime = 0.0;
     lastTime=clock.getElapsedTime().asSeconds();
     float elapsed = 0.0;
-    float accumulator = 0.0;
+    double accumulator = 0.0;
     int t = 0.0;
+    int counter = 1;
 
 
 
@@ -64,49 +64,83 @@ void Game::start()
 
         lastTime = newTime;
 
-        if(elapsed>.017)
-        {
-            //std::cout<<"Stutter frame detected"<<std::endl;
-        }
+
         accumulator +=elapsed;
-        //std::cout<<1/elapsed<<std::endl;
+        //
+        /*if(elapsed>.018)
+        {
+
+
+
+
+        //counter+=1;
+
+        }*/
 
 
 
         ///update logic at a fixed rate of 30
         float o = 0.0;
-        int counter = 0;
-        //t+=elapsed;
 
+        t+=elapsed;
+
+        double alpha;
+         if(isVsynced&&accumulator>(dt+(dt/10)))
+        {
+
+                //std::cout<<"LEFTOVER TIME:"
+                //<<accumulator<<std::endl;
+                accumulator -=(dt/10);
+        }
 
         while(accumulator>=dt)
         {
-            counter+=1;
+
+
+            //std::cout<<i<<std::endl;
             update(dt);
-            accumulator-=dt;
+
             world->Step(timeStep,velocityIterations,positionIterations);
+
+
+
+            //counter = 1;
+            accumulator-=dt;
+
+            //
         }
 
-        //std::cout<<counter<<std::endl;
-        //gameLevel.physicsUpdate(elapsed,accumulator);
+        alpha = (accumulator/dt);
+         if(isVsynced&&accumulator<(dt/10))
+        {
+                //std::cout<<"FPS:"
+                //<<1/elapsed<<std::endl;
+                //std::cout<<"LEFTOVER TIME:"
+                //<<accumulator<<std::endl;
+                accumulator +=(dt/10);
+        }
 
 
 
 
-        //world->ClearForces();
-        //std::cout<<elapsed<<std::endl;
 
 
 
 
 
+       //gameLevel.physicsSmooth(alpha);
 
-        double alpha = (accumulator/dt);
+
+
+
+
+        //
 
 
         ///render freely
-        render(alpha);
-        //window->setView(tempView);
+
+            render(alpha);
+
 
         if (!gameRunning)
         {
@@ -199,10 +233,13 @@ void Game::processInput()
                 if(isVsynced)
                 {
                     isVsynced = false;
+                    std::cout<<"VSync is OFF"<<std::endl;
                 }
                 else
                 {
                     isVsynced = true;
+                     std::cout<<"VSync is ON"<<std::endl;
+                    //clock.restart();
                 }
                 window->setVerticalSyncEnabled(isVsynced);
             }
@@ -215,8 +252,8 @@ void Game::processInput()
         {
 
 
-           gameCamera.camView.setSize(v2f_windowSize.x+256,v2f_windowSize.y);
-           gameCamera.camView.zoom(1.25);
+           gameCamera.camView.setSize(v2f_windowSize.x+384,v2f_windowSize.y);
+           gameCamera.camView.zoom(1.5);
            //window->setView();//event.size.width+512, event.size.height+1024);
             std::cout << "new width: " << event.size.width << std::endl;
             std::cout << "new height: " << event.size.height << std::endl;

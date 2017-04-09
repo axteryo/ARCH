@@ -1,0 +1,30 @@
+{"frames": [
+
+{
+	"filename": "archii_texture.png",
+	"frame": {"x":1,"y":1,"w":64,"h":54},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":54},
+	"sourceSize": {"w":64,"h":54},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "d1_texture.png",
+	"frame": {"x":67,"y":1,"w":32,"h":48},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":48},
+	"sourceSize": {"w":32,"h":48},
+	"pivot": {"x":0.5,"y":0.5}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "characterTextures.png",
+	"format": "RGBA8888",
+	"size": {"w":100,"h":56},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:6ae6e5aba6272e76aced9ef5f22952d9:23dfdfda65e2c73f38b980d28cdee62a:df285b20ee2436030770164ab2a563bc$"
+}
+}

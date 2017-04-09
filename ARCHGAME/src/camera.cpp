@@ -14,31 +14,34 @@ void camera::setCoords(sf::Vector2i focal, sf::Vector2f viewSize)
     camView.zoom(1.25);
 }
 
-void camera::update(entity* e)
+void camera::update()
 {
     sf::Vector2f point = sf::Vector2f(0,0);
-    if(targetID.compare("entity_player")==0)
+    if(target)
     {
-        player* p;
-        p = static_cast<player*>(e);
-        States::positionState  s = p->getPhysics()->getCurrentState();
-        sf::Vector2f pos = States::to_v2f(s.position);
-        sf::Vector2f vel = States::to_v2f(s.velocity);
-        float r = s.rotation;
-        point = sf::Vector2f(pos.x+(cos(r)*50)+(vel.x*.15),
-                             pos.y+(sin(r)*50)+(vel.y*.15));
+        if(target->getID().compare("entity_player")==0)
+        {
+            player* p;
+            p = static_cast<player*>(target);
+            States::positionState  s = p->getPhysics()->getCurrentState();
+            sf::Vector2f pos = States::to_v2f(s.position);
+            sf::Vector2f vel = States::to_v2f(s.velocity);
+            float r = s.rotation;
+            int length = 200;
+            float vel_percent = .5;
+            ///cos and sin of r return direction
+            point = sf::Vector2f(pos.x+(cos(r)*length)+(vel.x*vel_percent),
+                                 pos.y+(sin(r)*length)+(vel.y*vel_percent));
 
-            follow(point);
+            follow(point,50);
 
-
-        //std::cout<<"got here"<<std::endl;
-
-
+        }
     }
+
     camView.setCenter(v2i_focalPoint.x,v2i_focalPoint.y);
 }
 ///Follow function takes a point vector position parameter and changes the focal point of the camera
-void camera::follow(sf::Vector2f point)
+void camera::follow(sf::Vector2f point,int rate)
 {
     float camVel;
     sf::Vector2f direction = sf::Vector2f(point.x - v2i_focalPoint.x,point.y - v2i_focalPoint.y);
@@ -46,14 +49,14 @@ void camera::follow(sf::Vector2f point)
     camVel =sqrt(((point.x - v2i_focalPoint.x)*
             (point.x-v2i_focalPoint.x)) +
             ((point.y - v2i_focalPoint.y)*
-            (point.y-v2i_focalPoint.y)))/20;
+            (point.y-v2i_focalPoint.y)))/rate;
 
     v2i_focalPoint.x+=(direction.x*camVel);
     v2i_focalPoint.y+=(direction.y*camVel);
 }
-void camera::setTarget(std::string t)
+void camera::setTarget(entity* e)
 {
-    targetID = t;
+    target = e;
 }
 camera::~camera()
 {

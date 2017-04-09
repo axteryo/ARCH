@@ -45,7 +45,7 @@ void level::load(std::string mapFile)
     _map->create();
 
     spawnPoint pSpawn;
-    gameCamera.setTarget("entity_player");
+
     pSpawn.spawnID = "entity_player";
     pSpawn.location =b2Vec2(3,20);
     pSpawn.rotation =0;
@@ -54,6 +54,10 @@ void level::load(std::string mapFile)
     for(int i = 0; i<1;++i)
     {
         entityList.push_back(spawner->spawnEntity(pSpawn));
+        if(entityList[i]->getID().compare("entity_player")==0)
+        {
+             gameCamera.setTarget(entityList[i]);
+        }
         /**
         THIS IS A PROBLEM IN THE MAKING
         having to cast the entity in order to set it's frame texture
@@ -76,14 +80,10 @@ void level::update(float dt)
         //std::cout<<"GOT HERE"<<std::endl;
         for(int i = 0; i<entityList.size();++i)
         {
-
             entityList[i]->update(dt);
-            if(entityList[i]->getID().compare(gameCamera.targetID)==0)
-            {
-                gameCamera.update(entityList[i]);
-            }
             //std::cout<<entityList[i]->getPosition().x/30<<","<<entityList[i]->getPosition().y<<std::endl;
         }
+        gameCamera.update();
     }
 
 }
@@ -118,7 +118,7 @@ void level::physicsUpdate(float dt, float a)
     const int maxSteps = 5;
     float32 timeStep = 1.f/60.f;
     //a = 0.0f;
-   a+=dt;
+    a+=dt;
     int numSteps = static_cast<int>(std::floor(a/timeStep));
     if(numSteps>0)
     {
@@ -129,7 +129,7 @@ void level::physicsUpdate(float dt, float a)
 		a < timeStep + FLT_EPSILON
 	);
     int clampedNumSteps = std::min(numSteps,maxSteps);
-    std::cout<<clampedNumSteps<<std::endl;
+    //std::cout<<clampedNumSteps<<std::endl;
 
 
     for(int i = 0;i<clampedNumSteps;++i)
@@ -166,8 +166,8 @@ void level::physicsUpdate(float dt, float a)
 
 */
 }
-/*
-void level::physicsSmooth(float a)
+
+void level::physicsSmooth(float alpha)
 {
     PhysicsComponent* ph;
     player* p;
@@ -176,26 +176,33 @@ void level::physicsSmooth(float a)
 
 
         //std::cout<<"GOT HERE"<<std::endl;
-       // for(int i = 0; i<entityList.size();++i)
-        //{
-            if(entityList[0]->getID().compare("entity_player")==0)
+       for(int i = 0; i<entityList.size();++i)
+        {
+            if(entityList[i]->getID().compare("entity_player")==0)
             {
 
-                p = static_cast<player*>(entityList[0]);
+                p = static_cast<player*>(entityList[i]);
+
                 ph = p->getPhysics();
-                States::positionState state = States::lerpPositionState(ph->getPreviousState(),ph->getCurrentState(),a);
-                ph->setPosition(state.position);
-                ph->setRotation(state.rotation);
+                b2Vec2 cur = p->getPosition();
+                b2Vec2 pre = ph->getBody()->GetPosition();
+                //std::cout<<cur.x<<","<<pre.x<<std::endl;
+                float curAngle = p->getRotation();
+                float preAngle = ph->getBody()->GetAngle();
+                cur.x = (pre.x*alpha+cur.x*(1.0f-alpha));
+                cur.y = (pre.y*alpha+cur.y*(1.0f-alpha));
+                curAngle = (curAngle*alpha+preAngle*(1.0f-alpha));
+                p->setPosition(cur);
+                p->setRotation(curAngle);
+
+                //States::positionState state = //States::lerpPositionState(ph->getPreviousState(),ph->getCurrentState(),a);
+
                 /////>update(.01);
             }
             //entityList[i]->update(dt);
             //std::cout<<entityList[i]->getPosition().x/30<<","<<entityList[i]->getPosition().y<<std::endl;
         }
-    //
-
-
-
     }
 }
-*/
+
 

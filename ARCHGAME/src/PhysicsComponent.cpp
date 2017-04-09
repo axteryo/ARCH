@@ -50,8 +50,9 @@ States::renderState States::lerpRenderState(States::renderState pre, States::ren
 {
     States::renderState state;
 
-    state.position.x = (int)(cur.position.x*val+pre.position.x*(1.0f-val));
-    state.position.y = (int)(cur.position.y*val+pre.position.y*(1.0f-val));
+
+    state.position.x = (cur.position.x*val+pre.position.x*(1.0f-val));
+    state.position.y = (cur.position.y*val+pre.position.y*(1.0f-val));
     state.rotation = (cur.rotation*val+pre.rotation*(1.0f-val));
     //state.acceleration = cur.acceleration;
     //state.velocity = cur.velocity;
@@ -64,8 +65,8 @@ States::positionState States::lerpPositionState(States::positionState pre, State
     state.position.x = cur.position.x*val+pre.position.x*(1.0-val);
     state.position.y = cur.position.y*val+pre.position.y*(1.0-val);
     state.rotation = cur.rotation*val+pre.rotation*(1.0-val);
-    //state.acceleration = cur.acceleration;
-    //state.velocity = cur.velocity;
+    state.acceleration = cur.acceleration;
+    state.velocity = cur.velocity;
     return state;
 }
 
@@ -112,15 +113,15 @@ void PhysicsComponent::update(float dt)
     previousState = currentState;
 
     //currentState.velocity = body->GetLinearVelocity();
-    currentState.rotation+=(rotationAmount*dt);
-    currentState.velocity.x+=(currentState.acceleration.x*dt);
-    currentState.velocity.y+=(currentState.acceleration.y*dt);
+    currentState.rotation+=(rotationAmount);
+    currentState.velocity.x+=(currentState.acceleration.x);
+    currentState.velocity.y+=(currentState.acceleration.y);
 
     limitVelocity();
     //currentState.position.x +=(currentState.velocity.x*dt);
     //currentState.position.y +=(currentState.velocity.y*dt);
     //currentState.velocity = ;
-    body->SetLinearVelocity(b2Vec2(currentState.velocity.x*dt,currentState.velocity.y*dt));
+    body->SetLinearVelocity(currentState.velocity);
     currentState.position = body->GetPosition();
 
 
@@ -187,4 +188,9 @@ void PhysicsComponent::limitVelocity()
         currentState.velocity.x*=topSpeed;
         currentState.velocity.y*=topSpeed;
     }
+}
+
+b2Body* PhysicsComponent::getBody()
+{
+    return body;
 }

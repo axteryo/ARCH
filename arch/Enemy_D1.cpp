@@ -351,7 +351,7 @@ void Enemy_D1::drain()
             {
 
                 _physicsBody->body->DestroyFixture(attackFixture);
-                std::cout<<"getting here"<<std::endl;
+                //std::cout<<"getting here"<<std::endl;
                 //firing = false;
                 //attackDuration = 20;
                 //attackCoolDown = 60;

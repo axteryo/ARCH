@@ -1,0 +1,10 @@
+{
+	
+	"turnRight" :"Right",
+	"turnLeft" :"Left",
+	"thrust" :"Up",
+	"brake" :"LShift",
+	"useAttack1":"Space",
+	"useAttack2":"W"
+	
+}

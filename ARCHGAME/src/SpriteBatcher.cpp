@@ -139,10 +139,6 @@ void SpriteBatcher::batchSprites()
             quad[j+2].texCoords =batch_list[i].texPoint3;
             quad[j+3].texCoords =batch_list[i].texPoint4;
 
-
-
-
-
             j+=2;
 
         }

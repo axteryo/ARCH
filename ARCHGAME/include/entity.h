@@ -5,6 +5,9 @@
 #include <Box2D/Box2D.h>
 
 /**Entity interface class. Foundation for building entity objects with underlying functionality**/
+///NOTE to self Create a base class for other entity types to inherit from entity
+///Like A base Enemy class that uses data to drive it instead of creating a different class for each enemy
+///Same goes for GameObjects so to speak(interactable objects)
 class entity
 {
     public:

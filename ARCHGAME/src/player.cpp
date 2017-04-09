@@ -9,7 +9,7 @@ player::player(GraphicsComponent* g,PhysicsComponent* p)
     inputComponent = new playerInputComponent;
     thrustRate = 0;
     turnRate = 0;
-    pComponent->setTopSpeed(80);
+    pComponent->setTopSpeed(20);
     //ctor
 }
 
@@ -60,11 +60,11 @@ void player::update(float dt)
     switch(thrustState)
     {
     case THRUST:
-        turnRate = 2;
+        turnRate = .025;
         thrust();
         break;
     case THRUST_F:
-        turnRate = 6;
+        turnRate = .1;
         thrustRate = 0;
         break;
     }
@@ -74,7 +74,7 @@ void player::update(float dt)
         brake();
         break;
     case BRAKE_F:
-        pComponent->setTopSpeed(80);
+        pComponent->setTopSpeed(20);
         break;
     }
 
@@ -151,13 +151,13 @@ void player::thrust()
     float r = getRotation();
     b2Vec2 aim(0,0);
 
-    if(thrustRate>=240)
+    if(thrustRate>=1)
     {
-        thrustRate = 240;
+        thrustRate = 1;
     }
     else
     {
-        thrustRate+=6;
+        thrustRate+=.025;
     }
 
     aim = b2Vec2(cos(r),sin(r));
@@ -169,5 +169,5 @@ void player::thrust()
 }
 void player::brake()
 {
-    pComponent->setTopSpeed(20);
+    pComponent->setTopSpeed(7);
 }

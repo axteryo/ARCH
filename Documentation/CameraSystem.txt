@@ -35,8 +35,12 @@ if the controller registers that the player is not "Thrusting", but merely float
 
 
 
-
 NEW CAM IDEAS 10/21/2016
 
 
 IN the camera update function have a switch for camera modes like follow, frame etc and various functions like zoom and set subject()
+
+CAMERA AS AN OBSERVER VS CAMERA WITH AN OBSERVER
+
+if I give the camera object an observer it will be a pointer to a master observer that composes a list of events
+that processes a list of events at the end of each frame cycle

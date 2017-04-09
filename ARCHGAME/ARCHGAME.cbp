@@ -24,19 +24,19 @@
 				<Compiler>
 					<Add option="-O2" />
 					<Add option="-std=c++11" />
-					<Add directory="../../../../../SFML-2.3.2/include" />
+					<Add directory="../../../../../SFML/include" />
 					<Add directory="../../../../../Box2D_v2.3.1" />
 					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
 					<Add library="..\..\..\..\..\Box2D_v2.3.1\Build\Box2D\libBox2D.a" />
-					<Add library="..\..\..\..\..\SFML-2.3.2\lib\libsfml-graphics.a" />
-					<Add library="..\..\..\..\..\SFML-2.3.2\lib\libsfml-window.a" />
-					<Add library="..\..\..\..\..\SFML-2.3.2\lib\libsfml-system.a" />
+					<Add library="..\..\..\..\..\SFML\lib\libsfml-graphics.a" />
+					<Add library="..\..\..\..\..\SFML\lib\libsfml-window.a" />
+					<Add library="..\..\..\..\..\SFML\lib\libsfml-system.a" />
 					<Add directory="../../../../../Box2D_v2.3.1/Box2D" />
-					<Add directory="../../../../../SFML-2.3.2/lib" />
-					<Add directory="../../../../../SFML-2.3.2/bin" />
+					<Add directory="../../../../../SFML/lib" />
+					<Add directory="../../../../../SFML/bin" />
 				</Linker>
 			</Target>
 		</Build>
@@ -45,13 +45,13 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 			<Add directory="../../../../../Box2D_v2.3.1" />
-			<Add directory="../../../../../SFML-2.3.2/include" />
+			<Add directory="../../../../../SFML/include" />
 		</Compiler>
 		<Linker>
 			<Add library="..\..\..\..\..\Box2D_v2.3.1\Build\Box2D\libBox2D.a" />
-			<Add library="..\..\..\..\..\SFML-2.3.2\lib\libsfml-system.a" />
-			<Add library="..\..\..\..\..\SFML-2.3.2\lib\libsfml-graphics.a" />
-			<Add library="..\..\..\..\..\SFML-2.3.2\lib\libsfml-window.a" />
+			<Add library="..\..\..\..\..\SFML\lib\libsfml-system.a" />
+			<Add library="..\..\..\..\..\SFML\lib\libsfml-graphics.a" />
+			<Add library="..\..\..\..\..\SFML\lib\libsfml-window.a" />
 		</Linker>
 		<Unit filename="include/EntitySpawner.h" />
 		<Unit filename="include/Game.h" />

@@ -15,6 +15,11 @@
 #include "GameController.h"
 #include "camera.h"
 
+struct GameEvent
+{
+
+};
+
 
 
 

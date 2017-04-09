@@ -52,12 +52,15 @@ class PhysicsComponent
         b2Vec2 getPosition();
         void accelerate(b2Vec2 force);
         void createFixtureRectangle(b2Fixture* f,b2Vec2 dimensions,b2Vec2 position,std::string fixturedata);
+        void createFixtureShape();
         States::positionState getCurrentState();
         States::positionState getPreviousState();
         void setTopSpeed(float s);
         void limitVelocity();
 
         void update(float dt);
+
+        b2Body* getBody();
         /***
         virtual void createFixtureCircle() = 0;
         virtual void createFixtureFromPoints()= 0;

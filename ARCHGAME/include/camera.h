@@ -14,15 +14,16 @@ class camera
         camera();
         virtual ~camera();
         void setCoords(sf::Vector2i focal, sf::Vector2f viewSize);
-        void setTarget(std::string t);
+        void setTarget(entity* e);
 
-        void follow(sf::Vector2f point);
+        void follow(sf::Vector2f point,int rate);
         //void frame(sf::Vector2f point1,sf::Vector2f point2);
-        void update(entity* e);
+        void update();
         sf::View getView();
         sf::View camView;
 
         std::string targetID;
+        entity* target;
 
 
 
