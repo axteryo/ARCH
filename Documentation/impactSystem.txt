@@ -1,0 +1,32 @@
+Enemy gets hit by attack
+Enemy gaugesAttack Noting Type of attack and direction of attack
+Enemy Sets itself into the isAttacked State and sets the ImpactType as well as the impactdirection(b2vec2)
+
+In the enemies update loop, the enemys physicsBody applies the impact
+
+Enemy.gaugeAttack(AttackType,Direction)
+physicsBody.applyImpact(ImpactType,Direction);
+
+previousState
+
+gameObjectContainer(Enemy)
+impactType
+{
+	stunned,
+	pushedback,
+	//heavy(ratio combination of first two),
+	//misdirection,
+	//instantDeath,
+	NO_IMPACT
+	
+}
+
+PhysicsBody
+mobilityState
+{
+	MOBILE,
+	IMMOBILE
+	
+}
+
+NOTE TO SELF ADD CHECKFOROBSTACLEFUNCTION IS COLLISION FACTORY!!

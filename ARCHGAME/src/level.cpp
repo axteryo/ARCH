@@ -11,14 +11,7 @@ class GameMap;
 
 camera gameCamera;
 
-struct spawnPoint
-{
-    std::string spawnID;
-    b2Vec2 location;
-    float rotation;
 
-
-};
 level::level()
 {
     ///Creates A spawner object for creating entites and a batcher object for assembling sprites in a vertex array
@@ -32,6 +25,12 @@ level::~level()
 {
     //dtor
 }
+void level::setup()
+{
+    batcher->loadEntityTextures();
+    spawner->loadEntityData();
+    spawner->loadEntityShapes();
+}
 
 /**
 This function loads a specified level and retrieves and stores data
@@ -39,36 +38,32 @@ This function loads a specified level and retrieves and stores data
 **/
 void level::load(std::string mapFile)
 {
-
+    setup();
     _map->loadFile(mapFile);
-
     _map->create();
+    spawnList = _map->getSpawnSpoints();
+    wallList = _map->walls;
 
-    spawnPoint pSpawn;
 
-    pSpawn.spawnID = "entity_player";
+
+    /*spawnPoint pSpawn;
+
+    pSpawn.spawnID = "entity_d1";
+    pSpawn.entityType = "actor";
     pSpawn.location =b2Vec2(3,20);
-    pSpawn.rotation =0;
-    batcher->loadEntityTextures();
+    pSpawn.rotation =0;*/
     ///TEST CODE PLEASE REMOVE LATER
-    for(int i = 0; i<1;++i)
+    std::cout<<spawnList.size()<<std::endl;
+    for(int i = 0; i<spawnList.size();++i)
     {
-        entityList.push_back(spawner->spawnEntity(pSpawn));
+        entityList.push_back(spawner->spawnEntity(spawnList[i],batcher));
+
+        //std::cout<<"failed here"<<std::endl;
         if(entityList[i]->getID().compare("entity_player")==0)
         {
-             gameCamera.setTarget(entityList[i]);
+            gameCamera.setTarget(entityList[i]);
         }
-        /**
-        THIS IS A PROBLEM IN THE MAKING
-        having to cast the entity in order to set it's frame texture
-        **/
-        batcher->setFrameTexture(((player*)entityList[i])->getGraphic(),"archii_texture.png");
-        pSpawn.location.y+=5;
     }
-    //entityList.push_back(spawner->spawnEntity(pSpawn));
-
-
-    //batcher->setFrameTexture(((player*)entityList[0])->getGraphic(),"archii_texture.png");
 }
 
 
@@ -80,7 +75,7 @@ void level::update(float dt)
         //std::cout<<"GOT HERE"<<std::endl;
         for(int i = 0; i<entityList.size();++i)
         {
-            entityList[i]->update(dt);
+            entityList[i]->update();
             //std::cout<<entityList[i]->getPosition().x/30<<","<<entityList[i]->getPosition().y<<std::endl;
         }
         gameCamera.update();
@@ -168,7 +163,7 @@ void level::physicsUpdate(float dt, float a)
 }
 
 void level::physicsSmooth(float alpha)
-{
+{/*
     PhysicsComponent* ph;
     player* p;
     if(!entityList.empty())
@@ -202,7 +197,7 @@ void level::physicsSmooth(float alpha)
             //entityList[i]->update(dt);
             //std::cout<<entityList[i]->getPosition().x/30<<","<<entityList[i]->getPosition().y<<std::endl;
         }
-    }
+    }*/
 }
 
 

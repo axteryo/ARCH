@@ -29,9 +29,8 @@ void GraphicsComponent::setFrame(sf::IntRect c)
 
 void GraphicsComponent::update(entity* e)
 {
-    previousRenderState = currentRenderState;
-    currentRenderState.position=States::to_v2f(e->getPosition());
-    currentRenderState.rotation=States::to_degrees(e->getRotation());
+    previousRenderState = States::to_renderState(e->getPreviousState());
+    currentRenderState = States::to_renderState(e->getCurrentState());
 }
 
 

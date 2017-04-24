@@ -1,46 +1,28 @@
 #ifndef PHYSICSCOMPONENT_H
 #define PHYSICSCOMPONENT_H
 
-#include <Box2D/Box2D.h>
-#include "entity.h"
+
 #include <iostream>
+#include "entity.h"
 
 extern b2World* world;
-
-namespace States
+struct fixtureUserData
 {
-   struct positionState
-   {
-       b2Vec2 position;
-       b2Vec2 velocity;
-       b2Vec2 acceleration;
-       float rotation;
-   };
-   struct renderState
-   {
-       sf::Vector2f position;
-       float rotation;
-   };
-   void v2f_normalize(sf::Vector2f &source);
-   float to_degrees(float f);
-   float to_radians(float f);
-   b2Vec2 to_b2v(sf::Vector2f v);
-   sf::Vector2f to_v2f(b2Vec2 b);
-   sf::Vector2i to_v2i(b2Vec2 b);
-   renderState to_renderState(positionState p);
-   positionState to_positionState(renderState r);
-   renderState lerpRenderState(renderState pre,renderState cur,double val);
-   positionState lerpPositionState(positionState pre, positionState cur, float val);
-
-}
+  std::string data;
+  fixtureUserData()
+  {
+      data = "";
+  }
+};
 
 
-
-
+///NOTE TO SELF:IMPLEMENT BODY AND FIXTUREDATA
+///fixtureData Struct(fixtureType,Entity Type,pointer to fixture possibly...,etc.)
+///BodyData = (void*)Entity();
 class PhysicsComponent
 {
     public:
-        PhysicsComponent();
+        PhysicsComponent(b2BodyType t);
         virtual ~PhysicsComponent();
         void setPosition(b2Vec2 p);
         ///sets rotation to a specific angle
@@ -52,13 +34,14 @@ class PhysicsComponent
         b2Vec2 getPosition();
         void accelerate(b2Vec2 force);
         void createFixtureRectangle(b2Fixture* f,b2Vec2 dimensions,b2Vec2 position,std::string fixturedata);
-        void createFixtureShape();
+        void createFixtureCircle();
+        void createFixturePolygon(b2Fixture* f,float shape[],int shapeSize,b2Vec2 position,fixtureUserData* fixtureData);
         States::positionState getCurrentState();
         States::positionState getPreviousState();
         void setTopSpeed(float s);
         void limitVelocity();
 
-        void update(float dt);
+        void update();
 
         b2Body* getBody();
         /***

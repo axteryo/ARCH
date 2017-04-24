@@ -1,0 +1,37 @@
+Entity Component System
+
+An "Entity" is an object that is interactable in the game world.
+
+There will be different types of Entities:
+
+GameActor
+GameObject
+GameSequence(think level room,camera sequence)
+
+Apart from their core types differentiating them
+Each Entity will be characterized by the makeup of its components and the data of those components.
+
+GameActorComponents:
+graphicalComponent
+physicalComponent
+inputComponent
+AttackComponent
+
+
+GameObjectComponents:
+graphicalComponent
+physicalComponent
+triggerComponent
+
+
+GameSequenceComponents:
+triggerComponent
+physicalComponent
+
+
+Each entity will be created from the data about it in a file
+Their spawn points will reside in the map file.
+The map file will pass the spawn points to the entity spawner
+The entity spawner will return the entities in an entity list.
+
+

@@ -1,11 +1,8 @@
 #ifndef GRAPHICSCOMPONENT_H
 #define GRAPHICSCOMPONENT_H
 
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
 
 #include "entity.h"
-#include "PhysicsComponent.h"
 
 
 

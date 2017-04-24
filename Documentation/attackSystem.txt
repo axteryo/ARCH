@@ -1,0 +1,48 @@
+Player presses A key
+Key is mapped to useAttack1
+this changes player internal state to "attacking"
+
+
+Since UseAttack1 was activated, Attack1Function is used in the update function
+
+if Attack1 is a laser, a laser will be fired in the direction the player is aiming.
+
+How would that work?
+
+Ideas:
+
+A fixture in the shape of a rectangle is constantly protruding from the player(or we can create it dynamically)
+/////
+The player uses the attack
+
+The UseLaserFunction creates a dynamic sensory rectangle that extends from the players body
+
+It exerts a force on the object that overlaps in the direction the player is facing depending on the objects distance from the player
+
+
+
+useAttack("Attack")
+
+{
+	
+	if("Laser")
+	{
+		AttackTypeState = Laser
+	}
+	else("otherAttack")
+	{
+		AttackTypeState = OtherAttack
+	}
+
+
+
+}
+
+Laser()
+{
+	createSensorHitboxFixture();
+	firing = true
+
+}
+
+

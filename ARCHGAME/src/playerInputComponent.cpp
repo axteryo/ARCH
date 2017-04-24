@@ -4,46 +4,51 @@
 
 playerInputComponent::playerInputComponent()
 {
-    //ctor
 }
 
 playerInputComponent::~playerInputComponent()
 {
-    //dtor
 }
 
-void playerInputComponent::processInput(player* p)
+void playerInputComponent::processInput(ActorEntity* a)
 {
     if(controller.isActionKeyPressed("turnRight"))
     {
-        p->setTurnRightState();
+        a->setRotateRightState();
+
+        _rotateRight.execute(a);
     }
     else
     {
-        p->setTurnRightStateFalse();
+        a->setRotateRightStateFalse();
     }
     if(controller.isActionKeyPressed("turnLeft"))
     {
-        p->setTurnLeftState();
+        a->setRotateLeftState();
+
+        _rotateLeft.execute(a);
     }
     else
     {
-        p->setTurnLeftStateFalse();
+        a->setRotateLeftStateFalse();
     }
      if(controller.isActionKeyPressed("thrust"))
     {
-        p->setThrustState();
+        a->setAccelState();
+        _accelerate.execute(a);
     }
     else
     {
-        p->setThrustStateFalse();
+        a->setAccelStateFalse();
     }
      if(controller.isActionKeyPressed("brake"))
     {
-        p->setBrakeState();
+        a->setBrakeState();
+        _brake.execute(a);
     }
     else
     {
-        p->setBrakeStateFalse();
+        a->setBrakeStateFalse();
+
     }
 }

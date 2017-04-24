@@ -102,6 +102,7 @@ void Enemy_D1::update()
                     break;
                     case alerted:
                     target(t.x,t.y);
+                    goToward(t.x,t.y);
                     break;
                     case chase:
                     target(t.x,t.y);
@@ -351,7 +352,7 @@ void Enemy_D1::drain()
             {
 
                 _physicsBody->body->DestroyFixture(attackFixture);
-                //std::cout<<"getting here"<<std::endl;
+                std::cout<<"getting here"<<std::endl;
                 //firing = false;
                 //attackDuration = 20;
                 //attackCoolDown = 60;

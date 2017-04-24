@@ -19,14 +19,14 @@ void camera::update()
     sf::Vector2f point = sf::Vector2f(0,0);
     if(target)
     {
-        if(target->getID().compare("entity_player")==0)
+        if(target->getType().compare("actor")==0)
         {
-            player* p;
-            p = static_cast<player*>(target);
-            States::positionState  s = p->getPhysics()->getCurrentState();
-            sf::Vector2f pos = States::to_v2f(s.position);
-            sf::Vector2f vel = States::to_v2f(s.velocity);
-            float r = s.rotation;
+            ActorEntity* a;
+            a = static_cast<ActorEntity*>(target);
+            States::positionState  state = a->getCurrentState();
+            sf::Vector2f pos = States::to_v2f(state.position);
+            sf::Vector2f vel = States::to_v2f(state.velocity);
+            float r = state.rotation;
             int length = 200;
             float vel_percent = .5;
             ///cos and sin of r return direction

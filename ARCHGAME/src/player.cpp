@@ -79,7 +79,7 @@ void player::update(float dt)
     }
 
 
-    pComponent->update(dt);
+    pComponent->update();
     gComponent->update(this);
 }
 GraphicsComponent* player::getGraphic()

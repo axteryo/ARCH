@@ -74,17 +74,14 @@ void SpriteBatcher::addToBatch(entity* e, double alpha)
     GraphicsComponent* g;
     States::renderState state;
     sf::IntRect i;
-    if(e->getID().compare("entity_player")==0)
+    if(e->getType().compare("actor")==0)
     {
-        player* p;
-        p = static_cast<player*>(e);
-        g = p->getGraphic();
+        ActorEntity* a;
+        a = static_cast<ActorEntity*>(e);
+        g = a->getGraphics();
         i = g->getTextureCoord();
-        //g->update(e);
-        state = States::lerpRenderState(g->getPreviousState(),g->getCurrentState(),alpha);
-
-
-
+        //g->update(a);
+        state = g->getCurrentState();//States::lerpRenderState(g->getPreviousState(),g->getCurrentState(),alpha);
     }
 
 

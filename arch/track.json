@@ -6,7 +6,7 @@
          "name":"Tile Layer 1",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":100,
          "x":0,
          "y":0
@@ -18,31 +18,30 @@
          "objects":[
                 {
                  "height":32,
-                 "id":1,
+                 "id":524,
                  "name":"player_spawn",
-                 "rotation":3.14,
+                 "properties":
+                    {
+                     "entityType":"actor",
+                     "spawnID":"entity_player"
+                    },
+                 "propertytypes":
+                    {
+                     "entityType":"string",
+                     "spawnID":"string"
+                    },
+                 "rotation":0,
                  "type":"archii_texture",
                  "visible":true,
                  "width":32,
                  "x":128,
-                 "y":384
-                }, 
-                {
-                 "height":0,
-                 "id":518,
-                 "name":"Enemy_spawn",
-                 "rotation":0,
-                 "type":"d1_texture",
-                 "visible":true,
-                 "width":0,
-                 "x":2656,
-                 "y":192
+                 "y":608
                 }],
          "offsetx":64,
          "offsety":32,
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "width":100,
          "x":0,
          "y":0
@@ -1887,7 +1886,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":524,
+ "nextobjectid":525,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":32,

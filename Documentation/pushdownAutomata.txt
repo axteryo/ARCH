@@ -1,0 +1,21 @@
+PushDown automata
+
+
+BaseStateStack
+and SecondaryStateStack
+
+
+State Stack rules:
+
+There will never be more than three states on any given stack.
+The topMost State is the current State and each layer of states in linked to the other.
+
+MEANING
+
+The Base State on the stack must push a secondary state onto the stack
+SO
+When that base state is removed(REVERTED) OR added, the secondary state associated with it is Removed OR added
+The reverse is a bit different though.
+
+A secondary state may be added without changing the base state.
+ie: Position_base, standing_secondary, Walking_secondary

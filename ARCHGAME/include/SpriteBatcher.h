@@ -2,14 +2,15 @@
 #define SPRITEBATCHER_H
 
 #include "GraphicsComponent.h"
-//#include "entity.h"
-#include "player.h"
+#include "entity.h"
+
 //#include <SFML/Graphics.hpp>
 #include <iostream>
 #include <fstream>
 #include "json/json.h"
 
 #include "batch.h"
+#include "ActorEntity.h"
 
 class batch;
 

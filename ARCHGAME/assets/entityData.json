@@ -1,0 +1,39 @@
+{
+	"actor":
+	[
+		{
+			"entity_ID":"entity_player",
+			"accelRate":0.04,
+			"accelRateLimit":2,
+			"velLimit":20.0,
+			"brakeLimit":10.0,
+			"rotationRate":0.1,
+			"accel_rotationRate":0.03,
+			"shape":"archii",
+			"texture":"archii_texture.png"
+
+		},
+		{
+			"entity_ID":"entity_d1",
+			"accelRate":0.05,
+			"accelRateLimit":2,
+			"velLimit":18.0,
+			"brakeLimit":7.0,
+			"rotationRate":0.15,
+			"accel_rotationRate":0.025,
+			"shape":"d1",
+			"texture":"d1_texture.png"
+
+
+		}
+	],
+	"object":
+	[
+		{
+			"entity_ID":"entity_wall"
+
+		}
+
+	]
+
+}

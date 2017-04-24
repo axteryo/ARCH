@@ -1,0 +1,39 @@
+Player needs health to live
+When the enemy attacks the player the enemy drains some of the players health
+and the player dies have having their health fall to 0
+
+maxHealth
+healthLevel 
+damage
+
+
+
+takeDamage(amount)
+{
+ 	healthState = isAttacked;
+
+	healthLevel -= amount;
+
+
+}
+
+How do we determine if the player has collided with the enemeys attack or whether the enemy has attacked the player
+
+
+if the player is a certain radius with the enemy, the player will be added to the enemies attackQeue
+
+
+
+Attack()
+TakeDamage()
+
+
+Enemy Fires Lazer
+
+Player collides with lazer fixture
+
+Player sees it was an attack type fixture that collided with it's body component
+
+Player sets internal state to isAttacked by calling isAttacked(DamageAmount) which changes the state as well as sets the damage amount to the damage amount variable.
+
+Enemy sees that the 

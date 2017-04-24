@@ -9,6 +9,8 @@
 #include "json/json.h"
 
 #include "batch.h"
+#include "level.h"
+#include "ObjectEntity.h"
 
 
 
@@ -21,10 +23,16 @@ class GameMap// : public sf::Drawable, public sf::Transformable
         void loadFile(std::string mapFile);
         void create();
         void close();
+
+        std::vector<spawnPoint> getSpawnSpoints();
+
+
         batch getFirstLayer();
         batch getSecondLayer();
         batch layer1;
         batch layer2;
+        std::vector<ObjectEntity*> walls;
+        std::vector<spawnPoint> spawnData;
 
     protected:
     private:
@@ -39,7 +47,11 @@ class GameMap// : public sf::Drawable, public sf::Transformable
         sf::Vector2f v2f_textureSheetDimensions;
         std::vector<sf::Vector2f> textureSheetCoords;
         std::vector<int> levelData;
+
+
         std::vector<std::vector<int>> layerData;
+
+
 
 
 

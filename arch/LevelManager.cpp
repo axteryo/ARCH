@@ -437,7 +437,6 @@ for(int ii = 0; ii<levelLayers.size();++ii)
                                    sf::Vector2f(baseMapRoot["layers"][n]["objects"][m]["x"].asFloat(),
                                                 baseMapRoot["layers"][n]["objects"][m]["y"].asFloat())));
                                                 std::cout<<baseMapRoot["layers"][n]["objects"][m]["x"].asFloat()<<","<<baseMapRoot["layers"][n]["objects"][m]["y"].asFloat()<<std::endl;
-
                                     */
 
 
@@ -467,35 +466,23 @@ for(int ii = 0; ii<levelLayers.size();++ii)
                        /* *//*
                        for(int m = 0; m <baseMapRoot["layers"][n]["objects"].size();++m)
                         {
-
-
                         if(baseMapRoot["layers"][n]["objects"][m]["type"].asString().compare("archii_texture"))
                         {
-
                         }
                         else{
                                  std::cout<<"spawn"<<std::endl;
-
                         }
-
                         }
-
-
-
                     /*}
                     if(baseMapRoot["layers"][n]["name"].asString().compare("spawnPoints"))
                     {
                         for(int m = 0; m <baseMapRoot["layers"][n]["objects"].size();++m)
                         {
-
                         }
                     }
                     else
                     {
-
                     }
-
-
 */
 
 
@@ -516,7 +503,6 @@ for(int ii = 0; ii<levelLayers.size();++ii)
                 p =(Player*)chObjList[ii];
                  /*targ = sf::Vector2i((chObjList[ii]->b2V_position.x*30)+(cos(chObjList[ii]->fl_rotation)*175)+(20*(chObjList[ii]->b2V_velocity.x)),
                                                  (chObjList[ii]->b2V_position.y*30)+(sin(chObjList[ii]->fl_rotation)*175)+(20*(chObjList[ii]->b2V_velocity.y)));
-
             */}
 
 

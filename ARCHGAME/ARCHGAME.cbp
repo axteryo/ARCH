@@ -53,12 +53,20 @@
 			<Add library="..\..\..\..\..\SFML\lib\libsfml-graphics.a" />
 			<Add library="..\..\..\..\..\SFML\lib\libsfml-window.a" />
 		</Linker>
+		<Unit filename="include/AccelerateAction.h" />
+		<Unit filename="include/Action.h" />
+		<Unit filename="include/ActorEntity.h" />
+		<Unit filename="include/BrakeAction.h" />
 		<Unit filename="include/EntitySpawner.h" />
 		<Unit filename="include/Game.h" />
 		<Unit filename="include/GameController.h" />
 		<Unit filename="include/GameMap.h" />
 		<Unit filename="include/GraphicsComponent.h" />
+		<Unit filename="include/InputComponent.h" />
+		<Unit filename="include/ObjectEntity.h" />
 		<Unit filename="include/PhysicsComponent.h" />
+		<Unit filename="include/RotateLeftAction.h" />
+		<Unit filename="include/RotateRightAction.h" />
 		<Unit filename="include/SpriteBatcher.h" />
 		<Unit filename="include/batch.h" />
 		<Unit filename="include/camera.h" />
@@ -66,22 +74,28 @@
 		<Unit filename="include/json/json-forwards.h" />
 		<Unit filename="include/json/json.h" />
 		<Unit filename="include/level.h" />
-		<Unit filename="include/player.h" />
 		<Unit filename="include/playerInputComponent.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/AccelerateAction.cpp" />
+		<Unit filename="src/Action.cpp" />
+		<Unit filename="src/ActorEntity.cpp" />
+		<Unit filename="src/BrakeAction.cpp" />
 		<Unit filename="src/EntitySpawner.cpp" />
 		<Unit filename="src/Game.cpp" />
 		<Unit filename="src/GameController.cpp" />
 		<Unit filename="src/GameMap.cpp" />
 		<Unit filename="src/GraphicsComponent.cpp" />
+		<Unit filename="src/InputComponent.cpp" />
+		<Unit filename="src/ObjectEntity.cpp" />
 		<Unit filename="src/PhysicsComponent.cpp" />
+		<Unit filename="src/RotateLeftAction.cpp" />
+		<Unit filename="src/RotateRightAction.cpp" />
 		<Unit filename="src/SpriteBatcher.cpp" />
 		<Unit filename="src/batch.cpp" />
 		<Unit filename="src/camera.cpp" />
 		<Unit filename="src/entity.cpp" />
 		<Unit filename="src/jsoncpp.cpp" />
 		<Unit filename="src/level.cpp" />
-		<Unit filename="src/player.cpp" />
 		<Unit filename="src/playerInputComponent.cpp" />
 		<Extensions>
 			<code_completion />

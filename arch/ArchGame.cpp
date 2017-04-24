@@ -51,7 +51,6 @@ void ArchGame::start()
           Enemy_D1* e;
           e =(Enemy_D1*)chObjList[ii];
           e->setTarget(p);
-
         }
     }*/
 
@@ -92,11 +91,6 @@ void ArchGame::start()
 
 
         }
-        if(accumulator<(dt/10))
-        {
-            accumulator+=(dt/10);
-        }
-
         render(GameState);
 
 
@@ -302,15 +296,12 @@ void ArchGame::render(state currentState)
 
         ///DEBUG COLLISION DRAWER
 
-      for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
+      /* for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
         {
                 b2PolygonShape* polygonShape;
                 //sf::ConvexShape colShape;
                 //sf::Shape colShape;
                 //colShape = sf::ConvexShape;
-
-
-
                 for (b2Fixture* f = bodyIter->GetFixtureList(); f; f = f->GetNext())
                 {
                     b2Shape::Type shapeType = f->GetType();
@@ -331,11 +322,9 @@ void ArchGame::render(state currentState)
                         colShape.setPosition(bodyIter->GetPosition().x*30,bodyIter->GetPosition().y*30);
                         colShape.setRotation((bodyIter->GetTransform().q.GetAngle()*((180/3.14159))));
                         window->draw(colShape);
-
                     }
                     if(shapeType == b2Shape::e_circle)
                     {
-
                         polygonShape = (b2PolygonShape*)f->GetShape();
                         sf::CircleShape colShape;
                         colShape.setFillColor(sf::Color::Transparent);
@@ -346,11 +335,9 @@ void ArchGame::render(state currentState)
                         colShape.setPosition(bodyIter->GetPosition().x*30,bodyIter->GetPosition().y*30);
                         window->draw(colShape);
                     }
-
                 }
-
         }
-
+*/
 
 
         window->display();

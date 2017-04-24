@@ -62,6 +62,57 @@ void GameMap::loadFile(std::string mapFile)
                 layerData.push_back(l);
                 levelData.clear();
             }
+            /** This segements gets the spawn points from the spawn layer and puts them in a
+            compact list**/
+            if(baseMapRoot["layers"][i]["name"].asString().compare("spawnPoints")==0)
+            {
+
+                for(int ii = 0;ii<baseMapRoot["layers"][i]["objects"].size();++ii)
+                {
+                    //std::cout<<"failed here"<<std::endl;
+                    spawnPoint s;
+                    s.entityType =baseMapRoot["layers"][i]["objects"][ii]["properties"]["entityType"].asString();
+                    s.spawnID = baseMapRoot["layers"][i]["objects"][ii]["properties"]["spawnID"].asString();
+                    s.location.x = baseMapRoot["layers"][i]["objects"][ii]["x"].asFloat()/30;
+                    s.location.y= baseMapRoot["layers"][i]["objects"][ii]["y"].asFloat()/30;
+                    s.rotation = baseMapRoot["layers"][i]["objects"][ii]["rotation"].asFloat();
+                    spawnData.push_back(s);
+                    std::cout<<spawnData.size()<<std::endl;
+
+                }
+
+            }
+            /** This segment retrieves the collision walls of the map and stores them in a compact list.**/
+           if(baseMapRoot["layers"][i]["name"].asString().compare("collision")==0)
+            {
+                 for(int ii = 0; ii <baseMapRoot["layers"][i]["objects"].size();++ii)
+                {
+                    b2Fixture* f;
+                    fixtureUserData* fixtureData = new fixtureUserData;
+                    fixtureData->data = "nothing";
+                    ObjectEntity* o;
+                    PhysicsComponent* p = new PhysicsComponent(b2_kinematicBody);
+                    int shapeSize = baseMapRoot["layers"][i]["objects"][ii]["polyline"].size();
+                    float shape[shapeSize];
+                    int j =0;
+                    for(int iii = 0; iii < shapeSize; ++iii)
+                    {
+                        shape[j]= std::floor(baseMapRoot["layers"][i]["objects"][ii]["polyline"][iii]["x"].asFloat());
+                        shape[j+1]= std::floor(baseMapRoot["layers"][i]["objects"][ii]["polyline"][iii]["y"].asFloat());
+                        j+=2;
+                    }
+                    //std::cout<<"passed here 1"<<std::endl;
+                    o = new ObjectEntity("object_entity",p);
+                    p->createFixturePolygon(f,shape,shapeSize*2,p->getPosition(),fixtureData);
+                    o->setPosition(b2Vec2(baseMapRoot["layers"][i]["objects"][ii]["x"].asFloat()/30,baseMapRoot["layers"][i]["objects"][ii]["y"].asFloat()/30));
+
+
+                    o->update();
+                    walls.push_back(o);
+
+                }
+                std::cout<<walls.size()<<std::endl;
+            }
         }
 
         /** store tile coordinates from the map sheet texture**/
@@ -155,41 +206,27 @@ void GameMap::create()
 
                     }
                 }
-                //tileMapeLayers.push_back(tileMap);
+            //tileMapeLayers.push_back(tileMap);
 
 
-                j+=2;
-                xx+=v2f_tileDimensions.x;
-                ++rowCount;
-                if(rowCount==v2f_mapDimensions.x)
-                {
+            j+=2;
+            xx+=v2f_tileDimensions.x;
+            ++rowCount;
+            if(rowCount==v2f_mapDimensions.x)
+            {
 
-                    rowCount = 0;
-                    xx = 0;
-                    yy+=v2f_tileDimensions.y;
-                }
-
+                rowCount = 0;
+                xx = 0;
+                yy+=v2f_tileDimensions.y;
+            }
         }
-
-
-        /*if(ii==0)
-        {
-            std::cout<<"got here"<<std::endl;
-            layer1.v = tileMap;
-            //
-            //
-        }
-        if(ii==1)
-        {
-            std::cout<<"Got Here"<<std::endl;
-            layer2.v = tileMap;
-            tileMap.clear();
-
-        }*/
     }
 
 }
-
+std::vector<spawnPoint> GameMap::getSpawnSpoints()
+{
+    return spawnData;
+}
 batch GameMap::getFirstLayer()
 {
     return layer1;

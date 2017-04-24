@@ -13,7 +13,6 @@ Game::Game()
     //tempView.setSize(v2f_windowSize.x+256,v2f_windowSize.y+256);
     //world->SetAutoClearForces(false);
     //window->setFramerateLimit(600);
-
     gameRunning = true;
 
     dt = 1.f/60.0f;
@@ -35,7 +34,7 @@ void Game::start()
     float elapsed = 0.0;
     double accumulator = 0.0;
     int t = 0.0;
-    int counter = 1;
+    int counter = 0;
 
 
 
@@ -90,51 +89,32 @@ void Game::start()
 
                 //std::cout<<"LEFTOVER TIME:"
                 //<<accumulator<<std::endl;
-                accumulator -=(dt/10);
+                //accumulator -=(dt/10);
         }
-
+        counter+=1;
         while(accumulator>=dt)
         {
-
-
-            //std::cout<<i<<std::endl;
+            counter-=1;
             update(dt);
-
             world->Step(timeStep,velocityIterations,positionIterations);
-
-
-
-            //counter = 1;
             accumulator-=dt;
-
-            //
-        }
-
-        alpha = (accumulator/dt);
-         if(isVsynced&&accumulator<(dt/10))
-        {
+            if(isVsynced&&accumulator<(dt/10))
+            {
                 //std::cout<<"FPS:"
                 //<<1/elapsed<<std::endl;
                 //std::cout<<"LEFTOVER TIME:"
                 //<<accumulator<<std::endl;
-                accumulator +=(dt/10);
+                accumulator =(dt/10);
+            }
+
+        }
+         alpha = (accumulator/dt);
+
+        if(counter>0)
+        {
+            std::cout<<"We skipped the update yo"<<std::endl;
         }
 
-
-
-
-
-
-
-
-
-       //gameLevel.physicsSmooth(alpha);
-
-
-
-
-
-        //
 
 
         ///render freely

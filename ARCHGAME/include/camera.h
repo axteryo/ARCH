@@ -1,10 +1,10 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
+#include "ActorEntity.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
-#include "entity.h"
-#include "player.h"
+
 
 
 

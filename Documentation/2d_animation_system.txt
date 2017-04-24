@@ -1,0 +1,5 @@
+2d animation system
+
+sprite sheet gives animation data
+AnimationData files holds data for each character animation
+

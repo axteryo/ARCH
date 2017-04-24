@@ -11,7 +11,7 @@ track level/room events
 
 
 
-An idea is that the maps will store room data(enemies,objectives/items) the map will export the data into a room object which will spawn based on a sensor.
+An idea is that the maps will store room data(enemies,objectives/items) the map will export the data into a room object which will spawn based on a trigger
 
 The level class will load and save level data
 
@@ -80,7 +80,7 @@ createRoom()
 
 
 //RoomSpawner
-CharacterSpawner
+//CharacterSpawner
 SpriteBatcher
 
 
@@ -95,6 +95,9 @@ A map object will store map layer objects along with the current map texture.
 There will be three layers.(2 initially)
 
 Each layer will be split into the same number of quadrants.
+
+
+The map file will have a spawn layer that will allow the game retrieve spawnpoints of entities
 
 
 

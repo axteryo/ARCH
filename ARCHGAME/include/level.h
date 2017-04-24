@@ -12,6 +12,7 @@
 #include "PhysicsComponent.h"
 #include "player.h"
 #include "camera.h"
+#include "ObjectEntity.h"
 
 class EntitySpawner;
 class SpriteBatcher;
@@ -22,7 +23,13 @@ class GameMap;
 
 extern camera gameCamera;
 
-
+struct spawnPoint
+    {
+        std::string spawnID;
+        std::string entityType;
+        b2Vec2 location;
+        float rotation;
+    };
 
 
 
@@ -32,12 +39,7 @@ class level// : public sf::Drawable, public sf::Transformable
         level();
         virtual ~level();
 
-        struct spawnPoint
-        {
-            std::string spawnID;
-            b2Vec2 location;
-            float rotation;
-        };
+
         /**
         void loadFromSave();
 
@@ -45,6 +47,7 @@ class level// : public sf::Drawable, public sf::Transformable
         int getQuadrant();
         void draw();
         **/
+        void setup();
         void load(std::string mapFile);
         void getSpawnPoints();
         void update(float dt);
@@ -54,6 +57,7 @@ class level// : public sf::Drawable, public sf::Transformable
 
         std::vector<spawnPoint> spawnList;
         std::vector<entity*> entityList;
+        std::vector<ObjectEntity*> wallList;
 
 
         EntitySpawner* spawner;
