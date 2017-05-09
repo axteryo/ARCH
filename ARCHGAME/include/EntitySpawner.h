@@ -16,6 +16,8 @@ class EntitySpawner
 
         void loadEntityShapes();
         void loadEntityData();
+        void loadActionData();
+
         entity* spawnEntity(spawnPoint s,SpriteBatcher* b);
 
     protected:
@@ -27,6 +29,10 @@ class EntitySpawner
         Json::Value shapeRoot;
         Json::Reader shapeReader;
         std::ifstream shapeFile;
+
+        Json::Value actionDataRoot;
+        Json::Reader actionDataReader;
+        std::ifstream actionDataFile;
 };
 
 #endif // ENTITYSPAWNER_H

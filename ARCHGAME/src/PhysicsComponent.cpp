@@ -17,8 +17,8 @@ PhysicsComponent::PhysicsComponent(b2BodyType t)
     body->SetAngularVelocity(0);
 
 
-    //body->SetAngularDamping(2.f);
-    //body->SetLinearDamping(2.f);
+    body->SetAngularDamping(0.f);
+    body->SetLinearDamping(0.f);
     topSpeed = 0;
     rotationAmount = 0;
 
@@ -31,21 +31,22 @@ PhysicsComponent::~PhysicsComponent()
     //dtor
 }
 
-void PhysicsComponent::createFixtureRectangle(b2Fixture* f,b2Vec2 dimensions,b2Vec2 position,std::string fixturedata)
+b2Fixture* PhysicsComponent::createFixtureRectangle(b2Vec2 dimensions,b2Vec2 position,fixtureUserData* fixtureData,bool isSensor)
 {
     b2PolygonShape boxShape;
     boxShape.SetAsBox(dimensions.x,dimensions.y,position,0);
     fixtureDef.shape = &boxShape;
-    fixtureDef.friction = 0;
+    fixtureDef.friction = 0.0;
     fixtureDef.density = 1.0f;
-    ///insert fixturedata here
-    ///insert userdata here
-
-    f =body->CreateFixture(&fixtureDef);
+    fixtureDef.userData = ((void*)fixtureData);
+    fixtureDef.isSensor = isSensor;
+    b2Fixture* f =body->CreateFixture(&fixtureDef);
+    return f;
 }
-void PhysicsComponent::createFixturePolygon(b2Fixture* f,float shape[],int shapeSize,b2Vec2 position,fixtureUserData* fixtureData)
+b2Fixture* PhysicsComponent::createFixturePolygon(std::vector<float> shape,b2Vec2 position,fixtureUserData* fixtureData,bool isSensor)
 {
     b2PolygonShape polyShape;
+    int shapeSize = shape.size();
 
     //std::cout<<shapeSize<<std::endl;
     b2Vec2 vertices[shapeSize/2];
@@ -54,7 +55,6 @@ void PhysicsComponent::createFixturePolygon(b2Fixture* f,float shape[],int shape
 
     for(int i = 0;i<shapeSize;++i)
     {
-
         if(x>=0)
         {
             vertices[i].Set((shape[x]-position.x/2)/30.0f,(shape[y]-position.y/2)/30.0f);
@@ -64,12 +64,13 @@ void PhysicsComponent::createFixturePolygon(b2Fixture* f,float shape[],int shape
     }
     polyShape.Set(vertices,shapeSize/2);
     fixtureDef.shape = &polyShape;
-    fixtureDef.friction = 0;
-    fixtureDef.density = 1.0f;
-    //fixtureDef.restitution=100.f;
-    //fixtureDef.userData = ((void*)fixtureData);
+    fixtureDef.friction = 0.0;
+    fixtureDef.userData = ((void*)fixtureData);
+    fixtureDef.isSensor = isSensor;
+    b2Fixture* f;
     f = body->CreateFixture(&fixtureDef);
 
+    return f;
 }
 
 void PhysicsComponent::update()
@@ -79,6 +80,7 @@ void PhysicsComponent::update()
 
 
     currentState.rotation+=(rotationAmount);
+    currentState.velocity = body->GetLinearVelocity();
     currentState.velocity.x+=(currentState.acceleration.x);
     currentState.velocity.y+=(currentState.acceleration.y);
 
@@ -87,11 +89,7 @@ void PhysicsComponent::update()
     body->SetLinearVelocity(currentState.velocity);
     currentState.position = body->GetPosition();
 
-
-
-
     body->SetTransform(currentState.position,currentState.rotation);
-
 
     rotationAmount = 0;
     currentState.acceleration = b2Vec2(0,0);
@@ -124,11 +122,11 @@ void PhysicsComponent::accelerate(b2Vec2 force)
     currentState.acceleration+=force;
 }
 
-States::positionState PhysicsComponent::getCurrentState()
+positionState PhysicsComponent::getCurrentState()
 {
     return currentState;
 }
-States::positionState PhysicsComponent::getPreviousState()
+positionState PhysicsComponent::getPreviousState()
 {
     return previousState;
 }

@@ -1,0 +1,17 @@
+Ui system
+
+seperate texture for ui elements
+
+Gui Element
+{
+button
+textbox
+label
+Icon/image
+slider
+container/panel
+tab
+
+}
+
+NOTE TO SEL**** Look into model view controler derek banas

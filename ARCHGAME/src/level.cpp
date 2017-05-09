@@ -23,38 +23,57 @@ level::level()
 
 level::~level()
 {
-    //dtor
+    delete spawner;
+    delete batcher;
+    delete _map;
+}
+void level::close()
+{
+
+    if(!entityList.empty())
+    {
+        for(int i = 0;i<entityList.size();i++)
+        {
+            delete entityList[i];
+        }
+        entityList.clear();
+    }
+    if(!wallList.empty())
+    {
+        for(int i = 0;i<wallList.size();i++)
+        {
+            delete wallList[i];
+        }
+        wallList.clear();
+    }
+    spawnList.clear();
+    _map->close();
 }
 void level::setup()
 {
     batcher->loadEntityTextures();
     spawner->loadEntityData();
     spawner->loadEntityShapes();
+    spawner->loadActionData();
 }
 
 /**
 This function loads a specified level and retrieves and stores data
-
 **/
 void level::load(std::string mapFile)
 {
-    setup();
     _map->loadFile(mapFile);
-    _map->create();
     spawnList = _map->getSpawnSpoints();
     wallList = _map->walls;
-
-
-
-    /*spawnPoint pSpawn;
-
-    pSpawn.spawnID = "entity_d1";
-    pSpawn.entityType = "actor";
-    pSpawn.location =b2Vec2(3,20);
-    pSpawn.rotation =0;*/
-    ///TEST CODE PLEASE REMOVE LATER
     std::cout<<spawnList.size()<<std::endl;
-    for(int i = 0; i<spawnList.size();++i)
+}
+/**
+This function implements the level
+**/
+void level::initiate()
+{
+     _map->create();
+     for(int i = 0; i<spawnList.size();++i)
     {
         entityList.push_back(spawner->spawnEntity(spawnList[i],batcher));
 

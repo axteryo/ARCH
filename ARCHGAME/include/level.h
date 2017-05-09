@@ -42,13 +42,12 @@ class level// : public sf::Drawable, public sf::Transformable
 
         /**
         void loadFromSave();
-
-        void close();
         int getQuadrant();
-        void draw();
         **/
         void setup();
         void load(std::string mapFile);
+        void initiate();
+        void close();
         void getSpawnPoints();
         void update(float dt);
         void physicsUpdate(float dt, float a);

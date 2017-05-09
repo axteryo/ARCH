@@ -9,11 +9,11 @@ GraphicsComponent::GraphicsComponent()
 
 }
 
-States::renderState GraphicsComponent::getCurrentState()
+renderState GraphicsComponent::getCurrentState()
 {
     return currentRenderState;
 }
-States::renderState GraphicsComponent::getPreviousState()
+renderState GraphicsComponent::getPreviousState()
 {
     return previousRenderState;
 }
@@ -29,8 +29,8 @@ void GraphicsComponent::setFrame(sf::IntRect c)
 
 void GraphicsComponent::update(entity* e)
 {
-    previousRenderState = States::to_renderState(e->getPreviousState());
-    currentRenderState = States::to_renderState(e->getCurrentState());
+    previousRenderState = State::to_renderState(e->getPreviousState());
+    currentRenderState = State::to_renderState(e->getCurrentState());
 }
 
 

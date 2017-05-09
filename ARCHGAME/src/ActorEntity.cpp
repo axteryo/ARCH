@@ -4,13 +4,15 @@
 
 
 
-ActorEntity::ActorEntity(std::string e_ID,GraphicsComponent* g,PhysicsComponent* p, InputComponent* i)
+ActorEntity::ActorEntity(std::string e_ID,GraphicsComponent* g,PhysicsComponent* p, InputComponent* i,StateComponent* s,ActionComponent* a)
 {
     entity_ID = e_ID;
     entityType = "actor";
     graphics_component = g;
     physics_component = p;
     input_component = i;
+    state_component = s;
+    action_component = a;
 
     physics_component->getBody()->SetUserData((void*)this);
 }
@@ -20,6 +22,7 @@ ActorEntity::~ActorEntity()
     delete graphics_component;
     delete physics_component;
     delete input_component;
+    delete state_component;
     //dtor
 }
 GraphicsComponent* ActorEntity::getGraphics()
@@ -29,6 +32,14 @@ GraphicsComponent* ActorEntity::getGraphics()
 PhysicsComponent* ActorEntity::getPhysics()
 {
     return physics_component;
+}
+StateComponent* ActorEntity::getStates()
+{
+    return state_component;
+}
+ActionComponent* ActorEntity::getActions()
+{
+    return action_component;
 }
 
 /****BASE ENTITY FUNCTIONS*****/
@@ -61,27 +72,29 @@ std::string ActorEntity::getType()
 void ActorEntity::update()
 {
     input_component->processInput(this);
+    action_component->update(this);
     physics_component->update();
+    state_component->setPositionState(physics_component->getCurrentState());
     graphics_component->update(this);
 }
 
 
-States::positionState ActorEntity::getCurrentState()
+positionState ActorEntity::getCurrentState()
 {
     return physics_component->getCurrentState();
 }
-States::positionState ActorEntity::getPreviousState()
+positionState ActorEntity::getPreviousState()
 {
     return physics_component->getPreviousState();
 }
-States::attributeState ActorEntity::getAttributes()
+/*States::attributeState ActorEntity::getAttributes()
 {
     return attributes;
 }
 void ActorEntity::setAttributes(States::attributeState a)
 {
     attributes = a;
-}
+}*/
 
 /*** BASE ACTOR FUNCTIONS**/
 
@@ -109,7 +122,6 @@ void  ActorEntity::setAccelState()
 void  ActorEntity::setAccelStateFalse()
 {
      accelState = ACCELERATE_F;
-     attributes.accel = 0;
 }
 void  ActorEntity::setBrakeState()
 {

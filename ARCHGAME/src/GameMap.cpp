@@ -10,6 +10,20 @@ GameMap::GameMap()
     textureSheetCoords = {};
 }
 
+GameMap::~GameMap()
+{
+    //dtor
+}
+void GameMap::close()
+{
+    spawnData.clear();
+    walls.clear();
+    currentMapFile.close();
+    textureSheetCoords.clear();
+    levelData.clear();
+    layerData.clear();
+    baseMapRoot.clear();
+}
 void GameMap::loadFile(std::string mapFile)
 {
 
@@ -78,39 +92,42 @@ void GameMap::loadFile(std::string mapFile)
                     s.rotation = baseMapRoot["layers"][i]["objects"][ii]["rotation"].asFloat();
                     spawnData.push_back(s);
                     std::cout<<spawnData.size()<<std::endl;
-
                 }
 
             }
             /** This segment retrieves the collision walls of the map and stores them in a compact list.**/
            if(baseMapRoot["layers"][i]["name"].asString().compare("collision")==0)
             {
+
                  for(int ii = 0; ii <baseMapRoot["layers"][i]["objects"].size();++ii)
                 {
                     b2Fixture* f;
                     fixtureUserData* fixtureData = new fixtureUserData;
-                    fixtureData->data = "nothing";
+                    fixtureData->data = "WallBody";
+                    fixtureData->type = "BODY";
                     ObjectEntity* o;
                     PhysicsComponent* p = new PhysicsComponent(b2_kinematicBody);
                     int shapeSize = baseMapRoot["layers"][i]["objects"][ii]["polyline"].size();
-                    float shape[shapeSize];
+                    std::vector<float> shape;
                     int j =0;
                     for(int iii = 0; iii < shapeSize; ++iii)
                     {
-                        shape[j]= std::floor(baseMapRoot["layers"][i]["objects"][ii]["polyline"][iii]["x"].asFloat());
-                        shape[j+1]= std::floor(baseMapRoot["layers"][i]["objects"][ii]["polyline"][iii]["y"].asFloat());
+                        shape.push_back(std::floor(baseMapRoot["layers"][i]["objects"][ii]["polyline"][iii]["x"].asFloat()));
+                        shape.push_back(std::floor(baseMapRoot["layers"][i]["objects"][ii]["polyline"][iii]["y"].asFloat()));
+                        //shape[j]=
+                        //shape[j+1]=
                         j+=2;
                     }
                     //std::cout<<"passed here 1"<<std::endl;
                     o = new ObjectEntity("object_entity",p);
-                    p->createFixturePolygon(f,shape,shapeSize*2,p->getPosition(),fixtureData);
-                    o->setPosition(b2Vec2(baseMapRoot["layers"][i]["objects"][ii]["x"].asFloat()/30,baseMapRoot["layers"][i]["objects"][ii]["y"].asFloat()/30));
 
+                    p->createFixturePolygon(shape,p->getPosition(),fixtureData,false);
+                    o->setPosition(b2Vec2(baseMapRoot["layers"][i]["objects"][ii]["x"].asFloat()/30,baseMapRoot["layers"][i]["objects"][ii]["y"].asFloat()/30));
 
                     o->update();
                     walls.push_back(o);
-
                 }
+
                 std::cout<<walls.size()<<std::endl;
             }
         }
@@ -234,9 +251,4 @@ batch GameMap::getFirstLayer()
 batch GameMap::getSecondLayer()
 {
     return layer2;
-}
-
-GameMap::~GameMap()
-{
-    //dtor
 }

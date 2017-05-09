@@ -4,7 +4,9 @@
 
 RotateRightAction::RotateRightAction()
 {
-    //ctor
+    actionType= "rotateRight";
+    elapsed = 0;
+    isActive = false;
 }
 
 RotateRightAction::~RotateRightAction()
@@ -14,17 +16,22 @@ RotateRightAction::~RotateRightAction()
 
 void RotateRightAction::execute(ActorEntity* a)
 {
+    elapsed+=1;
+    isActive = true;
     float rate;
-    States::attributeState attributes = a->getAttributes();
-    switch(a->accelState)
+    StateComponent* s = a->getStates();
+    PhysicsComponent* p = a->getPhysics();
+    movementAttributeState attributes = s->getMovementAttributeState();
+    if(attributes.accel>0)
     {
-    case ActorEntity::ACCELERATE:
-       rate = attributes.accel_rotationRate;
-        break;
-    case ActorEntity::ACCELERATE_F:
-        rate = attributes.rotationRate;
-        break;
+        rate = attributes.accel_rotationRate;
     }
-   a->getPhysics()->_rotate(rate);
-   a->setAttributes(attributes);
+    else
+    {
+        rate = attributes.rotationRate;
+    }
+
+   p->_rotate(rate);
+   s->setMovementAttributeState(attributes);
 }
+

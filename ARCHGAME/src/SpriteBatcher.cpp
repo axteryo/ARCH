@@ -49,6 +49,7 @@ void SpriteBatcher::loadEntityTextures()
 
         }
     }
+    textureFile.close();
 }
 void SpriteBatcher::setFrameTexture(GraphicsComponent* g,std::string textureName)
 {
@@ -72,7 +73,7 @@ void SpriteBatcher::setFrameTexture(GraphicsComponent* g,std::string textureName
 void SpriteBatcher::addToBatch(entity* e, double alpha)
 {
     GraphicsComponent* g;
-    States::renderState state;
+    renderState state;
     sf::IntRect i;
     if(e->getType().compare("actor")==0)
     {

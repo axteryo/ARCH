@@ -3,12 +3,9 @@
 
 
 #include "GameController.h"
-#include "InputComponent.h"
-#include "ActorEntity.h"
-#include "AccelerateAction.h"
-#include "BrakeAction.h"
-#include "RotateLeftAction.h"
-#include "RotateRightAction.h"
+#include <InputComponent.h>
+#include "ActionComponent.h"
+
 
 
 
@@ -24,10 +21,11 @@ class playerInputComponent: public InputComponent
         void processInput(ActorEntity* a);
     protected:
     private:
-       AccelerateAction _accelerate;
-       RotateLeftAction _rotateLeft;
-       RotateRightAction _rotateRight;
-       BrakeAction _brake;
+       //AccelerateAction _accelerate;
+       //RotateLeftAction _rotateLeft;
+       //RotateRightAction _rotateRight;
+       //BrakeAction _brake;
+       //DeccelerateAction _deccelerate;
 
 };
 

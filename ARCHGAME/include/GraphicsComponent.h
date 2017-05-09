@@ -14,8 +14,8 @@ class GraphicsComponent
 
         void update(entity* e);
         //sf::Vector2f getPosition();
-        States::renderState getCurrentState();
-        States::renderState getPreviousState();
+        renderState getCurrentState();
+        renderState getPreviousState();
 
 
 
@@ -36,8 +36,8 @@ class GraphicsComponent
 
     private:
         sf::IntRect textureCoord;
-        States::renderState currentRenderState;
-        States::renderState previousRenderState;
+        renderState currentRenderState;
+        renderState previousRenderState;
 };
 
 #endif // GRAPHICSCOMPONENT_H

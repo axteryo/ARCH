@@ -4,15 +4,19 @@
 #include "entity.h"
 #include "GraphicsComponent.h"
 #include "PhysicsComponent.h"
+//#include "ActionComponent.h"
 #include "playerInputComponent.h"
+#include "AIBasicInputComponent.h"
 
-//#include "AttackComponent.h"
+class ActionComponent;
+
+
 
 
 class ActorEntity : public entity
 {
     public:
-        ActorEntity(std::string e_ID,GraphicsComponent* g,PhysicsComponent* p,InputComponent* i);
+        ActorEntity(std::string e_ID,GraphicsComponent* g,PhysicsComponent* p,InputComponent* i,StateComponent* s, ActionComponent* a);
         virtual ~ActorEntity();
 
         void setPosition(b2Vec2 p);
@@ -24,20 +28,23 @@ class ActorEntity : public entity
         std::string getID();
         std::string getType();
 
-        States::positionState getCurrentState();
-        States::positionState getPreviousState();
-        States::attributeState getAttributes();
+        positionState getCurrentState();
+        positionState getPreviousState();
+        //moattributeState getAttributes();
 
         /**
         virtual void initiateCollision() = 0;
         virtual void resolveCollision() = 0;
         **/
 
-        void setAttributes(States::attributeState a);
+        //void setAttributes(States::attributeState a);
 
 
         GraphicsComponent* getGraphics();
         PhysicsComponent* getPhysics();
+        StateComponent* getStates();
+        ActionComponent* getActions();
+
 
 
         ///State Functions
@@ -78,7 +85,11 @@ class ActorEntity : public entity
         GraphicsComponent* graphics_component;
         PhysicsComponent* physics_component;
         InputComponent* input_component;
-        States::attributeState attributes;
+        StateComponent* state_component;
+        ActionComponent* action_component;
+
+        //std::vector<attackData> registeredAttacks;
+        //States::attributeState attributes;
 
 };
 

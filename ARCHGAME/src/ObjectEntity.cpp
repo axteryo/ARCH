@@ -53,11 +53,11 @@ void ObjectEntity::update()
 }
 
 
-States::positionState ObjectEntity::getCurrentState()
+positionState ObjectEntity::getCurrentState()
 {
     return physics_component->getCurrentState();
 }
-States::positionState ObjectEntity::getPreviousState()
+positionState ObjectEntity::getPreviousState()
 {
     return physics_component->getPreviousState();
 }

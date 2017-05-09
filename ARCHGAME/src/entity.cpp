@@ -1,5 +1,5 @@
 #include "entity.h"
-
+/*
 void States::v2f_normalize(sf::Vector2f &source)
 {
     float mag = sqrt((source.x * source.x) + (source.y * source.y));
@@ -69,7 +69,7 @@ States::positionState States::lerpPositionState(States::positionState pre, State
 }
 
 
-
+*/
 entity::entity()
 {
     //ctor

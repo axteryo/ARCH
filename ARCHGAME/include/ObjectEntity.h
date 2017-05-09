@@ -20,8 +20,8 @@ class ObjectEntity : public entity
         std::string getID();
         std::string getType();
 
-        States::positionState getCurrentState();
-        States::positionState getPreviousState();
+        positionState getCurrentState();
+        positionState getPreviousState();
 
         PhysicsComponent* getPhysics();
     protected:

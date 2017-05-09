@@ -1,10 +1,10 @@
 #ifndef BRAKEACTION_H
 #define BRAKEACTION_H
 
-#include <Action.h>
+#include <MovementAction.h>
 
 
-class BrakeAction : public Action
+class BrakeAction : public MovementAction
 {
     public:
         BrakeAction();

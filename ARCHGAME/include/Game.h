@@ -15,14 +15,6 @@
 #include "GameController.h"
 #include "camera.h"
 
-struct GameEvent
-{
-
-};
-
-
-
-
 
 
 
@@ -51,7 +43,7 @@ class Game
 
         sf::Time currentTime;
         float flPreviousTime;
-        float dt;
+        double dt;
 
         /**Box2d Variables**/
 

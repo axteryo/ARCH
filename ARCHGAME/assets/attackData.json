@@ -1,0 +1,57 @@
+{
+	"attacks":
+	[
+		{
+			"name":"q1_beamAttack",
+			"attackType":"beamAttack",
+			"duration":10,
+			"cooldown":10,
+			"rotationRate":0.1,
+			"shape": [   500, 0  ,  500, 100  ,  0, 100  , 0,0],
+			"impactType":"push",
+			"fixtureType":"attackFixture",
+			"fixtureData":"q1_beamAttack",
+			"isSensor":true,
+			"graphic":"q1_beamAttack"
+		},
+		{
+			"name":"beamAttack_1",
+			"attackType":"beamAttack",
+			"duration":30,
+			"cooldown":10,
+			"rotationRate":0.1,
+			"impactType":"push",
+			"shape": [   500, 0  ,  500, 100  ,  0, 100  , 0,0],
+			"fixtureType":"attackFixture",
+			"fixtureData":"beamAttack_1",
+			"isSensor":true,
+			"graphic":"beamAttack_1"
+		},
+		{
+			"name":"d1_radiusAttack",
+			"attackType":"radiusAttack",
+			"duration":1,
+			"cooldown":0,
+			"rotationRate":0.15,
+			"impactType":"pull",
+			"shape":[],
+			"fixtureType":"attackFixture",
+			"fixtureData":"d1_radiusAttack",
+			"isSensor":true,
+			"graphic":"d1_radiusAttack"
+		},
+		{
+			"name":"radiusAttack_1",
+			"duration":2,
+			"cooldown":5,
+			"rotationRate":0.1,
+			"impactType":"push",
+			"shape":[],
+			"attackType":"radiusAttack",
+			"fixtureType":"attackFixture",
+			"fixtureData":"radiusAttack_1",
+			"isSensor":true,
+			"graphic":"radiusAttack_1"
+		}
+	]
+}

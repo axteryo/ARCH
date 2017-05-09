@@ -5,7 +5,7 @@
 
 
 class ActorEntity;
-class AccelerateAction;
+
 
 
 class InputComponent

@@ -1,15 +1,16 @@
 #ifndef ROTATELEFTACTION_H
 #define ROTATELEFTACTION_H
 
-#include <Action.h>
+#include <MovementAction.h>
 
 
-class RotateLeftAction : public Action
+class RotateLeftAction : public MovementAction
 {
     public:
         RotateLeftAction();
         virtual ~RotateLeftAction();
         void execute(ActorEntity* a);
+
     protected:
     private:
 };

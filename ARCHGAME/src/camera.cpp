@@ -23,9 +23,9 @@ void camera::update()
         {
             ActorEntity* a;
             a = static_cast<ActorEntity*>(target);
-            States::positionState  state = a->getCurrentState();
-            sf::Vector2f pos = States::to_v2f(state.position);
-            sf::Vector2f vel = States::to_v2f(state.velocity);
+            positionState  state = a->getCurrentState();
+            sf::Vector2f pos = State::to_v2f(state.position);
+            sf::Vector2f vel = State::to_v2f(state.velocity);
             float r = state.rotation;
             int length = 200;
             float vel_percent = .5;
@@ -45,7 +45,7 @@ void camera::follow(sf::Vector2f point,int rate)
 {
     float camVel;
     sf::Vector2f direction = sf::Vector2f(point.x - v2i_focalPoint.x,point.y - v2i_focalPoint.y);
-    States::v2f_normalize(direction);
+    State::v2f_normalize(direction);
     camVel =sqrt(((point.x - v2i_focalPoint.x)*
             (point.x-v2i_focalPoint.x)) +
             ((point.y - v2i_focalPoint.y)*

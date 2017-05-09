@@ -2,29 +2,55 @@
 	"actor":
 	[
 		{
+		//NOTE TO SELF MUST FURTHER ENCAPSULATE AND SPECIFY ATTRIBUTES:i.e MoveMentAttributes, skill/attack/action attributes or something similar	
+			//Note to self again. Add an entity Tag to the entity class which will be determined at run time, upon entity creation. Base it possibly off of entity id and a random number
 			"entity_ID":"entity_player",
-			"accelRate":0.04,
-			"accelRateLimit":2,
-			"velLimit":20.0,
-			"brakeLimit":10.0,
-			"rotationRate":0.1,
-			"accel_rotationRate":0.03,
+			"StatusAttributes":
+			{
+				"maxHealth":100,
+				"minHealth":0,
+				"curHealth":100
+			},
+			"MovementAttributes":
+			{
+				"accelRate":0.04,
+				"accelRateLimit":2,
+				"velLimit":20.0,
+				"brakeLimit":8.0,
+				"rotationRate":0.1,
+				"accel_rotationRate":0.035
+			},
+			"movementActions":["rotateLeft","rotateRight","accelerate","deccelerate","brake"],
+			"attackActions":
+			[	
+				{	
+				"name":"beamAttack_1",
+				 "type":"beamAttack"
+				}
+			
+			],
 			"shape":"archii",
 			"texture":"archii_texture.png"
-
 		},
 		{
 			"entity_ID":"entity_d1",
-			"accelRate":0.05,
-			"accelRateLimit":2,
-			"velLimit":18.0,
-			"brakeLimit":7.0,
-			"rotationRate":0.15,
-			"accel_rotationRate":0.025,
+			"StatusAttributes":
+			{
+				"maxHealth":100,
+				"minHealth":0,
+				"curHealth":100
+			},
+			"MovementAttributes":
+			{
+				"accelRate":0.05,
+				"accelRateLimit":2,
+				"velLimit":18.0,
+				"brakeLimit":7.0,
+				"rotationRate":0.15,
+				"accel_rotationRate":0.04
+			},
 			"shape":"d1",
 			"texture":"d1_texture.png"
-
-
 		}
 	],
 	"object":

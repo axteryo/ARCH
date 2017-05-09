@@ -9,8 +9,10 @@ extern b2World* world;
 struct fixtureUserData
 {
   std::string data;
+  std::string type;
   fixtureUserData()
   {
+      type = "";
       data = "";
   }
 };
@@ -33,11 +35,11 @@ class PhysicsComponent
         float getRotation();
         b2Vec2 getPosition();
         void accelerate(b2Vec2 force);
-        void createFixtureRectangle(b2Fixture* f,b2Vec2 dimensions,b2Vec2 position,std::string fixturedata);
+        b2Fixture* createFixtureRectangle(b2Vec2 dimensions,b2Vec2 position,fixtureUserData* fixtureData,bool isSensor);
         void createFixtureCircle();
-        void createFixturePolygon(b2Fixture* f,float shape[],int shapeSize,b2Vec2 position,fixtureUserData* fixtureData);
-        States::positionState getCurrentState();
-        States::positionState getPreviousState();
+        b2Fixture* createFixturePolygon(std::vector<float> shape,b2Vec2 position,fixtureUserData* fixtureData,bool isSensor);
+        positionState getCurrentState();
+        positionState getPreviousState();
         void setTopSpeed(float s);
         void limitVelocity();
 
@@ -61,8 +63,8 @@ class PhysicsComponent
 
         float topSpeed;
         float rotationAmount;
-        States::positionState currentState;
-        States::positionState previousState;
+        positionState currentState;
+        positionState previousState;
 
     private:
 };

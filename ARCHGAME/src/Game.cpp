@@ -28,13 +28,15 @@ Game::Game()
 void Game::start()
 {
 
-    float lastTime = 0.0;
-    float newTime = 0.0;
+    double lastTime = 0.0;
+    double newTime = 0.0;
     lastTime=clock.getElapsedTime().asSeconds();
-    float elapsed = 0.0;
+    double elapsed = 0.0;
     double accumulator = 0.0;
     int t = 0.0;
     int counter = 0;
+    int counterRun = 0;
+    int lastCounter = 0;
 
 
 
@@ -42,7 +44,9 @@ void Game::start()
     ///Game Controller Bindings are loaded
     controller.loadBindings();
     ///load function is called here to load the entities and assets of the game level
-    gameLevel.load("assets/testmap4.json");
+    gameLevel.setup();
+    gameLevel.load("assets/track.json");
+    gameLevel.initiate();
 
     while(window->isOpen())
     {
@@ -56,6 +60,7 @@ void Game::start()
         newTime = clock.getElapsedTime().asSeconds();
         elapsed = newTime-lastTime;
 
+
         if(elapsed>0.25)
         {
             elapsed = 0.25;
@@ -65,6 +70,11 @@ void Game::start()
 
 
         accumulator +=elapsed;
+
+        //std::cout<<"LEFTOVER TIME:"
+        //<<accumulator<<std::endl;
+        //std::cout<<"FPS:"
+        //<<1/elapsed<<std::endl;
         //
         /*if(elapsed>.018)
         {
@@ -78,50 +88,59 @@ void Game::start()
 
 
 
-        ///update logic at a fixed rate of 30
-        float o = 0.0;
-
-        t+=elapsed;
+        ///update logic at a fixed rate of 60
 
         double alpha;
-         if(isVsynced&&accumulator>(dt+(dt/10)))
-        {
 
-                //std::cout<<"LEFTOVER TIME:"
-                //<<accumulator<<std::endl;
-                //accumulator -=(dt/10);
-        }
         counter+=1;
+        if(isVsynced&&accumulator>(dt+(dt/10)))
+            {
+                if(elapsed>(1.0f/30.0f))
+                {
+                   std::cout<<"Elapsed time:"<<1/elapsed<<std::endl;
+                    std::cout<<"LEFTOVER TIME:"
+                    <<accumulator<<std::endl;
+                    //accumulator -=(dt);
+                }
+                accumulator -=(dt/10);
+            }
         while(accumulator>=dt)
         {
+
             counter-=1;
             update(dt);
             world->Step(timeStep,velocityIterations,positionIterations);
             accumulator-=dt;
-            if(isVsynced&&accumulator<(dt/10))
-            {
-                //std::cout<<"FPS:"
-                //<<1/elapsed<<std::endl;
-                //std::cout<<"LEFTOVER TIME:"
-                //<<accumulator<<std::endl;
-                accumulator =(dt/10);
-            }
 
         }
-         alpha = (accumulator/dt);
+        alpha = (accumulator/dt);
+         if(isVsynced&&accumulator<(dt/10))
+        {
+            accumulator+=(dt/10);
+        }
 
         if(counter>0)
         {
-            std::cout<<"We skipped the update yo"<<std::endl;
+            if(counter == lastCounter)
+            {
+                counterRun+=1;
+            }
+            else
+            {
+               /* std::cout<<counterRun<<std::endl;
+                std::cout<<"Number of skips :"<<counter<<std::endl;
+                counterRun = 0;*/
+            }
+            lastCounter = counter;
+            //std::cout<<"We skipped the update yo counter:"<<counter<<std::endl;
+            //counter = 0;
         }
 
 
 
         ///render freely
 
-            render(alpha);
-
-
+        render(alpha);
         if (!gameRunning)
         {
             window->close();
@@ -134,7 +153,7 @@ void Game::render(double alpha)
     window->setView(gameCamera.camView);
     window->clear(sf::Color::Black);
     gameLevel.render(window,alpha);
-    /*for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
+    for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
         {
                 b2PolygonShape* polygonShape;
                 //sf::ConvexShape colShape;
@@ -181,7 +200,7 @@ void Game::render(double alpha)
 
                 }
 
-        }*/
+        }
     window->display();
 
 

@@ -9,3 +9,12 @@ Action::~Action()
 {
     //dtor
 }
+
+std::string Action::getType()
+{
+    return actionType;
+}
+bool Action::getActive()
+{
+    return isActive;
+}

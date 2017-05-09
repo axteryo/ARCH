@@ -5,10 +5,11 @@
 #include <Box2D/Box2D.h>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+#include "StateComponent.h"
 
 
 
-
+/*
 namespace States
 {
    struct positionState
@@ -44,11 +45,11 @@ namespace States
    renderState lerpRenderState(renderState pre,renderState cur,double val);
    positionState lerpPositionState(positionState pre, positionState cur, float val);
 
-}
+}*/
 
 /**Entity interface class. Foundation for building entity objects with underlying functionality**/
 ///NOTE to self Create a base class for other entity types to inherit from entity
-///Like A base Enemy class that uses data to drive it instead of creating a different class for each enemy
+///Like A base ActorEntity class that uses data to drive it instead of creating a different class for each enemy
 ///Same goes for GameObjects so to speak(interactable objects)
 class entity
 {
@@ -64,8 +65,8 @@ class entity
         virtual std::string getID() = 0;
         virtual std::string getType()=0;
 
-        virtual States::positionState getCurrentState()= 0;
-        virtual States::positionState getPreviousState()= 0;
+        virtual positionState getCurrentState()= 0;
+        virtual positionState getPreviousState()= 0;
         /**
         virtual void initiateCollision() = 0;
         virtual void resolveCollision() = 0;
@@ -73,6 +74,7 @@ class entity
     protected:
         std::string entity_ID;
         std::string entityType;
+        std::string entityTag;
     private:
 
 };

@@ -39,6 +39,8 @@ void GameController::loadBindings()
     playerTurnLeftAction=root["turnLeft"].asString();
     playerTurnRightAction=root["turnRight"].asString();
     playerUseAttack1Action=root["useAttack1"].asString();
+
+    file.close();
 }
 
 bool GameController::isBindedKeyPressed(std::string bindingToCheck)
