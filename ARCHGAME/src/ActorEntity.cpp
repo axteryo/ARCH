@@ -74,8 +74,10 @@ void ActorEntity::update()
     input_component->processInput(this);
     action_component->update(this);
     physics_component->update();
-    state_component->setPositionState(physics_component->getCurrentState());
     graphics_component->update(this);
+
+    state_component->setPositionState(physics_component->getCurrentState());
+    state_component->setRenderState(graphics_component->getCurrentState());
 }
 
 
@@ -87,47 +89,4 @@ positionState ActorEntity::getPreviousState()
 {
     return physics_component->getPreviousState();
 }
-/*States::attributeState ActorEntity::getAttributes()
-{
-    return attributes;
-}
-void ActorEntity::setAttributes(States::attributeState a)
-{
-    attributes = a;
-}*/
 
-/*** BASE ACTOR FUNCTIONS**/
-
-///State Functions
-void  ActorEntity::setRotateRightState()
-{
-    rotateRightState =ROTATE_RIGHT;
-}
-void  ActorEntity::setRotateLeftState()
-{
-    rotateLeftState =ROTATE_LEFT;
-}
-void  ActorEntity::setRotateRightStateFalse()
-{
-    rotateRightState =ROTATE_RIGHT_F;
-}
-void  ActorEntity::setRotateLeftStateFalse()
-{
-    rotateLeftState =ROTATE_LEFT_F;
-}
-void  ActorEntity::setAccelState()
-{
-    accelState = ACCELERATE;
-}
-void  ActorEntity::setAccelStateFalse()
-{
-     accelState = ACCELERATE_F;
-}
-void  ActorEntity::setBrakeState()
-{
-    brakeState = BRAKE;
-}
-void  ActorEntity::setBrakeStateFalse()
-{
-    brakeState = BRAKE_F;
-}

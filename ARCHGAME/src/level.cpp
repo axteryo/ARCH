@@ -129,6 +129,15 @@ void level::render(sf::RenderWindow* window,double alpha)
 
 void level::physicsUpdate(float dt, float a)
 {
+    double maxStep = 0.017;
+    double progress = 0.0;
+    while(progress<dt)
+    {
+        float step = std::min((dt-progress),maxStep);
+        world->Step(step,6,2);
+        progress+=step;
+    }
+    /*
     const int maxSteps = 5;
     float32 timeStep = 1.f/60.f;
     //a = 0.0f;
@@ -151,7 +160,7 @@ void level::physicsUpdate(float dt, float a)
         world->Step(timeStep,6,2);
     }
     world->ClearForces();
-    /*
+
     PhysicsComponent* ph;
     player* p;
     GraphicsComponent* g;

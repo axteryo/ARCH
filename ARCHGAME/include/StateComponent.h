@@ -33,6 +33,13 @@
        float minHealth;
        float curHealth;
    };
+   struct attackAttributeState
+   {
+       bool isAttacking;
+       std::string attack;
+       std::string impactType;
+       float force;
+   };
 
 namespace State
 {

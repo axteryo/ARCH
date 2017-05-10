@@ -30,54 +30,16 @@ class ActorEntity : public entity
 
         positionState getCurrentState();
         positionState getPreviousState();
-        //moattributeState getAttributes();
 
         /**
         virtual void initiateCollision() = 0;
         virtual void resolveCollision() = 0;
         **/
 
-        //void setAttributes(States::attributeState a);
-
-
         GraphicsComponent* getGraphics();
         PhysicsComponent* getPhysics();
         StateComponent* getStates();
         ActionComponent* getActions();
-
-
-
-        ///State Functions
-        void setRotateRightState();
-        void setRotateLeftState();
-        void setRotateRightStateFalse();
-        void setRotateLeftStateFalse();
-        void setAccelState();
-        void setAccelStateFalse();
-        void setBrakeState();
-        void setBrakeStateFalse();
-
-         enum RotateRightState
-        {
-            ROTATE_RIGHT,
-            ROTATE_RIGHT_F
-        }rotateRightState;
-         enum RotateLefttState
-        {
-            ROTATE_LEFT,
-            ROTATE_LEFT_F
-        }rotateLeftState;
-        enum AccelState
-        {
-            ACCELERATE,
-            ACCELERATE_F
-        }accelState;
-        enum BrakeState
-        {
-            BRAKE,
-            BRAKE_F
-
-        }brakeState;
 
 
     protected:

@@ -54,6 +54,10 @@ void AccelerateAction::update(ActorEntity* a)
     elapsed-=1;
     if(elapsed<0)
     {
+        StateComponent* s = a->getStates();
+        movementAttributeState attributes = s->getMovementAttributeState();
+        attributes.accel = 0;
+        s->setMovementAttributeState(attributes);
         isActive = false;
         accel = 0;
         elapsed = 0;

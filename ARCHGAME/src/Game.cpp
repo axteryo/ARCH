@@ -15,7 +15,7 @@ Game::Game()
     //window->setFramerateLimit(600);
     gameRunning = true;
 
-    dt = 1.f/60.0f;
+    dt = 1.0f/60.0f;
 
     timeStep = 1.0/60.0f;
     velocityIterations = 6;
@@ -50,96 +50,36 @@ void Game::start()
 
     while(window->isOpen())
     {
-         ///Process user input
+        ///Process user input
         processInput();
-
-
 
         /// The clock goes forward so we store the current time in newTime
         ///Then we get how much has elapsed bu subtracting the lastTime
         newTime = clock.getElapsedTime().asSeconds();
         elapsed = newTime-lastTime;
 
-
-        if(elapsed>0.25)
-        {
-            elapsed = 0.25;
-        }
-
         lastTime = newTime;
-
-
         accumulator +=elapsed;
-
-        //std::cout<<"LEFTOVER TIME:"
-        //<<accumulator<<std::endl;
-        //std::cout<<"FPS:"
-        //<<1/elapsed<<std::endl;
-        //
-        /*if(elapsed>.018)
-        {
-
-
-
-
-        //counter+=1;
-
-        }*/
-
-
-
-        ///update logic at a fixed rate of 60
 
         double alpha;
 
-        counter+=1;
-        if(isVsynced&&accumulator>(dt+(dt/10)))
-            {
-                if(elapsed>(1.0f/30.0f))
-                {
-                   std::cout<<"Elapsed time:"<<1/elapsed<<std::endl;
-                    std::cout<<"LEFTOVER TIME:"
-                    <<accumulator<<std::endl;
-                    //accumulator -=(dt);
-                }
-                accumulator -=(dt/10);
-            }
+      ///update logic at a fixed rate of 60
+      if(isVsynced&&accumulator<(dt))
+        {
+            std::cout<<"LEFTOVER TIME:"
+            <<accumulator<<std::endl;
+            std::cout<<"Elapsed time:"<<1/elapsed<<std::endl;
+            accumulator+=(dt/11);
+        }
         while(accumulator>=dt)
         {
-
-            counter-=1;
-            update(dt);
-            world->Step(timeStep,velocityIterations,positionIterations);
             accumulator-=dt;
-
+            gameLevel.physicsUpdate(dt,accumulator);
+            update(dt);
         }
         alpha = (accumulator/dt);
-         if(isVsynced&&accumulator<(dt/10))
-        {
-            accumulator+=(dt/10);
-        }
-
-        if(counter>0)
-        {
-            if(counter == lastCounter)
-            {
-                counterRun+=1;
-            }
-            else
-            {
-               /* std::cout<<counterRun<<std::endl;
-                std::cout<<"Number of skips :"<<counter<<std::endl;
-                counterRun = 0;*/
-            }
-            lastCounter = counter;
-            //std::cout<<"We skipped the update yo counter:"<<counter<<std::endl;
-            //counter = 0;
-        }
-
-
 
         ///render freely
-
         render(alpha);
         if (!gameRunning)
         {
@@ -153,7 +93,7 @@ void Game::render(double alpha)
     window->setView(gameCamera.camView);
     window->clear(sf::Color::Black);
     gameLevel.render(window,alpha);
-    for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
+    /*for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
         {
                 b2PolygonShape* polygonShape;
                 //sf::ConvexShape colShape;
@@ -200,7 +140,7 @@ void Game::render(double alpha)
 
                 }
 
-        }
+        }*/
     window->display();
 
 

@@ -81,8 +81,7 @@ void SpriteBatcher::addToBatch(entity* e, double alpha)
         a = static_cast<ActorEntity*>(e);
         g = a->getGraphics();
         i = g->getTextureCoord();
-        //g->update(a);
-        state = g->getCurrentState();//States::lerpRenderState(g->getPreviousState(),g->getCurrentState(),alpha);
+        state = g->getCurrentState();//State::lerpRenderState(g->getPreviousState(),g->getCurrentState(),alpha);
     }
 
 

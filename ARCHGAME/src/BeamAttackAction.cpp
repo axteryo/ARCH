@@ -17,14 +17,12 @@ BeamAttackAction::~BeamAttackAction()
 
 void BeamAttackAction::execute(ActorEntity* a)
 {
-
     if(!inCoolDown)
     {
         if(elapsed<=0)
         {
             if(!attackFixture)
             {
-
                 fixtureUserData* fData = new fixtureUserData;
                 elapsed = data.duration;
                 fData->type = data.fixtureType;

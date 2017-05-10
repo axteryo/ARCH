@@ -48,7 +48,6 @@ void AttackAction::update(ActorEntity* a)
     }
     else
     {
-
         if(elapsed<0)
         {
             a->getPhysics()->getBody()->DestroyFixture(attackFixture);
