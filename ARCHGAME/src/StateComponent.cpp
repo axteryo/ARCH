@@ -96,6 +96,10 @@ void StateComponent::setStatusAttributeState(statusAttributeState s)
 {
     status_attributeState = s;
 }
+void StateComponent::setAttackAttributeState(attackAttributeState a)
+{
+    attack_attributeState=a;
+}
 
 positionState StateComponent::getPositionState()
 {
@@ -113,6 +117,11 @@ statusAttributeState StateComponent::getStatusAttributeState()
 {
     return status_attributeState;
 }
+attackAttributeState StateComponent::getAttackAttributeState()
+{
+    return attack_attributeState;
+}
+
 
 
 

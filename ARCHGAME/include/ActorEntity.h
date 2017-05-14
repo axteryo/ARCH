@@ -4,6 +4,7 @@
 #include "entity.h"
 #include "GraphicsComponent.h"
 #include "PhysicsComponent.h"
+#include "StateComponent.h"
 //#include "ActionComponent.h"
 #include "playerInputComponent.h"
 #include "AIBasicInputComponent.h"

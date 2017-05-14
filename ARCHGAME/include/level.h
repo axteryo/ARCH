@@ -10,9 +10,9 @@
 //#include "entity.h"
 #include "GraphicsComponent.h"
 #include "PhysicsComponent.h"
-#include "player.h"
 #include "camera.h"
 #include "ObjectEntity.h"
+#include "CollisionSystem.h"
 
 class EntitySpawner;
 class SpriteBatcher;
@@ -22,6 +22,7 @@ class GameMap;
 
 
 extern camera gameCamera;
+extern CollisionSystem* collisionSystem;
 
 struct spawnPoint
     {

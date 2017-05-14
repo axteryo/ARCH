@@ -9,7 +9,11 @@ class GameEvent
         virtual ~GameEvent();
         enum eventType
         {
-
+            EVENT_SEQUENCE,
+            EVENT_COMBAT,
+            EVENT_GAMESTATE,
+            EVENT_ACTION,
+            EVENT_MENU
         };
     protected:
     private:

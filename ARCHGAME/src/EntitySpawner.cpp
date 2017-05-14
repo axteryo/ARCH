@@ -69,7 +69,6 @@ entity* EntitySpawner::spawnEntity(spawnPoint s,SpriteBatcher* b)
                     PhysicsComponent* p = new PhysicsComponent(b2_dynamicBody);
                     GraphicsComponent* g = new GraphicsComponent;
 
-
                     ///Setup the input component
                     if(s.spawnID.compare("entity_player")==0)
                     {
@@ -110,7 +109,7 @@ entity* EntitySpawner::spawnEntity(spawnPoint s,SpriteBatcher* b)
                     ///get the height and width of sprite and apply to physics points
                     b2Vec2 position= b2Vec2(g->getTextureCoord().width,g->getTextureCoord().height);
                     fixtureUserData* fixtureData = new fixtureUserData;
-                    fixtureData->type = "BODY";
+                    fixtureData->type = "bodyFixture";
                     fixtureData->data = s.spawnID+"Body";
 
 
@@ -143,7 +142,6 @@ entity* EntitySpawner::spawnEntity(spawnPoint s,SpriteBatcher* b)
 
                         if(dataRoot["actor"][i]["movementActions"][k].asString().compare("rotateLeft")==0)
                         {
-                            std::cout<<"Made it here"<<std::endl;
                             ma = new RotateLeftAction;
                         }
                         else if(dataRoot["actor"][i]["movementActions"][k].asString().compare("rotateRight")==0)
@@ -170,7 +168,7 @@ entity* EntitySpawner::spawnEntity(spawnPoint s,SpriteBatcher* b)
                     {
                         attackData aData;
                         AttackAction* aa;
-                        std::cout<<"we got here"<<std::endl;
+
                         for(int ii = 0;ii<actionDataRoot["attacks"].size();ii++)
                         {
                             if(actionDataRoot["attacks"][ii]["name"].asString().compare(dataRoot["actor"][i]["attackActions"][j]["name"].asString())==0)
@@ -178,7 +176,10 @@ entity* EntitySpawner::spawnEntity(spawnPoint s,SpriteBatcher* b)
                                 if(dataRoot["actor"][i]["attackActions"][j]["type"].asString().compare("beamAttack")==0)
                                 {
                                     aa = new BeamAttackAction;
-
+                                }
+                                else if(dataRoot["actor"][i]["attackActions"][j]["type"].asString().compare("radiusAttack")==0)
+                                {
+                                    aa = new RadiusAttackAction;
                                 }
                                 aData.name = actionDataRoot["attacks"][ii]["name"].asString();
                                 aData.attackType=actionDataRoot["attacks"][ii]["attackType"].asString();
@@ -190,7 +191,8 @@ entity* EntitySpawner::spawnEntity(spawnPoint s,SpriteBatcher* b)
                                 {
                                     aData.shape.push_back(actionDataRoot["attacks"][ii]["shape"][k].asFloat());
                                 }
-
+                                aData.damage= dataRoot["actor"][i]["attackActions"][j]["damage"].asInt();
+                                aData.force = dataRoot["actor"][i]["attackActions"][j]["force"].asFloat();
                                 aData.impactType =actionDataRoot["attacks"][ii]["impactType"].asString();
                                 aData.fixtureType =actionDataRoot["attacks"][ii]["fixtureType"].asString();
                                 aData.fixtureData =actionDataRoot["attacks"][ii]["fixtureData"].asString();

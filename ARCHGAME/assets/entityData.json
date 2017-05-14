@@ -25,7 +25,9 @@
 			[	
 				{	
 				"name":"beamAttack_1",
-				 "type":"beamAttack"
+				"type":"beamAttack",
+				"force": 100.0,
+				"damage":25
 				}
 			
 			],
@@ -49,6 +51,17 @@
 				"rotationRate":0.15,
 				"accel_rotationRate":0.04
 			},
+			"movementActions":["rotateLeft","rotateRight","accelerate","deccelerate","brake"],
+			"attackActions":
+			[	
+				{	
+				"name":"d1_radiusAttack",
+				 "type":"radiusAttack",
+				 "force": 100.0,
+				"damage":5
+				}
+			
+			],
 			"shape":"d1",
 			"texture":"d1_texture.png"
 		}

@@ -16,6 +16,7 @@ class collisionFactory : public b2ContactListener
         void BeginContact(b2Contact* contact);
         void Contact(b2Contact* contact);
         void checkObstaclesBetween(GameObject* A, GameObject* B);
+
     protected:
     private:
 };

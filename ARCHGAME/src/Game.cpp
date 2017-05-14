@@ -10,9 +10,7 @@ Game::Game()
     tempView = sf::View(sf::Vector2f(90,600),v2f_windowSize);
     tempView.zoom(1.25);
     gameCamera.setCoords(sf::Vector2i(90,600),sf::Vector2f(1024,768));
-    //tempView.setSize(v2f_windowSize.x+256,v2f_windowSize.y+256);
-    //world->SetAutoClearForces(false);
-    //window->setFramerateLimit(600);
+    world->SetContactListener(collisionSystem);
     gameRunning = true;
 
     dt = 1.0f/60.0f;
@@ -45,7 +43,7 @@ void Game::start()
     controller.loadBindings();
     ///load function is called here to load the entities and assets of the game level
     gameLevel.setup();
-    gameLevel.load("assets/track.json");
+    gameLevel.load("assets/testmap4.json");
     gameLevel.initiate();
 
     while(window->isOpen())
@@ -64,12 +62,16 @@ void Game::start()
         double alpha;
 
       ///update logic at a fixed rate of 60
-      if(isVsynced&&accumulator<(dt))
+        if(isVsynced)
         {
-            std::cout<<"LEFTOVER TIME:"
-            <<accumulator<<std::endl;
-            std::cout<<"Elapsed time:"<<1/elapsed<<std::endl;
-            accumulator+=(dt/11);
+            if(accumulator>(dt))
+            {
+                //std::cout<<"LEFTOVER TIME:"
+                //<<accumulator<<std::endl;
+                //std::cout<<"Elapsed time:"<<1/elapsed<<std::endl;
+                accumulator=(dt);
+            }
+
         }
         while(accumulator>=dt)
         {
@@ -78,6 +80,15 @@ void Game::start()
             update(dt);
         }
         alpha = (accumulator/dt);
+
+         if(isVsynced)
+        {
+            if(accumulator<dt/10)
+            {
+                accumulator+=(dt/10);
+            }
+
+        }
 
         ///render freely
         render(alpha);
@@ -88,12 +99,16 @@ void Game::start()
     }
 
 }
+void Game::_end()
+{
+    gameRunning = false;
+}
 void Game::render(double alpha)
 {
     window->setView(gameCamera.camView);
     window->clear(sf::Color::Black);
     gameLevel.render(window,alpha);
-    /*for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
+    for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
         {
                 b2PolygonShape* polygonShape;
                 //sf::ConvexShape colShape;
@@ -140,7 +155,7 @@ void Game::render(double alpha)
 
                 }
 
-        }*/
+        }
     window->display();
 
 
@@ -149,6 +164,7 @@ void Game::render(double alpha)
 void Game::update(float dt)
 {
     gameLevel.update(dt);
+    collisionSystem->update();
 }
 
 /** Input is Processed through the windows pollEvent() function **/
@@ -165,7 +181,7 @@ void Game::processInput()
         {
             if(keyBoard.isKeyPressed(keyBoard.Escape))
             {
-                gameRunning = false;
+                _end();
             }
             if(keyBoard.isKeyPressed(keyBoard.Num1))
             {

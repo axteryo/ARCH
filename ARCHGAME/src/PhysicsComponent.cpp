@@ -150,3 +150,8 @@ b2Body* PhysicsComponent::getBody()
 {
     return body;
 }
+
+void PhysicsComponent::applyForce(b2Vec2 force)
+{
+    body->ApplyForce(force,body->GetWorldCenter(),true);
+}

@@ -36,9 +36,11 @@
    struct attackAttributeState
    {
        bool isAttacking;
+       b2Vec2 direction;
        std::string attack;
        std::string impactType;
        float force;
+       int damage;
    };
 
 namespace State
@@ -65,17 +67,27 @@ class StateComponent
         void setRenderState(renderState r);
         void setMovementAttributeState(movementAttributeState m);
         void setStatusAttributeState(statusAttributeState s);
+        void setAttackAttributeState(attackAttributeState a);
 
         positionState getPositionState();
         renderState getRenderState();
         movementAttributeState getMovementAttributeState();
         statusAttributeState getStatusAttributeState();
+        attackAttributeState getAttackAttributeState();
+
+        bool isAttacking();
+        bool isRotating();
+        bool isAlive();
+        bool isAccelerating();
+
+        void update();
     protected:
     private:
         positionState position_state;
         renderState render_state;
         movementAttributeState movement_attributeState;
         statusAttributeState status_attributeState;
+        attackAttributeState attack_attributeState;
 };
 
 #endif // STATECOMPONENT_H

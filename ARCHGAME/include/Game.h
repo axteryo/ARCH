@@ -24,6 +24,7 @@ class Game
         Game();
         virtual ~Game();
         void start();
+        void _end();
     protected:
     private:
         /**Game Variables**/

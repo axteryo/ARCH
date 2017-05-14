@@ -61,6 +61,7 @@
 		<Unit filename="include/AttackAction.h" />
 		<Unit filename="include/BeamAttackAction.h" />
 		<Unit filename="include/BrakeAction.h" />
+		<Unit filename="include/CollisionSystem.h" />
 		<Unit filename="include/DeccelerateAction.h" />
 		<Unit filename="include/EntitySpawner.h" />
 		<Unit filename="include/Game.h" />
@@ -72,6 +73,7 @@
 		<Unit filename="include/MovementAction.h" />
 		<Unit filename="include/ObjectEntity.h" />
 		<Unit filename="include/PhysicsComponent.h" />
+		<Unit filename="include/RadiusAttackAction.h" />
 		<Unit filename="include/RotateLeftAction.h" />
 		<Unit filename="include/RotateRightAction.h" />
 		<Unit filename="include/SpriteBatcher.h" />
@@ -92,6 +94,7 @@
 		<Unit filename="src/AttackAction.cpp" />
 		<Unit filename="src/BeamAttackAction.cpp" />
 		<Unit filename="src/BrakeAction.cpp" />
+		<Unit filename="src/CollisionSystem.cpp" />
 		<Unit filename="src/DeccelerateAction.cpp" />
 		<Unit filename="src/EntitySpawner.cpp" />
 		<Unit filename="src/Game.cpp" />
@@ -103,6 +106,7 @@
 		<Unit filename="src/MovementAction.cpp" />
 		<Unit filename="src/ObjectEntity.cpp" />
 		<Unit filename="src/PhysicsComponent.cpp" />
+		<Unit filename="src/RadiusAttackAction.cpp" />
 		<Unit filename="src/RotateLeftAction.cpp" />
 		<Unit filename="src/RotateRightAction.cpp" />
 		<Unit filename="src/SpriteBatcher.cpp" />

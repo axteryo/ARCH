@@ -8,6 +8,7 @@
 #include "RotateRightAction.h"
 #include "DeccelerateAction.h"
 #include "BeamAttackAction.h"
+#include "RadiusAttackAction.h"
 
 
 

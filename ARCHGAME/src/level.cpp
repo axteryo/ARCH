@@ -10,6 +10,7 @@ class GameMap;
 
 
 camera gameCamera;
+CollisionSystem* collisionSystem = new CollisionSystem();
 
 
 level::level()

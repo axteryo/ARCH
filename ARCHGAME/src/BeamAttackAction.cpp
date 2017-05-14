@@ -30,6 +30,15 @@ void BeamAttackAction::execute(ActorEntity* a)
                 attackFixture = a->getPhysics()->createFixturePolygon(data.shape,b2Vec2(-100,100),fData,data.isSensor);
                 isActive = true;
             }
+            attackState.attack = data.name;
+            attackState.damage = data.damage;
+            attackState.force = data.force;
+            attackState.impactType = data.impactType;
+            attackState.isAttacking = true;
+            float r = a->getRotation();
+            attackState.direction = b2Vec2(cos(r),sin(r));
+            attackState.direction.Normalize();
+            a->getStates()->setAttackAttributeState(attackState);
         }
     }
 }

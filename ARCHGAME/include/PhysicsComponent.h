@@ -43,6 +43,8 @@ class PhysicsComponent
         void setTopSpeed(float s);
         void limitVelocity();
 
+        void applyForce(b2Vec2 force);
+
         void update();
 
         b2Body* getBody();

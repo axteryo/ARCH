@@ -22,6 +22,8 @@ void AttackAction::setData(attackData aData)
     data.coolDown= aData.coolDown;
     data.rotationRate= aData.rotationRate;
     data.shape= aData.shape;
+    data.damage = aData.damage;
+    data.force = aData.force;
     data.impactType= aData.impactType;
     data.fixtureType= aData.fixtureType;
     data.fixtureData= aData.fixtureData;
@@ -44,6 +46,12 @@ void AttackAction::update(ActorEntity* a)
             isActive = false;
             inCoolDown = false;
             elapsed = 0;
+            attackState.attack = "";
+            attackState.damage = 0;
+            attackState.force= 0;
+            attackState.impactType = "";
+            attackState.isAttacking = false;
+            a->getStates()->setAttackAttributeState(attackState);
         }
     }
     else

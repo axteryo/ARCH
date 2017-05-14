@@ -2,6 +2,7 @@
 #define ATTACKACTION_H
 
 #include <Action.h>
+#include "StateComponent.h"
 
 
 
@@ -14,6 +15,8 @@ struct attackData
     int coolDown;
     float rotationRate;
     std::vector<float> shape;
+    int damage;
+    float force;
     std::string impactType;
     std::string fixtureType;
     std::string fixtureData;
@@ -35,6 +38,7 @@ class AttackAction : public Action
     protected:
         b2Fixture* attackFixture;
         attackData data;
+        attackAttributeState attackState;
         bool inCoolDown;
 
     private:
