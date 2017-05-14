@@ -18,6 +18,7 @@ struct attackData
     int damage;
     float force;
     std::string impactType;
+    int impactDuration;
     std::string fixtureType;
     std::string fixtureData;
     bool isSensor;

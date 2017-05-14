@@ -5,6 +5,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
+class ActorEntity;
+
    struct positionState
    {
        b2Vec2 position;
@@ -41,6 +43,16 @@
        std::string impactType;
        float force;
        int damage;
+       int impactDuration;
+   };
+   struct impactAttributeState
+   {
+       bool isImpacted;
+       std::string impactType;
+       b2Vec2 direction;
+       float force;
+       int impactDuration;
+       float impactDamage;
    };
 
 namespace State
@@ -68,19 +80,21 @@ class StateComponent
         void setMovementAttributeState(movementAttributeState m);
         void setStatusAttributeState(statusAttributeState s);
         void setAttackAttributeState(attackAttributeState a);
+        void setImpactAttributeState(impactAttributeState i);
 
         positionState getPositionState();
         renderState getRenderState();
         movementAttributeState getMovementAttributeState();
         statusAttributeState getStatusAttributeState();
         attackAttributeState getAttackAttributeState();
+        impactAttributeState getImpactAttributeState();
 
         bool isAttacking();
         bool isRotating();
         bool isAlive();
         bool isAccelerating();
 
-        void update();
+        void update(ActorEntity* a);
     protected:
     private:
         positionState position_state;
@@ -88,6 +102,7 @@ class StateComponent
         movementAttributeState movement_attributeState;
         statusAttributeState status_attributeState;
         attackAttributeState attack_attributeState;
+        impactAttributeState impact_attributeState;
 };
 
 #endif // STATECOMPONENT_H

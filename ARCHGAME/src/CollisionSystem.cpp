@@ -88,7 +88,7 @@ void CollisionSystem::resolveCollision()
 
                         if(aFixtureType.compare("bodyFixture")==0)
                         {
-                            std::cout<<"we are getting here"<<std::endl;
+
                             applyAttackCollision(attackAttributes_B,A);
                         }
                     }
@@ -117,19 +117,14 @@ void CollisionSystem::update()
 
 void CollisionSystem::applyAttackCollision(attackAttributeState a, ActorEntity* A)
 {
-    b2Vec2 force = b2Vec2(0,0);
-    if(a.impactType.compare("push")==0)
-    {
-        force.x = a.force;
-    }
-    else if(a.impactType.compare("pull")==0)
-    {
-        force.y = -a.force;
-    }
-
-    force.x*=a.direction.x;
-    force.y*=a.direction.y;
-    A->getPhysics()->applyForce(force,duration);
+    impactAttributeState i = A->getStates()->getImpactAttributeState();
+    i.force = a.force;
+    i.impactDamage = a.damage;
+    i.impactDuration = a.impactDuration;
+    i.impactType = a.impactType;
+    i.direction = a.direction;
+    i.isImpacted = true;
+    A->getStates()->setImpactAttributeState(i);
 }
 
 

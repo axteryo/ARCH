@@ -1,4 +1,5 @@
 #include "StateComponent.h"
+#include "ActorEntity.h"
 
 void State::v2f_normalize(sf::Vector2f &source)
 {
@@ -68,8 +69,6 @@ positionState State::lerpPositionState(positionState pre, positionState cur, flo
     return state;
 }
 
-
-
 StateComponent::StateComponent()
 {
     //ctor
@@ -100,6 +99,10 @@ void StateComponent::setAttackAttributeState(attackAttributeState a)
 {
     attack_attributeState=a;
 }
+void StateComponent::setImpactAttributeState(impactAttributeState i)
+{
+    impact_attributeState = i;
+}
 
 positionState StateComponent::getPositionState()
 {
@@ -121,6 +124,42 @@ attackAttributeState StateComponent::getAttackAttributeState()
 {
     return attack_attributeState;
 }
+impactAttributeState StateComponent::getImpactAttributeState()
+{
+    return impact_attributeState;
+}
+
+void StateComponent::update(ActorEntity* a)
+{
+    if(impact_attributeState.isImpacted)
+    {
+        if(impact_attributeState.impactDuration<=0)
+        {
+            impact_attributeState.isImpacted = false;
+        }
+        b2Vec2 force = b2Vec2(0,0);
+        if(impact_attributeState.impactType.compare("push")==0)
+        {
+            force.x = impact_attributeState.force;
+            force.y = impact_attributeState.force;
+        }
+        else if(impact_attributeState.impactType.compare("pull")==0)
+        {
+            force.x = -impact_attributeState.force;
+            force.y = -impact_attributeState.force;
+        }
+
+        force.x*=impact_attributeState.direction.x;
+        force.y*=impact_attributeState.direction.y;
+
+        a->getPhysics()->applyForce(force);
+        impact_attributeState.impactDuration--;
+    }
+
+
+}
+
+
 
 
 

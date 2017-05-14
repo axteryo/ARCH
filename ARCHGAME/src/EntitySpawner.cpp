@@ -191,8 +191,10 @@ entity* EntitySpawner::spawnEntity(spawnPoint s,SpriteBatcher* b)
                                 {
                                     aData.shape.push_back(actionDataRoot["attacks"][ii]["shape"][k].asFloat());
                                 }
+
                                 aData.damage= dataRoot["actor"][i]["attackActions"][j]["damage"].asInt();
                                 aData.force = dataRoot["actor"][i]["attackActions"][j]["force"].asFloat();
+                                aData.impactDuration = actionDataRoot["attacks"][ii]["impactDuration"].asInt();
                                 aData.impactType =actionDataRoot["attacks"][ii]["impactType"].asString();
                                 aData.fixtureType =actionDataRoot["attacks"][ii]["fixtureType"].asString();
                                 aData.fixtureData =actionDataRoot["attacks"][ii]["fixtureData"].asString();

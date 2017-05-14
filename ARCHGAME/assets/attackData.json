@@ -4,7 +4,8 @@
 		{
 			"name":"q1_beamAttack",
 			"attackType":"beamAttack",
-			"duration":10,
+			"duration":100,
+			"impactDuration":100,
 			"cooldown":10,
 			"rotationRate":0.1,
 			"shape": [   500, 0  ,  500, 100  ,  0, 100  , 0,0],
@@ -19,6 +20,7 @@
 			"name":"beamAttack_1",
 			"attackType":"beamAttack",
 			"duration":30,
+			"impactDuration":30,
 			"cooldown":10,
 			"rotationRate":0.1,
 			"impactType":"push",
@@ -32,6 +34,7 @@
 			"name":"d1_radiusAttack",
 			"attackType":"radiusAttack",
 			"duration":1,
+			"impactDuration":1,
 			"cooldown":0,
 			"rotationRate":0.15,
 			"impactType":"pull",
@@ -44,6 +47,7 @@
 		{
 			"name":"radiusAttack_1",
 			"duration":2,
+			"impactDuration":30,
 			"cooldown":5,
 			"rotationRate":0.1,
 			"impactType":"push",

@@ -75,6 +75,7 @@ void ActorEntity::update()
     action_component->update(this);
     physics_component->update();
     graphics_component->update(this);
+    state_component->update(this);
 
     state_component->setPositionState(physics_component->getCurrentState());
     state_component->setRenderState(graphics_component->getCurrentState());

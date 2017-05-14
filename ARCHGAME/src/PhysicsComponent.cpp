@@ -10,15 +10,14 @@ PhysicsComponent::PhysicsComponent(b2BodyType t)
     currentState.velocity = b2Vec2(0,0);
     previousState = currentState;
 
-    //bodyDef.position.Set(0,0);
     bodyDef.type = t;
     bodyDef.fixedRotation = true;
     body = world->CreateBody(&bodyDef);
     body->SetAngularVelocity(0);
 
 
-    body->SetAngularDamping(0.f);
-    body->SetLinearDamping(0.f);
+    //body->SetAngularDamping(0.f);
+    //body->SetLinearDamping(0.f);
     topSpeed = 0;
     rotationAmount = 0;
 
@@ -37,7 +36,7 @@ b2Fixture* PhysicsComponent::createFixtureRectangle(b2Vec2 dimensions,b2Vec2 pos
     boxShape.SetAsBox(dimensions.x,dimensions.y,position,0);
     fixtureDef.shape = &boxShape;
     fixtureDef.friction = 0.0;
-    fixtureDef.density = 1.0f;
+    fixtureDef.density = 2.0f;
     fixtureDef.userData = ((void*)fixtureData);
     fixtureDef.isSensor = isSensor;
     b2Fixture* f =body->CreateFixture(&fixtureDef);
@@ -48,7 +47,6 @@ b2Fixture* PhysicsComponent::createFixturePolygon(std::vector<float> shape,b2Vec
     b2PolygonShape polyShape;
     int shapeSize = shape.size();
 
-    //std::cout<<shapeSize<<std::endl;
     b2Vec2 vertices[shapeSize/2];
     int x = shapeSize-2;
     int y = x+1;
@@ -65,6 +63,7 @@ b2Fixture* PhysicsComponent::createFixturePolygon(std::vector<float> shape,b2Vec
     polyShape.Set(vertices,shapeSize/2);
     fixtureDef.shape = &polyShape;
     fixtureDef.friction = 0.0;
+    fixtureDef.density = .1;
     fixtureDef.userData = ((void*)fixtureData);
     fixtureDef.isSensor = isSensor;
     b2Fixture* f;
