@@ -88,13 +88,18 @@ entity* EntitySpawner::spawnEntity(spawnPoint s,SpriteBatcher* b)
                     m.rotationRate= dataRoot["actor"][i]["MovementAttributes"]["rotationRate"].asFloat();
                     m.accel_rotationRate = dataRoot["actor"][i]["MovementAttributes"]["accel_rotationRate"].asFloat();
                     m.accel = 0;
+                    m.isRotating = false;
+                    m.isAccelerating = false;
                     states->setMovementAttributeState(m);
 
-                    /*statusAttributeState stats = states->getStatusAttributeState();
-                    stats.maxHealth = dataRoot["actor"][i]["StatusAttributes"]["maxHealth"].asFloat();
-                    stats.minHealth = dataRoot["actor"][i]["StatusAttributes"]["minHealth"].asFloat();
-                    stats.curHealth = dataRoot["actor"][i]["StatusAttributes"]["curHealth"].asFloat();
-                    states->setStatusAttributeState(stats);*/
+                    p->setTopSpeed(m.velLimit);
+
+                    statusAttributeState stats = states->getStatusAttributeState();
+                    stats.maxHealth = dataRoot["actor"][i]["StatusAttributes"]["maxHealth"].asInt();
+                    stats.minHealth = dataRoot["actor"][i]["StatusAttributes"]["minHealth"].asInt();
+                    stats.curHealth = dataRoot["actor"][i]["StatusAttributes"]["curHealth"].asInt();
+                    stats.isAlive = true;
+                    states->setStatusAttributeState(stats);
 
                     ///Setup the physics component
                     b2Fixture* f;
@@ -113,23 +118,30 @@ entity* EntitySpawner::spawnEntity(spawnPoint s,SpriteBatcher* b)
                     fixtureData->data = s.spawnID+"Body";
 
 
-
                     ///MAKE SURE THAT THE "SHAPE" IN THE "ENTITY DATA" FILE
                     /// CORRESPONDS WITH THE "SHAPE" IN THE "SHAPE DATA" FILE
-                    for(int i =0; i<shapeRoot[shape].size();++i)
+                    for(int k =0; k<shapeRoot[shape].size();++k)
                     {
-                        int ss = shapeRoot[shape][i]["shape"].size();
+                        int ss = shapeRoot[shape][k]["shape"].size();
 
                         std::vector<float> points;
                         for(int ii = 0;ii<ss;++ii)
                         {
                             //points[ii]= shapeRoot[shape][i]["shape"][ii].asInt();
-                            points.push_back(shapeRoot[shape][i]["shape"][ii].asInt());
+                            points.push_back(shapeRoot[shape][k]["shape"][ii].asInt());
                         }
                         ///NOTE TO SELF:IMPLEMENT BODY AND FIXTUREDATA
                         p->createFixturePolygon(points,position,fixtureData,false);
 
                     }
+
+                    ///Create Field Sensors for actors
+                    fixtureUserData* sensorData = new fixtureUserData;
+                    sensorData->type = dataRoot["actor"][i]["sensorField"]["fixtureType"].asString();
+                    sensorData->data = dataRoot["actor"][i]["sensorField"]["fixtureData"].asString();
+                    float sensorRadius = dataRoot["actor"][i]["sensorField"]["radius"][0].asFloat();
+                    bool isSensor = dataRoot["actor"][i]["sensorField"]["isSensor"].asBool();
+                    p->createFixtureCircle(sensorRadius,b2Vec2(0,0),sensorData,isSensor);
 
 
                     ///SetUp Action Component
@@ -166,9 +178,9 @@ entity* EntitySpawner::spawnEntity(spawnPoint s,SpriteBatcher* b)
                     }
                     for(int j = 0;j<dataRoot["actor"][i]["attackActions"].size();j++)
                     {
+
                         attackData aData;
                         AttackAction* aa;
-
                         for(int ii = 0;ii<actionDataRoot["attacks"].size();ii++)
                         {
                             if(actionDataRoot["attacks"][ii]["name"].asString().compare(dataRoot["actor"][i]["attackActions"][j]["name"].asString())==0)
@@ -185,7 +197,7 @@ entity* EntitySpawner::spawnEntity(spawnPoint s,SpriteBatcher* b)
                                 aData.attackType=actionDataRoot["attacks"][ii]["attackType"].asString();
                                 aData.duration=actionDataRoot["attacks"][ii]["duration"].asInt();
                                 aData.coolDown=actionDataRoot["attacks"][ii]["cooldown"].asInt();
-                                aData.rotationRate=actionDataRoot["attacks"][i]["rotationRate"].asFloat();
+                                aData.rotationRate=dataRoot["actor"][i]["attackActions"][j]["rotationRate"].asFloat();
 
                                 for(int k = 0;k<actionDataRoot["attacks"][ii]["shape"].size();k++)
                                 {
@@ -194,6 +206,7 @@ entity* EntitySpawner::spawnEntity(spawnPoint s,SpriteBatcher* b)
 
                                 aData.damage= dataRoot["actor"][i]["attackActions"][j]["damage"].asInt();
                                 aData.force = dataRoot["actor"][i]["attackActions"][j]["force"].asFloat();
+
                                 aData.impactDuration = actionDataRoot["attacks"][ii]["impactDuration"].asInt();
                                 aData.impactType =actionDataRoot["attacks"][ii]["impactType"].asString();
                                 aData.fixtureType =actionDataRoot["attacks"][ii]["fixtureType"].asString();
@@ -206,17 +219,11 @@ entity* EntitySpawner::spawnEntity(spawnPoint s,SpriteBatcher* b)
 
                         }
                         ac->addAction(aa);
-
                     }
                     ///Create Actor
                     a = new ActorEntity(s.spawnID,g,p,ic,states,ac);
                     a->setPosition(s.location);
                     a->setRotation(s.rotation);
-
-                   /* States::attributeState attributes = a->getAttributes();
-
-
-                    a->setAttributes(attributes);*/
 
                     return a;
 

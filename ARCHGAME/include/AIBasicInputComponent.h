@@ -2,6 +2,7 @@
 #define AIBASICINPUTCOMPONENT_H
 
 #include <InputComponent.h>
+#include "ActionComponent.h"
 
 
 class AIBasicInputComponent : public InputComponent
@@ -10,8 +11,19 @@ class AIBasicInputComponent : public InputComponent
         AIBasicInputComponent();
         virtual ~AIBasicInputComponent();
         void processInput(ActorEntity* a);
-    protected:
+        void onNotifyEntityNearby(entity* e);
+        void onNotifyEntityWithinRadius(entity* e);
+
+        void setTarget(entity* t);
+        void setAlert();
+        void setAggro();
+
+
     private:
+        bool isAlert;
+        bool isAggro;
+
+        entity* target;
 };
 
 #endif // AIBASICINPUTCOMPONENT_H

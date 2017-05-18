@@ -62,5 +62,10 @@ positionState ObjectEntity::getPreviousState()
     return physics_component->getPreviousState();
 }
 
+void ObjectEntity::initiateCollision(entity* other, fixtureUserData* otherFData, fixtureUserData* selfFData)
+{
+
+}
+
 
 

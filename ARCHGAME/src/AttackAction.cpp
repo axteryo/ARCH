@@ -66,15 +66,19 @@ void AttackAction::update(ActorEntity* a)
         }
         else
         {
-                attackState.attack = data.name;
-                attackState.damage = data.damage;
-                attackState.impactDuration = data.impactDuration;
-                attackState.force = data.force;
-                attackState.impactType = data.impactType;
-                attackState.isAttacking = true;
+
+                attackState.rotationRate=data.rotationRate;
                 float r = a->getRotation();
-                attackState.direction = b2Vec2(cos(r),sin(r));
-                attackState.direction.Normalize();
+                if(data.attackType.compare("radiusAttack")==0)
+                {
+                    attackState.direction = a->getPosition();
+                }
+                else
+                {
+                    attackState.direction = b2Vec2(cos(r),sin(r));
+                }
+
+                //attackState.direction.Normalize();
                 a->getStates()->setAttackAttributeState(attackState);
 
         }

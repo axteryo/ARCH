@@ -22,6 +22,7 @@ class ObjectEntity : public entity
 
         positionState getCurrentState();
         positionState getPreviousState();
+        void initiateCollision(entity* other, fixtureUserData* otherFData, fixtureUserData* selfFData);
 
         PhysicsComponent* getPhysics();
     protected:

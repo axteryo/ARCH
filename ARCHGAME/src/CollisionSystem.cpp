@@ -51,8 +51,8 @@ void CollisionSystem::EndContact(b2Contact* contact)
     }
 }
 void CollisionSystem::resolveCollision()
-{
-    collisionEventData* colData = collisionEvents.front();
+{/*
+   collisionEventData* colData = collisionEvents.front();
     std::string aType = colData->A->getType();
     std::string bType = colData->B->getType();
     std::string aFixtureType = colData->A_Data->type;
@@ -65,18 +65,21 @@ void CollisionSystem::resolveCollision()
 
         if(aType.compare("actor")==0)
         {
-
             ActorEntity* A = static_cast<ActorEntity*>(colData->A);
+
             if(bType.compare("actor")==0)
             {
                 ActorEntity* B = static_cast<ActorEntity*>(colData->B);
+                if(bFixtureType.compare("sensorFixture")==0)
+                {
+                    B->notifyActorWithinRange(A);
+                }
+
                 if(aFixtureType.compare("attackFixture")==0)
                 {
-                    attackAttributeState attackAttributes_A = A->getStates()->getAttackAttributeState();
-
                     if(bFixtureType.compare("bodyFixture")==0)
                     {
-
+                        attackAttributeState attackAttributes_A = A->getStates()->getAttackAttributeState();
                         applyAttackCollision(attackAttributes_A,B);
                     }
                 }
@@ -84,14 +87,16 @@ void CollisionSystem::resolveCollision()
                 {
                     if(bFixtureType.compare("attackFixture")==0)
                     {
-                        attackAttributeState attackAttributes_B = B->getStates()->getAttackAttributeState();
-
                         if(aFixtureType.compare("bodyFixture")==0)
                         {
-
+                            attackAttributeState attackAttributes_B = B->getStates()->getAttackAttributeState();
                             applyAttackCollision(attackAttributes_B,A);
                         }
                     }
+                }
+                else if(aFixtureType.compare("sensorFixture")==0)
+                {
+                    A->notifyActorWithinRange(B);
                 }
 
             }
@@ -103,14 +108,20 @@ void CollisionSystem::resolveCollision()
 
         }
     }
-    delete colData;
+    delete colData;*/
 }
 void CollisionSystem::update()
 {
-
     for(int i = 0;i<collisionEvents.size();i++)
     {
-        resolveCollision();
+        collisionEventData* colData = collisionEvents.front();
+        if(colData->collisionType.compare("COLLISION_INITIAL")==0)
+        {
+
+            colData->entityA->initiateCollision(colData->entityB,colData->B_Data,colData->A_Data);
+            colData->entityB->initiateCollision(colData->entityA,colData->A_Data,colData->B_Data);
+        }
+        delete colData;
         collisionEvents.pop();
     }
 }

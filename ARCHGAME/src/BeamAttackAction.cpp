@@ -21,8 +21,11 @@ void BeamAttackAction::execute(ActorEntity* a)
     {
         if(elapsed<=0)
         {
+
             if(!attackFixture)
             {
+                if(!a->isAttacking())
+                {
 
                 fixtureUserData* fData = new fixtureUserData;
                 elapsed = data.duration;
@@ -30,19 +33,17 @@ void BeamAttackAction::execute(ActorEntity* a)
                 fData->data = data.fixtureData;
                 attackFixture = a->getPhysics()->createFixturePolygon(data.shape,b2Vec2(-100,100),fData,data.isSensor);
                 isActive = true;
-            }
-                /*attackState.attack = data.name;
+
+                attackState.attack = data.name;
                 attackState.damage = data.damage;
                 attackState.impactDuration = data.impactDuration;
                 attackState.force = data.force;
                 attackState.impactType = data.impactType;
                 attackState.isAttacking = true;
-                float r = a->getRotation();
-                attackState.direction = b2Vec2(cos(r),sin(r));
-                attackState.direction.Normalize();
-                a->getStates()->setAttackAttributeState(attackState);*/
+                a->getStates()->setAttackAttributeState(attackState);
 
-
+                }
+            }
         }
     }
 }

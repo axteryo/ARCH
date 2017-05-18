@@ -10,6 +10,7 @@ class RotateRightAction : public MovementAction
         RotateRightAction();
         virtual ~RotateRightAction();
         void execute(ActorEntity* a);
+        void update(ActorEntity* a);
 
     protected:
     private:

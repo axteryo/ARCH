@@ -3,7 +3,7 @@
 	<iostream>
 	"Game.h"
 
-1494701376 source:c:\users\mesh\documents\projectarch\archgame\src\level.cpp
+1494741887 source:c:\users\mesh\documents\projectarch\archgame\src\level.cpp
 	"level.h"
 	"EntitySpawner.h"
 	"SpriteBatcher.h"
@@ -23,11 +23,12 @@
 1493926935 source:c:\users\mesh\documents\projectarch\archgame\src\entity.cpp
 	"entity.h"
 
-1494091700 c:\users\mesh\documents\projectarch\archgame\include\entity.h
+1494969499 c:\users\mesh\documents\projectarch\archgame\include\entity.h
 	<Box2D/Box2D.h>
 	<SFML/Graphics.hpp>
 	<SFML/Window.hpp>
 	"StateComponent.h"
+	"PhysicsComponent.h"
 
 1450293359 c:\sfml-2.3.2\include\sfml\graphics.hpp
 	<SFML/Window.hpp>
@@ -407,7 +408,7 @@
 	<string>
 	<vector>
 
-1494719298 source:c:\users\mesh\documents\projectarch\archgame\src\game.cpp
+1495079240 source:c:\users\mesh\documents\projectarch\archgame\src\game.cpp
 	"Game.h"
 
 1494468047 c:\users\mesh\documents\projectarch\archgame\include\game.h
@@ -658,10 +659,10 @@
 	<sstream>
 	"config.h"
 
-1494737798 source:c:\users\mesh\documents\projectarch\archgame\src\physicscomponent.cpp
+1495075657 source:c:\users\mesh\documents\projectarch\archgame\src\physicscomponent.cpp
 	"PhysicsComponent.h"
 
-1494722266 c:\users\mesh\documents\projectarch\archgame\include\physicscomponent.h
+1494814009 c:\users\mesh\documents\projectarch\archgame\include\physicscomponent.h
 	<iostream>
 	"entity.h"
 
@@ -699,7 +700,7 @@
 	"level.h"
 	"SpriteBatcher.h"
 
-1494737406 source:c:\users\mesh\documents\projectarch\archgame\src\entityspawner.cpp
+1495080166 source:c:\users\mesh\documents\projectarch\archgame\src\entityspawner.cpp
 	"EntitySpawner.h"
 
 1465673537 c:\users\mesh\documents\projectarch\archgame\include\json\json.h
@@ -738,20 +739,20 @@
 1488862155 source:c:\users\mesh\documents\projectarch\archgame\src\batch.cpp
 	"batch.h"
 
-1493828005 source:c:\users\mesh\documents\projectarch\archgame\src\gamecontroller.cpp
+1494819361 source:c:\users\mesh\documents\projectarch\archgame\src\gamecontroller.cpp
 	"GameController.h"
 
-1490479933 c:\users\mesh\documents\projectarch\archgame\include\gamecontroller.h
+1494819378 c:\users\mesh\documents\projectarch\archgame\include\gamecontroller.h
 	"json/json.h"
 	<iostream>
 	<fstream>
 	<string>
 	<SFML/Window.hpp>
 
-1494361636 source:c:\users\mesh\documents\projectarch\archgame\src\playerinputcomponent.cpp
+1494974577 source:c:\users\mesh\documents\projectarch\archgame\src\playerinputcomponent.cpp
 	"playerInputComponent.h"
 
-1494279273 c:\users\mesh\documents\projectarch\archgame\include\playerinputcomponent.h
+1494971386 c:\users\mesh\documents\projectarch\archgame\include\playerinputcomponent.h
 	"GameController.h"
 	<InputComponent.h>
 	"ActionComponent.h"
@@ -1192,25 +1193,25 @@
 	<GLES/glext.h>
 	<GLES2/gl2ext.h>
 
-1494734855 c:\users\mesh\documents\projectarch\archgame\include\actorentity.h
+1494971160 c:\users\mesh\documents\projectarch\archgame\include\actorentity.h
 	"entity.h"
 	"GraphicsComponent.h"
-	"PhysicsComponent.h"
-	"StateComponent.h"
 	"playerInputComponent.h"
 	"AIBasicInputComponent.h"
 
-1494735327 source:c:\users\mesh\documents\projectarch\archgame\src\actorentity.cpp
+1495048156 source:c:\users\mesh\documents\projectarch\archgame\src\actorentity.cpp
 	"ActorEntity.h"
 
-1493929007 source:c:\users\mesh\documents\projectarch\archgame\src\objectentity.cpp
+1494969292 source:c:\users\mesh\documents\projectarch\archgame\src\objectentity.cpp
 	"ObjectEntity.h"
 
-1493928934 c:\users\mesh\documents\projectarch\archgame\include\objectentity.h
+1494967211 c:\users\mesh\documents\projectarch\archgame\include\objectentity.h
 	<entity.h>
 	"PhysicsComponent.h"
 
-1494279266 c:\users\mesh\documents\projectarch\archgame\include\inputcomponent.h
+1494971785 c:\users\mesh\documents\projectarch\archgame\include\inputcomponent.h
+	"entity.h"
+	<iostream>
 
 1491783977 source:c:\users\mesh\documents\projectarch\archgame\src\inputcomponent.cpp
 	"InputComponent.h"
@@ -1218,43 +1219,44 @@
 1494269488 source:c:\users\mesh\documents\projectarch\archgame\src\action.cpp
 	"Action.h"
 
-1494285886 c:\users\mesh\documents\projectarch\archgame\include\action.h
+1494816215 c:\users\mesh\documents\projectarch\archgame\include\action.h
 	<string>
 	<vector>
 	<Box2D/Box2D.h>
 
-1494361262 source:c:\users\mesh\documents\projectarch\archgame\src\accelerateaction.cpp
+1494810402 source:c:\users\mesh\documents\projectarch\archgame\src\accelerateaction.cpp
 	"AccelerateAction.h"
 	"ActorEntity.h"
 
 1494287076 c:\users\mesh\documents\projectarch\archgame\include\accelerateaction.h
 	<MovementAction.h>
 
-1494274447 c:\users\mesh\documents\projectarch\archgame\include\rotateleftaction.h
+1494811046 c:\users\mesh\documents\projectarch\archgame\include\rotateleftaction.h
 	<MovementAction.h>
 
-1494274452 c:\users\mesh\documents\projectarch\archgame\include\rotaterightaction.h
+1494811054 c:\users\mesh\documents\projectarch\archgame\include\rotaterightaction.h
 	<MovementAction.h>
 
-1494271055 source:c:\users\mesh\documents\projectarch\archgame\src\rotateleftaction.cpp
+1494978418 source:c:\users\mesh\documents\projectarch\archgame\src\rotateleftaction.cpp
 	"RotateLeftAction.h"
 	"ActorEntity.h"
 
-1494271069 source:c:\users\mesh\documents\projectarch\archgame\src\rotaterightaction.cpp
+1494812432 source:c:\users\mesh\documents\projectarch\archgame\src\rotaterightaction.cpp
 	"RotateRightAction.h"
 	"ActorEntity.h"
 
 1494273880 c:\users\mesh\documents\projectarch\archgame\include\brakeaction.h
 	<MovementAction.h>
 
-1494283080 source:c:\users\mesh\documents\projectarch\archgame\src\brakeaction.cpp
+1494811191 source:c:\users\mesh\documents\projectarch\archgame\src\brakeaction.cpp
 	"BrakeAction.h"
 	"ActorEntity.h"
 
-1493086799 c:\users\mesh\documents\projectarch\archgame\include\aibasicinputcomponent.h
+1494973598 c:\users\mesh\documents\projectarch\archgame\include\aibasicinputcomponent.h
 	<InputComponent.h>
+	"ActionComponent.h"
 
-1493086821 source:c:\users\mesh\documents\projectarch\archgame\src\aibasicinputcomponent.cpp
+1495080160 source:c:\users\mesh\documents\projectarch\archgame\src\aibasicinputcomponent.cpp
 	"AIBasicInputComponent.h"
 
 1493916659 source:c:\users\mesh\documents\projectarch\archgame\src\gameevent.cpp
@@ -1267,11 +1269,11 @@
 
 1493924540 c:\users\mesh\documents\projectarch\archgame\include\statuscomponent.h
 
-1494737338 source:c:\users\mesh\documents\projectarch\archgame\src\statecomponent.cpp
+1494983218 source:c:\users\mesh\documents\projectarch\archgame\src\statecomponent.cpp
 	"StateComponent.h"
 	"ActorEntity.h"
 
-1494735180 c:\users\mesh\documents\projectarch\archgame\include\statecomponent.h
+1494811709 c:\users\mesh\documents\projectarch\archgame\include\statecomponent.h
 	<Box2D/Box2D.h>
 	<SFML/Graphics.hpp>
 	<SFML/Window.hpp>
@@ -1283,7 +1285,7 @@
 	"DeccelerateAction.h"
 	"ActorEntity.h"
 
-1494735785 source:c:\users\mesh\documents\projectarch\archgame\src\attackaction.cpp
+1494819705 source:c:\users\mesh\documents\projectarch\archgame\src\attackaction.cpp
 	"AttackAction.h"
 	"ActorEntity.h"
 
@@ -1291,14 +1293,14 @@
 	<Action.h>
 	"StateComponent.h"
 
-1494735818 source:c:\users\mesh\documents\projectarch\archgame\src\beamattackaction.cpp
+1494983134 source:c:\users\mesh\documents\projectarch\archgame\src\beamattackaction.cpp
 	"BeamAttackAction.h"
 	"ActorEntity.h"
 
 1494288165 c:\users\mesh\documents\projectarch\archgame\include\beamattackaction.h
 	<AttackAction.h>
 
-1494361753 source:c:\users\mesh\documents\projectarch\archgame\src\actioncomponent.cpp
+1494978284 source:c:\users\mesh\documents\projectarch\archgame\src\actioncomponent.cpp
 	"ActionComponent.h"
 
 1494705280 c:\users\mesh\documents\projectarch\archgame\include\actioncomponent.h
@@ -1317,10 +1319,10 @@
 1494285946 c:\users\mesh\documents\projectarch\archgame\include\movementaction.h
 	<Action.h>
 
-1494735351 source:c:\users\mesh\documents\projectarch\archgame\src\collisionsystem.cpp
+1494969814 source:c:\users\mesh\documents\projectarch\archgame\src\collisionsystem.cpp
 	"CollisionSystem.h"
 
-1494720741 c:\users\mesh\documents\projectarch\archgame\include\collisionsystem.h
+1494967164 c:\users\mesh\documents\projectarch\archgame\include\collisionsystem.h
 	<Box2D/Box2D.h>
 	<queue>
 	"entity.h"
@@ -1331,6 +1333,7 @@
 1494704778 c:\users\mesh\documents\projectarch\archgame\include\radiusattackaction.h
 	<AttackAction.h>
 
-1494705009 source:c:\users\mesh\documents\projectarch\archgame\src\radiusattackaction.cpp
+1494819743 source:c:\users\mesh\documents\projectarch\archgame\src\radiusattackaction.cpp
 	"RadiusAttackAction.h"
+	"ActorEntity.h"
 

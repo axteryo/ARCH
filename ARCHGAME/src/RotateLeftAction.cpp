@@ -17,25 +17,41 @@ void RotateLeftAction::execute(ActorEntity* a)
     elapsed+=1;
     isActive = true;
     float rate;
-    StateComponent* s = a->getStates();
-    PhysicsComponent* p = a->getPhysics();
-    movementAttributeState attributes = s->getMovementAttributeState();
 
-    if(attributes.accel>0)
+    movementAttributeState attributes = a->getMovementAttributeState();
+
+    if(attributes.isAccelerating)
     {
         rate = -attributes.accel_rotationRate;
+    }
+    else if(a->isAttacking())
+    {
+        rate = -a->getAttackAttributeState().rotationRate;
     }
     else
     {
          rate = -attributes.rotationRate;
     }
 
-    p->_rotate(rate);
-    s->setMovementAttributeState(attributes);
-
-
-
+    attributes.isRotating = true;
+    a->getPhysics()->_rotate(rate);
+    a->getStates()->setMovementAttributeState(attributes);
 }
+
+void RotateLeftAction::update(ActorEntity* a)
+{
+    elapsed-=1;
+    if(elapsed<0)
+    {
+        movementAttributeState attributes = a->getMovementAttributeState();
+        attributes.isRotating = false;
+        a->getStates()->setMovementAttributeState(attributes);
+        isActive = false;
+        elapsed = 0;
+    }
+}
+
+
 
 
 

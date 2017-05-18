@@ -9,6 +9,7 @@ GameController::GameController()
     playerTurnLeftAction="";
     playerTurnRightAction="";
     playerUseAttack1Action="";
+    playerUseAttack2Action="";
 }
 
 GameController::~GameController()
@@ -39,6 +40,7 @@ void GameController::loadBindings()
     playerTurnLeftAction=root["turnLeft"].asString();
     playerTurnRightAction=root["turnRight"].asString();
     playerUseAttack1Action=root["useAttack1"].asString();
+    playerUseAttack2Action=root["useAttack2"].asString();
 
     file.close();
 }
@@ -67,9 +69,9 @@ bool GameController::isBindedKeyPressed(std::string bindingToCheck)
             return false;
         }
     }
-    if(bindingToCheck.compare("Right")==0)
+    if(bindingToCheck.compare("Left")==0)
     {
-        if(keyBoard.isKeyPressed(keyBoard.Right))
+        if(keyBoard.isKeyPressed(keyBoard.Left))
         {
             return true;
         }
@@ -78,9 +80,9 @@ bool GameController::isBindedKeyPressed(std::string bindingToCheck)
             return false;
         }
     }
-    if(bindingToCheck.compare("Left")==0)
+    if(bindingToCheck.compare("Right")==0)
     {
-        if(keyBoard.isKeyPressed(keyBoard.Left))
+        if(keyBoard.isKeyPressed(keyBoard.Right))
         {
             return true;
         }
@@ -103,6 +105,28 @@ bool GameController::isBindedKeyPressed(std::string bindingToCheck)
      if(bindingToCheck.compare("LShift")==0)
     {
         if(keyBoard.isKeyPressed(keyBoard.LShift))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    if(bindingToCheck.compare("W")==0)
+    {
+        if(keyBoard.isKeyPressed(keyBoard.W))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    if(bindingToCheck.compare("A")==0)
+    {
+        if(keyBoard.isKeyPressed(keyBoard.A))
         {
             return true;
         }
@@ -165,6 +189,17 @@ bool GameController::isActionKeyPressed(std::string actionToCheck)
     if(actionToCheck.compare("useAttack1")==0)
     {
         if(isBindedKeyPressed(playerUseAttack1Action))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+     if(actionToCheck.compare("useAttack2")==0)
+    {
+        if(isBindedKeyPressed(playerUseAttack2Action))
         {
             return true;
         }

@@ -19,6 +19,8 @@ class playerInputComponent: public InputComponent
         playerInputComponent();
         virtual ~playerInputComponent();
         void processInput(ActorEntity* a);
+        void onNotifyEntityNearby(entity* e);
+        void onNotifyEntityWithinRadius(entity* e);
     protected:
     private:
        //AccelerateAction _accelerate;

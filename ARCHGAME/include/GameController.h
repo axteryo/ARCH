@@ -27,6 +27,7 @@ class GameController
         std::string playerTurnLeftAction;
         std::string playerTurnRightAction;
         std::string playerUseAttack1Action;
+        std::string playerUseAttack2Action;
         std::string playerBrakeAction;
         enum controllerTypeState
         {

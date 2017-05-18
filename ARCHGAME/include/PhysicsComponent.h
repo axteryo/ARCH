@@ -36,7 +36,7 @@ class PhysicsComponent
         b2Vec2 getPosition();
         void accelerate(b2Vec2 force);
         b2Fixture* createFixtureRectangle(b2Vec2 dimensions,b2Vec2 position,fixtureUserData* fixtureData,bool isSensor);
-        void createFixtureCircle();
+        b2Fixture* createFixtureCircle(float radius,b2Vec2 position, fixtureUserData* fixtureData, bool isSensor);
         b2Fixture* createFixturePolygon(std::vector<float> shape,b2Vec2 position,fixtureUserData* fixtureData,bool isSensor);
         positionState getCurrentState();
         positionState getPreviousState();

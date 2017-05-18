@@ -3,8 +3,8 @@
 
 #include "entity.h"
 #include "GraphicsComponent.h"
-#include "PhysicsComponent.h"
-#include "StateComponent.h"
+//#include "PhysicsComponent.h"
+//#include "StateComponent.h"
 //#include "ActionComponent.h"
 #include "playerInputComponent.h"
 #include "AIBasicInputComponent.h"
@@ -32,6 +32,20 @@ class ActorEntity : public entity
 
         positionState getCurrentState();
         positionState getPreviousState();
+        movementAttributeState getMovementAttributeState();
+        statusAttributeState getStatusAttributeState();
+        attackAttributeState getAttackAttributeState();
+        impactAttributeState getImpactAttributeState();
+
+
+        void notifyEntityNearby(entity* e);
+        void notifyEntityWithinRadius(entity* e);
+
+        bool isAttacking();
+        bool isRotating();
+        bool isAlive();
+        bool isAccelerating();
+        bool isImpacted();
 
         /**
         virtual void initiateCollision() = 0;
@@ -42,6 +56,9 @@ class ActorEntity : public entity
         PhysicsComponent* getPhysics();
         StateComponent* getStates();
         ActionComponent* getActions();
+
+        void initiateCollision(entity* other, fixtureUserData* otherFData, fixtureUserData* selfFData);
+        void applyAttackOnSelf(attackAttributeState a);
 
 
     protected:

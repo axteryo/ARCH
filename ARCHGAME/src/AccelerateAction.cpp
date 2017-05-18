@@ -20,9 +20,9 @@ void AccelerateAction::execute(ActorEntity* a)
     isActive = true;
     float r = a->getRotation();
     b2Vec2 acceleration = b2Vec2(0,0);
-    StateComponent* s = a->getStates();
+
     PhysicsComponent* p = a->getPhysics();
-    movementAttributeState attributes = s->getMovementAttributeState();
+    movementAttributeState attributes = a->getMovementAttributeState();
 
 
     if(accel>=attributes.accelRateLimit)
@@ -42,10 +42,10 @@ void AccelerateAction::execute(ActorEntity* a)
 
     acceleration.x*=accel;
     acceleration.y*=accel;
-
+    attributes.isAccelerating = true;
     p->accelerate(acceleration);
     p->setTopSpeed(attributes.velLimit);
-    s->setMovementAttributeState(attributes);
+    a->getStates()->setMovementAttributeState(attributes);
 
 }
 
@@ -54,10 +54,10 @@ void AccelerateAction::update(ActorEntity* a)
     elapsed-=1;
     if(elapsed<0)
     {
-        StateComponent* s = a->getStates();
-        movementAttributeState attributes = s->getMovementAttributeState();
+        movementAttributeState attributes = a->getMovementAttributeState();
         attributes.accel = 0;
-        s->setMovementAttributeState(attributes);
+        attributes.isAccelerating = false;
+        a->getStates()->setMovementAttributeState(attributes);
         isActive = false;
         accel = 0;
         elapsed = 0;

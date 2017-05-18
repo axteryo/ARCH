@@ -26,11 +26,28 @@
 				{	
 				"name":"beamAttack_1",
 				"type":"beamAttack",
-				"force": 100.0,
-				"damage":25
+				"force": 50.0,
+				"damage":25,
+				"rotationRate":0.1,
+				"relativePosition":[-100,100]
+				},
+				{	
+				"name":"radiusAttack_1",
+				"type":"radiusAttack",
+				"force": 50.0,
+				"damage":10,
+				"rotationRate":0.1,
+				"relativePosition":[10,10]
 				}
 			
 			],
+			"sensorField":
+			{
+				"radius":[10],
+				"fixtureType":"sensorFixture",
+				"fixtureData":"playerSensorField",
+				"isSensor":true
+			},
 			"shape":"archii",
 			"texture":"archii_texture.png"
 		},
@@ -45,8 +62,8 @@
 			"MovementAttributes":
 			{
 				"accelRate":0.05,
-				"accelRateLimit":2,
-				"velLimit":18.0,
+				"accelRateLimit":3,
+				"velLimit":24.0,
 				"brakeLimit":7.0,
 				"rotationRate":0.15,
 				"accel_rotationRate":0.04
@@ -56,12 +73,19 @@
 			[	
 				{	
 				"name":"d1_radiusAttack",
-				 "type":"radiusAttack",
-				 "force": 100.0,
-				"damage":5
+				"type":"radiusAttack",
+				"force": 100.0,
+				"damage":5,				
+				"rotationRate":0.15
 				}
-			
 			],
+			"sensorField":
+			{
+				"radius":[10],
+				"fixtureType":"sensorFixture",
+				"fixtureData":"d1SensorField",
+				"isSensor":true
+			},
 			"shape":"d1",
 			"texture":"d1_texture.png"
 		}

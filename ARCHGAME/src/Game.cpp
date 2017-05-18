@@ -11,6 +11,7 @@ Game::Game()
     tempView.zoom(1.25);
     gameCamera.setCoords(sf::Vector2i(90,600),sf::Vector2f(1024,768));
     world->SetContactListener(collisionSystem);
+
     gameRunning = true;
 
     dt = 1.0f/60.0f;
@@ -64,13 +65,18 @@ void Game::start()
       ///update logic at a fixed rate of 60
         if(isVsynced)
         {
-            if(accumulator>(dt))
+            while(accumulator<dt)
             {
                 //std::cout<<"LEFTOVER TIME:"
                 //<<accumulator<<std::endl;
                 //std::cout<<"Elapsed time:"<<1/elapsed<<std::endl;
-                accumulator=(dt);
+
+                accumulator+=(dt/50);
+                //std::cout<<"we are here"<<std::endl;
+                //std::cout<<"LEFTOVER TIME:"
+            //<<accumulator<<std::endl;
             }
+
 
         }
         while(accumulator>=dt)
@@ -80,15 +86,6 @@ void Game::start()
             update(dt);
         }
         alpha = (accumulator/dt);
-
-         if(isVsynced)
-        {
-            if(accumulator<dt/10)
-            {
-                accumulator+=(dt/10);
-            }
-
-        }
 
         ///render freely
         render(alpha);
@@ -108,7 +105,7 @@ void Game::render(double alpha)
     window->setView(gameCamera.camView);
     window->clear(sf::Color::Black);
     gameLevel.render(window,alpha);
-    for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
+   /* for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
         {
                 b2PolygonShape* polygonShape;
                 //sf::ConvexShape colShape;
@@ -132,7 +129,7 @@ void Game::render(double alpha)
                             i++;
                         }
                         colShape.setFillColor(sf::Color::Transparent);
-                        colShape.setOutlineColor(sf::Color::Blue);
+                        colShape.setOutlineColor(sf::Color::Green);
                         colShape.setOutlineThickness(1);
                         colShape.setPosition(bodyIter->GetPosition().x*30,bodyIter->GetPosition().y*30);
                         colShape.setRotation((bodyIter->GetTransform().q.GetAngle()*((180/3.14159))));
@@ -155,7 +152,7 @@ void Game::render(double alpha)
 
                 }
 
-        }
+        }*/
     window->display();
 
 

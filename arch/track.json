@@ -34,8 +34,8 @@
                  "type":"archii_texture",
                  "visible":true,
                  "width":32,
-                 "x":64,
-                 "y":448
+                 "x":96,
+                 "y":128
                 }],
          "offsetx":64,
          "offsety":32,

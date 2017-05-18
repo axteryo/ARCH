@@ -8,20 +8,18 @@ PhysicsComponent::PhysicsComponent(b2BodyType t)
     currentState.rotation = 0;
     currentState.acceleration = b2Vec2(0,0);
     currentState.velocity = b2Vec2(0,0);
-    previousState = currentState;
+
+    previousState .position = b2Vec2(0,0);
+    previousState .rotation = 0;
+    previousState .acceleration = b2Vec2(0,0);
+    previousState .velocity = b2Vec2(0,0);
+
 
     bodyDef.type = t;
     bodyDef.fixedRotation = true;
     body = world->CreateBody(&bodyDef);
-    body->SetAngularVelocity(0);
-
-
-    //body->SetAngularDamping(0.f);
-    //body->SetLinearDamping(0.f);
     topSpeed = 0;
     rotationAmount = 0;
-
-    //ctor
 }
 
 PhysicsComponent::~PhysicsComponent()
@@ -40,6 +38,18 @@ b2Fixture* PhysicsComponent::createFixtureRectangle(b2Vec2 dimensions,b2Vec2 pos
     fixtureDef.userData = ((void*)fixtureData);
     fixtureDef.isSensor = isSensor;
     b2Fixture* f =body->CreateFixture(&fixtureDef);
+    return f;
+}
+b2Fixture* PhysicsComponent::createFixtureCircle(float radius,b2Vec2 position, fixtureUserData* fixtureData, bool isSensor)
+{
+    b2CircleShape circleShape;
+    circleShape.m_p.Set(position.x,position.y);
+    circleShape.m_radius = radius;
+    fixtureDef.shape = &circleShape;
+    fixtureDef.density = 0;
+    fixtureDef.userData = ((void*)fixtureData);
+    fixtureDef.isSensor = isSensor;
+    b2Fixture* f = body->CreateFixture((&fixtureDef));
     return f;
 }
 b2Fixture* PhysicsComponent::createFixturePolygon(std::vector<float> shape,b2Vec2 position,fixtureUserData* fixtureData,bool isSensor)
@@ -76,7 +86,6 @@ void PhysicsComponent::update()
 {
 
     previousState = currentState;
-
 
     currentState.rotation+=(rotationAmount);
     currentState.velocity = body->GetLinearVelocity();
@@ -115,12 +124,10 @@ b2Vec2 PhysicsComponent::getPosition()
 {
     return currentState.position;
 }
-
 void PhysicsComponent::accelerate(b2Vec2 force)
 {
     currentState.acceleration+=force;
 }
-
 positionState PhysicsComponent::getCurrentState()
 {
     return currentState;

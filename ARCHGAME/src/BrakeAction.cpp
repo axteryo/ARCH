@@ -14,12 +14,9 @@ BrakeAction::~BrakeAction()
 
 void BrakeAction::execute(ActorEntity* a)
 {
-
-    StateComponent* s = a->getStates();
-
-    movementAttributeState attributes = s->getMovementAttributeState();
+    movementAttributeState attributes = a->getMovementAttributeState();
     isActive = true;
-    b2Vec2 accel = s->getPositionState().velocity;
+    b2Vec2 accel = a->getCurrentState().velocity;
     if(accel.Length()>=attributes.brakeLimit)
     {
         accel.x/=4;

@@ -14,6 +14,7 @@ ActorEntity::ActorEntity(std::string e_ID,GraphicsComponent* g,PhysicsComponent*
     state_component = s;
     action_component = a;
 
+
     physics_component->getBody()->SetUserData((void*)this);
 }
 
@@ -80,7 +81,42 @@ void ActorEntity::update()
     state_component->setPositionState(physics_component->getCurrentState());
     state_component->setRenderState(graphics_component->getCurrentState());
 }
-
+movementAttributeState ActorEntity::getMovementAttributeState()
+{
+    return state_component->getMovementAttributeState();
+}
+statusAttributeState ActorEntity::getStatusAttributeState()
+{
+    return state_component->getStatusAttributeState();
+}
+attackAttributeState ActorEntity::getAttackAttributeState()
+{
+    return state_component->getAttackAttributeState();
+}
+impactAttributeState ActorEntity::getImpactAttributeState()
+{
+    return state_component->getImpactAttributeState();
+}
+bool ActorEntity::isAttacking()
+{
+    return state_component->getAttackAttributeState().isAttacking;
+}
+bool  ActorEntity::isRotating()
+{
+     return state_component->getMovementAttributeState().isRotating;
+}
+bool  ActorEntity::isAlive()
+{
+    return state_component->getStatusAttributeState().isAlive;
+}
+bool  ActorEntity::isAccelerating()
+{
+     return state_component->getMovementAttributeState().isAccelerating;
+}
+bool  ActorEntity::isImpacted()
+{
+    return state_component->getImpactAttributeState().isImpacted;
+}
 
 positionState ActorEntity::getCurrentState()
 {
@@ -89,5 +125,58 @@ positionState ActorEntity::getCurrentState()
 positionState ActorEntity::getPreviousState()
 {
     return physics_component->getPreviousState();
+}
+
+
+void ActorEntity::notifyEntityNearby(entity* e)
+{
+     input_component->onNotifyEntityNearby(e);
+}
+void ActorEntity::notifyEntityWithinRadius(entity* e)
+{
+    input_component->onNotifyEntityWithinRadius(e);
+}
+
+
+void ActorEntity::initiateCollision(entity* other, fixtureUserData* otherFData, fixtureUserData* selfFData)
+{
+
+    ///Actor to Actor collision
+    if(other->getType().compare("actor")==0)
+    {
+        ActorEntity* otherActor = static_cast<ActorEntity*>(other);
+        notifyEntityNearby(otherActor);
+
+        if(otherFData->type.compare("bodyFixture")==0)
+        {
+            if(selfFData->type.compare("sensorFixture")==0)
+            {
+                notifyEntityWithinRadius(otherActor);
+            }
+        }
+        else if(otherFData->type.compare("attackFixture")==0)
+        {
+            ///we were attacked
+            if(selfFData->type.compare("bodyFixture")==0)
+            {
+                attackAttributeState otherAttackAttributes= otherActor->getAttackAttributeState();
+                applyAttackOnSelf(otherAttackAttributes);
+            }
+        }
+    }
+
+}
+
+
+void ActorEntity::applyAttackOnSelf(attackAttributeState a)
+{
+    impactAttributeState i = state_component->getImpactAttributeState();
+    i.force = a.force;
+    i.impactDamage = a.damage;
+    i.impactDuration = a.impactDuration;
+    i.impactType = a.impactType;
+    i.direction = a.direction;
+    i.isImpacted = true;
+    state_component->setImpactAttributeState(i);
 }
 

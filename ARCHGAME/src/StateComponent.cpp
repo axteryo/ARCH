@@ -71,7 +71,31 @@ positionState State::lerpPositionState(positionState pre, positionState cur, flo
 
 StateComponent::StateComponent()
 {
-    //ctor
+    movement_attributeState.accel=0;
+    movement_attributeState.accelRate=0;
+    movement_attributeState.accelRateLimit=0;
+    movement_attributeState.accel_rotationRate=0;
+    movement_attributeState.brakeLimit=0;
+    movement_attributeState.isAccelerating=false;
+    movement_attributeState.isRotating=false;
+    movement_attributeState.rotationRate=0;
+    movement_attributeState.velLimit=0;
+
+    impact_attributeState.isImpacted = false;
+    impact_attributeState.force = 0;
+    impact_attributeState.impactDamage=0;
+    impact_attributeState.impactDuration=0;
+    impact_attributeState.impactType="";
+    impact_attributeState.direction= b2Vec2(0,0);
+
+    attack_attributeState.attack = "";
+    attack_attributeState.damage=0;
+    attack_attributeState.direction= b2Vec2(0,0);
+    attack_attributeState.force = 0;
+    attack_attributeState.impactDuration=0;
+    attack_attributeState.impactType="";
+    attack_attributeState.isAttacking = false;
+    attack_attributeState.rotationRate=0;
 }
 
 StateComponent::~StateComponent()
@@ -131,8 +155,11 @@ impactAttributeState StateComponent::getImpactAttributeState()
 
 void StateComponent::update(ActorEntity* a)
 {
+
+    ///Applies impact effect and damage
     if(impact_attributeState.isImpacted)
     {
+        b2Vec2 dir = b2Vec2(0,0);
         if(impact_attributeState.impactDuration<=0)
         {
             impact_attributeState.isImpacted = false;
@@ -148,12 +175,22 @@ void StateComponent::update(ActorEntity* a)
             force.x = -impact_attributeState.force;
             force.y = -impact_attributeState.force;
         }
-
+        impact_attributeState.direction.Normalize();
         force.x*=impact_attributeState.direction.x;
         force.y*=impact_attributeState.direction.y;
 
         a->getPhysics()->applyForce(force);
         impact_attributeState.impactDuration--;
+        std::cout<< status_attributeState.curHealth<<std::endl;
+        status_attributeState.curHealth-=impact_attributeState.impactDamage;
+        impact_attributeState.impactDamage=0;
+    }
+    ///checks health status
+    if(status_attributeState.curHealth<status_attributeState.minHealth)
+    {
+        status_attributeState.curHealth = 0;
+        status_attributeState.isAlive = false;
+
     }
 
 

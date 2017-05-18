@@ -41,7 +41,6 @@ Enemy_D1::~Enemy_D1()
     delete _alertRadius;
     delete _physicsBody;
     delete _graphicsBody;
-
     //dtor
 }
 

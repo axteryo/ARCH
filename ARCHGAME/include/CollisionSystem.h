@@ -12,15 +12,16 @@ struct collisionEventData
 {
 
     std::string collisionType = "";
-    entity* A;
-    entity* B;
+    entity* entityA;
+    entity* entityB;
+
     fixtureUserData* A_Data;
     fixtureUserData* B_Data;
 
     collisionEventData(entity* a, entity* b, fixtureUserData* dataA, fixtureUserData* dataB,std::string colType)
     {
-        A = a;
-        B = b;
+        entityA = a;
+        entityB = b;
         A_Data = dataA;
         B_Data = dataB;
         collisionType = colType;

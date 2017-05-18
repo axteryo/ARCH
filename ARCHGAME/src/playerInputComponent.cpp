@@ -18,32 +18,37 @@ void playerInputComponent::processInput(ActorEntity* a)
     {
         ac->performAction("rotateRight",a);
     }
-    else
-    {
-    }
+
     if(controller.isActionKeyPressed("turnLeft"))
     {
         ac->performAction("rotateLeft",a);
     }
-    else
-    {
-    }
-     if(controller.isActionKeyPressed("thrust"))
+
+    if(controller.isActionKeyPressed("thrust"))
     {
         ac->performAction("accelerate",a);
     }
-    else
-    {
-    }
+
      if(controller.isActionKeyPressed("brake"))
     {
         ac->performAction("brake",a);
     }
-    else
-    {
-    }
+
     if(controller.isActionKeyPressed("useAttack1"))
     {
         ac->performAction("beamAttack",a);
     }
+    if(controller.isActionKeyPressed("useAttack2"))
+    {
+        ac->performAction("radiusAttack",a);
+    }
+}
+
+void playerInputComponent::onNotifyEntityNearby(entity* e)
+{
+
+}
+void playerInputComponent::onNotifyEntityWithinRadius(entity* e)
+{
+
 }

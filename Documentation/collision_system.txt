@@ -1,0 +1,34 @@
+Collision System
+
+Objects collide now what?
+
+1.handle collision in the collision system via a system of nested ifs
+
+hell fuck no
+
+2. We split the collision handling into several specific functions within the collision system class
+
+im listening....
+
+We handle collisions on a case by case basis. 
+
+Actor to Actor
+
+Actor to Object
+
+Actor to Sequence
+
+Ok say we did this, would we still have nested ifs in the functions?
+
+Thats a huge possibility, and im not sure how to go around it....
+we could pass the contact object around possibly?
+
+When doing collisions we usually assume that the objects doing the colliding are entities.
+Maybe thats where we are going wrong?
+
+say we wanted to check if player crossed a trigger
+
+the players body fixture and the triggers trigger fixture would be the ones that collide in order to see if the trigger is activated.
+
+so we know a body and a trigger collided, but who'se body?
+

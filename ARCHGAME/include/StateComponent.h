@@ -21,6 +21,8 @@ class ActorEntity;
    };
    struct movementAttributeState
    {
+        bool isRotating;
+        bool isAccelerating;
         float accel;
         float accelRate;
         float accelRateLimit;
@@ -31,6 +33,7 @@ class ActorEntity;
    };
    struct statusAttributeState
    {
+       bool isAlive;
        float maxHealth;
        float minHealth;
        float curHealth;
@@ -44,6 +47,7 @@ class ActorEntity;
        float force;
        int damage;
        int impactDuration;
+       float rotationRate;
    };
    struct impactAttributeState
    {
@@ -88,11 +92,6 @@ class StateComponent
         statusAttributeState getStatusAttributeState();
         attackAttributeState getAttackAttributeState();
         impactAttributeState getImpactAttributeState();
-
-        bool isAttacking();
-        bool isRotating();
-        bool isAlive();
-        bool isAccelerating();
 
         void update(ActorEntity* a);
     protected:
