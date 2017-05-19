@@ -4,6 +4,7 @@
 	"turnLeft" :"Left",
 	"thrust" :"Up",
 	"brake" :"LShift",
+	"boost":"Space",
 	"useAttack1":"W",
 	"useAttack2":"A"
 }

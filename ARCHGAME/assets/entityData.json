@@ -13,22 +13,22 @@
 			},
 			"MovementAttributes":
 			{
-				"accelRate":0.04,
-				"accelRateLimit":2,
-				"velLimit":20.0,
+				"accelRate":0.08,
+				"accelRateLimit":4,
+				"velLimit":22.0,
 				"brakeLimit":8.0,
 				"rotationRate":0.1,
 				"accel_rotationRate":0.035
 			},
-			"movementActions":["rotateLeft","rotateRight","accelerate","deccelerate","brake"],
+			"movementActions":["rotateLeft","rotateRight","accelerate","deccelerate","brake","boost"],
 			"attackActions":
 			[	
 				{	
 				"name":"beamAttack_1",
 				"type":"beamAttack",
-				"force": 50.0,
+				"force": 10.0,
 				"damage":25,
-				"rotationRate":0.1,
+				"rotationRate":0.05,
 				"relativePosition":[-100,100]
 				},
 				{	
@@ -63,10 +63,10 @@
 			{
 				"accelRate":0.05,
 				"accelRateLimit":3,
-				"velLimit":24.0,
+				"velLimit":26.0,
 				"brakeLimit":7.0,
 				"rotationRate":0.15,
-				"accel_rotationRate":0.04
+				"accel_rotationRate":0.075
 			},
 			"movementActions":["rotateLeft","rotateRight","accelerate","deccelerate","brake"],
 			"attackActions":
@@ -74,7 +74,7 @@
 				{	
 				"name":"d1_radiusAttack",
 				"type":"radiusAttack",
-				"force": 100.0,
+				"force": 50.0,
 				"damage":5,				
 				"rotationRate":0.15
 				}
@@ -88,6 +88,44 @@
 			},
 			"shape":"d1",
 			"texture":"d1_texture.png"
+		},
+		{
+			"entity_ID":"entity_j1",
+			"StatusAttributes":
+			{
+				"maxHealth":100,
+				"minHealth":0,
+				"curHealth":100
+			},
+			"MovementAttributes":
+			{
+				"accelRate":0.05,
+				"accelRateLimit":3,
+				"velLimit":22.0,
+				"brakeLimit":7.0,
+				"rotationRate":0.15,
+				"accel_rotationRate":0.05
+			},
+			"movementActions":["rotateLeft","rotateRight","accelerate","deccelerate","brake","boost"],
+			"attackActions":
+			[	
+				{	
+				"name":"q1_beamAttack",
+				"type":"beamAttack",
+				"force": 100.0,
+				"damage":5,				
+				"rotationRate":0.15
+				}
+			],
+			"sensorField":
+			{
+				"radius":[10],
+				"fixtureType":"sensorFixture",
+				"fixtureData":"j1SensorField",
+				"isSensor":true
+			},
+			"shape":"j1",
+			"texture":"j1_texture.png"
 		}
 	],
 	"object":

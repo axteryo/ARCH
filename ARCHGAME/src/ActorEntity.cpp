@@ -60,6 +60,11 @@ float ActorEntity::getRotation()
 {
     return physics_component->getRotation();
 }
+
+float ActorEntity::getTopSpeed()
+{
+    return physics_component->getTopSpeed();
+}
 std::string ActorEntity::getID()
 {
     return entity_ID;

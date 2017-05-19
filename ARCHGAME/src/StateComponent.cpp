@@ -78,6 +78,7 @@ StateComponent::StateComponent()
     movement_attributeState.brakeLimit=0;
     movement_attributeState.isAccelerating=false;
     movement_attributeState.isRotating=false;
+    movement_attributeState.isBoosting=false;
     movement_attributeState.rotationRate=0;
     movement_attributeState.velLimit=0;
 
@@ -179,7 +180,7 @@ void StateComponent::update(ActorEntity* a)
         force.x*=impact_attributeState.direction.x;
         force.y*=impact_attributeState.direction.y;
 
-        a->getPhysics()->applyForce(force);
+        a->getPhysics()->accelerate(force);
         impact_attributeState.impactDuration--;
         std::cout<< status_attributeState.curHealth<<std::endl;
         status_attributeState.curHealth-=impact_attributeState.impactDamage;

@@ -8,6 +8,7 @@ GameController::GameController()
     playerBrakeAction = "";
     playerTurnLeftAction="";
     playerTurnRightAction="";
+    playerBoostAction= "";
     playerUseAttack1Action="";
     playerUseAttack2Action="";
 }
@@ -39,6 +40,7 @@ void GameController::loadBindings()
     playerBrakeAction = root["brake"].asString();
     playerTurnLeftAction=root["turnLeft"].asString();
     playerTurnRightAction=root["turnRight"].asString();
+    playerBoostAction=root["boost"].asString();
     playerUseAttack1Action=root["useAttack1"].asString();
     playerUseAttack2Action=root["useAttack2"].asString();
 
@@ -178,6 +180,17 @@ bool GameController::isActionKeyPressed(std::string actionToCheck)
     if(actionToCheck.compare("turnLeft")==0)
     {
         if(isBindedKeyPressed(playerTurnLeftAction))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    if(actionToCheck.compare("boost")==0)
+    {
+        if(isBindedKeyPressed(playerBoostAction))
         {
             return true;
         }

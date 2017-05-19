@@ -74,7 +74,7 @@ entity* EntitySpawner::spawnEntity(spawnPoint s,SpriteBatcher* b)
                     {
                         ic = new playerInputComponent;
                     }
-                    else if(s.spawnID.compare("entity_d1")==0)
+                    else
                     {
                         ic = new AIBasicInputComponent;
                     }
@@ -90,6 +90,7 @@ entity* EntitySpawner::spawnEntity(spawnPoint s,SpriteBatcher* b)
                     m.accel = 0;
                     m.isRotating = false;
                     m.isAccelerating = false;
+                    m.isBoosting = false;
                     states->setMovementAttributeState(m);
 
                     p->setTopSpeed(m.velLimit);
@@ -172,6 +173,11 @@ entity* EntitySpawner::spawnEntity(spawnPoint s,SpriteBatcher* b)
                         {
                              ma = new BrakeAction;
                         }
+                        else if(dataRoot["actor"][i]["movementActions"][k].asString().compare("boost")==0)
+                        {
+                             ma = new BoostAction;
+                        }
+
 
                         ac->addAction(ma);
 

@@ -105,7 +105,7 @@ void Game::render(double alpha)
     window->setView(gameCamera.camView);
     window->clear(sf::Color::Black);
     gameLevel.render(window,alpha);
-   /* for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
+    /*for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
         {
                 b2PolygonShape* polygonShape;
                 //sf::ConvexShape colShape;

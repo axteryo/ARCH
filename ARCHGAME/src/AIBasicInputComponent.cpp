@@ -44,10 +44,11 @@ void AIBasicInputComponent::processInput(ActorEntity* a)
 
             while(totalRotation<=-3.141592){totalRotation+=2*3.141592;}//+=2*3.141592;}
             while(totalRotation>=3.141592){totalRotation-=2*3.141592;}//totalRotation-=2*3.141592;}
-            if(totalRotation>0.05){ac->performAction("rotateRight",a);}
-            if(totalRotation<-0.05){ac->performAction("rotateLeft",a);}
+            if(totalRotation>.1){ac->performAction("rotateRight",a);}
+            else if(totalRotation<-.1){ac->performAction("rotateLeft",a);}
+            else {a->setRotation(desiredAngle);}
 
-            if(totalRotation<-.5||totalRotation>.5)
+            if(totalRotation<-1||totalRotation>1)
             {
                 accelerate = false;
             }

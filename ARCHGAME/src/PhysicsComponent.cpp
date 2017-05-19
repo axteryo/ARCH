@@ -109,7 +109,7 @@ void PhysicsComponent::setRotation(float a)
 }
 void PhysicsComponent::_rotate(float a)
 {
-    rotationAmount = a;
+    rotationAmount += a;
 }
 float PhysicsComponent::getRotation()
 {
@@ -140,6 +140,11 @@ positionState PhysicsComponent::getPreviousState()
 void PhysicsComponent::setTopSpeed(float s)
 {
     topSpeed = s;
+}
+
+float PhysicsComponent::getTopSpeed()
+{
+    return topSpeed;
 }
 
 void PhysicsComponent::limitVelocity()

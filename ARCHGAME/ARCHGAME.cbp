@@ -60,6 +60,7 @@
 		<Unit filename="include/ActorEntity.h" />
 		<Unit filename="include/AttackAction.h" />
 		<Unit filename="include/BeamAttackAction.h" />
+		<Unit filename="include/BoostAction.h" />
 		<Unit filename="include/BrakeAction.h" />
 		<Unit filename="include/CollisionSystem.h" />
 		<Unit filename="include/DeccelerateAction.h" />
@@ -93,6 +94,7 @@
 		<Unit filename="src/ActorEntity.cpp" />
 		<Unit filename="src/AttackAction.cpp" />
 		<Unit filename="src/BeamAttackAction.cpp" />
+		<Unit filename="src/BoostAction.cpp" />
 		<Unit filename="src/BrakeAction.cpp" />
 		<Unit filename="src/CollisionSystem.cpp" />
 		<Unit filename="src/DeccelerateAction.cpp" />

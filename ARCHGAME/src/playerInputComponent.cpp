@@ -23,6 +23,10 @@ void playerInputComponent::processInput(ActorEntity* a)
     {
         ac->performAction("rotateLeft",a);
     }
+    if(controller.isActionKeyPressed("boost"))
+    {
+        ac->performAction("boost",a);
+    }
 
     if(controller.isActionKeyPressed("thrust"))
     {

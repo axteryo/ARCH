@@ -41,6 +41,7 @@ class PhysicsComponent
         positionState getCurrentState();
         positionState getPreviousState();
         void setTopSpeed(float s);
+        float getTopSpeed();
         void limitVelocity();
 
         void applyForce(b2Vec2 force);

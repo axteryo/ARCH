@@ -26,6 +26,7 @@ class GameController
         std::string playerThrustAction;
         std::string playerTurnLeftAction;
         std::string playerTurnRightAction;
+        std::string playerBoostAction;
         std::string playerUseAttack1Action;
         std::string playerUseAttack2Action;
         std::string playerBrakeAction;

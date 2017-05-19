@@ -23,6 +23,7 @@ class ActorEntity;
    {
         bool isRotating;
         bool isAccelerating;
+        bool isBoosting;
         float accel;
         float accelRate;
         float accelRateLimit;

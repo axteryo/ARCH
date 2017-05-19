@@ -601,27 +601,6 @@
          "objects":[
                 {
                  "height":32,
-                 "id":786,
-                 "name":"enemy_spawn",
-                 "properties":
-                    {
-                     "entityType":"actor",
-                     "spawnID":"entity_d1"
-                    },
-                 "propertytypes":
-                    {
-                     "entityType":"string",
-                     "spawnID":"string"
-                    },
-                 "rotation":0,
-                 "type":"d1_texture",
-                 "visible":true,
-                 "width":32,
-                 "x":1664,
-                 "y":1280
-                }, 
-                {
-                 "height":32,
                  "id":806,
                  "name":"player_spawn",
                  "properties":
@@ -643,49 +622,7 @@
                 }, 
                 {
                  "height":32,
-                 "id":807,
-                 "name":"enemy_spawn",
-                 "properties":
-                    {
-                     "entityType":"actor",
-                     "spawnID":"entity_d1"
-                    },
-                 "propertytypes":
-                    {
-                     "entityType":"string",
-                     "spawnID":"string"
-                    },
-                 "rotation":0,
-                 "type":"d1_texture",
-                 "visible":true,
-                 "width":32,
-                 "x":1536,
-                 "y":1280
-                }, 
-                {
-                 "height":32,
-                 "id":808,
-                 "name":"enemy_spawn",
-                 "properties":
-                    {
-                     "entityType":"actor",
-                     "spawnID":"entity_d1"
-                    },
-                 "propertytypes":
-                    {
-                     "entityType":"string",
-                     "spawnID":"string"
-                    },
-                 "rotation":0,
-                 "type":"d1_texture",
-                 "visible":true,
-                 "width":32,
-                 "x":1536,
-                 "y":1152
-                }, 
-                {
-                 "height":32,
-                 "id":809,
+                 "id":814,
                  "name":"enemy_spawn",
                  "properties":
                     {
@@ -702,7 +639,7 @@
                  "visible":true,
                  "width":32,
                  "x":1664,
-                 "y":1152
+                 "y":1408
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -711,7 +648,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":810,
+ "nextobjectid":815,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":64,

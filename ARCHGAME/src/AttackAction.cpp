@@ -47,12 +47,7 @@ void AttackAction::update(ActorEntity* a)
             isActive = false;
             inCoolDown = false;
             elapsed = 0;
-            attackState.attack = "";
-            attackState.damage = 0;
-            attackState.force= 0;
-            attackState.impactType = "";
-            attackState.isAttacking = false;
-            a->getStates()->setAttackAttributeState(attackState);
+
         }
     }
     else
@@ -63,6 +58,12 @@ void AttackAction::update(ActorEntity* a)
             inCoolDown = true;
             elapsed = data.coolDown;
             attackFixture = nullptr;
+            attackState.attack = "";
+            attackState.damage = 0;
+            attackState.force= 0;
+            attackState.impactType = "";
+            attackState.isAttacking = false;
+            a->getStates()->setAttackAttributeState(attackState);
         }
         else
         {
@@ -79,6 +80,7 @@ void AttackAction::update(ActorEntity* a)
                 }
 
                 //attackState.direction.Normalize();
+
                 a->getStates()->setAttackAttributeState(attackState);
 
         }

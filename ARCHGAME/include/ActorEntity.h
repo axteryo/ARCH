@@ -25,6 +25,7 @@ class ActorEntity : public entity
         void setRotation(float a);
         b2Vec2 getPosition();
         float getRotation();
+        float getTopSpeed();
 
         void update();
         std::string getID();
