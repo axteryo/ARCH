@@ -60,6 +60,7 @@ class ActorEntity : public entity
 
         void initiateCollision(entity* other, fixtureUserData* otherFData, fixtureUserData* selfFData);
         void applyAttackOnSelf(attackAttributeState a);
+        void playAnimation(std::string animation,bool byTag);
 
 
     protected:

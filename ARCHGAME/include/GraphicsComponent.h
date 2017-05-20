@@ -3,7 +3,14 @@
 
 
 #include "entity.h"
-
+struct Animation
+{
+    std::string animationName;
+    std::string tag;
+    int duration;
+    int currentFrame;
+    std::vector<sf::IntRect> frames;
+};
 
 
 class GraphicsComponent
@@ -17,10 +24,16 @@ class GraphicsComponent
         renderState getCurrentState();
         renderState getPreviousState();
 
+        void addAnimation(Animation anim);
+        void onPlayAnimation(std::string animation);
+        void onPlayAnimationByTag(std::string animTag);
 
+        void playAnimation();
 
         sf::IntRect getTextureCoord();
+
         void setFrame(sf::IntRect c);
+        void setDefaultFrame(sf::IntRect c);
         //void setState(States::renderState r);
     protected:
 
@@ -35,9 +48,15 @@ class GraphicsComponent
         //sf::Texture texture;
 
     private:
+        sf::IntRect defaultFrame;
         sf::IntRect textureCoord;
         renderState currentRenderState;
         renderState previousRenderState;
+        std::vector<Animation> animationList;
+        Animation currentAnimation;
+        bool playingAnimation;
+
+        int frameCounter;
 };
 
 #endif // GRAPHICSCOMPONENT_H

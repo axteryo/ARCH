@@ -110,6 +110,15 @@ entity* EntitySpawner::spawnEntity(spawnPoint s,SpriteBatcher* b)
                     ///Setup graphics Component
                     b->setFrameTexture(g,dataRoot["actor"][i]["texture"].asString());
 
+                    ///Setup Animations
+                    for(int j = 0; j< dataRoot["actor"][i]["animations"].size();j++)
+                    {
+                        Animation anim = b->setAnimation(dataRoot["actor"][i]["animations"][j]["name"].asString());
+                        anim.tag = dataRoot["actor"][i]["animations"][j]["tag"].asString();
+
+                        anim.currentFrame = 0;
+                        g->addAnimation(anim);
+                    }
 
                     ///in order to properly align physics to sprite we must
                     ///get the height and width of sprite and apply to physics points

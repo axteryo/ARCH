@@ -5,6 +5,7 @@ AIBasicInputComponent::AIBasicInputComponent()
     isAlert = false;
     isAggro = false;
     target = nullptr;
+    accelerate = false;
     //ctor
 }
 
@@ -25,38 +26,41 @@ void AIBasicInputComponent::setAggro()
     isAggro = true;
 }
 
-void AIBasicInputComponent::processInput(ActorEntity* a)
+std::string AIBasicInputComponent::steerDirection(b2Vec2 targPos, b2Vec2 selfPos,float selfRotation)
 {
-        ActionComponent* ac = a->getActions();
-        bool accelerate = true;
-        if(isAlert&&target!=nullptr)
-        {
+     b2Vec2 displacement = targPos - selfPos;
+     ///Get the angle based on the vector direction toTarg
+     float desiredAngle = atan2(displacement.y,displacement.x);
 
-            b2Vec2 targetPos = target->getPosition();
-            b2Vec2 displacement = targetPos - a->getPosition();
+    float totalRotation = desiredAngle - selfRotation;
 
-            ///Get the angle based on the vector direction toTarg
-            float desiredAngle = atan2(displacement.y,displacement.x);
-
-            float totalRotation = desiredAngle - a->getRotation();
-
-
-
-            while(totalRotation<=-3.141592){totalRotation+=2*3.141592;}//+=2*3.141592;}
-            while(totalRotation>=3.141592){totalRotation-=2*3.141592;}//totalRotation-=2*3.141592;}
-            if(totalRotation>.1){ac->performAction("rotateRight",a);}
-            else if(totalRotation<-.1){ac->performAction("rotateLeft",a);}
-            else {a->setRotation(desiredAngle);}
+    while(totalRotation<=-3.141592){totalRotation+=2*3.141592;}//+=2*3.141592;}
+    while(totalRotation>=3.141592){totalRotation-=2*3.141592;}
 
             if(totalRotation<-1||totalRotation>1)
             {
                 accelerate = false;
             }
 
+    if(totalRotation>.05){return "right";}
+    else if(totalRotation<-.05){return "left";}
+    else {return "";}
+
+}
+
+void AIBasicInputComponent::processInput(ActorEntity* a)
+{
+        ActionComponent* ac = a->getActions();
+
+        std::string aim = "";
+        accelerate = true;
+        if(isAlert&&target!=nullptr)
+        {
+            //aim = steerDirection(target->getPosition(),a->getPosition(),a->getRotation());
         }
-        if(accelerate){ac->performAction("accelerate",a);}
-
-
+        if(aim.compare("left")==0){ac->performAction("rotateLeft",a);}
+        if(aim.compare("right")==0){ac->performAction("rotateRight",a);}
+        //if(accelerate){ac->performAction("accelerate",a);}
 }
 void AIBasicInputComponent::onNotifyEntityNearby(entity* e)
 {

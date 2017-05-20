@@ -18,10 +18,13 @@ class AIBasicInputComponent : public InputComponent
         void setAlert();
         void setAggro();
 
+        std::string steerDirection(b2Vec2 targPos, b2Vec2 selfPos,float selfRotation);
+
 
     private:
         bool isAlert;
         bool isAggro;
+        bool accelerate;
 
         entity* target;
 };

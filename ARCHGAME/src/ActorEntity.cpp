@@ -172,6 +172,18 @@ void ActorEntity::initiateCollision(entity* other, fixtureUserData* otherFData, 
 
 }
 
+void ActorEntity::playAnimation(std::string animation, bool byTag)
+{
+    if(byTag)
+    {
+        graphics_component->onPlayAnimationByTag(animation);
+    }
+    else
+    {
+        graphics_component->onPlayAnimation(animation);
+    }
+
+}
 
 void ActorEntity::applyAttackOnSelf(attackAttributeState a)
 {

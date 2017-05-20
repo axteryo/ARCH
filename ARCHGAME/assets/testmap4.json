@@ -627,7 +627,7 @@
                  "properties":
                     {
                      "entityType":"actor",
-                     "spawnID":"entity_d1"
+                     "spawnID":"entity_j1"
                     },
                  "propertytypes":
                     {
@@ -635,7 +635,7 @@
                      "spawnID":"string"
                     },
                  "rotation":0,
-                 "type":"d1_texture",
+                 "type":"j1_texture",
                  "visible":true,
                  "width":32,
                  "x":1664,

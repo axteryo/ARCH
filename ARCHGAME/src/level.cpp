@@ -53,6 +53,7 @@ void level::close()
 void level::setup()
 {
     batcher->loadEntityTextures();
+    batcher->loadAnimations();
     spawner->loadEntityData();
     spawner->loadEntityShapes();
     spawner->loadActionData();
@@ -122,6 +123,7 @@ void level::render(sf::RenderWindow* window,double alpha)
     window->draw(_map->layer2);
 
     window->draw(batcher->b);
+
 
 
 }

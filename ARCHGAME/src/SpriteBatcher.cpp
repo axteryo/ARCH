@@ -51,6 +51,18 @@ void SpriteBatcher::loadEntityTextures()
     }
     textureFile.close();
 }
+void SpriteBatcher::loadAnimations()
+{
+    animationFile.open("assets/animations.json");
+    bool parsedSuccess = animReader.parse(animationFile,animationRoot,false);
+    if(!parsedSuccess)
+    {
+         std::cout<<"failed to parse JSON"<< std::endl;
+         std::cout<<"animations could not be loaded"<<std::endl;
+            std::cout<<animReader.getFormattedErrorMessages()<<std::endl;
+    }
+    animationFile.close();
+}
 void SpriteBatcher::setFrameTexture(GraphicsComponent* g,std::string textureName)
 {
     for(int i = 0;i<textureRoot["frames"].size();++i)
@@ -62,11 +74,40 @@ void SpriteBatcher::setFrameTexture(GraphicsComponent* g,std::string textureName
                             textureRoot["frames"][i]["frame"]["w"].asInt(),
                             textureRoot["frames"][i]["frame"]["h"].asInt());
 
+            g->setDefaultFrame(frame);
             g->setFrame(frame);
             break;
         }
     }
 
+}
+Animation SpriteBatcher::setAnimation(std::string animationName)
+{
+    Animation a;
+    a.animationName = animationName;
+    for(int i = 0; i<animationRoot["animations"].size();i++)
+    {
+        if(animationName.compare(animationRoot["animations"][i]["name"].asString())==0)
+        {
+            for(int ii = 0; ii< animationRoot["animations"][i]["frames"].size();ii++)
+            {
+                for(int j = 0;j<textureRoot["frames"].size();++j)
+                {
+                    if(animationRoot["animations"][i]["frames"][ii].asString().compare(textureRoot["frames"][j]["filename"].asString())==0)
+                    {
+                        sf::IntRect frame = sf::IntRect(textureRoot["frames"][j]["frame"]["x"].asInt(),
+                                        textureRoot["frames"][j]["frame"]["y"].asInt(),
+                                        textureRoot["frames"][j]["frame"]["w"].asInt(),
+                                        textureRoot["frames"][j]["frame"]["h"].asInt());
+
+                        a.frames.push_back(frame);
+                    }
+                }
+            a.duration = animationRoot["animations"][i]["duration"].asInt();
+            }
+        }
+    }
+    return a;
 }
 
 ///Add a quad representation of an entity objects graphics component to a list of quads to be drawn to screen

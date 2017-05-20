@@ -22,14 +22,14 @@ class SpriteBatcher
         SpriteBatcher();
         virtual ~SpriteBatcher();
         void loadEntityTextures();
+        void loadAnimations();
         void setBatchTexture(sf::Image i);
         void setFrameTexture(GraphicsComponent* g,std::string textureName);
+        Animation setAnimation(std::string animationName);
         void addToBatch(entity* e,double alpha);
         void batchSprites();
         batch getBatch();
         batch b;
-
-
 
 
     protected:
@@ -61,6 +61,10 @@ class SpriteBatcher
         Json::Value textureRoot;
         Json::Reader myReader;
         std::ifstream textureFile;
+
+        Json::Value animationRoot;
+        Json::Reader animReader;
+        std::ifstream animationFile;
 
 
 };
