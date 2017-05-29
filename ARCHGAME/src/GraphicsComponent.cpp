@@ -10,6 +10,7 @@ GraphicsComponent::GraphicsComponent()
     playingAnimation = false;
     frameCounter = 0;
 
+
 }
 
 renderState GraphicsComponent::getCurrentState()
@@ -55,8 +56,8 @@ void GraphicsComponent::playAnimation()
             if(frameCounter<=0)
             {
 
-                frameCounter = currentAnimation.duration;
-                setFrame(currentAnimation.frames[currentAnimation.currentFrame]);
+                frameCounter = currentAnimation.frames[currentAnimation.currentFrame].duration;
+                setFrame(currentAnimation.frames[currentAnimation.currentFrame].textureCoords);
 
                 currentAnimation.currentFrame+=1;
             }

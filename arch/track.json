@@ -36,6 +36,69 @@
                  "width":32,
                  "x":96,
                  "y":128
+                }, 
+                {
+                 "height":32,
+                 "id":577,
+                 "name":"enemy_spawn",
+                 "properties":
+                    {
+                     "entityType":"actor",
+                     "spawnID":"entity_d1"
+                    },
+                 "propertytypes":
+                    {
+                     "entityType":"string",
+                     "spawnID":"string"
+                    },
+                 "rotation":0,
+                 "type":"d1_texture",
+                 "visible":true,
+                 "width":32,
+                 "x":2528,
+                 "y":1088
+                }, 
+                {
+                 "height":32,
+                 "id":579,
+                 "name":"enemy_spawn",
+                 "properties":
+                    {
+                     "entityType":"actor",
+                     "spawnID":"entity_d1"
+                    },
+                 "propertytypes":
+                    {
+                     "entityType":"string",
+                     "spawnID":"string"
+                    },
+                 "rotation":0,
+                 "type":"d1_texture",
+                 "visible":true,
+                 "width":32,
+                 "x":2656,
+                 "y":1120
+                }, 
+                {
+                 "height":32,
+                 "id":581,
+                 "name":"enemy_spawn",
+                 "properties":
+                    {
+                     "entityType":"actor",
+                     "spawnID":"entity_d1"
+                    },
+                 "propertytypes":
+                    {
+                     "entityType":"string",
+                     "spawnID":"string"
+                    },
+                 "rotation":0,
+                 "type":"d1_texture",
+                 "visible":true,
+                 "width":32,
+                 "x":2752,
+                 "y":1216
                 }],
          "offsetx":64,
          "offsety":32,
@@ -1886,7 +1949,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":576,
+ "nextobjectid":582,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":32,

@@ -18,6 +18,7 @@ void GameMap::close()
 {
     spawnData.clear();
     walls.clear();
+    triggers.clear();
     currentMapFile.close();
     textureSheetCoords.clear();
     levelData.clear();
@@ -98,37 +99,81 @@ void GameMap::loadFile(std::string mapFile)
             /** This segment retrieves the collision walls of the map and stores them in a compact list.**/
            if(baseMapRoot["layers"][i]["name"].asString().compare("collision")==0)
             {
+                ObjectEntity* o;
+                PhysicsComponent* p = new PhysicsComponent(b2_kinematicBody);
+                o = new ObjectEntity("object_entity",p);
 
-                 for(int ii = 0; ii <baseMapRoot["layers"][i]["objects"].size();++ii)
+                for(int ii = 0; ii <baseMapRoot["layers"][i]["objects"].size();++ii)
                 {
                     b2Fixture* f;
                     fixtureUserData* fixtureData = new fixtureUserData;
                     fixtureData->data = "WallBody";
                     fixtureData->type = "BODY";
-                    ObjectEntity* o;
-                    PhysicsComponent* p = new PhysicsComponent(b2_kinematicBody);
+
+
                     int shapeSize = baseMapRoot["layers"][i]["objects"][ii]["polyline"].size();
                     std::vector<float> shape;
+                    b2Vec2 pos = b2Vec2(baseMapRoot["layers"][i]["objects"][ii]["x"].asFloat()*2,baseMapRoot["layers"][i]["objects"][ii]["y"].asFloat()*2);
+
                     int j =0;
                     for(int iii = 0; iii < shapeSize; ++iii)
                     {
-                        shape.push_back(std::floor(baseMapRoot["layers"][i]["objects"][ii]["polyline"][iii]["x"].asFloat()));
-                        shape.push_back(std::floor(baseMapRoot["layers"][i]["objects"][ii]["polyline"][iii]["y"].asFloat()));
+                        shape.push_back(std::floor(baseMapRoot["layers"][i]["objects"][ii]["polyline"][iii]["x"].asFloat())+pos.x);
+                        shape.push_back(std::floor(baseMapRoot["layers"][i]["objects"][ii]["polyline"][iii]["y"].asFloat())+pos.y);
                         //shape[j]=
                         //shape[j+1]=
                         j+=2;
                     }
                     //std::cout<<"passed here 1"<<std::endl;
-                    o = new ObjectEntity("object_entity",p);
 
-                    p->createFixturePolygon(shape,p->getPosition(),fixtureData,false);
-                    o->setPosition(b2Vec2(baseMapRoot["layers"][i]["objects"][ii]["x"].asFloat()/30,baseMapRoot["layers"][i]["objects"][ii]["y"].asFloat()/30));
+                    p->createFixturePolygon(shape,
+                                            pos,
+                                            fixtureData,false);
+                    //o->setPosition();
 
-                    o->update();
-                    walls.push_back(o);
+
                 }
 
-                std::cout<<walls.size()<<std::endl;
+                o->update();
+                walls.push_back(o);
+                std::cout<<"wall size:"<<walls.size()<<std::endl;
+            }
+            if(baseMapRoot["layers"][i]["name"].asString().compare("triggers")==0)
+            {
+                for(int ii = 0; ii <baseMapRoot["layers"][i]["objects"].size();++ii)
+                {
+                    TriggerEntity* t;
+                    PhysicsComponent* p = new PhysicsComponent(b2_kinematicBody);
+                    b2Fixture* f;
+                    fixtureUserData* fixtureData = new fixtureUserData;
+                    fixtureData->data = "TriggerBody";
+                    fixtureData->type = "BODY";
+
+                    std::string tag = baseMapRoot["layers"][i]["objects"][ii]["name"].asString();
+
+
+                    int shapeSize = baseMapRoot["layers"][i]["objects"][ii]["polyline"].size();
+                    std::vector<float> shape;
+                    b2Vec2 pos = b2Vec2(baseMapRoot["layers"][i]["objects"][ii]["x"].asFloat()*2,baseMapRoot["layers"][i]["objects"][ii]["y"].asFloat()*2);
+
+                    int j =0;
+                    for(int iii = 0; iii < shapeSize; ++iii)
+                    {
+                        shape.push_back(std::floor(baseMapRoot["layers"][i]["objects"][ii]["polyline"][iii]["x"].asFloat())+pos.x);
+                        shape.push_back(std::floor(baseMapRoot["layers"][i]["objects"][ii]["polyline"][iii]["y"].asFloat())+pos.y);
+                        //shape[j]=
+                        //shape[j+1]=
+                        j+=2;
+                    }
+                    //std::cout<<"passed here 1"<<std::endl;
+
+                    p->createFixturePolygon(shape,
+                                            pos,
+                                            fixtureData,true);
+                    t = new TriggerEntity("entity_trigger",tag,p);
+                    triggers.push_back(t);
+                }
+
             }
         }
 
@@ -243,6 +288,10 @@ void GameMap::create()
 std::vector<spawnPoint> GameMap::getSpawnSpoints()
 {
     return spawnData;
+}
+std::vector<TriggerEntity*> GameMap::getTriggers()
+{
+    return triggers;
 }
 batch GameMap::getFirstLayer()
 {

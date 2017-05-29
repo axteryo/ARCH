@@ -25,6 +25,7 @@ class GameMap// : public sf::Drawable, public sf::Transformable
         void close();
 
         std::vector<spawnPoint> getSpawnSpoints();
+        std::vector<TriggerEntity*> getTriggers();
 
 
         batch getFirstLayer();
@@ -32,6 +33,7 @@ class GameMap// : public sf::Drawable, public sf::Transformable
         batch layer1;
         batch layer2;
         std::vector<ObjectEntity*> walls;
+        std::vector<TriggerEntity*> triggers;
         std::vector<spawnPoint> spawnData;
 
     protected:

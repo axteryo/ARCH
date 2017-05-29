@@ -26,7 +26,7 @@ void SpriteBatcher::setBatchTexture(sf::Image i)
 ///Load Entity Spritesheet into game
 void SpriteBatcher::loadEntityTextures()
 {
-    textureFile.open("assets/characterTextures.json");
+    textureFile.open("data/characterTextures.json");
     bool parsedSuccess = myReader.parse(textureFile,textureRoot,false);
     if(!parsedSuccess)
     {
@@ -53,7 +53,7 @@ void SpriteBatcher::loadEntityTextures()
 }
 void SpriteBatcher::loadAnimations()
 {
-    animationFile.open("assets/animations.json");
+    animationFile.open("data/animations.json");
     bool parsedSuccess = animReader.parse(animationFile,animationRoot,false);
     if(!parsedSuccess)
     {
@@ -93,17 +93,20 @@ Animation SpriteBatcher::setAnimation(std::string animationName)
             {
                 for(int j = 0;j<textureRoot["frames"].size();++j)
                 {
-                    if(animationRoot["animations"][i]["frames"][ii].asString().compare(textureRoot["frames"][j]["filename"].asString())==0)
+                    if(animationRoot["animations"][i]["frames"][ii]["name"].asString().compare(textureRoot["frames"][j]["filename"].asString())==0)
                     {
                         sf::IntRect frame = sf::IntRect(textureRoot["frames"][j]["frame"]["x"].asInt(),
                                         textureRoot["frames"][j]["frame"]["y"].asInt(),
                                         textureRoot["frames"][j]["frame"]["w"].asInt(),
                                         textureRoot["frames"][j]["frame"]["h"].asInt());
+                        Frame f;
+                        f.textureCoords = frame;
+                        f.duration = animationRoot["animations"][i]["frames"][ii]["duration"].asInt();
 
-                        a.frames.push_back(frame);
+                        a.frames.push_back(f);
                     }
                 }
-            a.duration = animationRoot["animations"][i]["duration"].asInt();
+            //a.duration = animationRoot["animations"][i]["duration"].asInt();
             }
         }
     }

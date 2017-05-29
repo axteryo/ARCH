@@ -7,6 +7,15 @@ ActionComponent::ActionComponent()
 
 ActionComponent::~ActionComponent()
 {
+    if(!actionList.empty())
+    {
+         for(int i = 0;i<actionList.size();i++)
+        {
+            delete actionList[i];
+        }
+    }
+    actionList.clear();
+
     //dtor
 }
 

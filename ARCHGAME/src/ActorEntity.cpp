@@ -23,6 +23,7 @@ ActorEntity::~ActorEntity()
     delete graphics_component;
     delete physics_component;
     delete input_component;
+    delete action_component;
     delete state_component;
     //dtor
 }

@@ -11,7 +11,7 @@ EntitySpawner::~EntitySpawner()
 }
 void EntitySpawner::loadEntityShapes()
 {
-    shapeFile.open("assets/shapes.json");
+    shapeFile.open("data/shapes.json");
     bool parsedSuccess = shapeReader.parse(shapeFile,shapeRoot,false);
     if(!parsedSuccess)
     {
@@ -24,7 +24,7 @@ void EntitySpawner::loadEntityShapes()
 }
 void EntitySpawner::loadEntityData()
 {
-    dataFile.open("assets/entityData.json");
+    dataFile.open("data/entityData.json");
     bool parsedSuccess = dataReader.parse(dataFile,dataRoot,false);
     if(!parsedSuccess)
     {
@@ -37,7 +37,7 @@ void EntitySpawner::loadEntityData()
 
 void EntitySpawner::loadActionData()
 {
-    actionDataFile.open("assets/attackData.json");
+    actionDataFile.open("data/attackData.json");
     bool parsedSuccess = dataReader.parse(actionDataFile,actionDataRoot,false);
     if(!parsedSuccess)
     {

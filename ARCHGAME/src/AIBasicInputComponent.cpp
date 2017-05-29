@@ -50,17 +50,21 @@ std::string AIBasicInputComponent::steerDirection(b2Vec2 targPos, b2Vec2 selfPos
 
 void AIBasicInputComponent::processInput(ActorEntity* a)
 {
+    if(a->isAlive())
+    {
         ActionComponent* ac = a->getActions();
-
         std::string aim = "";
         accelerate = true;
+
         if(isAlert&&target!=nullptr)
         {
-            //aim = steerDirection(target->getPosition(),a->getPosition(),a->getRotation());
+            aim = steerDirection(target->getPosition(),a->getPosition(),a->getRotation());
         }
         if(aim.compare("left")==0){ac->performAction("rotateLeft",a);}
         if(aim.compare("right")==0){ac->performAction("rotateRight",a);}
-        //if(accelerate){ac->performAction("accelerate",a);}
+        if(accelerate){ac->performAction("accelerate",a);}
+    }else{a->getPhysics()->getBody()->SetFixedRotation(false); a->getPhysics()->getBody()->SetAngularVelocity(4);}
+
 }
 void AIBasicInputComponent::onNotifyEntityNearby(entity* e)
 {

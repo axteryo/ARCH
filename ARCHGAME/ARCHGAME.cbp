@@ -79,6 +79,7 @@
 		<Unit filename="include/RotateRightAction.h" />
 		<Unit filename="include/SpriteBatcher.h" />
 		<Unit filename="include/StateComponent.h" />
+		<Unit filename="include/TriggerEntity.h" />
 		<Unit filename="include/batch.h" />
 		<Unit filename="include/camera.h" />
 		<Unit filename="include/entity.h" />
@@ -86,6 +87,7 @@
 		<Unit filename="include/json/json.h" />
 		<Unit filename="include/level.h" />
 		<Unit filename="include/playerInputComponent.h" />
+		<Unit filename="include/sequence.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/AIBasicInputComponent.cpp" />
 		<Unit filename="src/AccelerateAction.cpp" />
@@ -113,12 +115,14 @@
 		<Unit filename="src/RotateRightAction.cpp" />
 		<Unit filename="src/SpriteBatcher.cpp" />
 		<Unit filename="src/StateComponent.cpp" />
+		<Unit filename="src/TriggerEntity.cpp" />
 		<Unit filename="src/batch.cpp" />
 		<Unit filename="src/camera.cpp" />
 		<Unit filename="src/entity.cpp" />
 		<Unit filename="src/jsoncpp.cpp" />
 		<Unit filename="src/level.cpp" />
 		<Unit filename="src/playerInputComponent.cpp" />
+		<Unit filename="src/sequence.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

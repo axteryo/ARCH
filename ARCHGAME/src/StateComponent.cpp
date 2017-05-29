@@ -71,6 +71,11 @@ positionState State::lerpPositionState(positionState pre, positionState cur, flo
 
 StateComponent::StateComponent()
 {
+    status_attributeState.curHealth=0;
+    status_attributeState.maxHealth=0;
+    status_attributeState.minHealth=0;
+    status_attributeState.isAlive = false;
+
     movement_attributeState.accel=0;
     movement_attributeState.accelRate=0;
     movement_attributeState.accelRateLimit=0;
@@ -187,11 +192,14 @@ void StateComponent::update(ActorEntity* a)
         impact_attributeState.impactDamage=0;
     }
     ///checks health status
-    if(status_attributeState.curHealth<status_attributeState.minHealth)
+    if(status_attributeState.curHealth<=status_attributeState.minHealth)
     {
         status_attributeState.curHealth = 0;
         status_attributeState.isAlive = false;
-
+    }
+    else
+    {
+        status_attributeState.isAlive =true;
     }
 
 

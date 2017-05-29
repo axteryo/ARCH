@@ -2,18 +2,6 @@
 
 {
 	"filename": "animation_archiiRotateLeft.png",
-	"frame": {"x":174,"y":1,"w":64,"h":54},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":54},
-	"sourceSize": {"w":64,"h":54},
-	"pivot": {"x":0.5,"y":0.5},
-	"vertices": [ [64,54], [0,54], [0,0], [64,0] ],
-	"verticesUV": [ [238,55], [174,55], [174,1], [238,1] ],
-	"triangles": [ [1,2,3], [0,1,3] ]
-},
-{
-	"filename": "animation_archiiRotateRight.png",
 	"frame": {"x":240,"y":1,"w":64,"h":54},
 	"rotated": false,
 	"trimmed": false,
@@ -25,7 +13,7 @@
 	"triangles": [ [1,2,3], [0,1,3] ]
 },
 {
-	"filename": "archii_texture.png",
+	"filename": "animation_archiiRotateRight.png",
 	"frame": {"x":306,"y":1,"w":64,"h":54},
 	"rotated": false,
 	"trimmed": false,
@@ -34,6 +22,18 @@
 	"pivot": {"x":0.5,"y":0.5},
 	"vertices": [ [64,54], [0,54], [0,0], [64,0] ],
 	"verticesUV": [ [370,55], [306,55], [306,1], [370,1] ],
+	"triangles": [ [1,2,3], [0,1,3] ]
+},
+{
+	"filename": "archii_texture.png",
+	"frame": {"x":174,"y":1,"w":64,"h":59},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":59},
+	"sourceSize": {"w":64,"h":59},
+	"pivot": {"x":0.5,"y":0.5},
+	"vertices": [ [64,59], [0,59], [0,0], [64,0] ],
+	"verticesUV": [ [238,60], [174,60], [174,1], [238,1] ],
 	"triangles": [ [1,2,3], [0,1,3] ]
 },
 {
@@ -67,6 +67,6 @@
 	"format": "RGBA8888",
 	"size": {"w":512,"h":64},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:63e71d7beb18a7d1f6dd9e2d196a0ae6:1cf9e37262b270e3f0a43acfd955fb21:df285b20ee2436030770164ab2a563bc$"
+	"smartupdate": "$TexturePacker:SmartUpdate:f67af460d7b21b7507bb1d00240eb832:5041f76efd5fa27b8f9163cd8c734554:df285b20ee2436030770164ab2a563bc$"
 }
 }

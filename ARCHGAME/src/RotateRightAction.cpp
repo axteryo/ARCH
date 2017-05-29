@@ -39,7 +39,7 @@ void RotateRightAction::execute(ActorEntity* a)
         attributes.isRotating = true;
         a->getPhysics()->_rotate(rate);
         a->getStates()->setMovementAttributeState(attributes);
-        a->playAnimation("rotateRight",true);
+        //a->playAnimation("rotateRight",true);
     }
     else
     {

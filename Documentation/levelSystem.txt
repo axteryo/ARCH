@@ -11,7 +11,7 @@ track level/room events
 
 
 
-An idea is that the maps will store room data(enemies,objectives/items) the map will export the data into a room object which will spawn based on a trigger
+SCRAP THIS IDEA------>>>An idea is that the maps will store room data(enemies,objectives/items) the map will export the data into a room object which will spawn based on a trigger<<<<<------
 
 The level class will load and save level data
 

@@ -26,10 +26,8 @@ void CollisionSystem::BeginContact(b2Contact* contact)
 
     if(A&&B&&dataA&&dataB)
     {
-
         collisionEventData* c = new collisionEventData(A,B,dataA,dataB,"COLLISION_INITIAL");
-
-        notifyCollisionEvent(c);
+        collisionEvents.push(c);
     }
 }
 void CollisionSystem::EndContact(b2Contact* contact)
@@ -46,7 +44,6 @@ void CollisionSystem::EndContact(b2Contact* contact)
     if(A&&B&&dataA&&dataB)
     {
         collisionEventData* c = new collisionEventData(A,B,dataA,dataB,"COLLISION_END");
-
         notifyCollisionEvent(c);
     }
 }
@@ -117,7 +114,6 @@ void CollisionSystem::update()
         collisionEventData* colData = collisionEvents.front();
         if(colData->collisionType.compare("COLLISION_INITIAL")==0)
         {
-
             colData->entityA->initiateCollision(colData->entityB,colData->B_Data,colData->A_Data);
             colData->entityB->initiateCollision(colData->entityA,colData->A_Data,colData->B_Data);
         }

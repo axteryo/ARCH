@@ -16,6 +16,7 @@ class BoostAction : public MovementAction
         float tempLimit;
         //bool inCoolDown;
         int boostDuration;
+        b2Vec2 boostDirection;
 
 };
 

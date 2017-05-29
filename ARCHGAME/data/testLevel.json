@@ -1,0 +1,43 @@
+{
+	//"maps":
+	//[
+		//{
+	"map":"TestChamber1.json",
+	 "sequences":
+	 [
+	 	{
+	 		"type":"combat_sequence",
+	 		"trigger_tag":"zone1_trigger",
+	 		"waveList":
+	 		[
+		 		{
+			 		"spawnList":
+			 		[
+
+			 			{
+			 				"entityID":"entity_d1",
+			 				"entityType":"actor",
+			 				"x":0,
+			 				"y":0,
+			 				"rotation":0
+			 			},
+			 			{
+			 				"entityID":"entity_d1",
+			 				"entityType":"actor",
+			 				"x":0,
+			 				"y":0,
+			 				"rotation":0
+			 			}
+			 		]//end of spawn list
+		 		}
+		 	]//end of wave list
+	 	},//end of first sequence
+	 	{
+	 		"type":"narrative_sequence",
+	 		"trigger_tag":"zone1_trigger",
+	 		"text":"This is a narrative sequence text"
+	 	}
+	 ]//end of sequence list
+		//}
+	//]
+}

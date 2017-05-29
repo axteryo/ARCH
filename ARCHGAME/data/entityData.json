@@ -13,12 +13,12 @@
 			},
 			"MovementAttributes":
 			{
-				"accelRate":0.08,
+				"accelRate":0.1,
 				"accelRateLimit":4,
-				"velLimit":22.0,
+				"velLimit":24.0,
 				"brakeLimit":8.0,
-				"rotationRate":0.1,
-				"accel_rotationRate":0.035
+				"rotationRate":0.14,
+				"accel_rotationRate":0.04
 			},
 			"movementActions":["rotateLeft","rotateRight","accelerate","deccelerate","brake","boost"],
 			"attackActions":
@@ -76,8 +76,8 @@
 			"MovementAttributes":
 			{
 				"accelRate":0.05,
-				"accelRateLimit":3,
-				"velLimit":26.0,
+				"accelRateLimit":1,
+				"velLimit":28.0,
 				"brakeLimit":7.0,
 				"rotationRate":0.15,
 				"accel_rotationRate":0.075
@@ -117,9 +117,9 @@
 			},
 			"MovementAttributes":
 			{
-				"accelRate":0.05,
+				"accelRate":0.1,
 				"accelRateLimit":3,
-				"velLimit":22.0,
+				"velLimit":24.0,
 				"brakeLimit":7.0,
 				"rotationRate":0.15,
 				"accel_rotationRate":0.05

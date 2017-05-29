@@ -12,6 +12,7 @@ Game::Game()
     gameCamera.setCoords(sf::Vector2i(90,600),sf::Vector2f(1024,768));
     world->SetContactListener(collisionSystem);
 
+
     gameRunning = true;
 
     dt = 1.0f/60.0f;
@@ -44,7 +45,7 @@ void Game::start()
     controller.loadBindings();
     ///load function is called here to load the entities and assets of the game level
     gameLevel.setup();
-    gameLevel.load("assets/testmap4.json");
+    gameLevel.load("data/testLevel.json");
     gameLevel.initiate();
 
     while(window->isOpen())
@@ -65,16 +66,17 @@ void Game::start()
       ///update logic at a fixed rate of 60
         if(isVsynced)
         {
+
             while(accumulator<dt)
             {
                 //std::cout<<"LEFTOVER TIME:"
                 //<<accumulator<<std::endl;
                 //std::cout<<"Elapsed time:"<<1/elapsed<<std::endl;
 
-                accumulator+=(dt/50);
+                accumulator+=(dt/60);
                 //std::cout<<"we are here"<<std::endl;
                 //std::cout<<"LEFTOVER TIME:"
-            //<<accumulator<<std::endl;
+                //<<accumulator<<std::endl;
             }
 
 
@@ -83,6 +85,7 @@ void Game::start()
         {
             accumulator-=dt;
             gameLevel.physicsUpdate(dt,accumulator);
+            collisionSystem->update();
             update(dt);
         }
         alpha = (accumulator/dt);
@@ -105,7 +108,7 @@ void Game::render(double alpha)
     window->setView(gameCamera.camView);
     window->clear(sf::Color::Black);
     gameLevel.render(window,alpha);
-    /*for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
+    for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
         {
                 b2PolygonShape* polygonShape;
                 //sf::ConvexShape colShape;
@@ -129,7 +132,7 @@ void Game::render(double alpha)
                             i++;
                         }
                         colShape.setFillColor(sf::Color::Transparent);
-                        colShape.setOutlineColor(sf::Color::Green);
+                        colShape.setOutlineColor(sf::Color::Blue);
                         colShape.setOutlineThickness(1);
                         colShape.setPosition(bodyIter->GetPosition().x*30,bodyIter->GetPosition().y*30);
                         colShape.setRotation((bodyIter->GetTransform().q.GetAngle()*((180/3.14159))));
@@ -152,7 +155,7 @@ void Game::render(double alpha)
 
                 }
 
-        }*/
+        }
     window->display();
 
 
@@ -161,7 +164,6 @@ void Game::render(double alpha)
 void Game::update(float dt)
 {
     gameLevel.update(dt);
-    collisionSystem->update();
 }
 
 /** Input is Processed through the windows pollEvent() function **/
@@ -204,8 +206,8 @@ void Game::processInput()
         {
 
 
-           gameCamera.camView.setSize(v2f_windowSize.x+384,v2f_windowSize.y);
-           gameCamera.camView.zoom(1.5);
+           gameCamera.camView.setSize(v2f_windowSize.x+384,v2f_windowSize.y-48);
+           gameCamera.camView.zoom(1.6);
            //window->setView();//event.size.width+512, event.size.height+1024);
             std::cout << "new width: " << event.size.width << std::endl;
             std::cout << "new height: " << event.size.height << std::endl;

@@ -3,13 +3,19 @@
 
 
 #include "entity.h"
+
+struct Frame
+{
+    sf::IntRect textureCoords;
+    int duration;
+};
 struct Animation
 {
     std::string animationName;
     std::string tag;
     int duration;
     int currentFrame;
-    std::vector<sf::IntRect> frames;
+    std::vector<Frame> frames;
 };
 
 
@@ -57,6 +63,7 @@ class GraphicsComponent
         bool playingAnimation;
 
         int frameCounter;
+
 };
 
 #endif // GRAPHICSCOMPONENT_H

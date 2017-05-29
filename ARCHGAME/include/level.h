@@ -12,6 +12,7 @@
 #include "PhysicsComponent.h"
 #include "camera.h"
 #include "ObjectEntity.h"
+#include "TriggerEntity.h"
 #include "CollisionSystem.h"
 
 class EntitySpawner;
@@ -46,7 +47,7 @@ class level// : public sf::Drawable, public sf::Transformable
         int getQuadrant();
         **/
         void setup();
-        void load(std::string mapFile);
+        void load(std::string levelFile);
         void initiate();
         void close();
         void getSpawnPoints();
@@ -57,6 +58,7 @@ class level// : public sf::Drawable, public sf::Transformable
 
         std::vector<spawnPoint> spawnList;
         std::vector<entity*> entityList;
+        std::vector<TriggerEntity*> triggerList;
         std::vector<ObjectEntity*> wallList;
 
 
@@ -69,6 +71,10 @@ class level// : public sf::Drawable, public sf::Transformable
 
     protected:
     private:
+
+        Json::Value baseLevelRoot;
+        Json::Reader levelReader;
+        std::ifstream currentLevelFile;
 };
 
 #endif // LEVEL_H

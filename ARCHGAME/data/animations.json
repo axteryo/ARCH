@@ -1,0 +1,28 @@
+{
+	"animations":
+	[
+		{
+			"name":"archiiRotateRight",
+			"frames":
+			[
+				{
+				"name":"animation_archiiRotateRight.png",
+				"duration":1
+				}
+			]
+			
+		},
+		{
+			"name":"archiiRotateLeft",
+			"frames":
+			[
+				{
+				"name":"animation_archiiRotateLeft.png",
+				"duration":1
+				}
+			]
+			
+		}
+	]
+	
+}

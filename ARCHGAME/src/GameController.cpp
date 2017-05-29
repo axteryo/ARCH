@@ -23,7 +23,7 @@ void GameController::loadBindings()
     Json::Value root;
     Json::Reader reader;
     std::ifstream file;
-    file.open("assets/keyMap.json");
+    file.open("data/keyMap.json");
 
     bool parsedSuccess = reader.parse(file,root,false);
     if(!parsedSuccess)

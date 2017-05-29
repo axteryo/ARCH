@@ -62,12 +62,25 @@ void level::setup()
 /**
 This function loads a specified level and retrieves and stores data
 **/
-void level::load(std::string mapFile)
+void level::load(std::string levelFile)
 {
-    _map->loadFile(mapFile);
-    spawnList = _map->getSpawnSpoints();
-    wallList = _map->walls;
-    std::cout<<spawnList.size()<<std::endl;
+    currentLevelFile.open(levelFile);
+    bool parsedSuccess = levelReader.parse(currentLevelFile,baseLevelRoot,false);
+    if(!parsedSuccess)
+    {
+        std::cout<<"failed to parse JSON"<< std::endl
+        <<levelReader.getFormattedErrorMessages()
+        <<std::endl;
+    }
+    else
+    {
+         std::cout<<"Level file has been parsed"<< std::endl;
+        _map->loadFile("data/"+ baseLevelRoot["map"].asString());
+        spawnList = _map->getSpawnSpoints();
+        triggerList = _map->getTriggers();
+        wallList = _map->walls;
+        std::cout<<spawnList.size()<<std::endl;
+    }
 }
 /**
 This function implements the level
