@@ -41,6 +41,18 @@ void ActionComponent::performAction(std::string action, ActorEntity* a)
         }
     }
 }
+void ActionComponent::cancelAction(std::string action)
+{
+    for(int i = 0;i<actionList.size();i++)
+    {
+        if(actionList[i]->getType().compare(action)==0)
+        {
+            actionList[i]->cancel();
+            break;
+
+        }
+    }
+}
 void ActionComponent::addAction(Action* a)
 {
     actionList.push_back(a);

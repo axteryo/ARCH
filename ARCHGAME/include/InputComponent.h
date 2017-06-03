@@ -16,6 +16,7 @@ class InputComponent
         virtual void processInput(ActorEntity* a)=0;
         virtual void onNotifyEntityNearby(entity* e)=0;
         virtual void onNotifyEntityWithinRadius(entity* e)=0;
+        virtual void onNotifyBodyCollision(entity* e)=0;
     protected:
     private:
 };

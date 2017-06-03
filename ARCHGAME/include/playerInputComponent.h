@@ -21,6 +21,7 @@ class playerInputComponent: public InputComponent
         void processInput(ActorEntity* a);
         void onNotifyEntityNearby(entity* e);
         void onNotifyEntityWithinRadius(entity* e);
+        void onNotifyBodyCollision(entity* e);
     protected:
     private:
        //AccelerateAction _accelerate;

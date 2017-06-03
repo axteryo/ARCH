@@ -2,7 +2,7 @@
 	//"maps":
 	//[
 		//{
-	"map":"TestChamber1.json",
+	"map":"testChamber1.json",
 	 "sequences":
 	 [
 	 	{
@@ -17,8 +17,8 @@
 			 			{
 			 				"entityID":"entity_d1",
 			 				"entityType":"actor",
-			 				"x":0,
-			 				"y":0,
+			 				"x":1664.00,
+			 				"y":1600.00,
 			 				"rotation":0
 			 			},
 			 			{

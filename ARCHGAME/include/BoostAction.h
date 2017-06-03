@@ -14,9 +14,14 @@ class BoostAction : public MovementAction
     protected:
     private:
         float tempLimit;
-        //bool inCoolDown;
+        bool inCoolDown;
+        int speed;
         int boostDuration;
+        int boostDistance;
         b2Vec2 boostDirection;
+        b2Vec2 startPos;
+        b2Vec2 endPos;
+
 
 };
 

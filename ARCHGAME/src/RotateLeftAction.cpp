@@ -27,7 +27,15 @@ void RotateLeftAction::execute(ActorEntity* a)
         }
         else if(a->isAttacking())
         {
-            rate = -a->getAttackAttributeState().rotationRate;
+            if(attributes.inGridMode)
+            {
+                rate = -a->getAttackAttributeState().rotationRate*4;
+            }
+            else
+            {
+                 rate = -a->getAttackAttributeState().rotationRate;
+            }
+
         }
         else
         {

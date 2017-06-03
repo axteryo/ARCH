@@ -13,6 +13,7 @@ class AIBasicInputComponent : public InputComponent
         void processInput(ActorEntity* a);
         void onNotifyEntityNearby(entity* e);
         void onNotifyEntityWithinRadius(entity* e);
+        void onNotifyBodyCollision(entity* e);
 
         void setTarget(entity* t);
         void setAlert();

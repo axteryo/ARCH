@@ -10,6 +10,7 @@ class BrakeAction : public MovementAction
         BrakeAction();
         virtual ~BrakeAction();
         void execute(ActorEntity* a);
+        void update(ActorEntity* a);
     protected:
     private:
 };

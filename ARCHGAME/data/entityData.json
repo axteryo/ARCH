@@ -13,12 +13,12 @@
 			},
 			"MovementAttributes":
 			{
-				"accelRate":0.1,
-				"accelRateLimit":4,
-				"velLimit":24.0,
+				"accelRate":0.125,
+				"accelRateLimit":8,
+				"velLimit":28.0,
 				"brakeLimit":8.0,
-				"rotationRate":0.14,
-				"accel_rotationRate":0.04
+				"rotationRate":7,
+				"accel_rotationRate":3
 			},
 			"movementActions":["rotateLeft","rotateRight","accelerate","deccelerate","brake","boost"],
 			"attackActions":
@@ -29,6 +29,7 @@
 				"force": 10.0,
 				"damage":25,
 				"rotationRate":0.05,
+				"attackRate":0,
 				"relativePosition":[-100,100]
 				},
 				{	
@@ -37,13 +38,23 @@
 				"force": 50.0,
 				"damage":10,
 				"rotationRate":0.1,
+				"attackRate":0,
 				"relativePosition":[10,10]
+				},
+				{	
+				"name":"gridModeAttack",
+				"type":"modeAttack",
+				"force": 0.0,
+				"damage":0,
+				"rotationRate":6,
+				"attackRate":0,
+				"relativePosition":[0,0]
 				}
 			
 			],
 			"sensorField":
 			{
-				"radius":[10],
+				"radius":[2],
 				"fixtureType":"sensorFixture",
 				"fixtureData":"playerSensorField",
 				"isSensor":true
@@ -75,12 +86,12 @@
 			},
 			"MovementAttributes":
 			{
-				"accelRate":0.05,
-				"accelRateLimit":1,
+				"accelRate":0.5,
+				"accelRateLimit":3,
 				"velLimit":28.0,
 				"brakeLimit":7.0,
-				"rotationRate":0.15,
-				"accel_rotationRate":0.075
+				"rotationRate":6,
+				"accel_rotationRate":2
 			},
 			"movementActions":["rotateLeft","rotateRight","accelerate","deccelerate","brake"],
 			"attackActions":

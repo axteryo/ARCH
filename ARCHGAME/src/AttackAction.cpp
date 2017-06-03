@@ -18,10 +18,12 @@ void AttackAction::setData(attackData aData)
 {
     data.name=aData.name;
     data.attackType= aData.attackType;
+    data.attackRate = aData.attackRate;
     data.duration= aData.duration;
     data.coolDown= aData.coolDown;
     data.rotationRate= aData.rotationRate;
     data.shape= aData.shape;
+    data.relPosition = aData.relPosition;
     data.damage = aData.damage;
     data.force = aData.force;
     data.impactDuration = aData.impactDuration;

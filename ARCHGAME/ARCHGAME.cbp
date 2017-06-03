@@ -70,13 +70,16 @@
 		<Unit filename="include/GameEvent.h" />
 		<Unit filename="include/GameMap.h" />
 		<Unit filename="include/GraphicsComponent.h" />
+		<Unit filename="include/GridModeAttack.h" />
 		<Unit filename="include/InputComponent.h" />
 		<Unit filename="include/MovementAction.h" />
 		<Unit filename="include/ObjectEntity.h" />
 		<Unit filename="include/PhysicsComponent.h" />
+		<Unit filename="include/ProjectileEntity.h" />
 		<Unit filename="include/RadiusAttackAction.h" />
 		<Unit filename="include/RotateLeftAction.h" />
 		<Unit filename="include/RotateRightAction.h" />
+		<Unit filename="include/SequenceEntity.h" />
 		<Unit filename="include/SpriteBatcher.h" />
 		<Unit filename="include/StateComponent.h" />
 		<Unit filename="include/TriggerEntity.h" />
@@ -87,7 +90,6 @@
 		<Unit filename="include/json/json.h" />
 		<Unit filename="include/level.h" />
 		<Unit filename="include/playerInputComponent.h" />
-		<Unit filename="include/sequence.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/AIBasicInputComponent.cpp" />
 		<Unit filename="src/AccelerateAction.cpp" />
@@ -106,13 +108,16 @@
 		<Unit filename="src/GameEvent.cpp" />
 		<Unit filename="src/GameMap.cpp" />
 		<Unit filename="src/GraphicsComponent.cpp" />
+		<Unit filename="src/GridModeAttack.cpp" />
 		<Unit filename="src/InputComponent.cpp" />
 		<Unit filename="src/MovementAction.cpp" />
 		<Unit filename="src/ObjectEntity.cpp" />
 		<Unit filename="src/PhysicsComponent.cpp" />
+		<Unit filename="src/ProjectileEntity.cpp" />
 		<Unit filename="src/RadiusAttackAction.cpp" />
 		<Unit filename="src/RotateLeftAction.cpp" />
 		<Unit filename="src/RotateRightAction.cpp" />
+		<Unit filename="src/SequenceEntity.cpp" />
 		<Unit filename="src/SpriteBatcher.cpp" />
 		<Unit filename="src/StateComponent.cpp" />
 		<Unit filename="src/TriggerEntity.cpp" />
@@ -122,7 +127,6 @@
 		<Unit filename="src/jsoncpp.cpp" />
 		<Unit filename="src/level.cpp" />
 		<Unit filename="src/playerInputComponent.cpp" />
-		<Unit filename="src/sequence.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

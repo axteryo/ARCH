@@ -6,5 +6,6 @@
 	"brake" :"LShift",
 	"boost":"Space",
 	"useAttack1":"W",
-	"useAttack2":"A"
+	"useAttack2":"A",
+	"useAttack3":"S"
 }

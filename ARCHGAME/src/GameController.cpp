@@ -11,6 +11,7 @@ GameController::GameController()
     playerBoostAction= "";
     playerUseAttack1Action="";
     playerUseAttack2Action="";
+    playerUseAttack3Action="";
 }
 
 GameController::~GameController()
@@ -43,6 +44,7 @@ void GameController::loadBindings()
     playerBoostAction=root["boost"].asString();
     playerUseAttack1Action=root["useAttack1"].asString();
     playerUseAttack2Action=root["useAttack2"].asString();
+    playerUseAttack3Action=root["useAttack3"].asString();
 
     file.close();
 }
@@ -137,6 +139,17 @@ bool GameController::isBindedKeyPressed(std::string bindingToCheck)
             return false;
         }
     }
+    if(bindingToCheck.compare("S")==0)
+    {
+        if(keyBoard.isKeyPressed(keyBoard.S))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     return false;
 
@@ -213,6 +226,17 @@ bool GameController::isActionKeyPressed(std::string actionToCheck)
      if(actionToCheck.compare("useAttack2")==0)
     {
         if(isBindedKeyPressed(playerUseAttack2Action))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    if(actionToCheck.compare("useAttack3")==0)
+    {
+        if(isBindedKeyPressed(playerUseAttack3Action))
         {
             return true;
         }

@@ -40,7 +40,6 @@ void CollisionSystem::EndContact(b2Contact* contact)
     B = static_cast<entity*>(contact->GetFixtureB()->GetBody()->GetUserData());
     dataA = static_cast<fixtureUserData*>(contact->GetFixtureA()->GetUserData());
     dataB = static_cast<fixtureUserData*>(contact->GetFixtureB()->GetUserData());
-
     if(A&&B&&dataA&&dataB)
     {
         collisionEventData* c = new collisionEventData(A,B,dataA,dataB,"COLLISION_END");
@@ -114,8 +113,12 @@ void CollisionSystem::update()
         collisionEventData* colData = collisionEvents.front();
         if(colData->collisionType.compare("COLLISION_INITIAL")==0)
         {
-            colData->entityA->initiateCollision(colData->entityB,colData->B_Data,colData->A_Data);
-            colData->entityB->initiateCollision(colData->entityA,colData->A_Data,colData->B_Data);
+            if(colData->entityA!=nullptr && colData->entityB!=nullptr)
+            {
+                colData->entityA->initiateCollision(colData->entityB,colData->B_Data,colData->A_Data);
+                colData->entityB->initiateCollision(colData->entityA,colData->A_Data,colData->B_Data);
+            }
+
         }
         delete colData;
         collisionEvents.pop();

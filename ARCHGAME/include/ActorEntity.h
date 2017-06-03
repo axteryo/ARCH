@@ -12,7 +12,7 @@
 class ActionComponent;
 
 
-
+extern std::stack<entity*> deathStack;
 
 
 class ActorEntity : public entity
@@ -21,18 +21,10 @@ class ActorEntity : public entity
         ActorEntity(std::string e_ID,GraphicsComponent* g,PhysicsComponent* p,InputComponent* i,StateComponent* s, ActionComponent* a);
         virtual ~ActorEntity();
 
-        void setPosition(b2Vec2 p);
-        void setRotation(float a);
-        b2Vec2 getPosition();
-        float getRotation();
         float getTopSpeed();
 
         void update();
-        std::string getID();
-        std::string getType();
 
-        positionState getCurrentState();
-        positionState getPreviousState();
         movementAttributeState getMovementAttributeState();
         statusAttributeState getStatusAttributeState();
         attackAttributeState getAttackAttributeState();
@@ -41,12 +33,15 @@ class ActorEntity : public entity
 
         void notifyEntityNearby(entity* e);
         void notifyEntityWithinRadius(entity* e);
+        void notifyBodyCollision(entity* e);
 
         bool isAttacking();
         bool isRotating();
         bool isAlive();
         bool isAccelerating();
         bool isImpacted();
+        bool isBoosting();
+        bool inGridMode();
 
         /**
         virtual void initiateCollision() = 0;
@@ -54,7 +49,7 @@ class ActorEntity : public entity
         **/
 
         GraphicsComponent* getGraphics();
-        PhysicsComponent* getPhysics();
+        //PhysicsComponent* getPhysics();
         StateComponent* getStates();
         ActionComponent* getActions();
 
@@ -66,7 +61,7 @@ class ActorEntity : public entity
     protected:
     private:
         GraphicsComponent* graphics_component;
-        PhysicsComponent* physics_component;
+        //PhysicsComponent* physics_component;
         InputComponent* input_component;
         StateComponent* state_component;
         ActionComponent* action_component;

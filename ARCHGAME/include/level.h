@@ -14,6 +14,7 @@
 #include "ObjectEntity.h"
 #include "TriggerEntity.h"
 #include "CollisionSystem.h"
+#include "SequenceEntity.h"
 
 class EntitySpawner;
 class SpriteBatcher;
@@ -24,6 +25,7 @@ class GameMap;
 
 extern camera gameCamera;
 extern CollisionSystem* collisionSystem;
+
 
 struct spawnPoint
     {
@@ -59,6 +61,7 @@ class level// : public sf::Drawable, public sf::Transformable
         std::vector<spawnPoint> spawnList;
         std::vector<entity*> entityList;
         std::vector<TriggerEntity*> triggerList;
+        std::vector<SequenceEntity*> sequenceList;
         std::vector<ObjectEntity*> wallList;
 
 

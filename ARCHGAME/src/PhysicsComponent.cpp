@@ -18,6 +18,7 @@ PhysicsComponent::PhysicsComponent(b2BodyType t)
     bodyDef.type = t;
     bodyDef.fixedRotation = true;
     body = world->CreateBody(&bodyDef);
+
     topSpeed = 0;
     rotationAmount = 0;
 }
@@ -37,6 +38,7 @@ b2Fixture* PhysicsComponent::createFixtureRectangle(b2Vec2 dimensions,b2Vec2 pos
     fixtureDef.density = 2.0f;
     fixtureDef.userData = ((void*)fixtureData);
     fixtureDef.isSensor = isSensor;
+    fixtureDef.restitution= .1;
     b2Fixture* f =body->CreateFixture(&fixtureDef);
     return f;
 }
@@ -49,6 +51,7 @@ b2Fixture* PhysicsComponent::createFixtureCircle(float radius,b2Vec2 position, f
     fixtureDef.density = 0;
     fixtureDef.userData = ((void*)fixtureData);
     fixtureDef.isSensor = isSensor;
+    fixtureDef.restitution= 1;
     b2Fixture* f = body->CreateFixture((&fixtureDef));
     return f;
 }
@@ -76,6 +79,7 @@ b2Fixture* PhysicsComponent::createFixturePolygon(std::vector<float> shape,b2Vec
     fixtureDef.density = .1;
     fixtureDef.userData = ((void*)fixtureData);
     fixtureDef.isSensor = isSensor;
+    fixtureDef.restitution= .01;
     b2Fixture* f;
     f = body->CreateFixture(&fixtureDef);
 
@@ -87,7 +91,7 @@ void PhysicsComponent::update()
 
     previousState = currentState;
 
-    currentState.rotation+=(rotationAmount);
+    //currentState.rotation+=(rotationAmount);
     currentState.velocity = body->GetLinearVelocity();
     currentState.velocity.x+=(currentState.acceleration.x);
     currentState.velocity.y+=(currentState.acceleration.y);
@@ -95,7 +99,9 @@ void PhysicsComponent::update()
     limitVelocity();
 
     body->SetLinearVelocity(currentState.velocity);
+    body->SetAngularVelocity(rotationAmount);
     currentState.position = body->GetPosition();
+    currentState.rotation = body->GetAngle();
 
     body->SetTransform(currentState.position,currentState.rotation);
 
@@ -106,6 +112,7 @@ void PhysicsComponent::update()
 void PhysicsComponent::setRotation(float a)
 {
     currentState.rotation = a;
+    body->SetTransform(body->GetPosition(),a);
 }
 void PhysicsComponent::_rotate(float a)
 {

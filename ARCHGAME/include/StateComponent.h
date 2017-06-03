@@ -24,6 +24,8 @@ class ActorEntity;
         bool isRotating;
         bool isAccelerating;
         bool isBoosting;
+        bool inGridMode;
+        bool isBraking;
         float accel;
         float accelRate;
         float accelRateLimit;
@@ -72,6 +74,7 @@ namespace State
    positionState to_positionState(renderState r);
    renderState lerpRenderState(renderState pre,renderState cur,double val);
    positionState lerpPositionState(positionState pre, positionState cur, float val);
+   float getDistance(b2Vec2 p1, b2Vec2 p2);
 
 }
 

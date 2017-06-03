@@ -6,9 +6,14 @@ BoostAction::BoostAction()
     actionType= "boost";
     elapsed = 0;
     isActive = false;
+    inCoolDown = false;
     tempLimit = 0;
     boostDuration = 0;
+    boostDistance = 0;
+    startPos = b2Vec2(0,0);
+    endPos = b2Vec2(0,0);
     boostDirection = b2Vec2(0,0);
+    speed = 0;
 }
 
 BoostAction::~BoostAction()
@@ -19,12 +24,13 @@ void BoostAction::execute(ActorEntity* a)
 {
     if(!isActive)
     {
+        startPos = a->getPosition();
         PhysicsComponent* p = a->getPhysics();
         movementAttributeState attributes = a->getMovementAttributeState();
         elapsed+=1;
         isActive = true;
         tempLimit = a->getTopSpeed();
-        int speed = tempLimit*2.5;
+        speed = tempLimit*5;
         p->setTopSpeed(speed);
 
         float r = a->getRotation();
@@ -36,15 +42,16 @@ void BoostAction::execute(ActorEntity* a)
         acceleration = b2Vec2(cos(r),sin(r));
         acceleration.Normalize();
 
-        acceleration.x*=speed;//attributes.accel;
-        acceleration.y*=speed;//attributes.accel;
+        acceleration.x*=speed;
+        acceleration.y*=speed;
         boostDirection =acceleration;
-        //b2Vec2 antiVel = a->getCurrentState().velocity;
-       // p->accelerate(antiVel);
+        b2Vec2 antiVel = a->getCurrentState().velocity;
 
-        //attributes.isBoosting= true;
+
+        attributes.isBoosting= true;
         a->getStates()->setMovementAttributeState(attributes);
-        boostDuration = 5;
+        boostDuration = 20;
+        boostDistance = 1;
     }
 
 
@@ -53,33 +60,61 @@ void BoostAction::execute(ActorEntity* a)
 void BoostAction::update(ActorEntity* a)
 {
     elapsed-=1;
-    if(elapsed<0)
+    movementAttributeState attributes = a->getMovementAttributeState();
+    std::cout<<"got here"<<std::endl;
+    if(inCoolDown)
     {
-        isActive = false;
-        elapsed = 0;
-        a->getPhysics()->setTopSpeed(tempLimit);
-        //attributes.isBoosting= false;
-        //attributes.accel = 0;
-        //a->getStates()->setMovementAttributeState(attributes);
-    }
-    if(boostDuration>0)
-    {
-
-        elapsed+=1;
-        a->getPhysics()->accelerate(boostDirection);
-        boostDuration-=1;
-
+        if(elapsed<0)
+        {
+            isActive = false;
+            inCoolDown = false;
+            elapsed = 0;
+        }
     }
     else
     {
-        b2Vec2 accel = a->getCurrentState().velocity;
-        if(accel.Length()>=tempLimit)
+        endPos = a->getPosition();
+        if(State::getDistance(startPos,endPos)<boostDistance)
         {
-        accel.x/=5;
-        accel.y/=5;
-        a->getPhysics()->accelerate(b2Vec2(-accel.x,-accel.y));
-        elapsed+=1;
-        }
+            elapsed+=1;
+            /*if(boostDirection.Length()<=speed)
+            {
+                boostDirection.x*=1.5;
+                boostDirection.y*=1.5;
+            }*/
+            a->getPhysics()->accelerate(boostDirection);
 
+        }
+        else
+        {
+            b2Vec2 accel = a->getCurrentState().velocity;
+            if(accel.Length()>tempLimit)
+            {
+            accel.x/=5;
+            accel.y/=5;
+            a->getPhysics()->accelerate(b2Vec2(-accel.x,-accel.y));
+            elapsed+=1;
+            }
+            else
+            {
+                inCoolDown = true;
+                attributes.isBoosting= false;
+                elapsed = 30;
+                a->getPhysics()->setTopSpeed(tempLimit);
+                attributes.accel = 0;
+                a->getStates()->setMovementAttributeState(attributes);
+            }
+        }
+    }
+    /*if(boostDuration>0)
+    {
+
+
+
+    }*/
+
+    if(attributes.isBraking)
+    {
+        cancel();
     }
 }

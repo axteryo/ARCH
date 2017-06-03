@@ -107,8 +107,8 @@ void GameMap::loadFile(std::string mapFile)
                 {
                     b2Fixture* f;
                     fixtureUserData* fixtureData = new fixtureUserData;
-                    fixtureData->data = "WallBody";
-                    fixtureData->type = "BODY";
+                    fixtureData->data = "Wall";
+                    fixtureData->type = "bodyFixture";
 
 
                     int shapeSize = baseMapRoot["layers"][i]["objects"][ii]["polyline"].size();
@@ -147,7 +147,7 @@ void GameMap::loadFile(std::string mapFile)
                     b2Fixture* f;
                     fixtureUserData* fixtureData = new fixtureUserData;
                     fixtureData->data = "TriggerBody";
-                    fixtureData->type = "BODY";
+                    fixtureData->type = "bodyFixture";
 
                     std::string tag = baseMapRoot["layers"][i]["objects"][ii]["name"].asString();
 

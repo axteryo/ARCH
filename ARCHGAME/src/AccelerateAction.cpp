@@ -16,14 +16,17 @@ AccelerateAction::~AccelerateAction()
 
 void AccelerateAction::execute(ActorEntity* a)
 {
+
+    movementAttributeState attributes = a->getMovementAttributeState();
+
+    if(!attributes.inGridMode)
+    {
     elapsed+=1;
     isActive = true;
     float r = a->getRotation();
     b2Vec2 acceleration = b2Vec2(0,0);
 
     PhysicsComponent* p = a->getPhysics();
-    movementAttributeState attributes = a->getMovementAttributeState();
-
 
     if(accel>=attributes.accelRateLimit)
     {
@@ -46,7 +49,7 @@ void AccelerateAction::execute(ActorEntity* a)
     p->accelerate(acceleration);
     p->setTopSpeed(attributes.velLimit);
     a->getStates()->setMovementAttributeState(attributes);
-
+    }
 }
 
 void AccelerateAction::update(ActorEntity* a)

@@ -3,6 +3,7 @@
 GameController controller;
 
 
+
 Game::Game()
 {
     v2f_windowSize = sf::Vector2f(1024,768);
@@ -81,6 +82,7 @@ void Game::start()
 
 
         }
+
         while(accumulator>=dt)
         {
             accumulator-=dt;
@@ -88,6 +90,18 @@ void Game::start()
             collisionSystem->update();
             update(dt);
         }
+        for(int i = 0; i<deathStack.size();i++)
+        {
+
+            if(deathStack.top()!=nullptr)
+            {
+                //entity* e = deathStack.top();
+                delete deathStack.top();
+            }
+
+            deathStack.pop();
+        }
+
         alpha = (accumulator/dt);
 
         ///render freely
@@ -108,7 +122,7 @@ void Game::render(double alpha)
     window->setView(gameCamera.camView);
     window->clear(sf::Color::Black);
     gameLevel.render(window,alpha);
-    for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
+    /*for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
         {
                 b2PolygonShape* polygonShape;
                 //sf::ConvexShape colShape;
@@ -155,7 +169,7 @@ void Game::render(double alpha)
 
                 }
 
-        }
+        }*/
     window->display();
 
 

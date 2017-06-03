@@ -12,9 +12,10 @@ class BeamAttackAction : public AttackAction
         BeamAttackAction();
         virtual ~BeamAttackAction();
         void execute(ActorEntity* a);
-        //void update(ActorEntity* a);
+        void update(ActorEntity* a);
     protected:
     private:
+
         //PhysicsComponent* physics_component;
 };
 

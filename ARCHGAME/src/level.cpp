@@ -13,6 +13,7 @@ camera gameCamera;
 CollisionSystem* collisionSystem = new CollisionSystem();
 
 
+
 level::level()
 {
     ///Creates A spawner object for creating entites and a batcher object for assembling sprites in a vertex array
@@ -78,8 +79,21 @@ void level::load(std::string levelFile)
         _map->loadFile("data/"+ baseLevelRoot["map"].asString());
         spawnList = _map->getSpawnSpoints();
         triggerList = _map->getTriggers();
+        for(int i = 0;i<baseLevelRoot["sequences"].size();++i)
+        {
+            std::string sType = baseLevelRoot["sequences"][i]["type"].asString();
+            std::string tTag = baseLevelRoot["sequences"][i]["trigger_tag"].asString();
+            for(int m = 0; m <triggerList.size();++m)
+            {
+                if(triggerList[m]->getTag().compare(tTag)==0)
+                {
+                    sequenceList.push_back(new SequenceEntity("entity_sequence","sequence"+m,tTag,sType));
+                }
+            }
+        }
+        std::cout<<"num of sequences: "<<sequenceList.size()<<std::endl;
         wallList = _map->walls;
-        std::cout<<spawnList.size()<<std::endl;
+        std::cout<<"num of Spawn: "<<spawnList.size()<<std::endl;
     }
 }
 /**

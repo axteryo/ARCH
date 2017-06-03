@@ -91,6 +91,8 @@ entity* EntitySpawner::spawnEntity(spawnPoint s,SpriteBatcher* b)
                     m.isRotating = false;
                     m.isAccelerating = false;
                     m.isBoosting = false;
+                    m.isBraking = false;
+                    m.inGridMode = false;
                     states->setMovementAttributeState(m);
 
                     p->setTopSpeed(m.velLimit);
@@ -208,8 +210,13 @@ entity* EntitySpawner::spawnEntity(spawnPoint s,SpriteBatcher* b)
                                 {
                                     aa = new RadiusAttackAction;
                                 }
+                                else if(dataRoot["actor"][i]["attackActions"][j]["type"].asString().compare("modeAttack")==0)
+                                {
+                                    aa = new GridModeAttack;
+                                }
                                 aData.name = actionDataRoot["attacks"][ii]["name"].asString();
                                 aData.attackType=actionDataRoot["attacks"][ii]["attackType"].asString();
+                                aData.attackRate=actionDataRoot["attacks"][ii]["attackRate"].asInt();
                                 aData.duration=actionDataRoot["attacks"][ii]["duration"].asInt();
                                 aData.coolDown=actionDataRoot["attacks"][ii]["cooldown"].asInt();
                                 aData.rotationRate=dataRoot["actor"][i]["attackActions"][j]["rotationRate"].asFloat();
@@ -218,6 +225,8 @@ entity* EntitySpawner::spawnEntity(spawnPoint s,SpriteBatcher* b)
                                 {
                                     aData.shape.push_back(actionDataRoot["attacks"][ii]["shape"][k].asFloat());
                                 }
+                                aData.relPosition.x = actionDataRoot["attacks"][ii]["relativePosition"][0].asFloat();
+                                aData.relPosition.y = actionDataRoot["attacks"][ii]["relativePosition"][1].asFloat();
 
                                 aData.damage= dataRoot["actor"][i]["attackActions"][j]["damage"].asInt();
                                 aData.force = dataRoot["actor"][i]["attackActions"][j]["force"].asFloat();

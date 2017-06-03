@@ -29,7 +29,9 @@ class GameController
         std::string playerBoostAction;
         std::string playerUseAttack1Action;
         std::string playerUseAttack2Action;
+        std::string playerUseAttack3Action;
         std::string playerBrakeAction;
+
         enum controllerTypeState
         {
             KEYBOARD_MOUSE,

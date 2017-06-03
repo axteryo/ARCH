@@ -59,10 +59,11 @@ void AIBasicInputComponent::processInput(ActorEntity* a)
         if(isAlert&&target!=nullptr)
         {
             aim = steerDirection(target->getPosition(),a->getPosition(),a->getRotation());
+            if(accelerate){ac->performAction("accelerate",a);}
         }
         if(aim.compare("left")==0){ac->performAction("rotateLeft",a);}
         if(aim.compare("right")==0){ac->performAction("rotateRight",a);}
-        if(accelerate){ac->performAction("accelerate",a);}
+
     }else{a->getPhysics()->getBody()->SetFixedRotation(false); a->getPhysics()->getBody()->SetAngularVelocity(4);}
 
 }
@@ -84,6 +85,9 @@ void AIBasicInputComponent::onNotifyEntityWithinRadius(entity* e)
         setTarget(e);
         setAggro();
     }
-
+}
+void AIBasicInputComponent::onNotifyBodyCollision(entity* e)
+{
 
 }
+

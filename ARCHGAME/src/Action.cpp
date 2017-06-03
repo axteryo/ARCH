@@ -18,3 +18,8 @@ bool Action::getActive()
 {
     return isActive;
 }
+
+void Action::cancel()
+{
+    elapsed = 0;
+}

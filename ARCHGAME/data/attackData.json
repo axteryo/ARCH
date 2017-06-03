@@ -2,6 +2,20 @@
 	"attacks":
 	[
 		{
+			"name":"gridModeAttack",
+			"attackType":"modeAttack",
+			"duration":1000,
+			"impactDuration":0,
+			"cooldown":100,
+			"shape": [   10, 0  ,  10, 5  ,  0, 5  , 0,0],
+			"impactType":"push",
+			"force": 0,
+			"fixtureType":"attackFixture",
+			"fixtureData":"grid_segment",
+			"isSensor":true,
+			"graphic":"grid_segment"
+		},
+		{
 			"name":"q1_beamAttack",
 			"attackType":"beamAttack",
 			"duration":100,
@@ -22,7 +36,7 @@
 			"impactDuration":30,
 			"cooldown":10,
 			"impactType":"push",
-			"shape": [   800, 0  ,  800, 100  ,  0, 100  , 0,0],
+			"shape": [   100, 0  ,  100, 100  ,  0, 100  , 0,0],
 			"fixtureType":"attackFixture",
 			"fixtureData":"beamAttack_1",
 			"isSensor":true,

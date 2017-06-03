@@ -14,6 +14,7 @@ class Action
         Action();
         virtual ~Action();
         virtual void execute(ActorEntity* a)=0;
+        virtual void cancel();
         virtual void update(ActorEntity* a)=0;
         //virtual std::string getName()= 0;
         bool getActive();

@@ -1,8 +1,6 @@
 #include "ActorEntity.h"
 
-
-
-
+std::stack<entity*> deathStack;
 
 ActorEntity::ActorEntity(std::string e_ID,GraphicsComponent* g,PhysicsComponent* p, InputComponent* i,StateComponent* s,ActionComponent* a)
 {
@@ -13,6 +11,7 @@ ActorEntity::ActorEntity(std::string e_ID,GraphicsComponent* g,PhysicsComponent*
     input_component = i;
     state_component = s;
     action_component = a;
+    deathFlag = 0;
 
 
     physics_component->getBody()->SetUserData((void*)this);
@@ -31,10 +30,7 @@ GraphicsComponent* ActorEntity::getGraphics()
 {
     return graphics_component;
 }
-PhysicsComponent* ActorEntity::getPhysics()
-{
-    return physics_component;
-}
+
 StateComponent* ActorEntity::getStates()
 {
     return state_component;
@@ -44,35 +40,9 @@ ActionComponent* ActorEntity::getActions()
     return action_component;
 }
 
-/****BASE ENTITY FUNCTIONS*****/
-void ActorEntity::setPosition(b2Vec2 p)
-{
-    physics_component->setPosition(p);
-}
-b2Vec2 ActorEntity::getPosition()
-{
-    return physics_component->getPosition();
-}
-void ActorEntity::setRotation(float a)
-{
-    physics_component->setRotation(a);
-}
-float ActorEntity::getRotation()
-{
-    return physics_component->getRotation();
-}
-
 float ActorEntity::getTopSpeed()
 {
     return physics_component->getTopSpeed();
-}
-std::string ActorEntity::getID()
-{
-    return entity_ID;
-}
-std::string ActorEntity::getType()
-{
-    return entityType;
 }
 
 /**UPDATE FUNCTION**/
@@ -123,14 +93,13 @@ bool  ActorEntity::isImpacted()
 {
     return state_component->getImpactAttributeState().isImpacted;
 }
-
-positionState ActorEntity::getCurrentState()
+bool ActorEntity::isBoosting()
 {
-    return physics_component->getCurrentState();
+    return state_component->getMovementAttributeState().isBoosting;
 }
-positionState ActorEntity::getPreviousState()
+bool ActorEntity::inGridMode()
 {
-    return physics_component->getPreviousState();
+    return state_component->getMovementAttributeState().inGridMode;
 }
 
 
@@ -142,6 +111,11 @@ void ActorEntity::notifyEntityWithinRadius(entity* e)
 {
     input_component->onNotifyEntityWithinRadius(e);
 }
+void ActorEntity::notifyBodyCollision(entity* e)
+{
+    input_component->onNotifyBodyCollision(e);
+}
+
 
 
 void ActorEntity::initiateCollision(entity* other, fixtureUserData* otherFData, fixtureUserData* selfFData)
@@ -158,6 +132,19 @@ void ActorEntity::initiateCollision(entity* other, fixtureUserData* otherFData, 
             if(selfFData->type.compare("sensorFixture")==0)
             {
                 notifyEntityWithinRadius(otherActor);
+
+            }
+            if(selfFData->type.compare("bodyFixture")==0)
+            {
+                if(isBoosting())
+                {
+                    action_component->cancelAction("boost");
+                }
+
+               if(inGridMode())
+                {
+                    action_component->cancelAction("modeAttack");
+                }
             }
         }
         else if(otherFData->type.compare("attackFixture")==0)
@@ -165,8 +152,39 @@ void ActorEntity::initiateCollision(entity* other, fixtureUserData* otherFData, 
             ///we were attacked
             if(selfFData->type.compare("bodyFixture")==0)
             {
+                if(isBoosting())
+                {
+                    action_component->cancelAction("boost");
+
+                }
+                if(inGridMode())
+                {
+                    action_component->cancelAction("modeAttack");
+                }
+
                 attackAttributeState otherAttackAttributes= otherActor->getAttackAttributeState();
                 applyAttackOnSelf(otherAttackAttributes);
+            }
+        }
+    }
+    else if(other->getType().compare("object")==0)
+    {
+         if(otherFData->type.compare("bodyFixture")==0)
+        {
+
+            if(selfFData->type.compare("bodyFixture")==0)
+            {
+
+                if(isBoosting())
+                {
+                    action_component->cancelAction("boost");
+                }
+
+               if(inGridMode())
+                {
+                    action_component->cancelAction("modeAttack");
+                }
+
             }
         }
     }

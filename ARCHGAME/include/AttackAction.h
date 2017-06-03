@@ -3,6 +3,7 @@
 
 #include <Action.h>
 #include "StateComponent.h"
+#include "ProjectileEntity.h"
 
 
 
@@ -15,6 +16,8 @@ struct attackData
     int coolDown;
     float rotationRate;
     std::vector<float> shape;
+    b2Vec2 relPosition;
+    int attackRate;
     int damage;
     float force;
     std::string impactType;
@@ -41,6 +44,8 @@ class AttackAction : public Action
         attackData data;
         attackAttributeState attackState;
         bool inCoolDown;
+        int rate;
+        std::vector<ProjectileEntity*> projectileList;
 
     private:
 

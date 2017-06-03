@@ -69,6 +69,12 @@ positionState State::lerpPositionState(positionState pre, positionState cur, flo
     return state;
 }
 
+float State::getDistance(b2Vec2 p1, b2Vec2 p2)
+{
+    float distance = ((p2.x-p1.x)*(p2.x-p1.x))+((p2.y-p1.y)*(p2.y-p1.y));
+    return sqrt(distance);
+}
+
 StateComponent::StateComponent()
 {
     status_attributeState.curHealth=0;
@@ -84,6 +90,8 @@ StateComponent::StateComponent()
     movement_attributeState.isAccelerating=false;
     movement_attributeState.isRotating=false;
     movement_attributeState.isBoosting=false;
+    movement_attributeState.isBraking=false;
+    movement_attributeState.inGridMode = false;
     movement_attributeState.rotationRate=0;
     movement_attributeState.velLimit=0;
 
