@@ -61,7 +61,7 @@ void BoostAction::update(ActorEntity* a)
 {
     elapsed-=1;
     movementAttributeState attributes = a->getMovementAttributeState();
-    std::cout<<"got here"<<std::endl;
+    //std::cout<<"got here"<<std::endl;
     if(inCoolDown)
     {
         if(elapsed<0)

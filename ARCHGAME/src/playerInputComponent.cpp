@@ -40,11 +40,11 @@ void playerInputComponent::processInput(ActorEntity* a)
 
     if(controller.isActionKeyPressed("useAttack1"))
     {
-        //ac->performAction("beamAttack",a);
+        ac->performAction("beamAttack",a);
     }
     if(controller.isActionKeyPressed("useAttack2"))
     {
-        //ac->performAction("radiusAttack",a);
+        ac->performAction("radiusAttack",a);
     }
     if(controller.isActionKeyPressed("useAttack3"))
     {

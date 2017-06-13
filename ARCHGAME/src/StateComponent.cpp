@@ -195,19 +195,19 @@ void StateComponent::update(ActorEntity* a)
 
         a->getPhysics()->accelerate(force);
         impact_attributeState.impactDuration--;
-        std::cout<< status_attributeState.curHealth<<std::endl;
+        //std::cout<< status_attributeState.curHealth<<std::endl;
         status_attributeState.curHealth-=impact_attributeState.impactDamage;
         impact_attributeState.impactDamage=0;
     }
     ///checks health status
-    if(status_attributeState.curHealth<=status_attributeState.minHealth)
+    if(status_attributeState.isAlive)
     {
-        status_attributeState.curHealth = 0;
-        status_attributeState.isAlive = false;
-    }
-    else
-    {
-        status_attributeState.isAlive =true;
+        if(status_attributeState.curHealth<=status_attributeState.minHealth)
+        {
+            status_attributeState.curHealth = 0;
+            a->raiseDeathFlag();
+            status_attributeState.isAlive = false;
+        }
     }
 
 

@@ -25,8 +25,7 @@ PhysicsComponent::PhysicsComponent(b2BodyType t)
 
 PhysicsComponent::~PhysicsComponent()
 {
-    world->DestroyBody(body);
-    //dtor
+   world->DestroyBody(body);
 }
 
 b2Fixture* PhysicsComponent::createFixtureRectangle(b2Vec2 dimensions,b2Vec2 position,fixtureUserData* fixtureData,bool isSensor)

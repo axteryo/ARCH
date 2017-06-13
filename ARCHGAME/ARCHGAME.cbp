@@ -34,6 +34,7 @@
 					<Add library="..\..\..\..\..\SFML\lib\libsfml-graphics.a" />
 					<Add library="..\..\..\..\..\SFML\lib\libsfml-window.a" />
 					<Add library="..\..\..\..\..\SFML\lib\libsfml-system.a" />
+					<Add library="..\..\..\..\..\SFML\lib\libsfml-audio.a" />
 					<Add directory="../../../../../Box2D_v2.3.1/Box2D" />
 					<Add directory="../../../../../SFML/lib" />
 					<Add directory="../../../../../SFML/bin" />
@@ -59,6 +60,7 @@
 		<Unit filename="include/ActionComponent.h" />
 		<Unit filename="include/ActorEntity.h" />
 		<Unit filename="include/AttackAction.h" />
+		<Unit filename="include/AudioSystem.h" />
 		<Unit filename="include/BeamAttackAction.h" />
 		<Unit filename="include/BoostAction.h" />
 		<Unit filename="include/BrakeAction.h" />
@@ -97,6 +99,8 @@
 		<Unit filename="src/ActionComponent.cpp" />
 		<Unit filename="src/ActorEntity.cpp" />
 		<Unit filename="src/AttackAction.cpp" />
+		<Unit filename="src/AudioSource.cpp" />
+		<Unit filename="src/AudioSystem.cpp" />
 		<Unit filename="src/BeamAttackAction.cpp" />
 		<Unit filename="src/BoostAction.cpp" />
 		<Unit filename="src/BrakeAction.cpp" />

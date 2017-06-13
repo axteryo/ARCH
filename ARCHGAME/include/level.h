@@ -14,26 +14,30 @@
 #include "ObjectEntity.h"
 #include "TriggerEntity.h"
 #include "CollisionSystem.h"
-#include "SequenceEntity.h"
+
+
 
 class EntitySpawner;
 class SpriteBatcher;
 class GameMap;
+class SequenceEntity;
 
 
 
 
 extern camera gameCamera;
 extern CollisionSystem* collisionSystem;
-
+extern EntitySpawner* spawner;
+extern SpriteBatcher* batcher;
+extern GameMap* _map;
 
 struct spawnPoint
-    {
-        std::string spawnID;
-        std::string entityType;
-        b2Vec2 location;
-        float rotation;
-    };
+{
+    std::string spawnID;
+    std::string entityType;
+    b2Vec2 location;
+    float rotation;
+};
 
 
 
@@ -63,11 +67,6 @@ class level// : public sf::Drawable, public sf::Transformable
         std::vector<TriggerEntity*> triggerList;
         std::vector<SequenceEntity*> sequenceList;
         std::vector<ObjectEntity*> wallList;
-
-
-        EntitySpawner* spawner;
-        SpriteBatcher* batcher;
-        GameMap* _map;
 
 
 

@@ -3,4 +3,6 @@ INTENDED EXPERIENCE
 In this game Movement is everything
 
 
-I want the player to control a robot and to utilize the robots movement and abilities to complete Tests that are presented to you by a sarcastically Antagonistic AI. Those tests can mean anything from having to weave through corridors or destroyin having to engage enemy robots
+I want the player to control a robot and to utilize the robots movement and abilities to complete Tests that are presented to you by a sarcastically Antagonistic AI. Those tests can mean anything from having to weave through corridors or having to engage enemy robots
+
+I want the player to laugh feel excited and want to play again.

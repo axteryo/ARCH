@@ -18,7 +18,7 @@ class EntitySpawner
         void loadEntityData();
         void loadActionData();
 
-        entity* spawnEntity(spawnPoint s,SpriteBatcher* b);
+        entity* spawnEntity(spawnPoint s);
 
     protected:
     private:

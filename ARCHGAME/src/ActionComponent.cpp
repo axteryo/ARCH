@@ -12,9 +12,11 @@ ActionComponent::~ActionComponent()
          for(int i = 0;i<actionList.size();i++)
         {
             delete actionList[i];
+            actionList[i] = nullptr;
         }
     }
     actionList.clear();
+
 
     //dtor
 }

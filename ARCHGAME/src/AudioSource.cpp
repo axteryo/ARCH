@@ -1,0 +1,79 @@
+#include "AudioSource.h"
+
+AudioSource::AudioSource(std::string srcID, int limit)
+{
+    audioID = srcID;
+    isActive = false;
+    int soundLimit = limit;
+}
+
+AudioSource::~AudioSource()
+{
+    //dtor
+}
+
+std::string AudioSource::getID()
+{
+    return audioID;
+}
+
+bool AudioSource::getActive()
+{
+    return isActive;
+}
+
+void AudioSource::load(std::string src)
+{
+    if(!buffer.loadFromFile(src))
+    {
+        std::cout<<"The sound source "<<src<<" could not be loaded"<<std::endl;
+    }
+}
+
+
+void AudioSource::play()
+{
+    if(soundStack.size()<soundLimit)
+    {
+        isActive = true;
+        sf::Sound sound;
+        sound.setBuffer(buffer);
+        soundStack.push(sound);
+        sound.play();
+    }
+}
+
+void AudioSource::update()
+{
+    if(!soundStack.empty())
+    {
+        switch(soundStack.top().getStatus())
+        {
+        case sf::Sound::Stopped:
+            soundStack.pop();
+            break;
+        }
+
+    }
+}
+void AudioSource::pause()
+{
+    int i = soundStack.size();
+    while(i>0)
+    {
+        i-=1;
+        soundStack.top().pause();
+        pauseList.push_back(soundStack.top());
+        soundStack.pop();
+    }
+}
+
+void AudioSource::unPause()
+{
+    for(int i = 0;i<pauseList.size();i++)
+    {
+        pauseList[i].play();
+        soundStack.push(pauseList[i]);
+    }
+    pauseList.clear();
+}

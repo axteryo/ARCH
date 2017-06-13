@@ -2,7 +2,8 @@
 #define TRIGGERENTITY_H
 
 #include <entity.h>
-#include "SequenceEntity.h"
+
+class SequenceEntity;
 
 
 class TriggerEntity : public entity
@@ -12,7 +13,7 @@ class TriggerEntity : public entity
         virtual ~TriggerEntity();
         void update();
         void initiateCollision(entity* other, fixtureUserData* otherFData, fixtureUserData* selfFData);
-        void initiateSequences();
+        void sequenceBegin();
         void addSequence(SequenceEntity* s);
     protected:
     private:

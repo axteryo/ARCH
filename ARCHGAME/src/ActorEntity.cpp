@@ -24,7 +24,6 @@ ActorEntity::~ActorEntity()
     delete input_component;
     delete action_component;
     delete state_component;
-    //dtor
 }
 GraphicsComponent* ActorEntity::getGraphics()
 {
@@ -48,14 +47,20 @@ float ActorEntity::getTopSpeed()
 /**UPDATE FUNCTION**/
 void ActorEntity::update()
 {
-    input_component->processInput(this);
-    action_component->update(this);
-    physics_component->update();
-    graphics_component->update(this);
-    state_component->update(this);
-
-    state_component->setPositionState(physics_component->getCurrentState());
-    state_component->setRenderState(graphics_component->getCurrentState());
+        state_component->update(this);
+        input_component->processInput(this);
+        action_component->update(this);
+        physics_component->update();
+        graphics_component->update(this);
+        state_component->setPositionState(physics_component->getCurrentState());
+        state_component->setRenderState(graphics_component->getCurrentState());
+        if(deathFlag>0)
+        {
+            deathStack.push(this);
+            physics_component->getBody()->SetActive(false);
+            //world->DestroyBody(physics_component->getBody());
+            //deathFlag = 0;
+        }
 }
 movementAttributeState ActorEntity::getMovementAttributeState()
 {
@@ -122,8 +127,10 @@ void ActorEntity::initiateCollision(entity* other, fixtureUserData* otherFData, 
 {
 
     ///Actor to Actor collision
-    if(other->getType().compare("actor")==0)
+    if(other!=nullptr)
     {
+        if(other->getType().compare("actor")==0)
+        {
         ActorEntity* otherActor = static_cast<ActorEntity*>(other);
         notifyEntityNearby(otherActor);
 
@@ -167,24 +174,25 @@ void ActorEntity::initiateCollision(entity* other, fixtureUserData* otherFData, 
             }
         }
     }
-    else if(other->getType().compare("object")==0)
-    {
-         if(otherFData->type.compare("bodyFixture")==0)
+        else if(other->getType().compare("object")==0)
         {
-
-            if(selfFData->type.compare("bodyFixture")==0)
+             if(otherFData->type.compare("bodyFixture")==0)
             {
 
-                if(isBoosting())
+                if(selfFData->type.compare("bodyFixture")==0)
                 {
-                    action_component->cancelAction("boost");
-                }
 
-               if(inGridMode())
-                {
-                    action_component->cancelAction("modeAttack");
-                }
+                    if(isBoosting())
+                    {
+                        action_component->cancelAction("boost");
+                    }
 
+                   if(inGridMode())
+                    {
+                        action_component->cancelAction("modeAttack");
+                    }
+
+                }
             }
         }
     }

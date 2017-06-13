@@ -2,15 +2,17 @@
 #include "EntitySpawner.h"
 #include "SpriteBatcher.h"
 #include "GameMap.h"
+#include "SequenceEntity.h"
 
 
-class EntitySpawner;
-class SpriteBatcher;
-class GameMap;
+
 
 
 camera gameCamera;
 CollisionSystem* collisionSystem = new CollisionSystem();
+EntitySpawner* spawner = new EntitySpawner();
+SpriteBatcher* batcher = new SpriteBatcher;
+GameMap* _map = new GameMap;
 
 
 
@@ -83,11 +85,40 @@ void level::load(std::string levelFile)
         {
             std::string sType = baseLevelRoot["sequences"][i]["type"].asString();
             std::string tTag = baseLevelRoot["sequences"][i]["trigger_tag"].asString();
+            std::string sTag = baseLevelRoot["sequences"][i]["name"].asString();
+            std::string preSequence = baseLevelRoot["sequences"][i]["contingentSequence"].asString();
+            SequenceEntity* seq = new SequenceEntity("entity_sequence",sTag,tTag,sType,preSequence);
+            if(sType.compare("combat_sequence")==0)
+            {
+                for(int k = 0;k<baseLevelRoot["sequences"][i]["waveList"].size();++k)
+                {
+
+                    spawnWave wave;
+                    wave.delay = baseLevelRoot["sequences"][i]["waveList"][k]["waveDelay"].asInt();
+                    std::vector<spawnPoint> spawn;
+                    for(int l = 0;l<baseLevelRoot["sequences"][i]["waveList"][k]["spawnList"].size();++l)
+                    {
+                        spawnPoint sp;
+                        sp.spawnID =baseLevelRoot["sequences"][i]["waveList"][k]["spawnList"][l]["entityID"].asString();
+                        sp.entityType =baseLevelRoot["sequences"][i]["waveList"][k]["spawnList"][l]["entityType"].asString();
+                        sp.location.x =baseLevelRoot["sequences"][i]["waveList"][k]["spawnList"][l]["x"].asFloat()/30;
+                        sp.location.y =baseLevelRoot["sequences"][i]["waveList"][k]["spawnList"][l]["y"].asFloat()/30;
+                        sp.rotation =baseLevelRoot["sequences"][i]["waveList"][k]["spawnList"][l]["rotation"].asFloat();
+                        spawn.push_back(sp);
+                    }
+                    wave.spawn = spawn;
+                    seq->addWave(wave);
+                }
+            }
+
+
             for(int m = 0; m <triggerList.size();++m)
             {
                 if(triggerList[m]->getTag().compare(tTag)==0)
                 {
-                    sequenceList.push_back(new SequenceEntity("entity_sequence","sequence"+m,tTag,sType));
+
+                    sequenceList.push_back(seq);
+                    triggerList[m]->addSequence(seq);
                 }
             }
         }
@@ -104,9 +135,7 @@ void level::initiate()
      _map->create();
      for(int i = 0; i<spawnList.size();++i)
     {
-        entityList.push_back(spawner->spawnEntity(spawnList[i],batcher));
-
-        //std::cout<<"failed here"<<std::endl;
+        entityList.push_back(spawner->spawnEntity(spawnList[i]));
         if(entityList[i]->getID().compare("entity_player")==0)
         {
             gameCamera.setTarget(entityList[i]);
@@ -118,15 +147,48 @@ void level::initiate()
 ///Updates game entities by a dt variable
 void level::update(float dt)
 {
+
+    for(int i = 0;i<triggerList.size();++i)
+    {
+
+        if(triggerList[i]!=nullptr)
+        {
+            triggerList[i]->update();
+            if(triggerList[i]->getDeathFlag()>0)
+            {
+                triggerList[i]=nullptr;
+            }
+        }
+    }
     if(!entityList.empty())
     {
         //std::cout<<"GOT HERE"<<std::endl;
         for(int i = 0; i<entityList.size();++i)
         {
-            entityList[i]->update();
+            if(entityList[i]!=nullptr)
+            {
+                entityList[i]->update();
+                if(entityList[i]->getDeathFlag()>0)
+                {
+                    entityList[i]=nullptr;
+                }
+
+            }
+
             //std::cout<<entityList[i]->getPosition().x/30<<","<<entityList[i]->getPosition().y<<std::endl;
         }
         gameCamera.update();
+    }
+    if(!sequenceList.empty())
+    {
+        for(int i = 0; i<sequenceList.size();++i)
+        {
+            if(sequenceList[i]->getIsActive())
+            {
+                sequenceList[i]->update();
+            }
+        }
+
     }
 
 }
@@ -138,8 +200,31 @@ void level::render(sf::RenderWindow* window,double alpha)
     {
         for(int i = 0; i<entityList.size();++i)
         {
-            batcher->addToBatch(entityList[i],alpha);
+            if(entityList[i]!=nullptr)
+            {
+
+                batcher->addToBatch(entityList[i],alpha);
+            }
         }
+    }
+    if(!sequenceList.empty())
+    {
+        for(int i = 0; i<sequenceList.size();++i)
+        {
+            //if(sequenceList[i]->getIsActive())
+            //{
+                for(int ii = 0; ii<sequenceList[i]->activeSpawn.size();++ii)
+                {
+                    if(sequenceList[i]->activeSpawn[ii]!=nullptr)
+                    {
+                        batcher->addToBatch(sequenceList[i]->activeSpawn[ii],alpha);
+                    }
+
+                }
+
+            //}
+        }
+
     }
 
     batcher->batchSprites();
@@ -164,7 +249,7 @@ void level::physicsUpdate(float dt, float a)
     while(progress<dt)
     {
         float step = std::min((dt-progress),maxStep);
-        world->Step(step,6,2);
+        world->Step(step,6,3);
         progress+=step;
     }
 

@@ -40,12 +40,14 @@ class CollisionSystem : public b2ContactListener
         void notifyCollisionEvent(collisionEventData* colData);
         bool checkObstaclesBetween(entity* A, entity* B);
         void resolveCollision();
-
         void applyAttackCollision(attackAttributeState a, ActorEntity* A);
+        //std::vector<b2Contact*> collisionEvents;
+
         void update();
     protected:
     private:
         std::queue<collisionEventData*> collisionEvents;
+//        std::queue<b2Contact*> collisionEvents;
 
 };
 

@@ -6,38 +6,142 @@
 	 "sequences":
 	 [
 	 	{
+	 		"name":"combat1",
+	 		"contingentSequence":"",
 	 		"type":"combat_sequence",
 	 		"trigger_tag":"zone1_trigger",
 	 		"waveList":
 	 		[
-		 		{
+		 		{	
+		 			"waveDelay":10,
 			 		"spawnList":
 			 		[
 
 			 			{
 			 				"entityID":"entity_d1",
 			 				"entityType":"actor",
-			 				"x":1664.00,
-			 				"y":1600.00,
-			 				"rotation":0
+			 				"x":1600.00,
+			 				"y":1536.00,
+			 				"rotation":3.141592
 			 			},
 			 			{
 			 				"entityID":"entity_d1",
 			 				"entityType":"actor",
-			 				"x":0,
-			 				"y":0,
-			 				"rotation":0
+			 				"x":1600.00,
+			 				"y":1664.00,
+			 				"rotation":3.14159
+			 			},
+			 			{
+			 				"entityID":"entity_d1",
+			 				"entityType":"actor",
+			 				"x":1600.00,
+			 				"y":1536.00,
+			 				"rotation":3.141592
+			 			},
+			 			{
+			 				"entityID":"entity_d1",
+			 				"entityType":"actor",
+			 				"x":1600.00,
+			 				"y":1536.00,
+			 				"rotation":3.141592
+			 			},
+			 			{
+			 				"entityID":"entity_d1",
+			 				"entityType":"actor",
+			 				"x":1600.00,
+			 				"y":1536.00,
+			 				"rotation":3.141592
+			 			},
+			 			{
+			 				"entityID":"entity_d1",
+			 				"entityType":"actor",
+			 				"x":1600.00,
+			 				"y":1536.00,
+			 				"rotation":3.141592
 			 			}
+
 			 		]//end of spawn list
+		 		},
+		 		{
+		 			"waveDelay":100,
+		 			"spawnList":
+		 			[
+		 				{
+			 				"entityID":"entity_j1",
+			 				"entityType":"actor",
+			 				"x":1600.00,
+			 				"y":1600.00,
+			 				"rotation":3.141592
+			 			},
+			 			{
+			 				"entityID":"entity_j1",
+			 				"entityType":"actor",
+			 				"x":1600.00,
+			 				"y":1600.00,
+			 				"rotation":3.141592
+			 			},
+			 			{
+			 				"entityID":"entity_j1",
+			 				"entityType":"actor",
+			 				"x":1600.00,
+			 				"y":1600.00,
+			 				"rotation":3.141592
+			 			},
+			 			{
+			 				"entityID":"entity_j1",
+			 				"entityType":"actor",
+			 				"x":1600.00,
+			 				"y":1600.00,
+			 				"rotation":3.141592
+			 			},
+			 			{
+			 				"entityID":"entity_j1",
+			 				"entityType":"actor",
+			 				"x":1600.00,
+			 				"y":1600.00,
+			 				"rotation":3.141592
+			 			},
+			 			{
+			 				"entityID":"entity_j1",
+			 				"entityType":"actor",
+			 				"x":1600.00,
+			 				"y":1600.00,
+			 				"rotation":3.141592
+			 			},
+			 			{
+			 				"entityID":"entity_j1",
+			 				"entityType":"actor",
+			 				"x":1600.00,
+			 				"y":1600.00,
+			 				"rotation":3.141592
+			 			},
+			 			{
+			 				"entityID":"entity_j1",
+			 				"entityType":"actor",
+			 				"x":1600.00,
+			 				"y":1600.00,
+			 				"rotation":3.141592
+			 			},
+			 			{
+			 				"entityID":"entity_j1",
+			 				"entityType":"actor",
+			 				"x":1600.00,
+			 				"y":1600.00,
+			 				"rotation":3.141592
+			 			}
+
+		 			]
 		 		}
 		 	]//end of wave list
 	 	},//end of first sequence
 	 	{
+	 		"name":"narrative1",
+	 		"contingentSequence":"combat1",
 	 		"type":"narrative_sequence",
 	 		"trigger_tag":"zone1_trigger",
 	 		"text":"This is a narrative sequence text"
 	 	}
 	 ]//end of sequence list
-		//}
-	//]
+		}
+	]
 }

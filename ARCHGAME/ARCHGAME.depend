@@ -3,13 +3,14 @@
 	<iostream>
 	"Game.h"
 
-1496519839 source:c:\users\mesh\documents\projectarch\archgame\src\level.cpp
+1496952489 source:c:\users\mesh\documents\projectarch\archgame\src\level.cpp
 	"level.h"
 	"EntitySpawner.h"
 	"SpriteBatcher.h"
 	"GameMap.h"
+	"SequenceEntity.h"
 
-1496519516 c:\users\mesh\documents\projectarch\archgame\include\level.h
+1496952466 c:\users\mesh\documents\projectarch\archgame\include\level.h
 	<SFML/Graphics.hpp>
 	<SFML/Window.hpp>
 	<Box2D/Box2D.h>
@@ -20,9 +21,9 @@
 	"ObjectEntity.h"
 	"TriggerEntity.h"
 	"CollisionSystem.h"
-	"SequenceEntity.h"
+	"AudioSystem.h"
 
-1496519265 source:c:\users\mesh\documents\projectarch\archgame\src\entity.cpp
+1496726627 source:c:\users\mesh\documents\projectarch\archgame\src\entity.cpp
 	"entity.h"
 	"PhysicsComponent.h"
 
@@ -411,14 +412,15 @@
 	<string>
 	<vector>
 
-1496515637 source:c:\users\mesh\documents\projectarch\archgame\src\game.cpp
+1496990426 source:c:\users\mesh\documents\projectarch\archgame\src\game.cpp
 	"Game.h"
 
-1496264009 c:\users\mesh\documents\projectarch\archgame\include\game.h
+1496950237 c:\users\mesh\documents\projectarch\archgame\include\game.h
 	<SFML/Graphics.hpp>
 	<Box2D/Box2D.h>
 	<SFML/Window.hpp>
 	<SFML/OpenGL.hpp>
+	<SFML/Audio.hpp>
 	<string>
 	<math.h>
 	<iostream>
@@ -662,7 +664,7 @@
 	<sstream>
 	"config.h"
 
-1496356869 source:c:\users\mesh\documents\projectarch\archgame\src\physicscomponent.cpp
+1496782130 source:c:\users\mesh\documents\projectarch\archgame\src\physicscomponent.cpp
 	"PhysicsComponent.h"
 
 1495145708 c:\users\mesh\documents\projectarch\archgame\include\physicscomponent.h
@@ -675,7 +677,7 @@
 1495339515 c:\users\mesh\documents\projectarch\archgame\include\graphicscomponent.h
 	"entity.h"
 
-1495656856 source:c:\users\mesh\documents\projectarch\archgame\src\spritebatcher.cpp
+1496877625 source:c:\users\mesh\documents\projectarch\archgame\src\spritebatcher.cpp
 	"SpriteBatcher.h"
 
 1495312290 c:\users\mesh\documents\projectarch\archgame\include\spritebatcher.h
@@ -697,13 +699,13 @@
 	"GraphicsComponent.h"
 	"PhysicsComponent.h"
 
-1494275320 c:\users\mesh\documents\projectarch\archgame\include\entityspawner.h
+1496547436 c:\users\mesh\documents\projectarch\archgame\include\entityspawner.h
 	"entity.h"
 	"ActorEntity.h"
 	"level.h"
 	"SpriteBatcher.h"
 
-1496353906 source:c:\users\mesh\documents\projectarch\archgame\src\entityspawner.cpp
+1496675001 source:c:\users\mesh\documents\projectarch\archgame\src\entityspawner.cpp
 	"EntitySpawner.h"
 
 1465673537 c:\users\mesh\documents\projectarch\archgame\include\json\json.h
@@ -752,7 +754,7 @@
 	<string>
 	<SFML/Window.hpp>
 
-1496514967 source:c:\users\mesh\documents\projectarch\archgame\src\playerinputcomponent.cpp
+1496674497 source:c:\users\mesh\documents\projectarch\archgame\src\playerinputcomponent.cpp
 	"playerInputComponent.h"
 
 1496350029 c:\users\mesh\documents\projectarch\archgame\include\playerinputcomponent.h
@@ -1202,7 +1204,7 @@
 	"playerInputComponent.h"
 	"AIBasicInputComponent.h"
 
-1496514969 source:c:\users\mesh\documents\projectarch\archgame\src\actorentity.cpp
+1496782116 source:c:\users\mesh\documents\projectarch\archgame\src\actorentity.cpp
 	"ActorEntity.h"
 
 1496508148 source:c:\users\mesh\documents\projectarch\archgame\src\objectentity.cpp
@@ -1259,7 +1261,7 @@
 	<InputComponent.h>
 	"ActionComponent.h"
 
-1496350948 source:c:\users\mesh\documents\projectarch\archgame\src\aibasicinputcomponent.cpp
+1496782196 source:c:\users\mesh\documents\projectarch\archgame\src\aibasicinputcomponent.cpp
 	"AIBasicInputComponent.h"
 
 1493916659 source:c:\users\mesh\documents\projectarch\archgame\src\gameevent.cpp
@@ -1272,7 +1274,7 @@
 
 1493924540 c:\users\mesh\documents\projectarch\archgame\include\statuscomponent.h
 
-1496353876 source:c:\users\mesh\documents\projectarch\archgame\src\statecomponent.cpp
+1496772781 source:c:\users\mesh\documents\projectarch\archgame\src\statecomponent.cpp
 	"StateComponent.h"
 	"ActorEntity.h"
 
@@ -1297,7 +1299,7 @@
 	"StateComponent.h"
 	"ProjectileEntity.h"
 
-1496205004 source:c:\users\mesh\documents\projectarch\archgame\src\beamattackaction.cpp
+1496675019 source:c:\users\mesh\documents\projectarch\archgame\src\beamattackaction.cpp
 	"BeamAttackAction.h"
 	"ActorEntity.h"
 
@@ -1305,7 +1307,7 @@
 	"PhysicsComponent.h"
 	<AttackAction.h>
 
-1496349006 source:c:\users\mesh\documents\projectarch\archgame\src\actioncomponent.cpp
+1496774216 source:c:\users\mesh\documents\projectarch\archgame\src\actioncomponent.cpp
 	"ActionComponent.h"
 
 1496348911 c:\users\mesh\documents\projectarch\archgame\include\actioncomponent.h
@@ -1326,10 +1328,10 @@
 1494285946 c:\users\mesh\documents\projectarch\archgame\include\movementaction.h
 	<Action.h>
 
-1496510306 source:c:\users\mesh\documents\projectarch\archgame\src\collisionsystem.cpp
+1496802889 source:c:\users\mesh\documents\projectarch\archgame\src\collisionsystem.cpp
 	"CollisionSystem.h"
 
-1494967164 c:\users\mesh\documents\projectarch\archgame\include\collisionsystem.h
+1496780889 c:\users\mesh\documents\projectarch\archgame\include\collisionsystem.h
 	<Box2D/Box2D.h>
 	<queue>
 	"entity.h"
@@ -1344,7 +1346,7 @@
 	"RadiusAttackAction.h"
 	"ActorEntity.h"
 
-1496515387 source:c:\users\mesh\documents\projectarch\archgame\src\boostaction.cpp
+1496877326 source:c:\users\mesh\documents\projectarch\archgame\src\boostaction.cpp
 	"BoostAction.h"
 	"ActorEntity.h"
 
@@ -1356,12 +1358,13 @@
 
 1495681889 c:\users\mesh\documents\projectarch\archgame\include\sequence.h
 
-1496517842 c:\users\mesh\documents\projectarch\archgame\include\triggerentity.h
+1496546972 c:\users\mesh\documents\projectarch\archgame\include\triggerentity.h
 	<entity.h>
 
-1496508157 source:c:\users\mesh\documents\projectarch\archgame\src\triggerentity.cpp
+1496782121 source:c:\users\mesh\documents\projectarch\archgame\src\triggerentity.cpp
 	"TriggerEntity.h"
 	"PhysicsComponent.h"
+	"SequenceEntity.h"
 
 1496508138 source:c:\users\mesh\documents\projectarch\archgame\src\projectileentity.cpp
 	"ProjectileEntity.h"
@@ -1377,9 +1380,132 @@
 1496510497 source:c:\users\mesh\documents\projectarch\archgame\src\gridmodeattack.cpp
 	"GridModeAttack.h"
 
-1496518656 source:c:\users\mesh\documents\projectarch\archgame\src\sequenceentity.cpp
+1496802563 source:c:\users\mesh\documents\projectarch\archgame\src\sequenceentity.cpp
 	"SequenceEntity.h"
 
-1496518398 c:\users\mesh\documents\projectarch\archgame\include\sequenceentity.h
+1496802363 c:\users\mesh\documents\projectarch\archgame\include\sequenceentity.h
 	<entity.h>
+	<queue>
+	"level.h"
+	"EntitySpawner.h"
+
+1491238538 c:\sfml\include\sfml\audio.hpp
+	<SFML/System.hpp>
+	<SFML/Audio/InputSoundFile.hpp>
+	<SFML/Audio/Listener.hpp>
+	<SFML/Audio/Music.hpp>
+	<SFML/Audio/OutputSoundFile.hpp>
+	<SFML/Audio/Sound.hpp>
+	<SFML/Audio/SoundBuffer.hpp>
+	<SFML/Audio/SoundBufferRecorder.hpp>
+	<SFML/Audio/SoundFileFactory.hpp>
+	<SFML/Audio/SoundFileReader.hpp>
+	<SFML/Audio/SoundFileWriter.hpp>
+	<SFML/Audio/SoundRecorder.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<SFML/Audio/SoundStream.hpp>
+
+1491238538 c:\sfml\include\sfml\audio\inputsoundfile.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<SFML/System/Time.hpp>
+	<string>
+	<algorithm>
+
+1491238538 c:\sfml\include\sfml\audio\export.hpp
+	<SFML/Config.hpp>
+
+1491238538 c:\sfml\include\sfml\audio\listener.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/System/Vector3.hpp>
+
+1491238538 c:\sfml\include\sfml\audio\music.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundStream.hpp>
+	<SFML/Audio/InputSoundFile.hpp>
+	<SFML/System/Mutex.hpp>
+	<SFML/System/Time.hpp>
+	<string>
+	<vector>
+
+1491238538 c:\sfml\include\sfml\audio\soundstream.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<SFML/System/Thread.hpp>
+	<SFML/System/Time.hpp>
+	<SFML/System/Mutex.hpp>
+	<cstdlib>
+
+1491238538 c:\sfml\include\sfml\audio\soundsource.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/AlResource.hpp>
+	<SFML/System/Vector3.hpp>
+
+1491238538 c:\sfml\include\sfml\audio\alresource.hpp
+	<SFML/Audio/Export.hpp>
+
+1491238538 c:\sfml\include\sfml\audio\outputsoundfile.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<string>
+
+1491238538 c:\sfml\include\sfml\audio\sound.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<SFML/System/Time.hpp>
+	<cstdlib>
+
+1491238538 c:\sfml\include\sfml\audio\soundbuffer.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/AlResource.hpp>
+	<SFML/System/Time.hpp>
+	<string>
+	<vector>
+	<set>
+
+1491238538 c:\sfml\include\sfml\audio\soundbufferrecorder.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundBuffer.hpp>
+	<SFML/Audio/SoundRecorder.hpp>
+	<vector>
+
+1491238538 c:\sfml\include\sfml\audio\soundrecorder.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/AlResource.hpp>
+	<SFML/System/Thread.hpp>
+	<SFML/System/Time.hpp>
+	<vector>
+	<string>
+
+1491238538 c:\sfml\include\sfml\audio\soundfilefactory.hpp
+	<SFML/Audio/Export.hpp>
+	<string>
+	<vector>
+	<SFML/Audio/SoundFileFactory.inl>
+
+1491238538 c:\sfml\include\sfml\audio\soundfilefactory.inl
+
+1491238538 c:\sfml\include\sfml\audio\soundfilereader.hpp
+	<SFML/Audio/Export.hpp>
+	<string>
+
+1491238538 c:\sfml\include\sfml\audio\soundfilewriter.hpp
+	<SFML/Audio/Export.hpp>
+	<string>
+
+1497211594 source:c:\users\mesh\documents\projectarch\archgame\src\audiosystem.cpp
+	"AudioSystem.h"
+
+1497374545 c:\users\mesh\documents\projectarch\archgame\include\audiosystem.h
+	<SFML/Audio.hpp>
+	"AudioSource.h"
+
+1497374387 c:\users\mesh\documents\projectarch\archgame\include\audiosource.h
+	<stack>
+	<SFML/Audio.hpp>
+	<iostream>
+	<string>
+
+1497374497 source:c:\users\mesh\documents\projectarch\archgame\src\audiosource.cpp
+	"AudioSource.h"
 

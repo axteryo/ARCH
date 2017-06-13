@@ -1,6 +1,7 @@
 #include "Game.h"
 
 GameController controller;
+AudioSystem* audioSystem = new AudioSystem();
 
 
 
@@ -23,7 +24,6 @@ Game::Game()
     positionIterations = 2;
     isVsynced = true;
     window->setVerticalSyncEnabled(isVsynced);
-
 }
 
 void Game::start()
@@ -51,13 +51,14 @@ void Game::start()
 
     while(window->isOpen())
     {
+
         ///Process user input
         processInput();
 
         /// The clock goes forward so we store the current time in newTime
         ///Then we get how much has elapsed bu subtracting the lastTime
         newTime = clock.getElapsedTime().asSeconds();
-        elapsed = newTime-lastTime;
+        elapsed =clock.restart().asSeconds(); //newTime-lastTime;
 
         lastTime = newTime;
         accumulator +=elapsed;
@@ -67,18 +68,18 @@ void Game::start()
       ///update logic at a fixed rate of 60
         if(isVsynced)
         {
-
+            int a = 0;
             while(accumulator<dt)
             {
-                //std::cout<<"LEFTOVER TIME:"
-                //<<accumulator<<std::endl;
-                //std::cout<<"Elapsed time:"<<1/elapsed<<std::endl;
 
-                accumulator+=(dt/60);
+                //std::cout<<"Elapsed time:"<<1/elapsed<<std::endl;
+                accumulator+=(dt/80);
                 //std::cout<<"we are here"<<std::endl;
                 //std::cout<<"LEFTOVER TIME:"
                 //<<accumulator<<std::endl;
+                //a++;
             }
+            //std::cout<<a<<std::endl;
 
 
         }
@@ -89,21 +90,17 @@ void Game::start()
             gameLevel.physicsUpdate(dt,accumulator);
             collisionSystem->update();
             update(dt);
-        }
-        for(int i = 0; i<deathStack.size();i++)
-        {
 
-            if(deathStack.top()!=nullptr)
-            {
-                //entity* e = deathStack.top();
+        }
+           int i = deathStack.size();
+           while(i>=1)
+           {
+                std::cout<<deathStack.top()->getID()<<" has been deleted"<<std::endl;
                 delete deathStack.top();
-            }
-
-            deathStack.pop();
-        }
-
+                deathStack.pop();
+                i--;
+           }
         alpha = (accumulator/dt);
-
         ///render freely
         render(alpha);
         if (!gameRunning)

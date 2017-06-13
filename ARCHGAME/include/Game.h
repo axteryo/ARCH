@@ -5,6 +5,7 @@
 #include <Box2D/Box2D.h>
 #include <SFML/Window.hpp>
 #include <SFML/OpenGL.hpp>
+#include <SFML/Audio.hpp>
 
 #include <string>
 #include <math.h>
@@ -14,8 +15,10 @@
 #include "level.h"
 #include "GameController.h"
 #include "camera.h"
+#include "AudioSystem.h"
 
 
+extern AudioSystem* audioSystem;
 
 class Game
 {
@@ -42,12 +45,12 @@ class Game
         sf::View tempView;
 
         sf::Time currentTime;
-        float flPreviousTime;
+        double flPreviousTime;
         double dt;
 
         /**Box2d Variables**/
 
-        float32 timeStep;
+        double timeStep;
         int32 velocityIterations;
         int32 positionIterations;
         bool isVsynced;
@@ -58,8 +61,6 @@ class Game
         void processInput();
         void update(float dt);
         void render(double alpha);
-
-
 
         level gameLevel;
         //GameController controller;

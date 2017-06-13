@@ -11,28 +11,30 @@ CollisionSystem::~CollisionSystem()
 }
 void CollisionSystem::notifyCollisionEvent(collisionEventData* colData)
 {
-    collisionEvents.push(colData);
+    //collisionEvents.push(colData);
 }
 void CollisionSystem::BeginContact(b2Contact* contact)
 {
+
     entity* A;
     entity* B;
     fixtureUserData* dataA;
     fixtureUserData* dataB;
+
     A = static_cast<entity*>(contact->GetFixtureA()->GetBody()->GetUserData());
     B = static_cast<entity*>(contact->GetFixtureB()->GetBody()->GetUserData());
+
     dataA = static_cast<fixtureUserData*>(contact->GetFixtureA()->GetUserData());
     dataB = static_cast<fixtureUserData*>(contact->GetFixtureB()->GetUserData());
 
-    if(A&&B&&dataA&&dataB)
-    {
-        collisionEventData* c = new collisionEventData(A,B,dataA,dataB,"COLLISION_INITIAL");
-        collisionEvents.push(c);
-    }
+
+    collisionEventData* c = new collisionEventData(A,B,dataA,dataB,"COLLISION_INITIAL");
+    collisionEvents.push(c);
+
 }
 void CollisionSystem::EndContact(b2Contact* contact)
 {
-    entity* A;
+    /*entity* A;
     entity* B;
     fixtureUserData* dataA;
     fixtureUserData* dataB;
@@ -44,7 +46,7 @@ void CollisionSystem::EndContact(b2Contact* contact)
     {
         collisionEventData* c = new collisionEventData(A,B,dataA,dataB,"COLLISION_END");
         notifyCollisionEvent(c);
-    }
+    }*/
 }
 void CollisionSystem::resolveCollision()
 {/*
@@ -108,20 +110,20 @@ void CollisionSystem::resolveCollision()
 }
 void CollisionSystem::update()
 {
-    for(int i = 0;i<collisionEvents.size();i++)
+
+    int i = collisionEvents.size();
+    while(i>=1)
     {
         collisionEventData* colData = collisionEvents.front();
         if(colData->collisionType.compare("COLLISION_INITIAL")==0)
         {
-            if(colData->entityA!=nullptr && colData->entityB!=nullptr)
-            {
-                colData->entityA->initiateCollision(colData->entityB,colData->B_Data,colData->A_Data);
-                colData->entityB->initiateCollision(colData->entityA,colData->A_Data,colData->B_Data);
-            }
-
+            colData->entityA->initiateCollision(colData->entityB,colData->B_Data,colData->A_Data);
+            colData->entityB->initiateCollision(colData->entityA,colData->A_Data,colData->B_Data);
         }
+
         delete colData;
         collisionEvents.pop();
+        i--;
     }
 }
 

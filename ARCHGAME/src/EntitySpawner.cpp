@@ -48,7 +48,7 @@ void EntitySpawner::loadActionData()
 }
 
 
-entity* EntitySpawner::spawnEntity(spawnPoint s,SpriteBatcher* b)
+entity* EntitySpawner::spawnEntity(spawnPoint s)
 {
     if(s.spawnID.empty())
     {
@@ -110,12 +110,12 @@ entity* EntitySpawner::spawnEntity(spawnPoint s,SpriteBatcher* b)
                     std::string shape = dataRoot["actor"][i]["shape"].asString();
 
                     ///Setup graphics Component
-                    b->setFrameTexture(g,dataRoot["actor"][i]["texture"].asString());
+                    batcher->setFrameTexture(g,dataRoot["actor"][i]["texture"].asString());
 
                     ///Setup Animations
                     for(int j = 0; j< dataRoot["actor"][i]["animations"].size();j++)
                     {
-                        Animation anim = b->setAnimation(dataRoot["actor"][i]["animations"][j]["name"].asString());
+                        Animation anim = batcher->setAnimation(dataRoot["actor"][i]["animations"][j]["name"].asString());
                         anim.tag = dataRoot["actor"][i]["animations"][j]["tag"].asString();
 
                         anim.currentFrame = 0;
@@ -225,8 +225,8 @@ entity* EntitySpawner::spawnEntity(spawnPoint s,SpriteBatcher* b)
                                 {
                                     aData.shape.push_back(actionDataRoot["attacks"][ii]["shape"][k].asFloat());
                                 }
-                                aData.relPosition.x = actionDataRoot["attacks"][ii]["relativePosition"][0].asFloat();
-                                aData.relPosition.y = actionDataRoot["attacks"][ii]["relativePosition"][1].asFloat();
+                                aData.relPosition.x = dataRoot["actor"][i]["attackActions"][j]["relativePosition"][0].asFloat();
+                                aData.relPosition.y = dataRoot["actor"][i]["attackActions"][j]["relativePosition"][1].asFloat();
 
                                 aData.damage= dataRoot["actor"][i]["attackActions"][j]["damage"].asInt();
                                 aData.force = dataRoot["actor"][i]["attackActions"][j]["force"].asFloat();
