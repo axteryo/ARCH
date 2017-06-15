@@ -14,6 +14,7 @@
 #include "ObjectEntity.h"
 #include "TriggerEntity.h"
 #include "CollisionSystem.h"
+#include "AudioSystem.h"
 
 
 
@@ -30,6 +31,7 @@ extern CollisionSystem* collisionSystem;
 extern EntitySpawner* spawner;
 extern SpriteBatcher* batcher;
 extern GameMap* _map;
+extern AudioSystem* audioSystem;
 
 struct spawnPoint
 {
@@ -77,6 +79,8 @@ class level// : public sf::Drawable, public sf::Transformable
         Json::Value baseLevelRoot;
         Json::Reader levelReader;
         std::ifstream currentLevelFile;
+
+        std::string backGroundMusic;
 };
 
 #endif // LEVEL_H

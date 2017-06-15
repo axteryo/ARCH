@@ -2,6 +2,9 @@
 #define AUDIOSYSTEM_H
 #include <SFML/Audio.hpp>
 #include "AudioSource.h"
+#include <iostream>
+#include <fstream>
+#include "json/json.h"
 
 
 class AudioSystem
@@ -12,14 +15,21 @@ class AudioSystem
         void loadAudio();
         void update();
         void playAudio(std::string srcID);
+        void setBackGroundMusic(std::string src);
     protected:
     private:
 
-         sf::Music musicChannel1;
-         sf::Music musicChannel2;
-         sf::music musicChannel3;
+        ///Channels for longer sounds/music. Narration will always have priority over other sounds
+         sf::Music musicChannel;
          sf::Music narrationChannel;
-         std::vector<AudioSource*> audio;
+         std::vector<AudioSource*> audioList;
+
+         int narrationVolume;
+         int sfxVolume;
+         int musicVolume;
+
+         bool isNarrationActive;
+
 };
 
 #endif // AUDIOSYSTEM_H

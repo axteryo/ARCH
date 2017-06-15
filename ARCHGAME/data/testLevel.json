@@ -2,6 +2,7 @@
 	//"maps":
 	//[
 		//{
+	"backGroundMusic":"assets/Audio/Music/enchantmentinstumental_sonartuning.ogg",
 	"map":"testChamber1.json",
 	 "sequences":
 	 [

@@ -1,7 +1,7 @@
 #include "Game.h"
 
 GameController controller;
-AudioSystem* audioSystem = new AudioSystem();
+
 
 
 
@@ -13,6 +13,7 @@ Game::Game()
     tempView.zoom(1.25);
     gameCamera.setCoords(sf::Vector2i(90,600),sf::Vector2f(1024,768));
     world->SetContactListener(collisionSystem);
+    audioSystem->loadAudio();
 
 
     gameRunning = true;
@@ -48,9 +49,10 @@ void Game::start()
     gameLevel.setup();
     gameLevel.load("data/testLevel.json");
     gameLevel.initiate();
-
+    audioSystem->playAudio("metalClang1");
     while(window->isOpen())
     {
+
 
         ///Process user input
         processInput();
@@ -90,8 +92,9 @@ void Game::start()
             gameLevel.physicsUpdate(dt,accumulator);
             collisionSystem->update();
             update(dt);
-
         }
+        audioSystem->update();
+
            int i = deathStack.size();
            while(i>=1)
            {

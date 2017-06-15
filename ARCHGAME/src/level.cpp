@@ -13,6 +13,7 @@ CollisionSystem* collisionSystem = new CollisionSystem();
 EntitySpawner* spawner = new EntitySpawner();
 SpriteBatcher* batcher = new SpriteBatcher;
 GameMap* _map = new GameMap;
+AudioSystem* audioSystem = new AudioSystem();
 
 
 
@@ -23,6 +24,7 @@ level::level()
     batcher = new SpriteBatcher;
     _map = new GameMap;
     entityList= {};
+    backGroundMusic = "";
 }
 
 level::~level()
@@ -78,6 +80,7 @@ void level::load(std::string levelFile)
     else
     {
          std::cout<<"Level file has been parsed"<< std::endl;
+         backGroundMusic = baseLevelRoot["backGroundMusic"].asString();
         _map->loadFile("data/"+ baseLevelRoot["map"].asString());
         spawnList = _map->getSpawnSpoints();
         triggerList = _map->getTriggers();
@@ -133,7 +136,7 @@ This function implements the level
 void level::initiate()
 {
      _map->create();
-     for(int i = 0; i<spawnList.size();++i)
+    for(int i = 0; i<spawnList.size();++i)
     {
         entityList.push_back(spawner->spawnEntity(spawnList[i]));
         if(entityList[i]->getID().compare("entity_player")==0)
@@ -141,6 +144,7 @@ void level::initiate()
             gameCamera.setTarget(entityList[i]);
         }
     }
+    audioSystem->setBackGroundMusic(backGroundMusic);
 }
 
 

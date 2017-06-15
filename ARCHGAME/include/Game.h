@@ -15,10 +15,6 @@
 #include "level.h"
 #include "GameController.h"
 #include "camera.h"
-#include "AudioSystem.h"
-
-
-extern AudioSystem* audioSystem;
 
 class Game
 {

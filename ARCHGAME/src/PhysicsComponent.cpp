@@ -21,6 +21,7 @@ PhysicsComponent::PhysicsComponent(b2BodyType t)
 
     topSpeed = 0;
     rotationAmount = 0;
+    body->SetActive(false);
 }
 
 PhysicsComponent::~PhysicsComponent()
@@ -87,6 +88,10 @@ b2Fixture* PhysicsComponent::createFixturePolygon(std::vector<float> shape,b2Vec
 
 void PhysicsComponent::update()
 {
+    if(!body->IsActive())
+    {
+        body->SetActive(true);
+    }
 
     previousState = currentState;
 

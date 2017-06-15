@@ -60,6 +60,7 @@
 		<Unit filename="include/ActionComponent.h" />
 		<Unit filename="include/ActorEntity.h" />
 		<Unit filename="include/AttackAction.h" />
+		<Unit filename="include/AudioSource.h" />
 		<Unit filename="include/AudioSystem.h" />
 		<Unit filename="include/BeamAttackAction.h" />
 		<Unit filename="include/BoostAction.h" />

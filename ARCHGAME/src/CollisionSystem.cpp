@@ -120,7 +120,6 @@ void CollisionSystem::update()
             colData->entityA->initiateCollision(colData->entityB,colData->B_Data,colData->A_Data);
             colData->entityB->initiateCollision(colData->entityA,colData->A_Data,colData->B_Data);
         }
-
         delete colData;
         collisionEvents.pop();
         i--;

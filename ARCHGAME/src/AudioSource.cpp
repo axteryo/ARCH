@@ -4,6 +4,7 @@ AudioSource::AudioSource(std::string srcID, int limit)
 {
     audioID = srcID;
     isActive = false;
+    volume = 20;
     int soundLimit = limit;
 }
 
@@ -28,6 +29,7 @@ void AudioSource::load(std::string src)
     {
         std::cout<<"The sound source "<<src<<" could not be loaded"<<std::endl;
     }
+
 }
 
 
@@ -38,8 +40,9 @@ void AudioSource::play()
         isActive = true;
         sf::Sound sound;
         sound.setBuffer(buffer);
+        sound.setVolume(volume);
         soundStack.push(sound);
-        sound.play();
+        soundStack.top().play();
     }
 }
 
@@ -54,6 +57,10 @@ void AudioSource::update()
             break;
         }
 
+    }
+    else
+    {
+        isActive = false;
     }
 }
 void AudioSource::pause()

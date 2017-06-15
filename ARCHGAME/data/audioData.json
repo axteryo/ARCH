@@ -1,0 +1,10 @@
+{
+	"sfx":
+	[
+		{
+			"id":"metalClang1",
+			"countLimit":3,
+			"source":"assets/Audio/Sfx/metalClang.ogg"
+		}
+	]
+}

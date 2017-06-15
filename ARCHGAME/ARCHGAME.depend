@@ -3,14 +3,14 @@
 	<iostream>
 	"Game.h"
 
-1496952489 source:c:\users\mesh\documents\projectarch\archgame\src\level.cpp
+1497563330 source:c:\users\mesh\documents\projectarch\archgame\src\level.cpp
 	"level.h"
 	"EntitySpawner.h"
 	"SpriteBatcher.h"
 	"GameMap.h"
 	"SequenceEntity.h"
 
-1496952466 c:\users\mesh\documents\projectarch\archgame\include\level.h
+1497563349 c:\users\mesh\documents\projectarch\archgame\include\level.h
 	<SFML/Graphics.hpp>
 	<SFML/Window.hpp>
 	<Box2D/Box2D.h>
@@ -412,10 +412,10 @@
 	<string>
 	<vector>
 
-1496990426 source:c:\users\mesh\documents\projectarch\archgame\src\game.cpp
+1497566740 source:c:\users\mesh\documents\projectarch\archgame\src\game.cpp
 	"Game.h"
 
-1496950237 c:\users\mesh\documents\projectarch\archgame\include\game.h
+1497563352 c:\users\mesh\documents\projectarch\archgame\include\game.h
 	<SFML/Graphics.hpp>
 	<Box2D/Box2D.h>
 	<SFML/Window.hpp>
@@ -664,7 +664,7 @@
 	<sstream>
 	"config.h"
 
-1496782130 source:c:\users\mesh\documents\projectarch\archgame\src\physicscomponent.cpp
+1497563562 source:c:\users\mesh\documents\projectarch\archgame\src\physicscomponent.cpp
 	"PhysicsComponent.h"
 
 1495145708 c:\users\mesh\documents\projectarch\archgame\include\physicscomponent.h
@@ -1328,7 +1328,7 @@
 1494285946 c:\users\mesh\documents\projectarch\archgame\include\movementaction.h
 	<Action.h>
 
-1496802889 source:c:\users\mesh\documents\projectarch\archgame\src\collisionsystem.cpp
+1497566588 source:c:\users\mesh\documents\projectarch\archgame\src\collisionsystem.cpp
 	"CollisionSystem.h"
 
 1496780889 c:\users\mesh\documents\projectarch\archgame\include\collisionsystem.h
@@ -1493,19 +1493,22 @@
 	<SFML/Audio/Export.hpp>
 	<string>
 
-1497211594 source:c:\users\mesh\documents\projectarch\archgame\src\audiosystem.cpp
+1497566207 source:c:\users\mesh\documents\projectarch\archgame\src\audiosystem.cpp
 	"AudioSystem.h"
 
-1497374545 c:\users\mesh\documents\projectarch\archgame\include\audiosystem.h
+1497562450 c:\users\mesh\documents\projectarch\archgame\include\audiosystem.h
 	<SFML/Audio.hpp>
 	"AudioSource.h"
+	<iostream>
+	<fstream>
+	"json/json.h"
 
-1497374387 c:\users\mesh\documents\projectarch\archgame\include\audiosource.h
+1497560851 c:\users\mesh\documents\projectarch\archgame\include\audiosource.h
 	<stack>
 	<SFML/Audio.hpp>
 	<iostream>
 	<string>
 
-1497374497 source:c:\users\mesh\documents\projectarch\archgame\src\audiosource.cpp
+1497566442 source:c:\users\mesh\documents\projectarch\archgame\src\audiosource.cpp
 	"AudioSource.h"
 
