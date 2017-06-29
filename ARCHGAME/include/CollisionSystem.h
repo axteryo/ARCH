@@ -7,6 +7,8 @@
 #include "ObjectEntity.h"
 #include "ActorEntity.h"
 #include "PhysicsComponent.h"
+#include "GameEvent_Collision.h"
+#include "GameEventListener.h"
 
 struct collisionEventData
 {
@@ -32,7 +34,7 @@ struct collisionEventData
 class CollisionSystem : public b2ContactListener
 {
     public:
-        CollisionSystem();
+        CollisionSystem(GameEventListener* e);
         virtual ~CollisionSystem();
         void BeginContact(b2Contact* contact);
         void EndContact(b2Contact* contact);
@@ -47,6 +49,8 @@ class CollisionSystem : public b2ContactListener
     protected:
     private:
         std::queue<collisionEventData*> collisionEvents;
+
+        GameEventListener* _eventListener;
 //        std::queue<b2Contact*> collisionEvents;
 
 };

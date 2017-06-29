@@ -3,7 +3,8 @@
 	[
 		{
 			"id":"metalClang1",
-			"countLimit":3,
+			"volume":0.8,
+			"countLimit":5,
 			"source":"assets/Audio/Sfx/metalClang.ogg"
 		}
 	]

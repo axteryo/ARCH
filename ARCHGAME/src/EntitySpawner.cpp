@@ -1,4 +1,5 @@
 #include "EntitySpawner.h"
+#include "level.h"
 
 EntitySpawner::EntitySpawner()
 {
@@ -245,7 +246,7 @@ entity* EntitySpawner::spawnEntity(spawnPoint s)
                         ac->addAction(aa);
                     }
                     ///Create Actor
-                    a = new ActorEntity(s.spawnID,g,p,ic,states,ac);
+                    a = new ActorEntity(s.spawnID,g,p,ic,states,ac,new GameEventListener());
                     a->setPosition(s.location);
                     a->setRotation(s.rotation);
 

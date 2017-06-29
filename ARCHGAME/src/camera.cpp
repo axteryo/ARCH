@@ -12,13 +12,32 @@ void camera::setCoords(sf::Vector2i focal, sf::Vector2f viewSize)
     v2f_dimensions = sf::Vector2f(viewSize.x/2,viewSize.y/2);
     camView = sf::View(sf::Vector2f(v2i_focalPoint.x,v2i_focalPoint.y),viewSize);
     camView.zoom(1.45);
+    camBoundary.setSize(sf::Vector2f(camView.getSize().x+50,camView.getSize().y+50));
+    camBoundary.setOrigin(camBoundary.getSize().x/2,camBoundary.getSize().y/2);
+
+    camBoundary.setOutlineColor(sf::Color::Magenta);
+    camBoundary.setFillColor(sf::Color::Transparent);
+    camBoundary.setOutlineThickness(10);
     //1.25
     //1.45
     //1.65
 }
 
+bool camera::withinView(sf::Vector2f point)
+{
+    if(camBoundary.getGlobalBounds().contains(point.x,point.y))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 void camera::update()
 {
+    camBoundary.setPosition(camView.getCenter());
     sf::Vector2f point = sf::Vector2f(0,0);
     if(target)
     {

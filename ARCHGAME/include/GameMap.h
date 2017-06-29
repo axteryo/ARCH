@@ -5,12 +5,13 @@
 #include <SFML/Graphics.hpp>
 
 #include <iostream>
-#include <fstream>
-#include "json/json.h"
+
 
 #include "batch.h"
 #include "level.h"
 #include "ObjectEntity.h"
+#include "JsonHandler.h"
+#include "GraphicsComponent.h"
 
 
 
@@ -35,15 +36,19 @@ class GameMap// : public sf::Drawable, public sf::Transformable
         std::vector<ObjectEntity*> walls;
         std::vector<TriggerEntity*> triggers;
         std::vector<spawnPoint> spawnData;
+        std::vector<BatchQuad> mapQuads;
+        sf::Texture mapTexture;
+        sf::Image mapImage;
 
     protected:
     private:
 
+        JsonHandler jsonHandler;
+
         Json::Value baseMapRoot;
-        Json::Reader mapReader;
-        std::ifstream currentMapFile;
-        sf::Image mapImage;
-        sf::Texture mapTexture;
+
+
+
         sf::Vector2f v2f_mapDimensions;
         sf::Vector2f v2f_tileDimensions;
         sf::Vector2f v2f_textureSheetDimensions;
@@ -52,11 +57,6 @@ class GameMap// : public sf::Drawable, public sf::Transformable
 
 
         std::vector<std::vector<int>> layerData;
-
-
-
-
-
 
 };
 

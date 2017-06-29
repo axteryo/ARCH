@@ -3,11 +3,13 @@
 
 #include "entity.h"
 #include "GraphicsComponent.h"
-//#include "PhysicsComponent.h"
+#include "PhysicsComponent.h"
+#include "AttackAction.h"
 //#include "StateComponent.h"
 //#include "ActionComponent.h"
 #include "playerInputComponent.h"
 #include "AIBasicInputComponent.h"
+#include "GameEventListener.h"
 
 class ActionComponent;
 
@@ -18,7 +20,7 @@ extern std::stack<entity*> deathStack;
 class ActorEntity : public entity
 {
     public:
-        ActorEntity(std::string e_ID,GraphicsComponent* g,PhysicsComponent* p,InputComponent* i,StateComponent* s, ActionComponent* a);
+        ActorEntity(std::string e_ID,GraphicsComponent* g,PhysicsComponent* p,InputComponent* i,StateComponent* s, ActionComponent* a,GameEventListener* eListener);
         virtual ~ActorEntity();
 
         float getTopSpeed();
@@ -54,8 +56,10 @@ class ActorEntity : public entity
         ActionComponent* getActions();
 
         void initiateCollision(entity* other, fixtureUserData* otherFData, fixtureUserData* selfFData);
-        void applyAttackOnSelf(attackAttributeState a);
+        void applyAttackOnSelf(attackFixtureUserData* a);
         void playAnimation(std::string animation,bool byTag);
+
+        GameEventListener* _listener;
 
 
     protected:

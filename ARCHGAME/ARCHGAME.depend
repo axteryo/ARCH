@@ -3,14 +3,15 @@
 	<iostream>
 	"Game.h"
 
-1497563330 source:c:\users\mesh\documents\projectarch\archgame\src\level.cpp
+1498451358 source:c:\users\mesh\documents\projectarch\archgame\src\level.cpp
 	"level.h"
 	"EntitySpawner.h"
 	"SpriteBatcher.h"
 	"GameMap.h"
 	"SequenceEntity.h"
+	"AudioSystem.h"
 
-1497563349 c:\users\mesh\documents\projectarch\archgame\include\level.h
+1498341009 c:\users\mesh\documents\projectarch\archgame\include\level.h
 	<SFML/Graphics.hpp>
 	<SFML/Window.hpp>
 	<Box2D/Box2D.h>
@@ -21,18 +22,21 @@
 	"ObjectEntity.h"
 	"TriggerEntity.h"
 	"CollisionSystem.h"
-	"AudioSystem.h"
+	"GameEventHandler.h"
+	"JsonHandler.h"
+	"RenderBatch.h"
 
 1496726627 source:c:\users\mesh\documents\projectarch\archgame\src\entity.cpp
 	"entity.h"
 	"PhysicsComponent.h"
 
-1496519332 c:\users\mesh\documents\projectarch\archgame\include\entity.h
+1498702708 c:\users\mesh\documents\projectarch\archgame\include\entity.h
 	<Box2D/Box2D.h>
 	<SFML/Graphics.hpp>
 	<SFML/Window.hpp>
 	"StateComponent.h"
 	<stack>
+	"GameEvent_Entity.h"
 
 1450293359 c:\sfml-2.3.2\include\sfml\graphics.hpp
 	<SFML/Window.hpp>
@@ -412,10 +416,11 @@
 	<string>
 	<vector>
 
-1497566740 source:c:\users\mesh\documents\projectarch\archgame\src\game.cpp
+1498706681 source:c:\users\mesh\documents\projectarch\archgame\src\game.cpp
 	"Game.h"
+	"AudioSystem.h"
 
-1497563352 c:\users\mesh\documents\projectarch\archgame\include\game.h
+1498705470 c:\users\mesh\documents\projectarch\archgame\include\game.h
 	<SFML/Graphics.hpp>
 	<Box2D/Box2D.h>
 	<SFML/Window.hpp>
@@ -427,6 +432,11 @@
 	"level.h"
 	"GameController.h"
 	"camera.h"
+	"GameEventListener.h"
+	"GameEvent.h"
+	"JsonHandler.h"
+	"RenderBatch.h"
+	"GraphicsComponent.h"
 
 1456773003 c:\box2d_v2.3.1\box2d\box2d.h
 	<Box2D/Common/b2Settings.h>
@@ -664,23 +674,23 @@
 	<sstream>
 	"config.h"
 
-1497563562 source:c:\users\mesh\documents\projectarch\archgame\src\physicscomponent.cpp
+1498350931 source:c:\users\mesh\documents\projectarch\archgame\src\physicscomponent.cpp
 	"PhysicsComponent.h"
 
 1495145708 c:\users\mesh\documents\projectarch\archgame\include\physicscomponent.h
 	<iostream>
 	"entity.h"
 
-1495339511 source:c:\users\mesh\documents\projectarch\archgame\src\graphicscomponent.cpp
+1498340700 source:c:\users\mesh\documents\projectarch\archgame\src\graphicscomponent.cpp
 	"GraphicsComponent.h"
 
-1495339515 c:\users\mesh\documents\projectarch\archgame\include\graphicscomponent.h
+1498331295 c:\users\mesh\documents\projectarch\archgame\include\graphicscomponent.h
 	"entity.h"
 
-1496877625 source:c:\users\mesh\documents\projectarch\archgame\src\spritebatcher.cpp
+1498348806 source:c:\users\mesh\documents\projectarch\archgame\src\spritebatcher.cpp
 	"SpriteBatcher.h"
 
-1495312290 c:\users\mesh\documents\projectarch\archgame\include\spritebatcher.h
+1498343863 c:\users\mesh\documents\projectarch\archgame\include\spritebatcher.h
 	"GraphicsComponent.h"
 	"entity.h"
 	<iostream>
@@ -699,14 +709,14 @@
 	"GraphicsComponent.h"
 	"PhysicsComponent.h"
 
-1496547436 c:\users\mesh\documents\projectarch\archgame\include\entityspawner.h
+1498061263 c:\users\mesh\documents\projectarch\archgame\include\entityspawner.h
 	"entity.h"
 	"ActorEntity.h"
-	"level.h"
 	"SpriteBatcher.h"
 
-1496675001 source:c:\users\mesh\documents\projectarch\archgame\src\entityspawner.cpp
+1498153290 source:c:\users\mesh\documents\projectarch\archgame\src\entityspawner.cpp
 	"EntitySpawner.h"
+	"level.h"
 
 1465673537 c:\users\mesh\documents\projectarch\archgame\include\json\json.h
 	<stddef.h>
@@ -741,10 +751,10 @@
 1488866595 c:\users\mesh\documents\projectarch\archgame\include\batch.h
 	"GraphicsComponent.h"
 
-1488862155 source:c:\users\mesh\documents\projectarch\archgame\src\batch.cpp
+1498331269 source:c:\users\mesh\documents\projectarch\archgame\src\batch.cpp
 	"batch.h"
 
-1496206554 source:c:\users\mesh\documents\projectarch\archgame\src\gamecontroller.cpp
+1497566968 source:c:\users\mesh\documents\projectarch\archgame\src\gamecontroller.cpp
 	"GameController.h"
 
 1496206206 c:\users\mesh\documents\projectarch\archgame\include\gamecontroller.h
@@ -762,23 +772,23 @@
 	<InputComponent.h>
 	"ActionComponent.h"
 
-1496519025 source:c:\users\mesh\documents\projectarch\archgame\src\gamemap.cpp
+1498410612 source:c:\users\mesh\documents\projectarch\archgame\src\gamemap.cpp
 	"GameMap.h"
 
-1496032979 c:\users\mesh\documents\projectarch\archgame\include\gamemap.h
+1498342889 c:\users\mesh\documents\projectarch\archgame\include\gamemap.h
 	<Box2D/Box2D.h>
 	<SFML/Graphics.hpp>
 	<iostream>
-	<fstream>
-	"json/json.h"
 	"batch.h"
 	"level.h"
 	"ObjectEntity.h"
+	"JsonHandler.h"
+	"GraphicsComponent.h"
 
-1496516304 source:c:\users\mesh\documents\projectarch\archgame\src\camera.cpp
+1498411295 source:c:\users\mesh\documents\projectarch\archgame\src\camera.cpp
 	"camera.h"
 
-1491780190 c:\users\mesh\documents\projectarch\archgame\include\camera.h
+1498410363 c:\users\mesh\documents\projectarch\archgame\include\camera.h
 	"ActorEntity.h"
 	<SFML/Graphics.hpp>
 	<SFML/Window.hpp>
@@ -1198,13 +1208,16 @@
 	<GLES/glext.h>
 	<GLES2/gl2ext.h>
 
-1496357474 c:\users\mesh\documents\projectarch\archgame\include\actorentity.h
+1498586183 c:\users\mesh\documents\projectarch\archgame\include\actorentity.h
 	"entity.h"
 	"GraphicsComponent.h"
+	"PhysicsComponent.h"
+	"AttackAction.h"
 	"playerInputComponent.h"
 	"AIBasicInputComponent.h"
+	"GameEventListener.h"
 
-1496782116 source:c:\users\mesh\documents\projectarch\archgame\src\actorentity.cpp
+1498706944 source:c:\users\mesh\documents\projectarch\archgame\src\actorentity.cpp
 	"ActorEntity.h"
 
 1496508148 source:c:\users\mesh\documents\projectarch\archgame\src\objectentity.cpp
@@ -1224,12 +1237,14 @@
 1496349066 source:c:\users\mesh\documents\projectarch\archgame\src\action.cpp
 	"Action.h"
 
-1496349927 c:\users\mesh\documents\projectarch\archgame\include\action.h
+1498704440 c:\users\mesh\documents\projectarch\archgame\include\action.h
 	<string>
 	<vector>
 	<Box2D/Box2D.h>
+	"GameEvent_Action.h"
+	"GameEventListener.h"
 
-1496355024 source:c:\users\mesh\documents\projectarch\archgame\src\accelerateaction.cpp
+1498704762 source:c:\users\mesh\documents\projectarch\archgame\src\accelerateaction.cpp
 	"AccelerateAction.h"
 	"ActorEntity.h"
 
@@ -1242,11 +1257,11 @@
 1494811054 c:\users\mesh\documents\projectarch\archgame\include\rotaterightaction.h
 	<MovementAction.h>
 
-1496357159 source:c:\users\mesh\documents\projectarch\archgame\src\rotateleftaction.cpp
+1498152687 source:c:\users\mesh\documents\projectarch\archgame\src\rotateleftaction.cpp
 	"RotateLeftAction.h"
 	"ActorEntity.h"
 
-1496357154 source:c:\users\mesh\documents\projectarch\archgame\src\rotaterightaction.cpp
+1498152219 source:c:\users\mesh\documents\projectarch\archgame\src\rotaterightaction.cpp
 	"RotateRightAction.h"
 	"ActorEntity.h"
 
@@ -1261,20 +1276,21 @@
 	<InputComponent.h>
 	"ActionComponent.h"
 
-1496782196 source:c:\users\mesh\documents\projectarch\archgame\src\aibasicinputcomponent.cpp
+1498587500 source:c:\users\mesh\documents\projectarch\archgame\src\aibasicinputcomponent.cpp
 	"AIBasicInputComponent.h"
 
-1493916659 source:c:\users\mesh\documents\projectarch\archgame\src\gameevent.cpp
+1497990159 source:c:\users\mesh\documents\projectarch\archgame\src\gameevent.cpp
 	"GameEvent.h"
 
-1494523791 c:\users\mesh\documents\projectarch\archgame\include\gameevent.h
+1498705395 c:\users\mesh\documents\projectarch\archgame\include\gameevent.h
+	<queue>
 
 1493924540 source:c:\users\mesh\documents\projectarch\archgame\src\statuscomponent.cpp
 	"StatusComponent.h"
 
 1493924540 c:\users\mesh\documents\projectarch\archgame\include\statuscomponent.h
 
-1496772781 source:c:\users\mesh\documents\projectarch\archgame\src\statecomponent.cpp
+1498587403 source:c:\users\mesh\documents\projectarch\archgame\src\statecomponent.cpp
 	"StateComponent.h"
 	"ActorEntity.h"
 
@@ -1290,16 +1306,17 @@
 	"DeccelerateAction.h"
 	"ActorEntity.h"
 
-1496204598 source:c:\users\mesh\documents\projectarch\archgame\src\attackaction.cpp
+1498707123 source:c:\users\mesh\documents\projectarch\archgame\src\attackaction.cpp
 	"AttackAction.h"
 	"ActorEntity.h"
 
-1496204619 c:\users\mesh\documents\projectarch\archgame\include\attackaction.h
+1498586282 c:\users\mesh\documents\projectarch\archgame\include\attackaction.h
 	<Action.h>
 	"StateComponent.h"
 	"ProjectileEntity.h"
+	"PhysicsComponent.h"
 
-1496675019 source:c:\users\mesh\documents\projectarch\archgame\src\beamattackaction.cpp
+1498707307 source:c:\users\mesh\documents\projectarch\archgame\src\beamattackaction.cpp
 	"BeamAttackAction.h"
 	"ActorEntity.h"
 
@@ -1328,21 +1345,23 @@
 1494285946 c:\users\mesh\documents\projectarch\archgame\include\movementaction.h
 	<Action.h>
 
-1497566588 source:c:\users\mesh\documents\projectarch\archgame\src\collisionsystem.cpp
+1497991997 source:c:\users\mesh\documents\projectarch\archgame\src\collisionsystem.cpp
 	"CollisionSystem.h"
 
-1496780889 c:\users\mesh\documents\projectarch\archgame\include\collisionsystem.h
+1497991590 c:\users\mesh\documents\projectarch\archgame\include\collisionsystem.h
 	<Box2D/Box2D.h>
 	<queue>
 	"entity.h"
 	"ObjectEntity.h"
 	"ActorEntity.h"
 	"PhysicsComponent.h"
+	"GameEvent_Collision.h"
+	"GameEventListener.h"
 
 1494704778 c:\users\mesh\documents\projectarch\archgame\include\radiusattackaction.h
 	<AttackAction.h>
 
-1494819743 source:c:\users\mesh\documents\projectarch\archgame\src\radiusattackaction.cpp
+1498707599 source:c:\users\mesh\documents\projectarch\archgame\src\radiusattackaction.cpp
 	"RadiusAttackAction.h"
 	"ActorEntity.h"
 
@@ -1380,14 +1399,16 @@
 1496510497 source:c:\users\mesh\documents\projectarch\archgame\src\gridmodeattack.cpp
 	"GridModeAttack.h"
 
-1496802563 source:c:\users\mesh\documents\projectarch\archgame\src\sequenceentity.cpp
+1498070170 source:c:\users\mesh\documents\projectarch\archgame\src\sequenceentity.cpp
 	"SequenceEntity.h"
+	"level.h"
 
-1496802363 c:\users\mesh\documents\projectarch\archgame\include\sequenceentity.h
+1498067461 c:\users\mesh\documents\projectarch\archgame\include\sequenceentity.h
 	<entity.h>
 	<queue>
-	"level.h"
 	"EntitySpawner.h"
+	"GameEvent_Sequence.h"
+	"GameEventListener.h"
 
 1491238538 c:\sfml\include\sfml\audio.hpp
 	<SFML/System.hpp>
@@ -1493,22 +1514,85 @@
 	<SFML/Audio/Export.hpp>
 	<string>
 
-1497566207 source:c:\users\mesh\documents\projectarch\archgame\src\audiosystem.cpp
+1498059800 source:c:\users\mesh\documents\projectarch\archgame\src\audiosystem.cpp
 	"AudioSystem.h"
+	"PhysicsComponent.h"
 
-1497562450 c:\users\mesh\documents\projectarch\archgame\include\audiosystem.h
+1497992778 c:\users\mesh\documents\projectarch\archgame\include\audiosystem.h
 	<SFML/Audio.hpp>
 	"AudioSource.h"
 	<iostream>
 	<fstream>
 	"json/json.h"
+	"GameEventHandler.h"
 
-1497560851 c:\users\mesh\documents\projectarch\archgame\include\audiosource.h
+1498016603 c:\users\mesh\documents\projectarch\archgame\include\audiosource.h
 	<stack>
 	<SFML/Audio.hpp>
 	<iostream>
 	<string>
 
-1497566442 source:c:\users\mesh\documents\projectarch\archgame\src\audiosource.cpp
+1498017761 source:c:\users\mesh\documents\projectarch\archgame\src\audiosource.cpp
 	"AudioSource.h"
+
+1498063551 c:\users\mesh\documents\projectarch\archgame\include\gameeventlistener.h
+	"entity.h"
+	"GameEvent.h"
+
+1497987193 source:c:\users\mesh\documents\projectarch\archgame\src\gameeventhandler.cpp
+	"GameEventHandler.h"
+
+1498155738 c:\users\mesh\documents\projectarch\archgame\include\gameeventhandler.h
+	"GameEvent.h"
+	"GameEvent_Collision.h"
+	"GameEvent_Entity.h"
+
+1498063493 source:c:\users\mesh\documents\projectarch\archgame\src\gameeventlistener.cpp
+	"GameEventListener.h"
+
+1498703012 c:\users\mesh\documents\projectarch\archgame\include\gameevent_collision.h
+	<GameEvent.h>
+	"PhysicsComponent.h"
+
+1498702993 source:c:\users\mesh\documents\projectarch\archgame\src\gameevent_collision.cpp
+	"GameEvent_Collision.h"
+	"entity.h"
+
+1498065070 source:c:\users\mesh\documents\projectarch\archgame\src\gameevent_sequence.cpp
+	"GameEvent_Sequence.h"
+	"SequenceEntity.h"
+
+1498703081 c:\users\mesh\documents\projectarch\archgame\include\gameevent_sequence.h
+	<GameEvent.h>
+	"string"
+
+1498702847 c:\users\mesh\documents\projectarch\archgame\include\gameevent_entity.h
+	<GameEvent.h>
+
+1498702892 source:c:\users\mesh\documents\projectarch\archgame\src\gameevent_entity.cpp
+	"GameEvent_Entity.h"
+	"entity.h"
+
+1498326938 c:\users\mesh\documents\projectarch\archgame\include\jsonhandler.h
+	<iostream>
+	<fstream>
+	"json/json.h"
+
+1498342761 c:\users\mesh\documents\projectarch\archgame\include\renderbatch.h
+	"iostream"
+	"GraphicsComponent.h"
+
+1498342588 source:c:\users\mesh\documents\projectarch\archgame\src\jsonhandler.cpp
+	"JsonHandler.h"
+
+1498451401 source:c:\users\mesh\documents\projectarch\archgame\src\renderbatch.cpp
+	"RenderBatch.h"
+
+1498704781 source:c:\users\mesh\documents\projectarch\archgame\src\gameevent_action.cpp
+	"GameEvent_Action.h"
+	"Action.h"
+	"entity.h"
+
+1498705806 c:\users\mesh\documents\projectarch\archgame\include\gameevent_action.h
+	<GameEvent.h>
 

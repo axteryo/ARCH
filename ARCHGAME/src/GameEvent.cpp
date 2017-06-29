@@ -1,11 +1,17 @@
 #include "GameEvent.h"
 
+std::queue<GameEvent*> GameEventQueue;
+
 GameEvent::GameEvent()
 {
-    //ctor
 }
 
 GameEvent::~GameEvent()
 {
     //dtor
+}
+
+GameEvent::eventType GameEvent::getEventType()
+{
+    return event_type;
 }

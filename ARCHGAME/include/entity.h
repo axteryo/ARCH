@@ -7,6 +7,7 @@
 #include <SFML/Window.hpp>
 #include "StateComponent.h"
 #include <stack>
+#include "GameEvent_Entity.h"
 
 class PhysicsComponent;
 struct fixtureUserData;

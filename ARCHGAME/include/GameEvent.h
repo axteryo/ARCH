@@ -1,6 +1,9 @@
 #ifndef GAMEEVENT_H
 #define GAMEEVENT_H
 
+#include <queue>
+//#include "entity.h"
+//#include "SequenceEntity.h"
 
 class GameEvent
 {
@@ -9,14 +12,20 @@ class GameEvent
         virtual ~GameEvent();
         enum eventType
         {
+            EVENT_COLLISION,
             EVENT_SEQUENCE,
-            EVENT_COMBAT,
             EVENT_GAMESTATE,
+            EVENT_ENTITY,
             EVENT_ACTION,
             EVENT_MENU
-        };
+        }event_type;
+
+        eventType getEventType();
     protected:
     private:
 };
+
+extern std::queue<GameEvent*> GameEventQueue;
+
 
 #endif // GAMEEVENT_H

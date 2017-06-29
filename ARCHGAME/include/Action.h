@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 #include <Box2D/Box2D.h>
+#include "GameEvent_Action.h"
+#include "GameEventListener.h"
 
 class ActorEntity;
 
@@ -23,6 +25,7 @@ class Action
         std::string actionType;
         bool isActive;
         int elapsed;
+
     private:
 
 };

@@ -25,6 +25,9 @@ class camera
         std::string targetID;
         entity* target;
 
+        bool withinView(sf::Vector2f point);
+        sf::RectangleShape camBoundary;
+
 
 
     protected:
@@ -34,6 +37,7 @@ class camera
         //sf::Vector2f v2f_position;
         sf::Vector2i v2i_focalPoint;
         sf::Vector2f v2f_dimensions;
+
 
 };
 

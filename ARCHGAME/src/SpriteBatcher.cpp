@@ -131,7 +131,7 @@ void SpriteBatcher::addToBatch(entity* e, double alpha)
 
     ///Create a quad struct object and set the 4 corners of it's physical location
     /// and the 4 corners of it's texture position on spritesheet
-    batchQuad quad;
+    BatchQuad quad;
     quad.point1 = sf::Vector2f(state.position.x-i.width/2,state.position.y+i.height/2);
     quad.point2 = sf::Vector2f(state.position.x+i.width/2,state.position.y+i.height/2);
     quad.point3 = sf::Vector2f(state.position.x+i.width/2,state.position.y-i.height/2);
@@ -174,6 +174,7 @@ void SpriteBatcher::batchSprites()
             quad[j+1].position =batch_list[i].point2;
             quad[j+2].position =batch_list[i].point3;
             quad[j+3].position =batch_list[i].point4;
+            quad[j].color = sf::Color::Red;
 
             quad[j].texCoords = batch_list[i].texPoint1;
             quad[j+1].texCoords =batch_list[i].texPoint2;
@@ -181,16 +182,12 @@ void SpriteBatcher::batchSprites()
             quad[j+3].texCoords =batch_list[i].texPoint4;
 
             j+=2;
-
         }
     }
 
     b.t = batch_texture;
 
     batch_list.clear();
-
-
-
 
 }
 

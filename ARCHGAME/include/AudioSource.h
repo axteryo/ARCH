@@ -24,7 +24,7 @@ class AudioSource
         std::string audioID;
         bool isActive;
         int soundLimit;
-        int volume;
+        float volume;
         sf::SoundBuffer buffer;
         std::stack<sf::Sound> soundStack;
         std::vector<sf::Sound> pauseList;

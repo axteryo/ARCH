@@ -27,10 +27,18 @@ void BeamAttackAction::execute(ActorEntity* a)
                 if(!a->isAttacking())
                 {
 
-                fixtureUserData* fData = new fixtureUserData;
+                //fixtureUserData* fData = new fixtureUserData;
                 elapsed = data.duration;
+
+                attackFixtureUserData* fData = new attackFixtureUserData;
                 fData->type = data.fixtureType;
                 fData->data = data.fixtureData;
+                fData->force = data.force;
+                fData->impactType = data.impactType;
+                fData->impactDuration = data.impactDuration;
+                fData->attackType = data.attackType;
+                fData->damage = data.damage;
+
                 PhysicsComponent* p = new PhysicsComponent(b2_kinematicBody);
 
                 attackFixture = p->createFixturePolygon(data.shape,data.relPosition,fData,data.isSensor);
@@ -50,6 +58,7 @@ void BeamAttackAction::execute(ActorEntity* a)
 
                 acceleration = b2Vec2(cos(r),sin(r));
                 acceleration.Normalize();
+                fData->direction = acceleration;
                 acceleration.x*=50;
                 acceleration.y*=50;
                 p->accelerate(acceleration);

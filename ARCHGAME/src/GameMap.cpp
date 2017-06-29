@@ -19,7 +19,7 @@ void GameMap::close()
     spawnData.clear();
     walls.clear();
     triggers.clear();
-    currentMapFile.close();
+
     textureSheetCoords.clear();
     levelData.clear();
     layerData.clear();
@@ -32,17 +32,10 @@ void GameMap::loadFile(std::string mapFile)
 ///THE MAP FILE MUST FIRST BE OPENED AND PARSED FROM JSON TO VARIABLES*******/
 /**********************************************************************/
 /**********************************************************************/
-    currentMapFile.open(mapFile);
-    bool parsedSuccess = mapReader.parse(currentMapFile,baseMapRoot,false);
-    if(!parsedSuccess)
-    {
-        std::cout<<"failed to parse JSON"<< std::endl
-        <<mapReader.getFormattedErrorMessages()
-        <<std::endl;
-    }
-    else
-    {
-        std::cout<<"Map file has been parsed"<<std::endl;
+    baseMapRoot = jsonHandler.loadJson(mapFile);
+
+
+         std::cout<<"Map file has been parsed"<<std::endl;
 
      ///store the tileCount Dimensions
     v2f_mapDimensions = sf::Vector2f(baseMapRoot["width"].asFloat(),baseMapRoot["height"].asFloat());//*v2f_tileDimension.x,baseMapRoot["height"].asFloat()*v2f_tileDimension.y);
@@ -196,7 +189,6 @@ void GameMap::loadFile(std::string mapFile)
         }
 
         std::cout<<"Map Sheet coordinates stored"<<std::endl;
-        }
 }
 
 void GameMap::create()
@@ -239,7 +231,24 @@ void GameMap::create()
 
                 if(layerData[ii][i]>0)
                 {
-                    if(ii==0)
+
+                    BatchQuad quad;
+
+                    quad.point1=sf::Vector2f(xx,yy);
+                    quad.point2=sf::Vector2f(xx+v2f_tileDimensions.x,yy);
+                    quad.point3=sf::Vector2f(xx+v2f_tileDimensions.x,yy+v2f_tileDimensions.y);
+                    quad.point4=sf::Vector2f(xx,yy+v2f_tileDimensions.y);
+
+                     quad.center = sf::Vector2f((quad.point1.x+quad.point2.x+quad.point3.x+quad.point4.x)/4,
+                               (quad.point1.y+quad.point2.y+quad.point3.y+quad.point4.y)/4);
+
+                    quad.texPoint1= sf::Vector2f(textureSheetCoords[layerData[ii][i]-1].x,textureSheetCoords[layerData[ii][i]-1].y);
+                    quad.texPoint2= sf::Vector2f(textureSheetCoords[layerData[ii][i]-1].x+v2f_tileDimensions.x,textureSheetCoords[layerData[ii][i]-1].y);
+                    quad.texPoint3= sf::Vector2f(textureSheetCoords[layerData[ii][i]-1].x+v2f_tileDimensions.x,textureSheetCoords[layerData[ii][i]-1].y+v2f_tileDimensions.y);
+                    quad.texPoint4= sf::Vector2f(textureSheetCoords[layerData[ii][i]-1].x,textureSheetCoords[layerData[ii][i]-1].y+v2f_tileDimensions.y);
+
+
+                    /*if(ii==0)
                     {
                         sf::Vertex* quad = &layer1.v[j];
                         quad[j].position=sf::Vector2f(xx,yy);
@@ -251,6 +260,7 @@ void GameMap::create()
                         quad[j+1].texCoords= sf::Vector2f(textureSheetCoords[layerData[ii][i]-1].x+v2f_tileDimensions.x,textureSheetCoords[layerData[ii][i]-1].y);
                         quad[j+2].texCoords= sf::Vector2f(textureSheetCoords[layerData[ii][i]-1].x+v2f_tileDimensions.x,textureSheetCoords[layerData[ii][i]-1].y+v2f_tileDimensions.y);
                         quad[j+3].texCoords= sf::Vector2f(textureSheetCoords[layerData[ii][i]-1].x,textureSheetCoords[layerData[ii][i]-1].y+v2f_tileDimensions.y);
+
 
                     }
                     if(ii==1)
@@ -266,7 +276,8 @@ void GameMap::create()
                         quad[j+2].texCoords= sf::Vector2f(textureSheetCoords[layerData[ii][i]-1].x+v2f_tileDimensions.x,textureSheetCoords[layerData[ii][i]-1].y+v2f_tileDimensions.y);
                         quad[j+3].texCoords= sf::Vector2f(textureSheetCoords[layerData[ii][i]-1].x,textureSheetCoords[layerData[ii][i]-1].y+v2f_tileDimensions.y);
 
-                    }
+                    }*/
+                    mapQuads.push_back(quad);
                 }
             //tileMapeLayers.push_back(tileMap);
 
@@ -283,7 +294,7 @@ void GameMap::create()
             }
         }
     }
-
+    std::cout<<mapQuads.size()<<std::endl;
 }
 std::vector<spawnPoint> GameMap::getSpawnSpoints()
 {

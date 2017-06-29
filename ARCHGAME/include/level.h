@@ -14,14 +14,15 @@
 #include "ObjectEntity.h"
 #include "TriggerEntity.h"
 #include "CollisionSystem.h"
-#include "AudioSystem.h"
-
-
+#include "GameEventHandler.h"
+#include "JsonHandler.h"
+#include "RenderBatch.h"
 
 class EntitySpawner;
 class SpriteBatcher;
 class GameMap;
 class SequenceEntity;
+class AudioSystem;
 
 
 
@@ -43,7 +44,7 @@ struct spawnPoint
 
 
 
-class level// : public sf::Drawable, public sf::Transformable
+class level : public GameEventHandler
 {
     public:
         level();
@@ -70,16 +71,17 @@ class level// : public sf::Drawable, public sf::Transformable
         std::vector<SequenceEntity*> sequenceList;
         std::vector<ObjectEntity*> wallList;
 
+        RenderBatch entityBatch;
+        RenderBatch mapBackGroundBatch;
 
 
+        void handleEvent(GameEvent* e);
 
     protected:
     private:
 
         Json::Value baseLevelRoot;
-        Json::Reader levelReader;
-        std::ifstream currentLevelFile;
-
+        JsonHandler jsonHandler;
         std::string backGroundMusic;
 };
 

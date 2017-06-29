@@ -33,30 +33,13 @@ class SpriteBatcher
 
 
     protected:
-        struct batchQuad
-        {
-            sf::Vector2f point1;
-            sf::Vector2f point2;
-            sf::Vector2f point3;
-            sf::Vector2f point4;
-
-            sf::Vector2f texPoint1;
-            sf::Vector2f texPoint2;
-            sf::Vector2f texPoint3;
-            sf::Vector2f texPoint4;
-
-            sf::Vector2f center;
-            float rotation;
-        };
-
-
 
 
 
     private:
         sf::VertexArray batch_vertArray;
         sf::Texture  batch_texture;
-        std::vector<batchQuad> batch_list;
+        std::vector<BatchQuad> batch_list;
 
         Json::Value textureRoot;
         Json::Reader myReader;

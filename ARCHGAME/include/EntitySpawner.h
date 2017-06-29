@@ -3,10 +3,10 @@
 
 #include "entity.h"
 #include "ActorEntity.h"
-#include "level.h"
+//#include "level.h"
 #include "SpriteBatcher.h"
 
-
+struct spawnPoint;
 
 class EntitySpawner
 {

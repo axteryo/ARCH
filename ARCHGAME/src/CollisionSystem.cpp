@@ -1,8 +1,8 @@
 #include "CollisionSystem.h"
 
-CollisionSystem::CollisionSystem()
+CollisionSystem::CollisionSystem(GameEventListener* e)
 {
-    //ctor
+    _eventListener = e;
 }
 
 CollisionSystem::~CollisionSystem()
@@ -117,8 +117,11 @@ void CollisionSystem::update()
         collisionEventData* colData = collisionEvents.front();
         if(colData->collisionType.compare("COLLISION_INITIAL")==0)
         {
+            GameEvent_Collision* g = new GameEvent_Collision(colData->entityA,colData->entityB,colData->A_Data,colData->B_Data,colData->collisionType);
+            _eventListener->notifyEvent(g);
             colData->entityA->initiateCollision(colData->entityB,colData->B_Data,colData->A_Data);
             colData->entityB->initiateCollision(colData->entityA,colData->A_Data,colData->B_Data);
+
         }
         delete colData;
         collisionEvents.pop();

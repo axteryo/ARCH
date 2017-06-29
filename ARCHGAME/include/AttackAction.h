@@ -4,6 +4,7 @@
 #include <Action.h>
 #include "StateComponent.h"
 #include "ProjectileEntity.h"
+#include "PhysicsComponent.h"
 
 
 
@@ -26,6 +27,16 @@ struct attackData
     std::string fixtureData;
     bool isSensor;
     std::string graphic;
+};
+
+struct attackFixtureUserData : fixtureUserData
+{
+    int damage;
+    float force;
+    std::string attackType;
+    std::string impactType;
+    int impactDuration;
+    b2Vec2 direction;
 };
 class AttackAction : public Action
 {

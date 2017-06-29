@@ -25,20 +25,29 @@ void RadiusAttackAction::execute(ActorEntity* a)
             {
                 if(!a->isAttacking())
                 {
-                fixtureUserData* fData = new fixtureUserData;
+                //fixtureUserData* fData = new fixtureUserData;
                 elapsed = data.duration;
-                fData->type = data.fixtureType;
-                fData->data = data.fixtureData;
-                attackFixture = a->getPhysics()->createFixtureCircle(data.shape[0],b2Vec2(0,0),fData,data.isSensor);
+
                 isActive = true;
 
-                attackState.attack = data.name;
+                attackFixtureUserData* fData = new attackFixtureUserData;
+                fData->type = data.fixtureType;
+                fData->data = data.fixtureData;
+                fData->force = data.force;
+                fData->impactType = data.impactType;
+                fData->impactDuration = data.impactDuration;
+                fData->attackType = data.attackType;
+                fData->direction = a->getPosition();
+                fData->damage = data.damage;
+                attackFixture = a->getPhysics()->createFixtureCircle(data.shape[0],b2Vec2(0,0),fData,data.isSensor);
+
+                /*attackState.attack = data.name;
                 attackState.damage = data.damage;
                 attackState.impactDuration = data.impactDuration;
                 attackState.force = data.force;
                 attackState.impactType = data.impactType;
                 attackState.isAttacking = true;
-                a->getStates()->setAttackAttributeState(attackState);
+                a->getStates()->setAttackAttributeState(attackState);*/
                 }
             }
         }

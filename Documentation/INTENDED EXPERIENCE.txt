@@ -1,8 +1,9 @@
 INTENDED EXPERIENCE
 
+the player has been sent in to defeat an ai with hive mind capabilities that is using the shell of other robots to an enact terror
+
 In this game Movement is everything
 
+I want the player to control a robot and to utilize the robots movement and abilities to maneuver an alien environment in order to find and defeat an Antagonistic AI, engaging enemy robots along the way.
 
-I want the player to control a robot and to utilize the robots movement and abilities to complete Tests that are presented to you by a sarcastically Antagonistic AI. Those tests can mean anything from having to weave through corridors or having to engage enemy robots
-
-I want the player to laugh feel excited and want to play again.
+I want the player to feel excited feel engaged, and want to play again.

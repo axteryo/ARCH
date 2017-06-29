@@ -4,8 +4,8 @@ AudioSource::AudioSource(std::string srcID, int limit)
 {
     audioID = srcID;
     isActive = false;
-    volume = 20;
-    int soundLimit = limit;
+    volume = 5;
+    soundLimit = limit;
 }
 
 AudioSource::~AudioSource()
@@ -40,20 +40,23 @@ void AudioSource::play()
         isActive = true;
         sf::Sound sound;
         sound.setBuffer(buffer);
-        sound.setVolume(volume);
         soundStack.push(sound);
+        soundStack.top().setVolume(volume);
         soundStack.top().play();
+
     }
 }
 
 void AudioSource::update()
 {
+    //std::cout<<"ACTIVE_SOUND"<<std::endl;
     if(!soundStack.empty())
     {
         switch(soundStack.top().getStatus())
         {
         case sf::Sound::Stopped:
             soundStack.pop();
+
             break;
         }
 

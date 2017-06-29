@@ -5,9 +5,10 @@
 #include <iostream>
 #include <fstream>
 #include "json/json.h"
+#include "GameEventHandler.h"
 
 
-class AudioSystem
+class AudioSystem : GameEventHandler
 {
     public:
         AudioSystem();
@@ -16,6 +17,7 @@ class AudioSystem
         void update();
         void playAudio(std::string srcID);
         void setBackGroundMusic(std::string src);
+        void handleEvent(GameEvent* e);
     protected:
     private:
 

@@ -3,13 +3,14 @@
 #include "SpriteBatcher.h"
 #include "GameMap.h"
 #include "SequenceEntity.h"
+#include "AudioSystem.h"
 
 
 
 
 
 camera gameCamera;
-CollisionSystem* collisionSystem = new CollisionSystem();
+CollisionSystem* collisionSystem = new CollisionSystem(new GameEventListener());
 EntitySpawner* spawner = new EntitySpawner();
 SpriteBatcher* batcher = new SpriteBatcher;
 GameMap* _map = new GameMap;
@@ -69,18 +70,10 @@ This function loads a specified level and retrieves and stores data
 **/
 void level::load(std::string levelFile)
 {
-    currentLevelFile.open(levelFile);
-    bool parsedSuccess = levelReader.parse(currentLevelFile,baseLevelRoot,false);
-    if(!parsedSuccess)
-    {
-        std::cout<<"failed to parse JSON"<< std::endl
-        <<levelReader.getFormattedErrorMessages()
-        <<std::endl;
-    }
-    else
-    {
-         std::cout<<"Level file has been parsed"<< std::endl;
-         backGroundMusic = baseLevelRoot["backGroundMusic"].asString();
+    baseLevelRoot = jsonHandler.loadJson(levelFile);
+
+        std::cout<<"Level file has been parsed"<< std::endl;
+        backGroundMusic = baseLevelRoot["backGroundMusic"].asString();
         _map->loadFile("data/"+ baseLevelRoot["map"].asString());
         spawnList = _map->getSpawnSpoints();
         triggerList = _map->getTriggers();
@@ -90,8 +83,8 @@ void level::load(std::string levelFile)
             std::string tTag = baseLevelRoot["sequences"][i]["trigger_tag"].asString();
             std::string sTag = baseLevelRoot["sequences"][i]["name"].asString();
             std::string preSequence = baseLevelRoot["sequences"][i]["contingentSequence"].asString();
-            SequenceEntity* seq = new SequenceEntity("entity_sequence",sTag,tTag,sType,preSequence);
-            if(sType.compare("combat_sequence")==0)
+            SequenceEntity* seq = new SequenceEntity("entity_sequence",sTag,tTag,sType,preSequence,new GameEventListener());
+            if(sType.compare("COMBAT")==0)
             {
                 for(int k = 0;k<baseLevelRoot["sequences"][i]["waveList"].size();++k)
                 {
@@ -128,7 +121,6 @@ void level::load(std::string levelFile)
         std::cout<<"num of sequences: "<<sequenceList.size()<<std::endl;
         wallList = _map->walls;
         std::cout<<"num of Spawn: "<<spawnList.size()<<std::endl;
-    }
 }
 /**
 This function implements the level
@@ -136,6 +128,7 @@ This function implements the level
 void level::initiate()
 {
      _map->create();
+    mapBackGroundBatch.setBatchTexture(_map->mapImage);
     for(int i = 0; i<spawnList.size();++i)
     {
         entityList.push_back(spawner->spawnEntity(spawnList[i]));
@@ -144,6 +137,7 @@ void level::initiate()
             gameCamera.setTarget(entityList[i]);
         }
     }
+
     audioSystem->setBackGroundMusic(backGroundMusic);
 }
 
@@ -231,19 +225,28 @@ void level::render(sf::RenderWindow* window,double alpha)
 
     }
 
+
+
+    //window->draw(_map->layer1);
+    //window->draw(_map->layer2);
+    for(int i= 0; i<_map->mapQuads.size();i++)
+    {
+       // if(gameCamera.withinView(_map->mapQuads[i].center))
+        //{
+            mapBackGroundBatch.addQuad(_map->mapQuads[i]);
+        //}
+    }
+    mapBackGroundBatch.batchQuads();
+
     batcher->batchSprites();
 
-    //window->draw(_map->getFirstLayer());
-    //window->draw(_map->getSecondLayer());
-    window->draw(_map->layer1);
-    window->draw(_map->layer2);
+    window->draw(mapBackGroundBatch);
 
     window->draw(batcher->b);
 
 
 
 }
-
 
 
 void level::physicsUpdate(float dt, float a)
@@ -256,58 +259,38 @@ void level::physicsUpdate(float dt, float a)
         world->Step(step,6,3);
         progress+=step;
     }
+}
 
-    /*
-    const int maxSteps = 5;
-    float32 timeStep = 1.f/60.f;
-    //a = 0.0f;
-    a+=dt;
-    int numSteps = static_cast<int>(std::floor(a/timeStep));
-    if(numSteps>0)
+void level::handleEvent(GameEvent* e)
+{
+       switch(e->getEventType())
     {
-        a -=(numSteps*timeStep);
-    }
-    assert (
-		"Accumulator must have a value lesser than the fixed time step" &&
-		a < timeStep + FLT_EPSILON
-	);
-    int clampedNumSteps = std::min(numSteps,maxSteps);
-    //std::cout<<clampedNumSteps<<std::endl;
-
-
-    for(int i = 0;i<clampedNumSteps;++i)
-    {
-        world->Step(timeStep,6,2);
-    }
-    world->ClearForces();
-
-    PhysicsComponent* ph;
-    player* p;
-    GraphicsComponent* g;
-    float alpha = a/timeStep;
-    //update(.01f);
-    if(!entityList.empty())
-    {
-        //std::cout<<"GOT HERE"<<std::endl;
-       // for(int i = 0; i<entityList.size();++i)
-        //{
-            if(entityList[0]->getID().compare("entity_player")==0)
+    case GameEvent::EVENT_SEQUENCE:
+        GameEvent_Sequence* seqEvent = static_cast<GameEvent_Sequence*>(e);
+/***************************************/
+            switch(seqEvent->sequenceState)
             {
+            case GameEvent_Sequence::SEQUENCE_END:
+                for(int i = 0; i<sequenceList.size();++i)
+                {
+                    if(sequenceList[i]!=nullptr)
+                    {
+                        if(!sequenceList[i]->getIsActive())
+                        {
+                            sequenceList[i]->onNotifySequenceEnd(seqEvent->sequence->getTag());
+                        }
+                    }
+                }
+                break;
+            case GameEvent_Sequence::SEQUENCE_BEGIN:
 
-                p = static_cast<player*>(entityList[0]);
-                ph = p->getPhysics();
-                //ph->update(.01f);
-                States::positionState state = States::lerpPositionState(ph->getPreviousState(),ph->getCurrentState(),alpha);
-                ph->setPosition(state.position);
-                ph->setRotation(state.rotation);
-
+                break;
             }
-            //entityList[i]->update(dt);
-            //std::cout<<entityList[i]->getPosition().x/30<<","<<entityList[i]->getPosition().y<<std::endl;
+/***************************************/
+
+        break;
 
     }
-
-*/
 }
 
 void level::physicsSmooth(float alpha)

@@ -1,4 +1,5 @@
 #include "AudioSystem.h"
+#include "PhysicsComponent.h"
 
 AudioSystem::AudioSystem()
 {
@@ -70,7 +71,8 @@ void AudioSystem::setBackGroundMusic(std::string src)
 
 	musicChannel.setLoop(true);
 	musicChannel.play();
-	musicChannel.setVolume(musicVolume);
+	//musicChannel.setVolume(musicVolume);
+	musicChannel.setVolume(0);
 }
 
 void AudioSystem::update()
@@ -82,6 +84,23 @@ void AudioSystem::update()
             audioList[i]->update();
         }
     }
+}
+
+void AudioSystem::handleEvent(GameEvent* e)
+{
+    switch(e->getEventType())
+    {
+    case GameEvent::EVENT_COLLISION:
+
+        GameEvent_Collision* colEvent = static_cast<GameEvent_Collision*>(e);
+        if(colEvent->A_Data->type.compare("bodyFixture")==0&&colEvent->B_Data->type.compare("bodyFixture")==0)
+        {
+            playAudio("metalClang1");
+        }
+        break;
+
+    }
+
 }
 
 

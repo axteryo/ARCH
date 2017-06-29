@@ -15,6 +15,12 @@
 #include "level.h"
 #include "GameController.h"
 #include "camera.h"
+#include "GameEventListener.h"
+#include "GameEvent.h"
+#include "JsonHandler.h"
+#include "RenderBatch.h"
+#include "GraphicsComponent.h"
+
 
 class Game
 {
@@ -23,6 +29,11 @@ class Game
         virtual ~Game();
         void start();
         void _end();
+        void toggleVsync();
+        void toggleCollisionView();
+        void refresh();
+        void clean();
+
     protected:
     private:
         /**Game Variables**/
@@ -49,7 +60,10 @@ class Game
         double timeStep;
         int32 velocityIterations;
         int32 positionIterations;
-        bool isVsynced;
+        Json::Value textureRoot;
+        Json::Value animationRoot;
+        bool isCollisionViewOn;
+        bool isVsyncOn;
 
 
 
@@ -60,6 +74,7 @@ class Game
 
         level gameLevel;
         //GameController controller;
+
 
 
 

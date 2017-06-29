@@ -3,8 +3,9 @@
 
 #include <entity.h>
 #include <queue>
-#include "level.h"
 #include "EntitySpawner.h"
+#include "GameEvent_Sequence.h"
+#include "GameEventListener.h"
 
 struct spawnWave
 {
@@ -14,10 +15,11 @@ struct spawnWave
 
 //struct spawnPoint;
 
+
 class SequenceEntity : public entity
 {
     public:
-        SequenceEntity(std::string e_ID, std::string e_tag,std::string t_tag,std::string sequenceType,std::string preSeq);
+        SequenceEntity(std::string e_ID, std::string e_tag,std::string t_tag,std::string sequenceType,std::string preSeq,GameEventListener* e);
         virtual ~SequenceEntity();
         void update();
         void initiateCollision(entity* other, fixtureUserData* otherFData, fixtureUserData* selfFData);
@@ -25,6 +27,13 @@ class SequenceEntity : public entity
         void sequenceEnd();
         void addWave(spawnWave wave);
         bool getIsActive();
+        void onNotifySequenceEnd(std::string tag);
+
+         enum sequence_type
+        {
+            SEQ_COMBAT,
+            SEQ_NARRATIVE
+        }seqType;
 
         spawnWave currentWave;
         std::vector<ActorEntity*> activeSpawn;
@@ -34,14 +43,10 @@ class SequenceEntity : public entity
         std::queue<spawnWave> spawnWaveQueue;
         int waveDelayCounter;
         std::string contingentSequence;
+        GameEventListener* _listener;
 
 
 
-        enum sequence_type
-        {
-            SEQ_COMBAT,
-            SEQ_NARRATIVE
-        }seqType;
     private:
 };
 

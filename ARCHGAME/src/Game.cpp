@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "AudioSystem.h"
 
 GameController controller;
 
@@ -9,22 +10,19 @@ Game::Game()
 {
     v2f_windowSize = sf::Vector2f(1024,768);
     window = new sf::RenderWindow(sf::VideoMode(v2f_windowSize.x,v2f_windowSize.y),"Initiative_ARCH");
-    tempView = sf::View(sf::Vector2f(90,600),v2f_windowSize);
-    tempView.zoom(1.25);
-    gameCamera.setCoords(sf::Vector2i(90,600),sf::Vector2f(1024,768));
+
+    gameCamera.setCoords(sf::Vector2i(90,600),v2f_windowSize);
     world->SetContactListener(collisionSystem);
     audioSystem->loadAudio();
-
-
+    isVsyncOn = true;
+    isCollisionViewOn = false;
     gameRunning = true;
-
     dt = 1.0f/60.0f;
-
     timeStep = 1.0/60.0f;
     velocityIterations = 6;
     positionIterations = 2;
-    isVsynced = true;
-    window->setVerticalSyncEnabled(isVsynced);
+    //isVsynced = true;
+    window->setVerticalSyncEnabled(isVsyncOn);
 }
 
 void Game::start()
@@ -49,7 +47,15 @@ void Game::start()
     gameLevel.setup();
     gameLevel.load("data/testLevel.json");
     gameLevel.initiate();
-    audioSystem->playAudio("metalClang1");
+    //audioSystem->playAudio("metalClang1");
+    int i = GameEventQueue.size();
+    while(i>=1)
+    {
+        std::cout<<GameEventQueue.size()<<std::endl;
+        delete GameEventQueue.front();
+        GameEventQueue.pop();
+        i--;
+    }
     while(window->isOpen())
     {
 
@@ -61,6 +67,7 @@ void Game::start()
         ///Then we get how much has elapsed bu subtracting the lastTime
         newTime = clock.getElapsedTime().asSeconds();
         elapsed =clock.restart().asSeconds(); //newTime-lastTime;
+//        std::cout<<"Elapsed time:"<<1/elapsed<<std::endl;
 
         lastTime = newTime;
         accumulator +=elapsed;
@@ -68,12 +75,11 @@ void Game::start()
         double alpha;
 
       ///update logic at a fixed rate of 60
-        if(isVsynced)
+        if(isVsyncOn)
         {
             int a = 0;
             while(accumulator<dt)
             {
-
                 //std::cout<<"Elapsed time:"<<1/elapsed<<std::endl;
                 accumulator+=(dt/80);
                 //std::cout<<"we are here"<<std::endl;
@@ -82,8 +88,6 @@ void Game::start()
                 //a++;
             }
             //std::cout<<a<<std::endl;
-
-
         }
 
         while(accumulator>=dt)
@@ -92,26 +96,57 @@ void Game::start()
             gameLevel.physicsUpdate(dt,accumulator);
             collisionSystem->update();
             update(dt);
+            int i = GameEventQueue.size();
+
+            while(i>=1)
+            {
+               // std::cout<<GameEventQueue.size()<<std::endl;
+               switch(GameEventQueue.front()->getEventType())
+                {
+                case GameEvent::EVENT_ACTION:
+                    audioSystem->handleEvent(GameEventQueue.front());
+                    break;
+
+                case GameEvent::EVENT_COLLISION:
+                    audioSystem->handleEvent(GameEventQueue.front());
+                    break;
+
+                case GameEvent::EVENT_ENTITY:
+                    break;
+
+                case GameEvent::EVENT_SEQUENCE:
+                    audioSystem->handleEvent(GameEventQueue.front());
+                    gameLevel.handleEvent(GameEventQueue.front());
+                    break;
+
+                case GameEvent::EVENT_GAMESTATE:
+                    audioSystem->handleEvent(GameEventQueue.front());
+                    gameLevel.handleEvent(GameEventQueue.front());
+                    break;
+
+                case GameEvent::EVENT_MENU:
+                    audioSystem->handleEvent(GameEventQueue.front());
+                    break;
+                }
+
+
+                delete GameEventQueue.front();
+                GameEventQueue.pop();
+                i--;
+            }
         }
         audioSystem->update();
-
-           int i = deathStack.size();
-           while(i>=1)
-           {
-                std::cout<<deathStack.top()->getID()<<" has been deleted"<<std::endl;
-                delete deathStack.top();
-                deathStack.pop();
-                i--;
-           }
         alpha = (accumulator/dt);
-        ///render freely
+
+        /**REMOVES ENTITIES**/
+        clean();
         render(alpha);
+
         if (!gameRunning)
         {
             window->close();
         }
     }
-
 }
 void Game::_end()
 {
@@ -119,60 +154,58 @@ void Game::_end()
 }
 void Game::render(double alpha)
 {
-    window->setView(gameCamera.camView);
-    window->clear(sf::Color::Black);
+    refresh();
     gameLevel.render(window,alpha);
-    /*for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
+    if(isCollisionViewOn)
+    {
+        for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
         {
-                b2PolygonShape* polygonShape;
-                //sf::ConvexShape colShape;
-                //sf::Shape colShape;
-                //colShape = sf::ConvexShape;
-
-
-
-                for (b2Fixture* f = bodyIter->GetFixtureList(); f; f = f->GetNext())
+            b2PolygonShape* polygonShape;
+            //sf::ConvexShape colShape;
+            //sf::Shape colShape;
+            //colShape = sf::ConvexShape;
+            for (b2Fixture* f = bodyIter->GetFixtureList(); f; f = f->GetNext())
+            {
+                b2Shape::Type shapeType = f->GetType();
+                if(shapeType == b2Shape::e_polygon)
                 {
-                    b2Shape::Type shapeType = f->GetType();
-                    if(shapeType == b2Shape::e_polygon)
+                    sf::ConvexShape colShape;
+                    polygonShape = (b2PolygonShape*)f->GetShape();
+                     colShape.setPointCount(polygonShape->GetVertexCount());
+                    int i = 0;
+                    for(int ii = polygonShape->GetVertexCount()-1; ii>=0 ; ii--)
                     {
-                        sf::ConvexShape colShape;
-                        polygonShape = (b2PolygonShape*)f->GetShape();
-                         colShape.setPointCount(polygonShape->GetVertexCount());
-                        int i = 0;
-                        for(int ii = polygonShape->GetVertexCount()-1; ii>=0 ; ii--)
-                        {
-                            colShape.setPoint(ii,sf::Vector2f((polygonShape->GetVertex(i).x)*30,(polygonShape->GetVertex(i).y)*30));
-                            i++;
-                        }
-                        colShape.setFillColor(sf::Color::Transparent);
-                        colShape.setOutlineColor(sf::Color::Blue);
-                        colShape.setOutlineThickness(1);
-                        colShape.setPosition(bodyIter->GetPosition().x*30,bodyIter->GetPosition().y*30);
-                        colShape.setRotation((bodyIter->GetTransform().q.GetAngle()*((180/3.14159))));
-                        window->draw(colShape);
-
+                        colShape.setPoint(ii,sf::Vector2f((polygonShape->GetVertex(i).x)*30,(polygonShape->GetVertex(i).y)*30));
+                        i++;
                     }
-                    if(shapeType == b2Shape::e_circle)
-                    {
-
-                        polygonShape = (b2PolygonShape*)f->GetShape();
-                        sf::CircleShape colShape;
-                        colShape.setFillColor(sf::Color::Transparent);
-                        colShape.setOutlineColor(sf::Color::Red);
-                        colShape.setOutlineThickness(1);
-                        colShape.setOrigin(polygonShape->m_radius*30,polygonShape->m_radius*30);
-                        colShape.setRadius(polygonShape->m_radius*30);
-                        colShape.setPosition(bodyIter->GetPosition().x*30,bodyIter->GetPosition().y*30);
-                        window->draw(colShape);
-                    }
+                    colShape.setFillColor(sf::Color::Transparent);
+                    colShape.setOutlineColor(sf::Color::Blue);
+                    colShape.setOutlineThickness(1);
+                    colShape.setPosition(bodyIter->GetPosition().x*30,bodyIter->GetPosition().y*30);
+                    colShape.setRotation((bodyIter->GetTransform().q.GetAngle()*((180/3.14159))));
+                    window->draw(colShape);
 
                 }
+                if(shapeType == b2Shape::e_circle)
+                {
 
-        }*/
+                    polygonShape = (b2PolygonShape*)f->GetShape();
+                    sf::CircleShape colShape;
+                    colShape.setFillColor(sf::Color::Transparent);
+                    colShape.setOutlineColor(sf::Color::Red);
+                    colShape.setOutlineThickness(1);
+                    colShape.setOrigin(polygonShape->m_radius*30,polygonShape->m_radius*30);
+                    colShape.setRadius(polygonShape->m_radius*30);
+                    colShape.setPosition(bodyIter->GetPosition().x*30,bodyIter->GetPosition().y*30);
+                    window->draw(colShape);
+                }
+
+            }
+        }
+         window->draw(gameCamera.camBoundary);
+    }
+
     window->display();
-
-
 }
 /** The game is updated **/
 void Game::update(float dt)
@@ -198,18 +231,11 @@ void Game::processInput()
             }
             if(keyBoard.isKeyPressed(keyBoard.Num1))
             {
-                if(isVsynced)
-                {
-                    isVsynced = false;
-                    std::cout<<"VSync is OFF"<<std::endl;
-                }
-                else
-                {
-                    isVsynced = true;
-                     std::cout<<"VSync is ON"<<std::endl;
-                    //clock.restart();
-                }
-                window->setVerticalSyncEnabled(isVsynced);
+                toggleVsync();
+            }
+            if(keyBoard.isKeyPressed(keyBoard.Num2))
+            {
+                toggleCollisionView();
             }
         }
         if(event.type == sf::Event::MouseMoved)
@@ -229,6 +255,52 @@ void Game::processInput()
     }
 
 }
+
+void Game::toggleCollisionView()
+{
+    if(isCollisionViewOn)
+    {
+        isCollisionViewOn = false;
+    }
+    else
+    {
+        isCollisionViewOn = true;
+    }
+}
+
+void Game::toggleVsync()
+{
+    if(isVsyncOn)
+    {
+        isVsyncOn = false;
+        std::cout<<"VSYNC IS OFF"<<std::endl;
+    }
+    else
+    {
+        isVsyncOn = true;
+        std::cout<<"VSYNC IS ON"<<std::endl;
+    }
+    window->setVerticalSyncEnabled(isVsyncOn);
+}
+
+void Game::refresh()
+{
+    window->setView(gameCamera.camView);
+    window->clear(sf::Color::Black);
+}
+
+void Game::clean()
+{
+   int i = deathStack.size();
+   while(i>=1)
+   {
+        std::cout<<deathStack.top()->getID()<<" has been deleted"<<std::endl;
+        delete deathStack.top();
+        deathStack.pop();
+        i--;
+   }
+}
+
 
 
 Game::~Game()
