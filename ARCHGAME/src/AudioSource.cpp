@@ -1,16 +1,17 @@
 #include "AudioSource.h"
 
-AudioSource::AudioSource(std::string srcID, int limit)
+AudioSource::AudioSource(std::string srcID, int limit,GameEventListener* e)
 {
     audioID = srcID;
     isActive = false;
     volume = 5;
     soundLimit = limit;
+    _listener = e;
 }
 
 AudioSource::~AudioSource()
 {
-    //dtor
+    delete _listener;
 }
 
 std::string AudioSource::getID()
@@ -29,7 +30,6 @@ void AudioSource::load(std::string src)
     {
         std::cout<<"The sound source "<<src<<" could not be loaded"<<std::endl;
     }
-
 }
 
 
@@ -44,6 +44,8 @@ void AudioSource::play()
         soundStack.top().setVolume(volume);
         soundStack.top().play();
 
+        GameEvent_Audio* a = new GameEvent_Audio(audioID,AUDIO_START);
+        _listener->notifyEvent(a);
     }
 }
 
@@ -56,7 +58,8 @@ void AudioSource::update()
         {
         case sf::Sound::Stopped:
             soundStack.pop();
-
+            GameEvent_Audio* a = new GameEvent_Audio(audioID,AUDIO_END);
+            _listener->notifyEvent(a);
             break;
         }
 

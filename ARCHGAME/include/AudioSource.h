@@ -5,12 +5,15 @@
 #include <iostream>
 #include <string>
 
+#include "GameEvent_Audio.h"
+#include "GameEventListener.h"
+
 
 
 class AudioSource
 {
     public:
-        AudioSource(std::string srcID, int limit);
+        AudioSource(std::string srcID, int limit,GameEventListener* e);
         virtual ~AudioSource();
         std::string getID();
         bool getActive();
@@ -28,6 +31,7 @@ class AudioSource
         sf::SoundBuffer buffer;
         std::stack<sf::Sound> soundStack;
         std::vector<sf::Sound> pauseList;
+        GameEventListener* _listener;
     private:
 };
 

@@ -3,7 +3,7 @@
 	//[
 		//{
 	"backGroundMusic":"assets/Audio/Music/enchantmentinstumental_sonartuning.ogg",
-	"map":"testChamber1.json",
+	"map":"track.json",
 	 "sequences":
 	 [
 	 	{

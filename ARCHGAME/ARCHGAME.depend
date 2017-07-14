@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1488864971 source:c:\users\mesh\documents\projectarch\archgame\main.cpp
+1499539484 source:c:\users\mesh\documents\projectarch\archgame\main.cpp
 	<iostream>
 	"Game.h"
 
@@ -416,17 +416,17 @@
 	<string>
 	<vector>
 
-1498706681 source:c:\users\mesh\documents\projectarch\archgame\src\game.cpp
+1499537433 source:c:\users\mesh\documents\projectarch\archgame\src\game.cpp
 	"Game.h"
 	"AudioSystem.h"
+	<string>
 
-1498705470 c:\users\mesh\documents\projectarch\archgame\include\game.h
+1499400615 c:\users\mesh\documents\projectarch\archgame\include\game.h
 	<SFML/Graphics.hpp>
 	<Box2D/Box2D.h>
 	<SFML/Window.hpp>
 	<SFML/OpenGL.hpp>
 	<SFML/Audio.hpp>
-	<string>
 	<math.h>
 	<iostream>
 	"level.h"
@@ -437,6 +437,7 @@
 	"JsonHandler.h"
 	"RenderBatch.h"
 	"GraphicsComponent.h"
+	"GameStateManager.h"
 
 1456773003 c:\box2d_v2.3.1\box2d\box2d.h
 	<Box2D/Common/b2Settings.h>
@@ -754,17 +755,15 @@
 1498331269 source:c:\users\mesh\documents\projectarch\archgame\src\batch.cpp
 	"batch.h"
 
-1497566968 source:c:\users\mesh\documents\projectarch\archgame\src\gamecontroller.cpp
+1498769190 source:c:\users\mesh\documents\projectarch\archgame\src\gamecontroller.cpp
 	"GameController.h"
 
-1496206206 c:\users\mesh\documents\projectarch\archgame\include\gamecontroller.h
-	"json/json.h"
-	<iostream>
-	<fstream>
+1498768549 c:\users\mesh\documents\projectarch\archgame\include\gamecontroller.h
+	"JsonHandler.h"
 	<string>
 	<SFML/Window.hpp>
 
-1496674497 source:c:\users\mesh\documents\projectarch\archgame\src\playerinputcomponent.cpp
+1498769966 source:c:\users\mesh\documents\projectarch\archgame\src\playerinputcomponent.cpp
 	"playerInputComponent.h"
 
 1496350029 c:\users\mesh\documents\projectarch\archgame\include\playerinputcomponent.h
@@ -1282,7 +1281,7 @@
 1497990159 source:c:\users\mesh\documents\projectarch\archgame\src\gameevent.cpp
 	"GameEvent.h"
 
-1498705395 c:\users\mesh\documents\projectarch\archgame\include\gameevent.h
+1499206188 c:\users\mesh\documents\projectarch\archgame\include\gameevent.h
 	<queue>
 
 1493924540 source:c:\users\mesh\documents\projectarch\archgame\src\statuscomponent.cpp
@@ -1514,11 +1513,11 @@
 	<SFML/Audio/Export.hpp>
 	<string>
 
-1498059800 source:c:\users\mesh\documents\projectarch\archgame\src\audiosystem.cpp
+1499729015 source:c:\users\mesh\documents\projectarch\archgame\src\audiosystem.cpp
 	"AudioSystem.h"
 	"PhysicsComponent.h"
 
-1497992778 c:\users\mesh\documents\projectarch\archgame\include\audiosystem.h
+1499284270 c:\users\mesh\documents\projectarch\archgame\include\audiosystem.h
 	<SFML/Audio.hpp>
 	"AudioSource.h"
 	<iostream>
@@ -1526,13 +1525,15 @@
 	"json/json.h"
 	"GameEventHandler.h"
 
-1498016603 c:\users\mesh\documents\projectarch\archgame\include\audiosource.h
+1499284148 c:\users\mesh\documents\projectarch\archgame\include\audiosource.h
 	<stack>
 	<SFML/Audio.hpp>
 	<iostream>
 	<string>
+	"GameEvent_Audio.h"
+	"GameEventListener.h"
 
-1498017761 source:c:\users\mesh\documents\projectarch\archgame\src\audiosource.cpp
+1499284130 source:c:\users\mesh\documents\projectarch\archgame\src\audiosource.cpp
 	"AudioSource.h"
 
 1498063551 c:\users\mesh\documents\projectarch\archgame\include\gameeventlistener.h
@@ -1593,6 +1594,298 @@
 	"Action.h"
 	"entity.h"
 
-1498705806 c:\users\mesh\documents\projectarch\archgame\include\gameevent_action.h
+1499283795 c:\users\mesh\documents\projectarch\archgame\include\gameevent_action.h
 	<GameEvent.h>
+
+1498770923 source:c:\users\mesh\documents\projectarch\archgame\src\interface.cpp
+	"Interface.h"
+
+1498770152 c:\users\mesh\documents\projectarch\archgame\include\interface.h
+	<SFML/Graphics.hpp>
+	<SFML/Window.hpp>
+	<SFML/OpenGL.hpp>
+
+1499282910 c:\users\mesh\documents\projectarch\archgame\include\gamestatemanager.h
+
+1499537294 source:c:\users\mesh\documents\projectarch\archgame\src\gamestatemanager.cpp
+	"GameStateManager.h"
+
+1499284173 c:\users\mesh\documents\projectarch\archgame\include\gameevent_audio.h
+	<string>
+	<GameEvent.h>
+
+1499283923 source:c:\users\mesh\documents\projectarch\archgame\src\gameevent_audio.cpp
+	"GameEvent_Audio.h"
+
+1499193039 c:\tgui-0.7\include\tgui\tgui.hpp
+	<TGUI/Clipboard.hpp>
+	<TGUI/Animation.hpp>
+	<TGUI/Widget.hpp>
+	<TGUI/Container.hpp>
+	<TGUI/HorizontalLayout.hpp>
+	<TGUI/VerticalLayout.hpp>
+	<TGUI/Gui.hpp>
+	<TGUI/Loading/Deserializer.hpp>
+	<TGUI/Loading/Serializer.hpp>
+	<TGUI/Loading/Theme.hpp>
+	<TGUI/Loading/WidgetLoader.hpp>
+	<TGUI/Loading/WidgetSaver.hpp>
+	<TGUI/Widgets/Button.hpp>
+	<TGUI/Widgets/Canvas.hpp>
+	<TGUI/Widgets/ChatBox.hpp>
+	<TGUI/Widgets/CheckBox.hpp>
+	<TGUI/Widgets/ChildWindow.hpp>
+	<TGUI/Widgets/ClickableWidget.hpp>
+	<TGUI/Widgets/ComboBox.hpp>
+	<TGUI/Widgets/EditBox.hpp>
+	<TGUI/Widgets/Grid.hpp>
+	<TGUI/Widgets/Knob.hpp>
+	<TGUI/Widgets/Label.hpp>
+	<TGUI/Widgets/ListBox.hpp>
+	<TGUI/Widgets/MenuBar.hpp>
+	<TGUI/Widgets/MessageBox.hpp>
+	<TGUI/Widgets/Panel.hpp>
+	<TGUI/Widgets/Picture.hpp>
+	<TGUI/Widgets/ProgressBar.hpp>
+	<TGUI/Widgets/RadioButton.hpp>
+	<TGUI/Widgets/Scrollbar.hpp>
+	<TGUI/Widgets/Slider.hpp>
+	<TGUI/Widgets/SpinButton.hpp>
+	<TGUI/Widgets/Tab.hpp>
+	<TGUI/Widgets/TextBox.hpp>
+	<TGUI/Widgets/ToolTip.hpp>
+
+1499193038 c:\tgui-0.7\include\tgui\clipboard.hpp
+	<TGUI/Global.hpp>
+
+1499193038 c:\tgui-0.7\include\tgui\global.hpp
+	<TGUI/Config.hpp>
+	<TGUI/Borders.hpp>
+	<TGUI/Exception.hpp>
+	<SFML/Graphics.hpp>
+	<iostream>
+	<string>
+	<sstream>
+	<memory>
+	<locale>
+
+1499193038 c:\tgui-0.7\include\tgui\config.hpp
+	<SFML/Config.hpp>
+
+1499193038 c:\tgui-0.7\include\tgui\borders.hpp
+	<TGUI/Config.hpp>
+
+1499193038 c:\tgui-0.7\include\tgui\exception.hpp
+	<string>
+	<stdexcept>
+	<TGUI/Config.hpp>
+
+1499193038 c:\tgui-0.7\include\tgui\animation.hpp
+	<TGUI/Widget.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\widget.hpp
+	<TGUI/Global.hpp>
+	<TGUI/Signal.hpp>
+	<TGUI/Transformable.hpp>
+	<TGUI/Texture.hpp>
+	<TGUI/Color.hpp>
+	<TGUI/Font.hpp>
+	<TGUI/Loading/Deserializer.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\signal.hpp
+	<TGUI/Global.hpp>
+	<TGUI/Callback.hpp>
+	<map>
+	<deque>
+	<memory>
+	<cassert>
+	<functional>
+
+1499193038 c:\tgui-0.7\include\tgui\callback.hpp
+	<map>
+	<list>
+	<functional>
+	<TGUI/Global.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\transformable.hpp
+	<TGUI/Global.hpp>
+	<TGUI/Layout.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\layout.hpp
+	<SFML/System/Vector2.hpp>
+	<TGUI/Config.hpp>
+	<functional>
+	<memory>
+	<vector>
+	<set>
+
+1499193039 c:\tgui-0.7\include\tgui\texture.hpp
+	<TGUI/TextureData.hpp>
+	<TGUI/TextureManager.hpp>
+	<TGUI/Global.hpp>
+	<functional>
+
+1499193039 c:\tgui-0.7\include\tgui\texturedata.hpp
+	<TGUI/Config.hpp>
+	<SFML/Graphics/Image.hpp>
+	<SFML/Graphics/Texture.hpp>
+	<SFML/Graphics/Rect.hpp>
+	<memory>
+	<string>
+
+1499193039 c:\tgui-0.7\include\tgui\texturemanager.hpp
+	<TGUI/TextureData.hpp>
+	<TGUI/Config.hpp>
+	<list>
+	<map>
+	<memory>
+
+1499193038 c:\tgui-0.7\include\tgui\color.hpp
+	<TGUI/Global.hpp>
+
+1499193038 c:\tgui-0.7\include\tgui\font.hpp
+	<TGUI/Global.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\loading\deserializer.hpp
+	<TGUI/Loading/ObjectConverter.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\loading\objectconverter.hpp
+	<TGUI/Color.hpp>
+	<TGUI/Borders.hpp>
+	<TGUI/Texture.hpp>
+
+1499193038 c:\tgui-0.7\include\tgui\container.hpp
+	<list>
+	<TGUI/Widget.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\horizontallayout.hpp
+	<TGUI/BoxLayout.hpp>
+
+1499193038 c:\tgui-0.7\include\tgui\boxlayout.hpp
+	<TGUI/Widgets/Panel.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\widgets\panel.hpp
+	<TGUI/Container.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\verticallayout.hpp
+	<TGUI/BoxLayout.hpp>
+
+1499193038 c:\tgui-0.7\include\tgui\gui.hpp
+	<queue>
+	<TGUI/Container.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\loading\serializer.hpp
+	<TGUI/Loading/ObjectConverter.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\loading\theme.hpp
+	<TGUI/Widget.hpp>
+	<TGUI/Loading/WidgetConverter.hpp>
+	<TGUI/Loading/ThemeLoader.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\loading\widgetconverter.hpp
+	<TGUI/Widget.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\loading\themeloader.hpp
+	<TGUI/Widget.hpp>
+	<memory>
+	<string>
+	<vector>
+	<map>
+
+1499193039 c:\tgui-0.7\include\tgui\loading\widgetloader.hpp
+	<TGUI/Loading/WidgetConverter.hpp>
+	<TGUI/Loading/DataIO.hpp>
+	<TGUI/Container.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\loading\dataio.hpp
+	<TGUI/Config.hpp>
+	<sstream>
+	<memory>
+	<vector>
+	<string>
+	<map>
+	<cstdio>
+
+1499193039 c:\tgui-0.7\include\tgui\loading\widgetsaver.hpp
+	<TGUI/Loading/WidgetConverter.hpp>
+	<TGUI/Loading/DataIO.hpp>
+	<TGUI/Container.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\widgets\button.hpp
+	<TGUI/Widgets/Label.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\widgets\label.hpp
+	<TGUI/Widgets/ClickableWidget.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\widgets\clickablewidget.hpp
+	<TGUI/Widget.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\widgets\canvas.hpp
+	<TGUI/Widgets/ClickableWidget.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\widgets\chatbox.hpp
+	<TGUI/Widget.hpp>
+	<TGUI/Widgets/Panel.hpp>
+	<TGUI/Widgets/Scrollbar.hpp>
+	<deque>
+
+1499193039 c:\tgui-0.7\include\tgui\widgets\scrollbar.hpp
+	<TGUI/Widget.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\widgets\checkbox.hpp
+	<TGUI/Widgets/RadioButton.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\widgets\radiobutton.hpp
+	<TGUI/Widgets/Label.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\widgets\childwindow.hpp
+	<TGUI/Container.hpp>
+	<TGUI/Widgets/Button.hpp>
+	<TGUI/Widgets/Label.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\widgets\combobox.hpp
+	<TGUI/Widgets/Label.hpp>
+	<TGUI/Widgets/ListBox.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\widgets\listbox.hpp
+	<TGUI/Widgets/Scrollbar.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\widgets\editbox.hpp
+	<TGUI/Widgets/ClickableWidget.hpp>
+	<regex>
+
+1499193039 c:\tgui-0.7\include\tgui\widgets\grid.hpp
+	<TGUI/Container.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\widgets\knob.hpp
+	<TGUI/Widget.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\widgets\menubar.hpp
+	<TGUI/Widgets/Label.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\widgets\messagebox.hpp
+	<TGUI/Widgets/Label.hpp>
+	<TGUI/Widgets/Button.hpp>
+	<TGUI/Widgets/ChildWindow.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\widgets\picture.hpp
+	<TGUI/Widgets/ClickableWidget.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\widgets\progressbar.hpp
+	<TGUI/Widgets/Label.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\widgets\slider.hpp
+	<TGUI/Widget.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\widgets\spinbutton.hpp
+	<TGUI/Widgets/ClickableWidget.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\widgets\tab.hpp
+	<TGUI/Widgets/Label.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\widgets\textbox.hpp
+	<TGUI/Widget.hpp>
+
+1499193039 c:\tgui-0.7\include\tgui\widgets\tooltip.hpp
+	<TGUI/Widgets/Label.hpp>
 

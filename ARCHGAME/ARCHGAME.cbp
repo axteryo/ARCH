@@ -27,6 +27,8 @@
 					<Add directory="../../../../../SFML/include" />
 					<Add directory="../../../../../Box2D_v2.3.1" />
 					<Add directory="include" />
+					<Add directory="../../../../../TGUI-0.7/include" />
+					<Add directory="../../../../../sfgui-0.3.1-mingw_builds-6.1.0-posix-seh-64/include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -35,9 +37,13 @@
 					<Add library="..\..\..\..\..\SFML\lib\libsfml-window.a" />
 					<Add library="..\..\..\..\..\SFML\lib\libsfml-system.a" />
 					<Add library="..\..\..\..\..\SFML\lib\libsfml-audio.a" />
+					<Add library="..\..\..\..\..\TGUI-0.7\lib\libtgui.a" />
+					<Add library="..\..\..\..\..\sfgui-0.3.1-mingw_builds-6.1.0-posix-seh-64\lib\libsfgui.a" />
 					<Add directory="../../../../../Box2D_v2.3.1/Box2D" />
 					<Add directory="../../../../../SFML/lib" />
 					<Add directory="../../../../../SFML/bin" />
+					<Add directory="../../../../../TGUI-0.7/lib" />
+					<Add directory="../../../../../sfgui-0.3.1-mingw_builds-6.1.0-posix-seh-64/lib" />
 				</Linker>
 			</Target>
 		</Build>
@@ -47,6 +53,7 @@
 			<Add option="-fexceptions" />
 			<Add directory="../../../../../Box2D_v2.3.1" />
 			<Add directory="../../../../../SFML/include" />
+			<Add directory="../../../../../TGUI-0.7/include" />
 		</Compiler>
 		<Linker>
 			<Add library="..\..\..\..\..\Box2D_v2.3.1\Build\Box2D\libBox2D.a" />
@@ -74,13 +81,16 @@
 		<Unit filename="include/GameEventHandler.h" />
 		<Unit filename="include/GameEventListener.h" />
 		<Unit filename="include/GameEvent_Action.h" />
+		<Unit filename="include/GameEvent_Audio.h" />
 		<Unit filename="include/GameEvent_Collision.h" />
 		<Unit filename="include/GameEvent_Entity.h" />
 		<Unit filename="include/GameEvent_Sequence.h" />
 		<Unit filename="include/GameMap.h" />
+		<Unit filename="include/GameStateManager.h" />
 		<Unit filename="include/GraphicsComponent.h" />
 		<Unit filename="include/GridModeAttack.h" />
 		<Unit filename="include/InputComponent.h" />
+		<Unit filename="include/Interface.h" />
 		<Unit filename="include/JsonHandler.h" />
 		<Unit filename="include/MovementAction.h" />
 		<Unit filename="include/ObjectEntity.h" />
@@ -122,13 +132,16 @@
 		<Unit filename="src/GameEventHandler.cpp" />
 		<Unit filename="src/GameEventListener.cpp" />
 		<Unit filename="src/GameEvent_Action.cpp" />
+		<Unit filename="src/GameEvent_Audio.cpp" />
 		<Unit filename="src/GameEvent_Collision.cpp" />
 		<Unit filename="src/GameEvent_Entity.cpp" />
 		<Unit filename="src/GameEvent_Sequence.cpp" />
 		<Unit filename="src/GameMap.cpp" />
+		<Unit filename="src/GameStateManager.cpp" />
 		<Unit filename="src/GraphicsComponent.cpp" />
 		<Unit filename="src/GridModeAttack.cpp" />
 		<Unit filename="src/InputComponent.cpp" />
+		<Unit filename="src/Interface.cpp" />
 		<Unit filename="src/JsonHandler.cpp" />
 		<Unit filename="src/MovementAction.cpp" />
 		<Unit filename="src/ObjectEntity.cpp" />

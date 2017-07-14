@@ -7,7 +7,8 @@
 #include <SFML/OpenGL.hpp>
 #include <SFML/Audio.hpp>
 
-#include <string>
+
+
 #include <math.h>
 #include <iostream>
 
@@ -20,6 +21,7 @@
 #include "JsonHandler.h"
 #include "RenderBatch.h"
 #include "GraphicsComponent.h"
+#include "GameStateManager.h"
 
 
 class Game
@@ -37,8 +39,8 @@ class Game
     protected:
     private:
         /**Game Variables**/
-
         bool gameRunning;
+
 
         /**SFML Variables**/
         sf::Vector2f v2f_windowSize;
@@ -54,6 +56,9 @@ class Game
         sf::Time currentTime;
         double flPreviousTime;
         double dt;
+
+        sf::Text elapsedText;
+        sf::Text accumulatorText;
 
         /**Box2d Variables**/
 
@@ -71,13 +76,20 @@ class Game
         void processInput();
         void update(float dt);
         void render(double alpha);
+        void runMainMenu();
+        void runGameLevel();
+        void resolveEvents();
+
+        double lastTime;
+        double newTime;
+        double elapsed;
+        double accumulator;
+        double alpha;
 
         level gameLevel;
-        //GameController controller;
 
 
-
-
+        GameStateManager * GameState;
 };
 
 #endif // GAME_H

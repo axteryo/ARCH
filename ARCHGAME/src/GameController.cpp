@@ -12,6 +12,9 @@ GameController::GameController()
     playerUseAttack1Action="";
     playerUseAttack2Action="";
     playerUseAttack3Action="";
+    selectBackwardAction = "";
+    selectForwardAction ="";
+    confirmSelectionAction = "";
 }
 
 GameController::~GameController()
@@ -19,34 +22,25 @@ GameController::~GameController()
     //dtor
 }
 
-void GameController::loadBindings()
+void GameController::loadDefaultBindings()
 {
-    Json::Value root;
-    Json::Reader reader;
-    std::ifstream file;
-    file.open("data/keyMap.json");
-
-    bool parsedSuccess = reader.parse(file,root,false);
-    if(!parsedSuccess)
-    {
-        std::cout<<"failed to parse JSON"<< std::endl
-        <<reader.getFormattedErrorMessages()
-        <<std::endl;
-    }
-    else
+    baseKeyRoot = jsonHandler.loadJson("data/keyMap.json");
+    if(!baseKeyRoot.empty())
     {
         std::cout<<"Controller Bindings have successfully been loaded"<<std::endl;
-    }
-    playerThrustAction=root["thrust"].asString();
-    playerBrakeAction = root["brake"].asString();
-    playerTurnLeftAction=root["turnLeft"].asString();
-    playerTurnRightAction=root["turnRight"].asString();
-    playerBoostAction=root["boost"].asString();
-    playerUseAttack1Action=root["useAttack1"].asString();
-    playerUseAttack2Action=root["useAttack2"].asString();
-    playerUseAttack3Action=root["useAttack3"].asString();
 
-    file.close();
+        playerThrustAction=baseKeyRoot["thrust"].asString();
+        playerBrakeAction = baseKeyRoot["brake"].asString();
+        playerTurnLeftAction=baseKeyRoot["turnLeft"].asString();
+        playerTurnRightAction=baseKeyRoot["turnRight"].asString();
+        playerBoostAction=baseKeyRoot["boost"].asString();
+        playerUseAttack1Action=baseKeyRoot["useAttack1"].asString();
+        playerUseAttack2Action=baseKeyRoot["useAttack2"].asString();
+        playerUseAttack3Action=baseKeyRoot["useAttack3"].asString();
+        selectBackwardAction = baseKeyRoot["selectBackward"].asString();
+        selectForwardAction =baseKeyRoot["selectForward"].asString();
+        confirmSelectionAction =baseKeyRoot["confirmSelection"].asString();
+    }
 }
 
 bool GameController::isBindedKeyPressed(std::string bindingToCheck)
@@ -237,6 +231,39 @@ bool GameController::isActionKeyPressed(std::string actionToCheck)
     if(actionToCheck.compare("useAttack3")==0)
     {
         if(isBindedKeyPressed(playerUseAttack3Action))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    if(actionToCheck.compare("selectForward")==0)
+    {
+        if(isBindedKeyPressed(selectForwardAction))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    if(actionToCheck.compare("selectBackward")==0)
+    {
+        if(isBindedKeyPressed(selectBackwardAction))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    if(actionToCheck.compare("confirmSelection")==0)
+    {
+        if(isBindedKeyPressed(confirmSelectionAction))
         {
             return true;
         }

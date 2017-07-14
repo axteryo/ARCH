@@ -7,6 +7,8 @@ AudioSystem::AudioSystem()
     narrationVolume = 10;
     sfxVolume = 10;
     isNarrationActive = false;
+    audioLimit = 256;
+    audioCount = 0;
 }
 
 AudioSystem::~AudioSystem()
@@ -44,7 +46,9 @@ void AudioSystem::loadAudio()
         int limit = dataRoot["sfx"][i]["countLimit"].asInt();
         std::string src = dataRoot["sfx"][i]["source"].asString();
 
-        AudioSource* audio = new AudioSource(id,limit);
+        GameEventListener* l = new GameEventListener();
+
+        AudioSource* audio = new AudioSource(id,limit,l);
         audio->load(src);
         audioList.push_back(audio);
     }
@@ -52,12 +56,15 @@ void AudioSystem::loadAudio()
 
 void AudioSystem::playAudio(std::string srcID)
 {
-    for(int i = 0;i<audioList.size();i++)
+    if(audioCount<audioLimit)
     {
-        if(audioList[i]->getID().compare(srcID)==0)
+        for(int i = 0;i<audioList.size();i++)
         {
-            audioList[i]->play();
-            break;
+            if(audioList[i]->getID().compare(srcID)==0)
+            {
+                audioList[i]->play();
+                break;
+            }
         }
     }
 }
@@ -71,8 +78,8 @@ void AudioSystem::setBackGroundMusic(std::string src)
 
 	musicChannel.setLoop(true);
 	musicChannel.play();
-	//musicChannel.setVolume(musicVolume);
-	musicChannel.setVolume(0);
+	musicChannel.setVolume(musicVolume);
+	//musicChannel.setVolume(0);
 }
 
 void AudioSystem::update()
@@ -90,15 +97,36 @@ void AudioSystem::handleEvent(GameEvent* e)
 {
     switch(e->getEventType())
     {
-    case GameEvent::EVENT_COLLISION:
-
-        GameEvent_Collision* colEvent = static_cast<GameEvent_Collision*>(e);
-        if(colEvent->A_Data->type.compare("bodyFixture")==0&&colEvent->B_Data->type.compare("bodyFixture")==0)
+        /************************************/
+        case GameEvent::EVENT_COLLISION:
         {
-            playAudio("metalClang1");
+            GameEvent_Collision* colEvent = static_cast<GameEvent_Collision*>(e);
+            if(colEvent->A_Data->type.compare("bodyFixture")==0&&colEvent->B_Data->type.compare("bodyFixture")==0)
+            {
+                playAudio("metalClang1");
+            }
+            break;
         }
-        break;
-
+        /************************************/
+        case GameEvent::EVENT_AUDIO:
+        {
+            GameEvent_Audio* audioEvent = static_cast<GameEvent_Audio*>(e);
+            switch(audioEvent->audio_state)
+            {
+            case AUDIO_START:
+                audioCount++;
+                break;
+            case AUDIO_END:
+                audioCount--;
+                break;
+            }
+            break;
+        }
+        /************************************/
+        case GameEvent::EVENT_ACTION:
+        {
+            break;
+        }
     }
 
 }

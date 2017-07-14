@@ -1,8 +1,6 @@
 #include "Game.h"
 #include "AudioSystem.h"
-
-GameController controller;
-
+#include <string>
 
 
 
@@ -23,118 +21,74 @@ Game::Game()
     positionIterations = 2;
     //isVsynced = true;
     window->setVerticalSyncEnabled(isVsyncOn);
+    GameState = new GameStateManager();
+
+    lastTime = 0.0;
+    newTime = 0.0;
+    lastTime=clock.getElapsedTime().asSeconds();
+    elapsed = 0.0;
+    accumulator = 0.0;
+    alpha = 0.0;
+
+    ///Game Controller Bindings are loaded
+    controller.loadDefaultBindings();
 }
 
 void Game::start()
 {
 
-    double lastTime = 0.0;
-    double newTime = 0.0;
-    lastTime=clock.getElapsedTime().asSeconds();
-    double elapsed = 0.0;
-    double accumulator = 0.0;
-    int t = 0.0;
-    int counter = 0;
-    int counterRun = 0;
-    int lastCounter = 0;
-
-
-
-
-    ///Game Controller Bindings are loaded
-    controller.loadBindings();
-    ///load function is called here to load the entities and assets of the game level
-    gameLevel.setup();
-    gameLevel.load("data/testLevel.json");
-    gameLevel.initiate();
-    //audioSystem->playAudio("metalClang1");
-    int i = GameEventQueue.size();
-    while(i>=1)
-    {
-        std::cout<<GameEventQueue.size()<<std::endl;
-        delete GameEventQueue.front();
-        GameEventQueue.pop();
-        i--;
-    }
     while(window->isOpen())
     {
 
-
         ///Process user input
         processInput();
-
-        /// The clock goes forward so we store the current time in newTime
-        ///Then we get how much has elapsed bu subtracting the lastTime
         newTime = clock.getElapsedTime().asSeconds();
-        elapsed =clock.restart().asSeconds(); //newTime-lastTime;
-//        std::cout<<"Elapsed time:"<<1/elapsed<<std::endl;
-
+        elapsed =clock.restart().asSeconds();
         lastTime = newTime;
         accumulator +=elapsed;
 
-        double alpha;
 
-      ///update logic at a fixed rate of 60
         if(isVsyncOn)
         {
-            int a = 0;
             while(accumulator<dt)
             {
-                //std::cout<<"Elapsed time:"<<1/elapsed<<std::endl;
                 accumulator+=(dt/80);
-                //std::cout<<"we are here"<<std::endl;
-                //std::cout<<"LEFTOVER TIME:"
-                //<<accumulator<<std::endl;
-                //a++;
             }
-            //std::cout<<a<<std::endl;
         }
-
-        while(accumulator>=dt)
+        /****************************************/
+        switch(GameState->system_game_state)
         {
-            accumulator-=dt;
-            gameLevel.physicsUpdate(dt,accumulator);
-            collisionSystem->update();
-            update(dt);
-            int i = GameEventQueue.size();
+            case GameState->SYSTEM_IN_MAIN_MENU:
+                runMainMenu();
+            break;
+            /****************************************/
+            case GameState->SYSTEM_START_LEVEL:
+                gameLevel.setup();
+                GameState->system_game_state = GameState->SYSTEM_IN_LEVEL;
+            break;
+           /****************************************/
+            case GameState->SYSTEM_IN_LEVEL:
 
-            while(i>=1)
-            {
-               // std::cout<<GameEventQueue.size()<<std::endl;
-               switch(GameEventQueue.front()->getEventType())
+                switch(GameState->level_game_state)
                 {
-                case GameEvent::EVENT_ACTION:
-                    audioSystem->handleEvent(GameEventQueue.front());
+                    case GameState->LEVEL_LOADING:
+                        gameLevel.load("data/testLevel.json");
+                        gameLevel.initiate();
+                        GameState->level_game_state =GameState->LEVEL_IN_GAME;
                     break;
-
-                case GameEvent::EVENT_COLLISION:
-                    audioSystem->handleEvent(GameEventQueue.front());
+                     /****************************************/
+                    case GameState->LEVEL_IN_GAME:
+                        runGameLevel();
                     break;
-
-                case GameEvent::EVENT_ENTITY:
+                    /*****************************************/
+                    case GameState->LEVEL_PAUSED:
                     break;
-
-                case GameEvent::EVENT_SEQUENCE:
-                    audioSystem->handleEvent(GameEventQueue.front());
-                    gameLevel.handleEvent(GameEventQueue.front());
-                    break;
-
-                case GameEvent::EVENT_GAMESTATE:
-                    audioSystem->handleEvent(GameEventQueue.front());
-                    gameLevel.handleEvent(GameEventQueue.front());
-                    break;
-
-                case GameEvent::EVENT_MENU:
-                    audioSystem->handleEvent(GameEventQueue.front());
-                    break;
+                     /****************************************/
                 }
-
-
-                delete GameEventQueue.front();
-                GameEventQueue.pop();
-                i--;
-            }
+            break;
+            /****************************************/
         }
+        /****************************************/
         audioSystem->update();
         alpha = (accumulator/dt);
 
@@ -155,62 +109,98 @@ void Game::_end()
 void Game::render(double alpha)
 {
     refresh();
-    gameLevel.render(window,alpha);
-    if(isCollisionViewOn)
+
+    switch(GameState->system_game_state)
     {
-        for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
-        {
-            b2PolygonShape* polygonShape;
-            //sf::ConvexShape colShape;
-            //sf::Shape colShape;
-            //colShape = sf::ConvexShape;
-            for (b2Fixture* f = bodyIter->GetFixtureList(); f; f = f->GetNext())
+        case GameState->SYSTEM_IN_MAIN_MENU:
+        break;
+        /****************************************/
+        case GameState->SYSTEM_IN_LEVEL:
+            gameLevel.render(window,alpha);
+            /****************************************/
+            switch(GameState->level_game_state)
             {
-                b2Shape::Type shapeType = f->GetType();
-                if(shapeType == b2Shape::e_polygon)
-                {
-                    sf::ConvexShape colShape;
-                    polygonShape = (b2PolygonShape*)f->GetShape();
-                     colShape.setPointCount(polygonShape->GetVertexCount());
-                    int i = 0;
-                    for(int ii = polygonShape->GetVertexCount()-1; ii>=0 ; ii--)
-                    {
-                        colShape.setPoint(ii,sf::Vector2f((polygonShape->GetVertex(i).x)*30,(polygonShape->GetVertex(i).y)*30));
-                        i++;
-                    }
-                    colShape.setFillColor(sf::Color::Transparent);
-                    colShape.setOutlineColor(sf::Color::Blue);
-                    colShape.setOutlineThickness(1);
-                    colShape.setPosition(bodyIter->GetPosition().x*30,bodyIter->GetPosition().y*30);
-                    colShape.setRotation((bodyIter->GetTransform().q.GetAngle()*((180/3.14159))));
-                    window->draw(colShape);
-
-                }
-                if(shapeType == b2Shape::e_circle)
-                {
-
-                    polygonShape = (b2PolygonShape*)f->GetShape();
-                    sf::CircleShape colShape;
-                    colShape.setFillColor(sf::Color::Transparent);
-                    colShape.setOutlineColor(sf::Color::Red);
-                    colShape.setOutlineThickness(1);
-                    colShape.setOrigin(polygonShape->m_radius*30,polygonShape->m_radius*30);
-                    colShape.setRadius(polygonShape->m_radius*30);
-                    colShape.setPosition(bodyIter->GetPosition().x*30,bodyIter->GetPosition().y*30);
-                    window->draw(colShape);
-                }
-
+                case GameState->LEVEL_PAUSED:
+                break;
             }
-        }
-         window->draw(gameCamera.camBoundary);
+            /****************************************/
+        break;
+        /****************************************/
     }
+
+
+    switch(GameState->debug_state)
+    {
+        case GameState->DEBUG_OFF:
+        break;
+        /****************************************/
+        case GameState->DEBUG_ON:
+            /*int val = 1/elapsed;
+            st
+            elapsedText.setString("FPS : " + text);
+            elapsedText.setCharacterSize(10);
+            elapsedText.setFillColor(sf::Color::White);
+
+                    //std::cout<<"LEFTOVER TIME:"
+                    //<<accumulator<<std::endl;*/
+            /****************************************/
+            for(b2Body* bodyIter = world->GetBodyList(); bodyIter!=0; bodyIter = bodyIter->GetNext())
+            {
+                b2PolygonShape* polygonShape;
+                //sf::ConvexShape colShape;
+                //sf::Shape colShape;
+                //colShape = sf::ConvexShape;
+                for (b2Fixture* f = bodyIter->GetFixtureList(); f; f = f->GetNext())
+                {
+                    b2Shape::Type shapeType = f->GetType();
+                    if(shapeType == b2Shape::e_polygon)
+                    {
+                        sf::ConvexShape colShape;
+                        polygonShape = (b2PolygonShape*)f->GetShape();
+                         colShape.setPointCount(polygonShape->GetVertexCount());
+                        int i = 0;
+                        for(int ii = polygonShape->GetVertexCount()-1; ii>=0 ; ii--)
+                        {
+                            colShape.setPoint(ii,sf::Vector2f((polygonShape->GetVertex(i).x)*30,(polygonShape->GetVertex(i).y)*30));
+                            i++;
+                        }
+                        colShape.setFillColor(sf::Color::Transparent);
+                        colShape.setOutlineColor(sf::Color::Blue);
+                        colShape.setOutlineThickness(1);
+                        colShape.setPosition(bodyIter->GetPosition().x*30,bodyIter->GetPosition().y*30);
+                        colShape.setRotation((bodyIter->GetTransform().q.GetAngle()*((180/3.14159))));
+                        window->draw(colShape);
+                    }
+                    if(shapeType == b2Shape::e_circle)
+                    {
+                        polygonShape = (b2PolygonShape*)f->GetShape();
+                        sf::CircleShape colShape;
+                        colShape.setFillColor(sf::Color::Transparent);
+                        colShape.setOutlineColor(sf::Color::Red);
+                        colShape.setOutlineThickness(1);
+                        colShape.setOrigin(polygonShape->m_radius*30,polygonShape->m_radius*30);
+                        colShape.setRadius(polygonShape->m_radius*30);
+                        colShape.setPosition(bodyIter->GetPosition().x*30,bodyIter->GetPosition().y*30);
+                        window->draw(colShape);
+                    }
+
+                }
+            }
+            /****************************************/
+            window->draw(gameCamera.camBoundary);
+            //window->draw(elapsedText);
+        break;
+        /****************************************/
+
+    }
+
 
     window->display();
 }
 /** The game is updated **/
 void Game::update(float dt)
 {
-    gameLevel.update(dt);
+
 }
 
 /** Input is Processed through the windows pollEvent() function **/
@@ -218,6 +208,7 @@ void Game::processInput()
 {
     while(window->pollEvent(event))
     {
+
         if(event.type==sf::Event::Closed)
         {
             gameRunning = false;
@@ -302,6 +293,70 @@ void Game::clean()
 }
 
 
+/**The Core**/
+void Game::runMainMenu()
+{
+        while(accumulator>=dt)
+        {
+            accumulator-=dt;
+            //mainMenu->update();
+            resolveEvents();
+        }
+}
+void Game::runGameLevel()
+{
+        ///update logic at a fixed rate of 60
+        while(accumulator>=dt)
+        {
+            accumulator-=dt;
+            gameLevel.physicsUpdate(dt,accumulator);
+            collisionSystem->update();
+            gameLevel.update(dt);
+            resolveEvents();
+        }
+}
+
+void Game::resolveEvents()
+{
+           int i = GameEventQueue.size();
+            while(i>=1)
+            {
+               switch(GameEventQueue.front()->getEventType())
+                {
+                case GameEvent::EVENT_ACTION:
+                    audioSystem->handleEvent(GameEventQueue.front());
+                    break;
+
+                case GameEvent::EVENT_COLLISION:
+                    audioSystem->handleEvent(GameEventQueue.front());
+                    break;
+
+                case GameEvent::EVENT_ENTITY:
+                    break;
+
+                case GameEvent::EVENT_SEQUENCE:
+                    audioSystem->handleEvent(GameEventQueue.front());
+                    gameLevel.handleEvent(GameEventQueue.front());
+                    break;
+
+                case GameEvent::EVENT_GAMESTATE:
+                    audioSystem->handleEvent(GameEventQueue.front());
+                    gameLevel.handleEvent(GameEventQueue.front());
+                    break;
+
+                case GameEvent::EVENT_MENU:
+                    audioSystem->handleEvent(GameEventQueue.front());
+                    break;
+                case GameEvent::EVENT_AUDIO:
+                    audioSystem->handleEvent(GameEventQueue.front());
+                    gameLevel.handleEvent(GameEventQueue.front());
+                    break;
+                }
+                delete GameEventQueue.front();
+                GameEventQueue.pop();
+                i--;
+            }
+}
 
 Game::~Game()
 {

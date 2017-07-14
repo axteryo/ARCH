@@ -2,5 +2,8 @@
 	"turnRed" :"Down" ,
 	"turnBlue" :"Up" ,
 	"turnGreen" :"Right" ,
-	"turnYellow" :"Left"
+	"turnYellow" :"Left",
+	"confirmSelection":"Space",
+	"selectForward":"Up",
+	"selectBackward":"Down"
 }

@@ -1,6 +1,6 @@
 #include "playerInputComponent.h"
 
-
+GameController controller;
 
 
 playerInputComponent::playerInputComponent()

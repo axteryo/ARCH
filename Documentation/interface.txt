@@ -1,0 +1,36 @@
+INTERFACE SYSTEM
+
+ui element: button, text display, icon/image, panel
+
+ui element  components: label, graphic, container 
+
+ui element variables:
+{
+elementType
+transform(position,rotation,scale)
+control_pressState
+control_overState
+}
+
+button
+{
+	label
+	graphic
+	container
+}
+text display
+{
+	label
+	container
+}
+icon
+{
+	graphic
+	container
+}
+panel
+{
+	label
+	container
+	subElementsVector
+}

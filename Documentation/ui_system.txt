@@ -11,7 +11,47 @@ Icon/image
 slider
 container/panel
 tab
-
 }
 
-NOTE TO SEL**** Look into model view controler derek banas
+GUI element component system
+
+common components: label,icon/image, pos,rotation,center ,rect
+
+
+interactable gui elements
+[
+button
+slider
+tab
+]
+
+controller/interface/interactive states
+[
+control_over
+control_pressed
+control_none
+]
+
+gui element
+{
+ position;
+ center;
+}
+
+
+gui button
+
+{
+	string label;
+	buttontype
+	texture
+	quad
+	{
+		point1, point2, point3, point4
+		texturePos
+		center
+		rotation
+	}
+}
+
+

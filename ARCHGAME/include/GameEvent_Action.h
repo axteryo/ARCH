@@ -10,7 +10,6 @@ enum ActionState
 {
     ACTION_INITIATE,
     ACTION_IN_PROGRESS,
-
 };
 
 class GameEvent_Action: public GameEvent

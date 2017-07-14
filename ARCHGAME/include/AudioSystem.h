@@ -29,6 +29,8 @@ class AudioSystem : GameEventHandler
          int narrationVolume;
          int sfxVolume;
          int musicVolume;
+         int audioLimit;
+         int audioCount;
 
          bool isNarrationActive;
 

@@ -17,7 +17,8 @@ class GameEvent
             EVENT_GAMESTATE,
             EVENT_ENTITY,
             EVENT_ACTION,
-            EVENT_MENU
+            EVENT_MENU,
+            EVENT_AUDIO
         }event_type;
 
         eventType getEventType();
