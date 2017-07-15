@@ -316,6 +316,11 @@ void Game::runGameLevel()
         }
 }
 
+void Game::handleEvent(GameEvent* e)
+{
+
+}
+
 void Game::resolveEvents()
 {
            int i = GameEventQueue.size();
@@ -325,6 +330,7 @@ void Game::resolveEvents()
                 {
                 case GameEvent::EVENT_ACTION:
                     audioSystem->handleEvent(GameEventQueue.front());
+                    handleEvent(GameEventQueue.front());
                     break;
 
                 case GameEvent::EVENT_COLLISION:
@@ -332,11 +338,13 @@ void Game::resolveEvents()
                     break;
 
                 case GameEvent::EVENT_ENTITY:
+                    handleEvent(GameEventQueue.front());
                     break;
 
                 case GameEvent::EVENT_SEQUENCE:
                     audioSystem->handleEvent(GameEventQueue.front());
                     gameLevel.handleEvent(GameEventQueue.front());
+                    handleEvent(GameEventQueue.front());
                     break;
 
                 case GameEvent::EVENT_GAMESTATE:
@@ -344,8 +352,9 @@ void Game::resolveEvents()
                     gameLevel.handleEvent(GameEventQueue.front());
                     break;
 
-                case GameEvent::EVENT_MENU:
+                case GameEvent::EVENT_INTERFACE:
                     audioSystem->handleEvent(GameEventQueue.front());
+                    handleEvent(GameEventQueue.front());
                     break;
                 case GameEvent::EVENT_AUDIO:
                     audioSystem->handleEvent(GameEventQueue.front());

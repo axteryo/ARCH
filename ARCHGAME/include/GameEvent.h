@@ -17,7 +17,7 @@ class GameEvent
             EVENT_GAMESTATE,
             EVENT_ENTITY,
             EVENT_ACTION,
-            EVENT_MENU,
+            EVENT_INTERFACE,
             EVENT_AUDIO
         }event_type;
 

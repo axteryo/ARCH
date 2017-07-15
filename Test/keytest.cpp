@@ -263,50 +263,12 @@ class GameController
 GameController* gC;
 
 
-class UI_Element
-{
-    public:
-    enum UI_TYPE
-    {
-        BUTTON,
-        TEXT_DISPLAY,
-        ICON,
-        PANEL
-    }ui_type;
-    enum CONTROL_OVER_STATE
-    {
-        CONTROL_OVER_T,
-        CONTROL_OVER_F
-    }control_over_state;
-    enum CONTROL_PRESS_STATE
-    {
-        CONTROL_PRESS_T,
-        CONTROL_PRESS_F
-    }control_press_state;
-
-    sf::Vector2f position;
-    sf::Vector2f scale;
-    float rotation;
-    sf::RectangleShape body;
-
-    sf::RectangleShape getBody()
-    {
-        return body;
-    }
-    virtual void handleEvent(sf::Event e) = 0;
-    bool isMouseOver(sf::Vector2f pos)
-    {
-        if(body.getGlobalBounds().contains(pos.x,pos.y))
-        {
-            return true;
-        }
-        return false;
-    }
-
-};
 class UI_Component
 {
-
+public:
+    sf::Vector2f position;
+    sf::Vector2f relative_position;
+    sf::Vector2f scale;
 };
 class UIC_Label: UI_Component
 {
@@ -329,29 +291,133 @@ class UIC_Label: UI_Component
         }
         void setPosition(sf::Vector2f pos)
         {
+            position = pos;
             text.setPosition(pos);
         }
+};
+
+class UIC_Graphic : public UI_Component
+{
+    public:
+        sf::Texture texture;
+        sf::Sprite sprite;
+
+        void loadTexture(std::string src)
+        {
+            texture.loadFromFile(src);
+            sprite.setTexture(texture);
+        }
+        sf::Sprite getSprite()
+        {
+            return sprite;
+        }
+        void setPosition(sf::Vector2f pos)
+        {
+            position = pos;
+            sprite.setPosition(pos);
+        }
+};
+
+class UI_Element
+{
+    public:
+
+    sf::Vector2f relative_position;
+    sf::Vector2f position;
+    sf::Vector2f scale;
+    float rotation;
+    sf::RectangleShape body;
+    UIC_Graphic graphic;
+    bool hasTexture;
+    bool hasRectBody;
+    void setPosition(sf::Vector2f pos)
+    {
+        position = sf::Vector2f(pos.x+relative_position.x,pos.y+relative_position.y);
+        body.setPosition(position);
+        if(hasTexture)
+        {
+            graphic.setPosition(position);
+        }
+    }
+     void setPositionRelative(sf::Vector2f pos)
+    {
+        relative_position = pos;
+    }
+    void createRectBody(sf::Vector2f sc, sf::Color fillC,sf::Color outlineC,int thicness, float rot)
+    {
+        scale = sc;
+        rotation = rot;
+
+        body.setSize(sc);
+        body.setFillColor(fillC);
+        body.setOutlineColor(outlineC);
+        body.setOutlineThickness(thicness);
+        body.setRotation(rot);
+        hasRectBody = true;
+    }
+    void createGraphic(std::string src)
+    {
+        hasTexture = true;
+        graphic.loadTexture(src);
+    }
+    sf::Vector2f getPosition()
+    {
+        return position;
+    }
+    enum UI_TYPE
+    {
+        BUTTON,
+        //TEXT_DISPLAY,
+        ICON,
+        PANEL
+    }ui_type;
+    enum CONTROL_OVER_STATE
+    {
+        CONTROL_OVER_T,
+        CONTROL_OVER_F
+    }control_over_state;
+    enum CONTROL_PRESS_STATE
+    {
+        CONTROL_PRESS_T,
+        CONTROL_PRESS_F
+    }control_press_state;
+
+    sf::RectangleShape getBody()
+    {
+        return body;
+    }
+    virtual void handleEvent(sf::Event e) = 0;
+    bool isMouseOver(sf::Vector2f pos)
+    {
+        if(body.getGlobalBounds().contains(pos.x,pos.y))
+        {
+            return true;
+        }
+        return false;
+    }
+    bool isTextured()
+    {
+        return hasTexture;
+    }
+
+    UIC_Graphic getGraphic()
+    {
+        return graphic;
+    }
+
 };
 
 class UI_Button : public UI_Element
 {
 public:
-
-    UI_Button(sf::Vector2f pos, sf::Vector2f sc, float rot)
+    UI_Button()
     {
         ui_type = BUTTON;
         control_press_state=CONTROL_PRESS_F;
         control_over_state =CONTROL_OVER_F;
-        position = pos;
-        scale = sc;
-        rotation = rot;
-        body.setSize(sc);
-        body.setPosition(pos);
-        body.setFillColor(sf::Color::Transparent);
-        body.setOutlineColor(sf::Color::Red);
-        body.setOutlineThickness(5);
-        body.setRotation(rot);
     };
+
+
 
     void onControlOver()
     {
@@ -409,6 +475,7 @@ public:
 
     void update()
     {
+
         switch(control_over_state)
         {
         case CONTROL_OVER_T:
@@ -426,14 +493,30 @@ public:
         case CONTROL_PRESS_F:
             body.setFillColor(sf::Color::Transparent);
             break;
-
         }
     }
 };
 
+
+class UI_Panel : public UI_Element
+{
+public:
+    UI_Panel()
+    {
+        ui_type = PANEL;
+        control_press_state=CONTROL_PRESS_F;
+        control_over_state =CONTROL_OVER_F;
+    }
+
+     virtual void handleEvent(sf::Event e)
+     {
+
+     }
+};
 class Interface
 {
     public:
+    UI_Panel* mainPanel;
     std::vector<UI_Button*> buttonList;
     UI_Element* selectedElement;
     UI_Button* activeButton;
@@ -444,20 +527,41 @@ class Interface
 
     Interface(sf::Vector2f pos,std::string n)
     {
+
+
+        mainPanel = new UI_Panel();
+        mainPanel->createGraphic("assets/main_panel.png");
+        sf::Vector2f panel_scale = sf::Vector2f(mainPanel->graphic.getSprite().getTextureRect().width,mainPanel->graphic.getSprite().getTextureRect().height);
+        mainPanel->createRectBody(panel_scale,sf::Color::Transparent,sf::Color::Red,10,0);
+
         activeButton = nullptr;
         position = pos;
-        UI_Button* myButton = new UI_Button(sf::Vector2f(400,100),sf::Vector2f(100,50),0);
-        UI_Button* myButton1 = new UI_Button(sf::Vector2f(400,250),sf::Vector2f(100,50),0);
-        UI_Button* myButton2 = new UI_Button(sf::Vector2f(400,400),sf::Vector2f(100,50),0);
-        UI_Button* myButton3 = new UI_Button(sf::Vector2f(400,550),sf::Vector2f(100,50),0);
-        buttonList.push_back(myButton);
-        buttonList.push_back(myButton1);
-        buttonList.push_back(myButton2);
-        buttonList.push_back(myButton3);
+        mainPanel->setPosition(pos);
+
         int currentButton = 0;
         name = n;
-        //selectedElement = elementsList[currentButton];
+    }
+
+    void addButton(UI_Button* b)
+    {
+        buttonList.push_back(b);
+    }
+    void setup()
+    {
         setActive(buttonList[currentButton]);
+        mainPanel->setPositionRelative(sf::Vector2f(0,0));
+        mainPanel->setPosition(sf::Vector2f(250,100));
+        int rel_x, rel_y;
+        rel_x = 180;
+        rel_y = 200;
+        for(int i = 0;i<buttonList.size();i++)
+        {
+            buttonList[i]->setPositionRelative(sf::Vector2f(rel_x,rel_y));
+            rel_y+=150;
+            buttonList[i]->setPosition(mainPanel->getPosition());
+            buttonList[i]->update();
+        }
+
     }
 
     void setActive(UI_Button* b)
@@ -557,8 +661,15 @@ class Interface
 
     void draw(sf::RenderWindow &w)
     {
+        w.draw(mainPanel->getBody());
+        w.draw(mainPanel->graphic.getSprite());
         for(int i = 0; i <buttonList.size(); i++)
         {
+            if(buttonList[i]->isTextured())
+            {
+                w.draw(buttonList[i]->getGraphic().getSprite());
+
+            }
             w.draw(buttonList[i]->getBody());
         }
     }
@@ -624,7 +735,20 @@ int main()
     //label.setPosition(myButton->position);
     Interface* testInterface = new Interface(sf::Vector2f(0,0),"TEST");
 
+    UI_Button* myButton = new UI_Button();
+    myButton->createGraphic("assets/start_button.png");
+    sf::Vector2f button_scale = sf::Vector2f(myButton->graphic.getSprite().getTextureRect().width,myButton->graphic.getSprite().getTextureRect().height);
+    myButton->createRectBody(button_scale,sf::Color::Transparent,sf::Color::Blue,5,0);
 
+    UI_Button* myButton1 = new UI_Button();
+    myButton1->createGraphic("assets/exit_button.png");
+    button_scale = sf::Vector2f(myButton1->graphic.getSprite().getTextureRect().width,myButton1->graphic.getSprite().getTextureRect().height);
+    myButton1->createRectBody(button_scale,sf::Color::Transparent,sf::Color::Blue,5,0);
+
+    testInterface->addButton(myButton);
+    testInterface->addButton(myButton1);
+
+    testInterface->setup();
 
     while(window.isOpen())
     {

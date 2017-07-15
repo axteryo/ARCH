@@ -22,9 +22,10 @@
 #include "RenderBatch.h"
 #include "GraphicsComponent.h"
 #include "GameStateManager.h"
+#include "GameEventHandler.h"
 
 
-class Game
+class Game : public GameEventHandler
 {
     public:
         Game();
@@ -79,6 +80,7 @@ class Game
         void runMainMenu();
         void runGameLevel();
         void resolveEvents();
+        void handleEvent(GameEvent* e);
 
         double lastTime;
         double newTime;

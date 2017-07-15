@@ -421,7 +421,7 @@
 	"AudioSystem.h"
 	<string>
 
-1499400615 c:\users\mesh\documents\projectarch\archgame\include\game.h
+1500149742 c:\users\mesh\documents\projectarch\archgame\include\game.h
 	<SFML/Graphics.hpp>
 	<Box2D/Box2D.h>
 	<SFML/Window.hpp>
@@ -438,6 +438,7 @@
 	"RenderBatch.h"
 	"GraphicsComponent.h"
 	"GameStateManager.h"
+	"GameEventHandler.h"
 
 1456773003 c:\box2d_v2.3.1\box2d\box2d.h
 	<Box2D/Common/b2Settings.h>
@@ -1607,7 +1608,7 @@
 
 1499282910 c:\users\mesh\documents\projectarch\archgame\include\gamestatemanager.h
 
-1499537294 source:c:\users\mesh\documents\projectarch\archgame\src\gamestatemanager.cpp
+1499913804 source:c:\users\mesh\documents\projectarch\archgame\src\gamestatemanager.cpp
 	"GameStateManager.h"
 
 1499284173 c:\users\mesh\documents\projectarch\archgame\include\gameevent_audio.h

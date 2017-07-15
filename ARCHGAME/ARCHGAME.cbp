@@ -84,6 +84,7 @@
 		<Unit filename="include/GameEvent_Audio.h" />
 		<Unit filename="include/GameEvent_Collision.h" />
 		<Unit filename="include/GameEvent_Entity.h" />
+		<Unit filename="include/GameEvent_Interface.h" />
 		<Unit filename="include/GameEvent_Sequence.h" />
 		<Unit filename="include/GameMap.h" />
 		<Unit filename="include/GameStateManager.h" />
@@ -135,6 +136,7 @@
 		<Unit filename="src/GameEvent_Audio.cpp" />
 		<Unit filename="src/GameEvent_Collision.cpp" />
 		<Unit filename="src/GameEvent_Entity.cpp" />
+		<Unit filename="src/GameEvent_Interface.cpp" />
 		<Unit filename="src/GameEvent_Sequence.cpp" />
 		<Unit filename="src/GameMap.cpp" />
 		<Unit filename="src/GameStateManager.cpp" />
