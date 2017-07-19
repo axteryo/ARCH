@@ -11,8 +11,8 @@ enum InterfaceState
 class GameEvent_Interface : public GameEvent
 {
     public:
-        GameEvent_Interface();
-        virtual ~GameEvent_Interface(InterfaceState i);
+        GameEvent_Interface(InterfaceState i);
+        virtual ~GameEvent_Interface();
         InterfaceState interface_state;
     protected:
     private:

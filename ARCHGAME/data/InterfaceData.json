@@ -1,0 +1,41 @@
+{
+	"interface":
+	[
+		{
+			"name":"MainMenu",
+			"ui_elements":
+			[
+				{
+					"ui_type":"panel",
+					"id":"main_panel",
+					"relative_position":[0,0],
+					"texture":"main_panel.png"
+				},
+				{
+					"ui_type":"button",
+					"id":"start_button",
+					"relative_position":[0,0],
+					"texture":"start_button.png",
+					"on_control_over":
+					{
+						"texture":"control_over_start_button.png"
+					}
+				},
+				{
+					"ui_type":"button",
+					"id":"exit_button",
+					"relative_position":[0,0],
+					"texture":"exit_button.png",
+					"on_control_over":
+					{
+						"texture":"control_over_exit_button.png"
+					}
+				}
+				
+			]
+
+		}
+	]
+
+
+}

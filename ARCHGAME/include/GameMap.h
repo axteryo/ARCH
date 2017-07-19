@@ -44,7 +44,6 @@ class GameMap// : public sf::Drawable, public sf::Transformable
     private:
 
         JsonHandler jsonHandler;
-
         Json::Value baseMapRoot;
 
 

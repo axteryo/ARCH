@@ -2,9 +2,9 @@
 
 GameStateManager::GameStateManager()
 {
-    system_game_state = SYSTEM_START_LEVEL;
+    system_game_state = SYSTEM_IN_MAIN_MENU;
     level_game_state = LEVEL_LOADING;
-    debug_state = DEBUG_OFF;
+    debug_state = DEBUG_ON;
 }
 
 GameStateManager::~GameStateManager()

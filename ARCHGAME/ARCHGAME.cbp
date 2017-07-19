@@ -105,6 +105,9 @@
 		<Unit filename="include/SpriteBatcher.h" />
 		<Unit filename="include/StateComponent.h" />
 		<Unit filename="include/TriggerEntity.h" />
+		<Unit filename="include/UI_Button.h" />
+		<Unit filename="include/UI_Element.h" />
+		<Unit filename="include/UI_Panel.h" />
 		<Unit filename="include/batch.h" />
 		<Unit filename="include/camera.h" />
 		<Unit filename="include/entity.h" />
@@ -157,6 +160,9 @@
 		<Unit filename="src/SpriteBatcher.cpp" />
 		<Unit filename="src/StateComponent.cpp" />
 		<Unit filename="src/TriggerEntity.cpp" />
+		<Unit filename="src/UI_Button.cpp" />
+		<Unit filename="src/UI_Element.cpp" />
+		<Unit filename="src/UI_Panel.cpp" />
 		<Unit filename="src/batch.cpp" />
 		<Unit filename="src/camera.cpp" />
 		<Unit filename="src/entity.cpp" />

@@ -9,19 +9,11 @@ Game::Game()
     v2f_windowSize = sf::Vector2f(1024,768);
     window = new sf::RenderWindow(sf::VideoMode(v2f_windowSize.x,v2f_windowSize.y),"Initiative_ARCH");
 
-    gameCamera.setCoords(sf::Vector2i(90,600),v2f_windowSize);
+    gameCamera.setCoords(sf::Vector2i(0,0),v2f_windowSize);
     world->SetContactListener(collisionSystem);
     audioSystem->loadAudio();
-    isVsyncOn = true;
-    isCollisionViewOn = false;
-    gameRunning = true;
-    dt = 1.0f/60.0f;
-    timeStep = 1.0/60.0f;
-    velocityIterations = 6;
-    positionIterations = 2;
-    //isVsynced = true;
-    window->setVerticalSyncEnabled(isVsyncOn);
-    GameState = new GameStateManager();
+    controller.loadDefaultBindings();
+
 
     lastTime = 0.0;
     newTime = 0.0;
@@ -29,9 +21,76 @@ Game::Game()
     elapsed = 0.0;
     accumulator = 0.0;
     alpha = 0.0;
+    isVsyncOn = true;
+    isCollisionViewOn = false;
+    gameRunning = true;
 
-    ///Game Controller Bindings are loaded
-    controller.loadDefaultBindings();
+    dt = 1.0f/60.0f;
+    timeStep = 1.0/60.0f;
+    velocityIterations = 6;
+    positionIterations = 2;
+
+    window->setVerticalSyncEnabled(isVsyncOn);
+    GameState = new GameStateManager();
+
+    currentInterface = nullptr;
+    interfaceRoot =json.loadJson("data/InterfaceData.json");
+    textureRoot = json.loadJson("data/gui_textures.json");
+
+    sf::Image im;
+    im.loadFromFile("assets/gui_textures.png");
+    interface_batcher.setBatchTexture(im);
+    gameCamera.update();
+
+    for(int i = 0;i <interfaceRoot["interface"].size();i++)
+    {
+        Interface* in = new Interface(interfaceRoot["interface"][i]["name"].asString());
+        for(int ii = 0; ii <interfaceRoot["interface"][i]["ui_elements"].size();ii++)
+        {
+            UI_Element* e;
+            if(interfaceRoot["interface"][i]["ui_elements"][ii]["ui_type"].asString().compare("panel")==0)
+            {
+                e = new UI_Panel(interfaceRoot["interface"][i]["ui_elements"][ii]["id"].asString());
+                in->setMainPanel(static_cast<UI_Panel*>(e));
+            }
+            else if(interfaceRoot["interface"][i]["ui_elements"][ii]["ui_type"].asString().compare("button")==0)
+            {
+                e = new UI_Button(interfaceRoot["interface"][i]["ui_elements"][ii]["id"].asString());
+                in->addButton(static_cast<UI_Button*>(e));
+            }
+
+            for(int j = 0;j <textureRoot["frames"].size();j++)
+            {
+                if(textureRoot["frames"][j]["filename"].asString().compare(interfaceRoot["interface"][i]["ui_elements"][ii]["texture"].asString())==0)
+                {
+                    sf::IntRect frame = sf::IntRect(textureRoot["frames"][j]["frame"]["x"].asInt(),
+                            textureRoot["frames"][j]["frame"]["y"].asInt(),
+                            textureRoot["frames"][j]["frame"]["w"].asInt(),
+                            textureRoot["frames"][j]["frame"]["h"].asInt());
+
+                    e->setGraphicCoordinates(frame);
+                }
+                if(e->getID().compare("button")==0);
+                {
+                    if(textureRoot["frames"][j]["filename"].asString().compare(interfaceRoot["interface"][i]["ui_elements"][ii]["on_control_over"]["texture"].asString())==0)
+                    {
+                        sf::IntRect frame = sf::IntRect(textureRoot["frames"][j]["frame"]["x"].asInt(),
+                            textureRoot["frames"][j]["frame"]["y"].asInt(),
+                            textureRoot["frames"][j]["frame"]["w"].asInt(),
+                            textureRoot["frames"][j]["frame"]["h"].asInt());
+                    e->setOnControlOverTexture(frame);
+                    }
+                }
+
+            }
+            e->setRelativePosition(sf::Vector2f(interfaceRoot["interface"][i]["ui_elements"][ii]["relative_position"][0].asFloat(),
+                                                interfaceRoot["interface"][i]["ui_elements"][ii]["relative_position"][1].asFloat()));
+        }
+        interfaceList.push_back(in);
+    }
+
+    setCurrentInterFace("MainMenu");
+    currentInterface->activate();
 }
 
 void Game::start()
@@ -48,13 +107,7 @@ void Game::start()
         accumulator +=elapsed;
 
 
-        if(isVsyncOn)
-        {
-            while(accumulator<dt)
-            {
-                accumulator+=(dt/80);
-            }
-        }
+
         /****************************************/
         switch(GameState->system_game_state)
         {
@@ -68,7 +121,13 @@ void Game::start()
             break;
            /****************************************/
             case GameState->SYSTEM_IN_LEVEL:
-
+            if(isVsyncOn)
+            {
+                while(accumulator<dt)
+                {
+                    accumulator+=(dt/80);
+                }
+            }
                 switch(GameState->level_game_state)
                 {
                     case GameState->LEVEL_LOADING:
@@ -108,11 +167,22 @@ void Game::_end()
 }
 void Game::render(double alpha)
 {
+    //gameCamera.update();
     refresh();
 
     switch(GameState->system_game_state)
     {
         case GameState->SYSTEM_IN_MAIN_MENU:
+            window->draw(currentInterface->mainPanel->getRectBody());
+            //interface_batcher.addQuad(currentInterface->mainPanel->getQuad());
+            for(int i = 0;i<currentInterface->buttonList.size();i++)
+            {
+                window->draw(currentInterface->buttonList[i]->getRectBody());
+                //interface_batcher.addQuad(currentInterface->buttonList[i]->getQuad());
+            }
+            //interface_batcher.batchQuads();
+            //window->draw(interface_batcher);
+            //currentInterface->draw(window);
         break;
         /****************************************/
         case GameState->SYSTEM_IN_LEVEL:
@@ -208,7 +278,15 @@ void Game::processInput()
 {
     while(window->pollEvent(event))
     {
+        if(currentInterface!=nullptr)
+        {
+            currentInterface->processWindowEvents(event);
+            if(currentInterface->isActive())
+            {
 
+                currentInterface->update(controller);
+            }
+        }
         if(event.type==sf::Event::Closed)
         {
             gameRunning = false;
@@ -245,6 +323,23 @@ void Game::processInput()
         }
     }
 
+}
+
+void Game::setCurrentInterFace(std::string i)
+{
+    if(currentInterface!=nullptr)
+    {
+        currentInterface->deactivate();
+    }
+    for(int j = 0;j<interfaceList.size();j++)
+    {
+        if(interfaceList[j]->getID().compare(i)==0)
+        {
+            currentInterface = interfaceList[j];
+            currentInterface->setup(gameCamera.camView);
+            break;
+        }
+    }
 }
 
 void Game::toggleCollisionView()
@@ -299,9 +394,11 @@ void Game::runMainMenu()
         while(accumulator>=dt)
         {
             accumulator-=dt;
+
             //mainMenu->update();
             resolveEvents();
         }
+
 }
 void Game::runGameLevel()
 {

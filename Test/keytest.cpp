@@ -386,7 +386,7 @@ class UI_Element
     {
         return body;
     }
-    virtual void handleEvent(sf::Event e) = 0;
+    //virtual void handleEvent(sf::Event e) = 0;
     bool isMouseOver(sf::Vector2f pos)
     {
         if(body.getGlobalBounds().contains(pos.x,pos.y))
@@ -527,7 +527,6 @@ class Interface
 
     Interface(sf::Vector2f pos,std::string n)
     {
-
 
         mainPanel = new UI_Panel();
         mainPanel->createGraphic("assets/main_panel.png");

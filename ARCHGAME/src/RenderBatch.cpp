@@ -3,7 +3,7 @@
 RenderBatch::RenderBatch()
 {
     //ctor
-    batch_vertexArray.setPrimitiveType(sf::Quads);
+
 }
 
 RenderBatch::~RenderBatch()
@@ -21,6 +21,7 @@ void RenderBatch::setBatchTexture(sf::Image i)
     {
         batchTexture.setSmooth(false);
     }
+    batch_vertexArray.setPrimitiveType(sf::Quads);
 }
 void RenderBatch::addQuad(BatchQuad q)
 {

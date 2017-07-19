@@ -1,0 +1,57 @@
+{"frames": [
+
+{
+	"filename": "control_over_exit_button.png",
+	"frame": {"x":339,"y":1,"w":167,"h":66},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":167,"h":66},
+	"sourceSize": {"w":167,"h":66},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "control_over_start_button.png",
+	"frame": {"x":508,"y":1,"w":167,"h":66},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":167,"h":66},
+	"sourceSize": {"w":167,"h":66},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "exit_button.png",
+	"frame": {"x":170,"y":1,"w":167,"h":66},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":167,"h":66},
+	"sourceSize": {"w":167,"h":66},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "main_panel.png",
+	"frame": {"x":1,"y":69,"w":540,"h":560},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":540,"h":560},
+	"sourceSize": {"w":540,"h":560},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "start_button.png",
+	"frame": {"x":1,"y":1,"w":167,"h":66},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":167,"h":66},
+	"sourceSize": {"w":167,"h":66},
+	"pivot": {"x":0.5,"y":0.5}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "gui_textures.png",
+	"format": "RGBA8888",
+	"size": {"w":676,"h":630},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:392626afe2517da452835d54f9123baf:d73cd5f735c0dd2963b19ec30efeef7b:7fe139572aa68a6bff1ab7ea374432d7$"
+}
+}

@@ -23,6 +23,7 @@
 #include "GraphicsComponent.h"
 #include "GameStateManager.h"
 #include "GameEventHandler.h"
+#include "Interface.h"
 
 
 class Game : public GameEventHandler
@@ -36,9 +37,14 @@ class Game : public GameEventHandler
         void toggleCollisionView();
         void refresh();
         void clean();
+        void setup();
+        void setCurrentInterFace(std::string i);
 
     protected:
     private:
+
+        Interface* currentInterface;
+        std::vector<Interface*> interfaceList;
         /**Game Variables**/
         bool gameRunning;
 
@@ -66,7 +72,8 @@ class Game : public GameEventHandler
         double timeStep;
         int32 velocityIterations;
         int32 positionIterations;
-        Json::Value textureRoot;
+
+
         Json::Value animationRoot;
         bool isCollisionViewOn;
         bool isVsyncOn;
@@ -90,8 +97,15 @@ class Game : public GameEventHandler
 
         level gameLevel;
 
-
         GameStateManager * GameState;
+
+
+        JsonHandler json;
+        Json::Value textureRoot;
+        Json::Value interfaceRoot;
+        RenderBatch interface_batcher;
+
+
 };
 
 #endif // GAME_H
