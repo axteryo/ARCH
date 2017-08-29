@@ -1,17 +1,19 @@
 #include "Interface.h"
 
-Interface::Interface(std::string i)
+Interface::Interface(std::string i,GameEventListener* e)
 {
     id = i;
     activeButton = nullptr;
     mainPanel = nullptr;
     position = sf::Vector2f(0,0);
     currentButton = 0;
+    _listener = e;
 }
 
 Interface::~Interface()
 {
     //dtor
+    delete _listener;
 }
 std::string Interface::getID()
 {
@@ -69,12 +71,14 @@ void Interface::setup(sf::View v)
 {
     activateButton(buttonList[currentButton]);
     sf::Vector2f panel_dim = mainPanel->getDimensions();
-    position = sf::Vector2f(v.getCenter().x-(panel_dim.x/2),v.getCenter().y-(panel_dim.y/2));
-    mainPanel->setPosition(position);
+    //position = sf::Vector2f(v.getCenter().x-(panel_dim.x/2),v.getCenter().y-(panel_dim.y/2));
+    mainPanel->setPosition(v.getCenter());
     for(int i = 0; i<buttonList.size();i++)
     {
-        buttonList[i]->setPosition(position);
+        mainPanel->addChildElement(buttonList[i]);
+        //buttonList[i]->setPosition(position);
     }
+    mainPanel->arrangeElementsHorizontally();
 }
 void Interface::setMainPanel(UI_Panel* p)
 {
@@ -108,6 +112,8 @@ void Interface::selectForward()
         currentButton=buttonList.size()-1;
     }
     activateButton(buttonList[currentButton]);
+    GameEvent_Interface* i = new GameEvent_Interface(BUTTON_OVER,activeButton->getID());
+    _listener->notifyEvent(i);
 }
 void Interface::selectBackward()
 {
@@ -118,10 +124,14 @@ void Interface::selectBackward()
         currentButton = 0;
     }
     activateButton(buttonList[currentButton]);
+    GameEvent_Interface* i = new GameEvent_Interface(BUTTON_OVER,activeButton->getID());
+    _listener->notifyEvent(i);
 }
 void Interface::select()
 {
     activeButton->onControlPress();
+    GameEvent_Interface* i = new GameEvent_Interface(BUTTON_SELECT,activeButton->getID());
+    _listener->notifyEvent(i);
 }
 void Interface::unselect()
 {

@@ -6,6 +6,12 @@
 			"volume":0.8,
 			"countLimit":5,
 			"source":"assets/Audio/Sfx/metalClang.ogg"
+		},
+		{
+			"id":"scroll",
+			"volume":50,
+			"countLimit":5,
+			"source":"assets/Audio/Sfx/scroll.ogg"
 		}
 	]
 }

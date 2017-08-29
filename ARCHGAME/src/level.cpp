@@ -227,9 +227,9 @@ void level::render(sf::RenderWindow* window,double alpha)
 
 
 
-    //window->draw(_map->layer1);
-    //window->draw(_map->layer2);
-    for(int i= 0; i<_map->mapQuads.size();i++)
+    window->draw(_map->layer1);
+    window->draw(_map->layer2);
+  /*  for(int i= 0; i<_map->mapQuads.size();i++)
     {
        // if(gameCamera.withinView(_map->mapQuads[i].center))
         //{
@@ -237,10 +237,10 @@ void level::render(sf::RenderWindow* window,double alpha)
         //}
     }
     mapBackGroundBatch.batchQuads();
-
+*/
     batcher->batchSprites();
 
-    window->draw(mapBackGroundBatch);
+//    window->draw(mapBackGroundBatch);
 
     window->draw(batcher->b);
 

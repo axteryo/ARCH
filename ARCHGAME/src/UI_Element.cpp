@@ -46,7 +46,7 @@ void UI_Element::setRelativePosition(sf::Vector2f pos)
 }
 void UI_Element::setPosition(sf::Vector2f pos)
 {
-    position = sf::Vector2f(relative_position.x+pos.x,relative_position.y+pos.y);
+    position = sf::Vector2f(pos.x-dimensions.x/2,pos.y-dimensions.y/2);
     if(hasRectBody)
     {
         rectbody.setPosition(position);

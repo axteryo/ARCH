@@ -21,6 +21,7 @@
 						"texture":"control_over_start_button.png"
 					}
 				},
+
 				{
 					"ui_type":"button",
 					"id":"exit_button",

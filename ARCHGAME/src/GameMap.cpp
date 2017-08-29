@@ -232,7 +232,7 @@ void GameMap::create()
                 if(layerData[ii][i]>0)
                 {
 
-                    BatchQuad quad;
+                   /* BatchQuad quad;
 
                     quad.point1=sf::Vector2f(xx,yy);
                     quad.point2=sf::Vector2f(xx+v2f_tileDimensions.x,yy);
@@ -247,8 +247,8 @@ void GameMap::create()
                     quad.texPoint3= sf::Vector2f(textureSheetCoords[layerData[ii][i]-1].x+v2f_tileDimensions.x,textureSheetCoords[layerData[ii][i]-1].y+v2f_tileDimensions.y);
                     quad.texPoint4= sf::Vector2f(textureSheetCoords[layerData[ii][i]-1].x,textureSheetCoords[layerData[ii][i]-1].y+v2f_tileDimensions.y);
 
-
-                    /*if(ii==0)
+*/
+                    if(ii==0)
                     {
                         sf::Vertex* quad = &layer1.v[j];
                         quad[j].position=sf::Vector2f(xx,yy);
@@ -276,8 +276,8 @@ void GameMap::create()
                         quad[j+2].texCoords= sf::Vector2f(textureSheetCoords[layerData[ii][i]-1].x+v2f_tileDimensions.x,textureSheetCoords[layerData[ii][i]-1].y+v2f_tileDimensions.y);
                         quad[j+3].texCoords= sf::Vector2f(textureSheetCoords[layerData[ii][i]-1].x,textureSheetCoords[layerData[ii][i]-1].y+v2f_tileDimensions.y);
 
-                    }*/
-                    mapQuads.push_back(quad);
+                    }
+                    //mapQuads.push_back(quad);
                 }
             //tileMapeLayers.push_back(tileMap);
 

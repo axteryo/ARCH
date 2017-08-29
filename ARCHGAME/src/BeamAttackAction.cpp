@@ -59,8 +59,8 @@ void BeamAttackAction::execute(ActorEntity* a)
                 acceleration = b2Vec2(cos(r),sin(r));
                 acceleration.Normalize();
                 fData->direction = acceleration;
-                acceleration.x*=50;
-                acceleration.y*=50;
+                acceleration.x*=(50);
+                acceleration.y*=(50);
                 p->accelerate(acceleration);
 
                 isActive = true;

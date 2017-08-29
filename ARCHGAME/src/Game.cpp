@@ -44,7 +44,7 @@ Game::Game()
 
     for(int i = 0;i <interfaceRoot["interface"].size();i++)
     {
-        Interface* in = new Interface(interfaceRoot["interface"][i]["name"].asString());
+        Interface* in = new Interface(interfaceRoot["interface"][i]["name"].asString(),new GameEventListener());
         for(int ii = 0; ii <interfaceRoot["interface"][i]["ui_elements"].size();ii++)
         {
             UI_Element* e;
@@ -174,14 +174,14 @@ void Game::render(double alpha)
     {
         case GameState->SYSTEM_IN_MAIN_MENU:
             window->draw(currentInterface->mainPanel->getRectBody());
-            //interface_batcher.addQuad(currentInterface->mainPanel->getQuad());
+            interface_batcher.addQuad(currentInterface->mainPanel->getQuad());
             for(int i = 0;i<currentInterface->buttonList.size();i++)
             {
                 window->draw(currentInterface->buttonList[i]->getRectBody());
-                //interface_batcher.addQuad(currentInterface->buttonList[i]->getQuad());
+                interface_batcher.addQuad(currentInterface->buttonList[i]->getQuad());
             }
-            //interface_batcher.batchQuads();
-            //window->draw(interface_batcher);
+            interface_batcher.batchQuads();
+            window->draw(interface_batcher);
             //currentInterface->draw(window);
         break;
         /****************************************/
@@ -415,7 +415,23 @@ void Game::runGameLevel()
 
 void Game::handleEvent(GameEvent* e)
 {
+    switch(e->getEventType())
+    {
+    case GameEvent::EVENT_INTERFACE:
+        GameEvent_Interface* interfaceEvent = static_cast<GameEvent_Interface*>(e);
+        switch(interfaceEvent->interface_state)
+        {
+        case BUTTON_SELECT:
+            if(interfaceEvent->btnID.compare("start_button")==0)
+            {
+                currentInterface->deactivate();
+                GameState->system_game_state = GameState->SYSTEM_START_LEVEL;
+            }
 
+            break;
+        }
+        break;
+    }
 }
 
 void Game::resolveEvents()

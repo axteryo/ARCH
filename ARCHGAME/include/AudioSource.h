@@ -13,7 +13,7 @@
 class AudioSource
 {
     public:
-        AudioSource(std::string srcID, int limit,GameEventListener* e);
+        AudioSource(std::string srcID, int limit,float vol,GameEventListener* e);
         virtual ~AudioSource();
         std::string getID();
         bool getActive();
@@ -29,7 +29,7 @@ class AudioSource
         int soundLimit;
         float volume;
         sf::SoundBuffer buffer;
-        std::stack<sf::Sound> soundStack;
+        std::queue<sf::Sound> soundQueue;
         std::vector<sf::Sound> pauseList;
         GameEventListener* _listener;
     private:

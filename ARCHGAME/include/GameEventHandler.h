@@ -3,6 +3,7 @@
 #include "GameEvent.h"
 #include "GameEvent_Collision.h"
 #include "GameEvent_Entity.h"
+#include "GameEvent_Interface.h"
 
 
 class GameEventHandler

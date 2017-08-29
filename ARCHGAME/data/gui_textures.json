@@ -29,11 +29,11 @@
 },
 {
 	"filename": "main_panel.png",
-	"frame": {"x":1,"y":69,"w":540,"h":560},
+	"frame": {"x":1,"y":69,"w":540,"h":580},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":540,"h":560},
-	"sourceSize": {"w":540,"h":560},
+	"spriteSourceSize": {"x":0,"y":0,"w":540,"h":580},
+	"sourceSize": {"w":540,"h":580},
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
@@ -50,8 +50,8 @@
 	"version": "1.0",
 	"image": "gui_textures.png",
 	"format": "RGBA8888",
-	"size": {"w":676,"h":630},
+	"size": {"w":676,"h":650},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:392626afe2517da452835d54f9123baf:d73cd5f735c0dd2963b19ec30efeef7b:7fe139572aa68a6bff1ab7ea374432d7$"
+	"smartupdate": "$TexturePacker:SmartUpdate:26ed89eeb406ce641fe5bd29508a591d:31a9e2c006cdd190fd6b9aaa4f1293ea:7fe139572aa68a6bff1ab7ea374432d7$"
 }
 }

@@ -8,12 +8,15 @@
 #include "UI_Button.h"
 #include "UI_Panel.h"
 #include "GameController.h"
+#include "GameEvent_Interface.h"
+#include "GameEventListener.h"
+
 
 
 class Interface
 {
     public:
-        Interface(std::string i);
+        Interface(std::string i,GameEventListener* e);
         virtual ~Interface();
         //void run(GameState* gameState);
         void processWindowEvents(sf::Event e);
@@ -41,6 +44,7 @@ class Interface
     int currentButton;
 
     UI_Button* activeButton;
+    GameEventListener* _listener;
 };
 
 #endif // INTERFACE_H

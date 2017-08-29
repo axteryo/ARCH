@@ -30,7 +30,7 @@
 				"damage":100,
 				"rotationRate":0.05,
 				"attackRate":0,
-				"relativePosition":[-100,100]
+				"relativePosition":[-200,100]
 				},
 				{	
 				"name":"radiusAttack_1",
@@ -91,7 +91,7 @@
 				"velLimit":28.0,
 				"brakeLimit":7.0,
 				"rotationRate":6,
-				"accel_rotationRate":2
+				"accel_rotationRate":4
 			},
 			"movementActions":["rotateLeft","rotateRight","accelerate","deccelerate","brake"],
 			"attackActions":
@@ -128,9 +128,9 @@
 			},
 			"MovementAttributes":
 			{
-				"accelRate":0.5,
-				"accelRateLimit":6,
-				"velLimit":24.0,
+				"accelRate":1,
+				"accelRateLimit":9,
+				"velLimit":30.0,
 				"brakeLimit":7.0,
 				"rotationRate":9,
 				"accel_rotationRate":4

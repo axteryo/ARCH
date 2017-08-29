@@ -45,10 +45,11 @@ void AudioSystem::loadAudio()
         std::string id = dataRoot["sfx"][i]["id"].asString();
         int limit = dataRoot["sfx"][i]["countLimit"].asInt();
         std::string src = dataRoot["sfx"][i]["source"].asString();
+        float vol = dataRoot["sfx"][i]["volume"].asFloat();
 
         GameEventListener* l = new GameEventListener();
 
-        AudioSource* audio = new AudioSource(id,limit,l);
+        AudioSource* audio = new AudioSource(id,limit,vol,l);
         audio->load(src);
         audioList.push_back(audio);
     }
@@ -125,6 +126,17 @@ void AudioSystem::handleEvent(GameEvent* e)
         /************************************/
         case GameEvent::EVENT_ACTION:
         {
+            break;
+        }
+        case GameEvent::EVENT_INTERFACE:
+        {
+            GameEvent_Interface* interfaceEvent = static_cast<GameEvent_Interface*>(e);
+            switch(interfaceEvent->interface_state)
+            {
+            case BUTTON_OVER:
+                playAudio("scroll");
+                break;
+            }
             break;
         }
     }

@@ -174,7 +174,7 @@ void SpriteBatcher::batchSprites()
             quad[j+1].position =batch_list[i].point2;
             quad[j+2].position =batch_list[i].point3;
             quad[j+3].position =batch_list[i].point4;
-            quad[j].color = sf::Color::Red;
+            //quad[j].color = sf::Color::Red;
 
             quad[j].texCoords = batch_list[i].texPoint1;
             quad[j+1].texCoords =batch_list[i].texPoint2;
